@@ -23,6 +23,8 @@ Edit the credentials locally using:
 
 * How to run the test suite
 
+Tests built using (https://books.thoughtbot.com/assets/testing-rails.pdf) as a guide.
+
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
