@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
-  def show
+  before_action :get_page
+
+  def home
+    # we may want to use a different layout for the home page
+  end
+
+  def show; end
+
+  private
+
+  def get_page
     @page = Page.find_by(slug: params[:slug])
 
     # redirect_to root_url, flash: { error: 'Record not found.' } unless @page
