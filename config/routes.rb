@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   # with its own template
   root controller: 'pages', action: 'home', slug: 'home'
 
-  # catch all rouite to catch any page - this could be a security risk...
-  match '*slug', controller: 'pages', action: 'show', via: :get
+  # catch all route to catch any page - this could be a security risk...
+  match '*slug', controller: 'pages', action: 'show', via: :get, as: 'page'
 end
