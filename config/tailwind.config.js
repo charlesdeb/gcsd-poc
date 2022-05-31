@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        lora: ['Lora', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         beige: '#fffcf5',
