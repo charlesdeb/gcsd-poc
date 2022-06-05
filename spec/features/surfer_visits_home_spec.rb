@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.feature 'Surfer visits home page', type: :feature do
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
-  let!(:home_page) { create(:page, slug: slug, body: body) }
+  let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }
 
   scenario 'they see a home page' do
     visit root_path
