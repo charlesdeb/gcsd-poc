@@ -73,5 +73,14 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
         expect(Event.future.count).to eq(1)
       end
     end
+
+    context 'published' do
+      let!(:published_event) { FactoryBot.create(:event, status: :published) }
+      let!(:not_published_event) { FactoryBot.create(:event, status: :draft) }
+
+      it 'only returns one event' do
+        expect(Event.published.count).to eq(1)
+      end
+    end
   end
 end

@@ -10,4 +10,5 @@ class Event < ApplicationRecord
 
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
+  scope :published, -> { where(status: :published) }
 end
