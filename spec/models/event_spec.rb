@@ -64,5 +64,14 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
         expect(Event.featured.count).to eq(1)
       end
     end
+
+    context 'future' do
+      let!(:future_event) { FactoryBot.create(:event, starting_at: Date.today.next_week) }
+      let!(:past_event) { FactoryBot.create(:event, starting_at: Date.today.last_week) }
+
+      it 'only returns one event' do
+        expect(Event.future.count).to eq(1)
+      end
+    end
   end
 end
