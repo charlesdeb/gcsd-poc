@@ -9,13 +9,13 @@ RSpec.describe 'events/index', type: :view do
                title: 'Title',
                status: 'Status',
                description: 'MyText',
-               is_featured: false
+               starting_at: Date.today.next_week
              ),
              Event.create!(
                title: 'Title',
                status: 'Status',
                description: 'MyText',
-               is_featured: false
+               starting_at: Date.today.last_week
              )
            ])
   end

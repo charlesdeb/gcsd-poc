@@ -8,7 +8,7 @@ RSpec.describe 'events/show', type: :view do
                               title: 'Title',
                               status: 'Status',
                               description: 'MyText',
-                              is_featured: false
+                              starting_at: Date.today.next_week
                             ))
   end
 

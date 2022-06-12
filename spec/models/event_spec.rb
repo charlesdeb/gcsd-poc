@@ -4,8 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
   subject do
-    Event.new(title: 'some title', starting_at: Date.today.next_week, status: :published, description: 'some description',
-              is_featured: true)
+    Event.new(
+      title: 'some title',
+      starting_at: Date.today.next_week,
+      status: :published,
+      description: 'some description'
+    )
   end
 
   it 'is valid with valid attributes' do
@@ -44,6 +48,21 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     subject.is_featured = nil
 
     expect(subject.valid?).to be false
-    expect(subject.errors[:is_featured]).to include("can't be blank")
+    expect(subject.errors[:is_featured]).to include('must be true or false')
+  end
+
+  it 'is_featured defaults to false' do
+    expect(subject.is_featured).to eq(false)
+  end
+
+  describe 'scopes: ' do
+    context 'featured' do
+      let!(:featured_event) { FactoryBot.create(:event, is_featured: true) }
+      let!(:not_featured_event) { FactoryBot.create(:event, is_featured: false) }
+
+      it 'only returns one event' do
+        expect(Event.featured.count).to eq(1)
+      end
+    end
   end
 end
