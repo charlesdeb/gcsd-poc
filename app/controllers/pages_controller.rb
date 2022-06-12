@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
+# public controller for pages
 class PagesController < ApplicationController
-  before_action :get_page
+  before_action :find_page
 
   def home
     # we may want to use a different layout for the home page
+    @featured_future_event = Event.featured.future.published.first
   end
 
   def show; end
 
   private
 
-  def get_page
+  def find_page
     @page = Page.find_by(slug: params[:slug])
 
     # redirect_to root_url, flash: { error: 'Record not found.' } unless @page

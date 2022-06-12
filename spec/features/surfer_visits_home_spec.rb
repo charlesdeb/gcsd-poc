@@ -14,11 +14,19 @@ RSpec.feature 'Surfer visits home page', type: :feature do
     expect(page).to have_text(body)
   end
 
-  scenario 'they see a list of coming events' do
-    visit root_path
+  context('featured future events') do
+    let(:title) { 'Groovy Event' }
+    let!(:future_featured_event) do
+      FactoryBot.create(:event, starting_at: Date.today.next_week,
+                                is_featured: true, title: title)
+    end
 
-    expect(page).to have_text('Coming Events')
-    expect(page).to have_link future_link_title, href: future_link_url
+    scenario 'they see a featured future event' do
+      visit root_path
+
+      expect(page).to have_text(title)
+      expect(page).to have_link title, href: event_path(future_featured_event)
+    end
   end
 
   scenario 'they see a list of past events' do

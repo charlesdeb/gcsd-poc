@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_24_213358) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_220009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "title", limit: 40
+    t.date "starting_at"
+    t.string "status", limit: 15
+    t.text "description"
+    t.boolean "is_featured"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["starting_at"], name: "index_events_on_starting_at"
+    t.index ["title"], name: "index_events_on_title"
+  end
 
   create_table "pages", force: :cascade do |t|
     t.string "title", limit: 50

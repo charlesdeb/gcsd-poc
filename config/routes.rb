@@ -3,12 +3,12 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-
-  # home page is produced by running the home action of the PagesController 
+  # home page is produced by running the home action of the PagesController
   # with its own template
   root controller: 'pages', action: 'home', slug: 'home'
+
+  # resources :events
+  resources :events, only: %i[index show]
 
   # catch all route to catch any page - this could be a security risk...
   match '*slug', controller: 'pages', action: 'show', via: :get, as: 'page'
