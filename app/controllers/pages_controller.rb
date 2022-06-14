@@ -5,8 +5,9 @@ class PagesController < ApplicationController
   before_action :find_page
 
   def home
-    # we may want to use a different layout for the home page
-    @featured_future_event = Event.featured.future.published.first
+    # get a future event to show on the home page - if there is one
+    # @event = Event.featured.future.published.first
+    @future_event = Event.featured.future.published.first
   end
 
   def show; end

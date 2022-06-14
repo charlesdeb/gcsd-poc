@@ -1,32 +1,31 @@
 <div id="<%= dom_id event %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= event.title %>
-  </p>
-
+  <h2 class="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-3xl md:text-4xl xl:text-5xl">Our next Creative Studio Day:</h2>
+  <h2 class="my-5 text-2xl tracking-tight font-extrabold text-orange sm:text-3xl md:text-4xl xl:text-5xl">
+    <% if action_name != "show" %>
+      <%= link_to event.title, event, class: "" %>
+    <% else %>
+      <%= event.title %>
+    <% end %>
+  </h2>
   <p class="my-5">
     <strong class="block font-medium mb-1">Starting at:</strong>
     <%= event.starting_at %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Status:</strong>
     <%= event.status %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Description:</strong>
     <%= event.description %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Is featured:</strong>
     <%= event.is_featured %>
   </p>
-
   <% if action_name != "show" %>
     <%= link_to "Show this event", event, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%# <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>
 </div>
