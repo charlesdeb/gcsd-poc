@@ -19,3 +19,13 @@
     @apply font-lora uppercase
   }
 }
+
+@layer utilities {
+  .bg-darken {
+    @apply bg-black/30;
+  }
+
+  .bg-lighten {
+    @apply bg-white/30;
+  }
+}
