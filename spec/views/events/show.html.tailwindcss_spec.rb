@@ -13,7 +13,6 @@ RSpec.describe 'events/show', type: :view do
   end
 
   it 'renders attributes in <p>' do
-    pending 'build real show view'
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/Status/)
