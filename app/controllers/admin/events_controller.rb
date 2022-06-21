@@ -2,7 +2,7 @@
 
 # admin controller for events
 class Admin::EventsController < ApplicationController
-  before_action :set_admin_event, only: %i[show edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy]
 
   # GET /admin/events or /admin/events.json
   def index
@@ -22,7 +22,7 @@ class Admin::EventsController < ApplicationController
 
   # POST /admin/events or /admin/events.json
   def create
-    @event = Admin::Event.new(admin_event_params)
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
@@ -38,7 +38,7 @@ class Admin::EventsController < ApplicationController
   # PATCH/PUT /admin/events/1 or /admin/events/1.json
   def update
     respond_to do |format|
-      if @event.update(admin_event_params)
+      if @event.update(event_params)
         format.html { redirect_to admin_event_url(@event), notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -61,12 +61,13 @@ class Admin::EventsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_admin_event
+  def set_event
     @event = Event.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
-  def admin_event_params
-    params.fetch(:admin_event, {})
+  def event_params
+    # params.fetch(:admin_event, {})
+    params.require(:event).permit(:title, :slug, :starting_at, :finishing_at, :status, :description, :is_featured)
   end
 end
