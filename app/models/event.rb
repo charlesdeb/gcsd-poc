@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  validates :title, :starting_at, :status, :description, presence: true
+  validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
 
   validates :is_featured, inclusion: {
     in: [true, false],

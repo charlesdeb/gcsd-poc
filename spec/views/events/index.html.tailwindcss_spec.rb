@@ -2,20 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe 'events/index', type: :view do
+RSpec.describe 'events/index', type: :view do # rubocop:disable Metrics/BlockLength
   before(:each) do
     assign(:events, [
              Event.create!(
                title: 'Title',
+               slug: 'slug-1',
                status: 'Status',
                description: 'MyText',
-               starting_at: Date.today.next_week
+               starting_at: Date.today.next_week,
+               finishing_at: Date.today.next_week
              ),
              Event.create!(
                title: 'Title',
+               slug: 'slug-2',
                status: 'Status',
                description: 'MyText',
-               starting_at: Date.today.last_week
+               starting_at: Date.today.next_week,
+               finishing_at: Date.today.next_week
              )
            ])
   end

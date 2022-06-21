@@ -5,8 +5,10 @@ require 'rails_helper'
 RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
   subject do
     Event.new(
-      title: 'some title',
+      title: 'Some Title',
+      slug: 'some-title',
       starting_at: Date.today.next_week,
+      finishing_at: Date.today.next_week,
       status: :published,
       description: 'some description'
     )
@@ -23,11 +25,25 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     expect(subject.errors[:title]).to include("can't be blank")
   end
 
+  it 'is invalid without a slug' do
+    subject.slug = nil
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:slug]).to include("can't be blank")
+  end
+
   it 'is invalid without starting_at' do
     subject.starting_at = nil
 
     expect(subject.valid?).to be false
     expect(subject.errors[:starting_at]).to include("can't be blank")
+  end
+
+  it 'is invalid without finishing_at' do
+    subject.finishing_at = nil
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:finishing_at]).to include("can't be blank")
   end
 
   it 'is invalid without a status' do
