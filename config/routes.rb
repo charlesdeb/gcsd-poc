@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users
   # home page is produced by running the home action of the PagesController
   # with its own template
   root controller: 'pages', action: 'home', slug: 'home'
