@@ -2,21 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
-
-*/
-
 @layer base {
   @import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
 
-  h1, h2, h3 {
-    @apply font-lora uppercase
+  h1,
+  h2,
+  h3 {
+    @apply font-lora uppercase;
   }
 }
 
@@ -27,5 +19,9 @@
 
   .bg-lighten {
     @apply bg-white/30;
+  }
+
+  [x-cloak] {
+    display: none !important;
   }
 }

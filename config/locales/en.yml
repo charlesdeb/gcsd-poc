@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    label:
+      user:
+        email: 'Email Address'
+        password: 'Password'
+        sign-in: 'Sign In'
+  forgot_your_password: 'Forgot your password?'
+  hello: 'Hello world'
