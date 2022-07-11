@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     root to: 'events#index'
   end
+  
   devise_for :users
 
   # home page is produced by running the home action of the PagesController

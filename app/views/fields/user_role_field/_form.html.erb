@@ -1,0 +1,6 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+  <%= f.select field.attribute, options_for_select(User.roles.map {|key, value| [key.titleize, User.roles.key(value)]}, field.attribute) %>
+</div>

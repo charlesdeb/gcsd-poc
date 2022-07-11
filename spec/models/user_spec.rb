@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   subject do
     User.new(
       email: 'bob@example.com',
@@ -34,5 +34,9 @@ RSpec.describe User, type: :model do
 
     expect(subject.valid?).to be false
     expect(subject.errors.full_messages).to include("First name and last name can't both be blank")
+  end
+
+  it "has 'user' role by default" do
+    expect(subject.role.to_sym).to eq(:user)
   end
 end

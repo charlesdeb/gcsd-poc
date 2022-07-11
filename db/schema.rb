@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_11_134554) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_224005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_134554) do
     t.string "last_sign_in_ip"
     t.string "first_name"
     t.string "last_name"
-    t.integer "role", default: 0
+    t.integer "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "time_zone", default: "London", null: false

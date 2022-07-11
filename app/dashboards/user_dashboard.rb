@@ -23,7 +23,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_ip: Field::String,
     first_name: Field::String,
     last_name: Field::String,
-    role: Field::Number,
+    role: UserRoleField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     time_zone: TimeZoneField
@@ -50,6 +50,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name
     last_name
     time_zone
+    role
     reset_password_token
     reset_password_sent_at
     remember_created_at
@@ -58,7 +59,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_at
     current_sign_in_ip
     last_sign_in_ip
-    role
     created_at
     updated_at
   ].freeze
@@ -71,7 +71,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name
     last_name
     time_zone
-    encrypted_password
+    role
     reset_password_token
     reset_password_sent_at
     remember_created_at
@@ -80,7 +80,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_at
     current_sign_in_ip
     last_sign_in_ip
-    role
   ].freeze
 
   # COLLECTION_FILTERS

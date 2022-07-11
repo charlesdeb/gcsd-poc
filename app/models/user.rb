@@ -8,6 +8,15 @@ class User < ApplicationRecord
 
   validate :need_a_name
 
+  # for i18n, check out https://github.com/shlima/translate_enum
+  enum role: { user: 0, attender: 1, admin: 2 }
+
+  after_initialize :set_default_role, if: :new_record?
+
+  def set_default_role
+    self.role ||= :user
+  end
+
   def need_a_name
     return if first_name.present? || last_name.present?
 
