@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class EventDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -10,14 +12,18 @@ class EventDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    starting_at: Field::DateTime,
-    finishing_at: Field::DateTime,
+    starting_at: Field::DateTime.with_options(
+      format: '%a, %d %b %Y %H:%M'
+    ),
+    finishing_at: Field::DateTime.with_options(
+      format: '%a, %d %b %Y %H:%M'
+    ),
     status: Field::String,
     description: Field::Text,
     is_featured: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    slug: Field::String,
+    slug: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -29,6 +35,7 @@ class EventDashboard < Administrate::BaseDashboard
     id
     title
     starting_at
+    finishing_at
     status
   ].freeze
 
@@ -75,7 +82,7 @@ class EventDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how events are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(event)
-  #   "Event ##{event.id}"
-  # end
+  def display_resource(event)
+    "Event '#{event.title}'"
+  end
 end

@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class PageDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -11,9 +13,12 @@ class PageDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     slug: Field::String,
-    body: Field::Text,
+    body: Field::Text.with_options(
+      truncate: 120,
+      searchable: true
+    ),
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -63,7 +68,7 @@ class PageDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how pages are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(page)
-  #   "Page ##{page.id}"
-  # end
+  def display_resource(page)
+    "Page '#{page.title}'"
+  end
 end
