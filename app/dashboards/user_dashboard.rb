@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "administrate/base_dashboard"
 
 class UserDashboard < Administrate::BaseDashboard
@@ -24,6 +26,7 @@ class UserDashboard < Administrate::BaseDashboard
     role: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    time_zone: TimeZoneField
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -43,7 +46,9 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     email
-    encrypted_password
+    first_name
+    last_name
+    time_zone
     reset_password_token
     reset_password_sent_at
     remember_created_at
@@ -52,8 +57,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_at
     current_sign_in_ip
     last_sign_in_ip
-    first_name
-    last_name
     role
     created_at
     updated_at
@@ -64,6 +67,9 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     email
+    first_name
+    last_name
+    time_zone
     encrypted_password
     reset_password_token
     reset_password_sent_at
@@ -73,8 +79,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_at
     current_sign_in_ip
     last_sign_in_ip
-    first_name
-    last_name
     role
   ].freeze
 

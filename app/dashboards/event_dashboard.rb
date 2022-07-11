@@ -10,14 +10,14 @@ class EventDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    starting_at: Field::Date,
+    starting_at: Field::DateTime,
+    finishing_at: Field::DateTime,
     status: Field::String,
     description: Field::Text,
     is_featured: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String,
-    finishing_at: Field::Time,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,14 +37,14 @@ class EventDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     title
+    slug
     starting_at
+    finishing_at
     status
     description
     is_featured
     created_at
     updated_at
-    slug
-    finishing_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -53,11 +53,11 @@ class EventDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     starting_at
+    finishing_at
     status
     description
     is_featured
     slug
-    finishing_at
   ].freeze
 
   # COLLECTION_FILTERS

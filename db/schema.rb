@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_222815) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_134554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
     t.string "title", limit: 40
-    t.date "starting_at"
+    t.datetime "starting_at", precision: nil
     t.string "status", limit: 15
     t.text "description"
     t.boolean "is_featured", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug", limit: 30
-    t.time "finishing_at"
+    t.datetime "finishing_at"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["starting_at"], name: "index_events_on_starting_at"
     t.index ["title"], name: "index_events_on_title"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_222815) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "time_zone", default: "London", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
