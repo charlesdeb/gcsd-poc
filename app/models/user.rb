@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Users of the GCSD application
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,6 +11,8 @@ class User < ApplicationRecord
 
   # for i18n, check out https://github.com/shlima/translate_enum
   enum role: { user: 0, attender: 1, admin: 2 }
+
+  has_one_attached :avatar
 
   after_initialize :set_default_role, if: :new_record?
 
