@@ -10,7 +10,6 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    avatar: Field::ActiveStorage,
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
@@ -25,6 +24,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     role: UserRoleField,
+    avatar: Field::ActiveStorage.with_options(index_display_preview: true),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     time_zone: TimeZoneField
@@ -52,6 +52,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     time_zone
     role
+    avatar
     reset_password_token
     reset_password_sent_at
     remember_created_at
@@ -73,6 +74,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     time_zone
     role
+    avatar
     reset_password_token
     reset_password_sent_at
     remember_created_at

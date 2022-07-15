@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
     root to: 'events#index'
   end
-  
+
   devise_for :users
 
   # home page is produced by running the home action of the PagesController
@@ -22,5 +22,7 @@ Rails.application.routes.draw do
   # end
 
   # catch all route to catch any page - this could be a security risk...
-  match '*slug', controller: 'pages', action: 'show', via: :get, as: 'page'
+  match '*slug', controller: 'pages', action: 'show', via: :get, as: 'page', constraints: lambda { |request|
+                                                                                            !request.path_parameters[:slug].start_with?('rails/')
+                                                                                          }
 end
