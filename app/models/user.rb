@@ -12,7 +12,9 @@ class User < ApplicationRecord
   # for i18n, check out https://github.com/shlima/translate_enum
   enum role: { user: 0, attender: 1, admin: 2 }
 
-  has_one_attached :avatar
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
 
   after_initialize :set_default_role, if: :new_record?
 
