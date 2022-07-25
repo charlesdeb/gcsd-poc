@@ -12,16 +12,15 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
-  def icon
-    if avatar.attached?
-      h.image_tag(avatar.variant(:thumb), class: 'h-8 w-8 rounded-full')
+  def avatar
+    if profile_image.attached?
+      h.image_tag(profile_image.variant(:thumb), class: 'h-8 w-8 rounded-full')
     else
       initials
     end
   end
 
   def initials
-    text = "#{first_name.first.upcase}#{last_name.first.upcase}".strip
-    h.tag.div(text, class: 'text-gray-500 hover:text-gray-700 bg-transparent p-1 border-orange border-2 rounded-full')
+    h.tag.div(object.initials, class: 'text-gray-500 hover:text-gray-700 bg-transparent p-1 border-orange border-2 rounded-full')
   end
 end

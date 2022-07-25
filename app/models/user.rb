@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # for i18n, check out https://github.com/shlima/translate_enum
   enum role: { user: 0, attender: 1, admin: 2 }
 
-  has_one_attached :avatar do |attachable|
+  has_one_attached :profile_image do |attachable|
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
 
@@ -27,5 +27,9 @@ class User < ApplicationRecord
 
     errors.add :base, :invalid,
                message: "First name and last name can't both be blank"
+  end
+
+  def initials
+    "#{first_name.first.upcase}#{last_name.first.upcase}".strip
   end
 end

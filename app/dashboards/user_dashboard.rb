@@ -24,7 +24,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     role: UserRoleField,
-    avatar: Field::ActiveStorage.with_options(
+    profile_image: Field::ActiveStorage.with_options(
       index_preview_variant: :thumb,
       show_preview_variant: :thumb
     ),
@@ -40,7 +40,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    avatar
+    profile_image
     email
     first_name
     last_name
@@ -56,7 +56,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     time_zone
     role
-    avatar
+    profile_image
     reset_password_token
     reset_password_sent_at
     remember_created_at
@@ -78,7 +78,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     time_zone
     role
-    avatar
+    profile_image 
     reset_password_token
     reset_password_sent_at
     remember_created_at
