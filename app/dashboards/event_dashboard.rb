@@ -19,7 +19,7 @@ class EventDashboard < Administrate::BaseDashboard
       format: '%a, %d %b %Y %H:%M'
     ),
     status: Field::String,
-    description: Field::Text,
+    description: RichTextAreaField,
     is_featured: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
