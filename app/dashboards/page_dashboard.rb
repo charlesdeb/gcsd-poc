@@ -17,6 +17,10 @@ class PageDashboard < Administrate::BaseDashboard
       truncate: 120,
       searchable: true
     ),
+    featured_image: Field::ActiveStorage.with_options(
+      index_preview_variant: :thumb,
+      show_preview_variant: :thumb
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -40,6 +44,7 @@ class PageDashboard < Administrate::BaseDashboard
     title
     slug
     body
+    featured_image
     created_at
     updated_at
   ].freeze
@@ -51,6 +56,7 @@ class PageDashboard < Administrate::BaseDashboard
     title
     slug
     body
+    featured_image
   ].freeze
 
   # COLLECTION_FILTERS
