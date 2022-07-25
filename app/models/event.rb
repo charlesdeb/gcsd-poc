@@ -8,6 +8,8 @@ class Event < ApplicationRecord
     message: 'must be true or false'
   }
 
+  has_rich_text :description
+
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
   scope :published, -> { where(status: :published) }
