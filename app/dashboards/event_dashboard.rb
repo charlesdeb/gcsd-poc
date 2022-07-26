@@ -20,6 +20,10 @@ class EventDashboard < Administrate::BaseDashboard
     ),
     status: Field::String,
     description: RichTextAreaField,
+    featured_image: Field::ActiveStorage.with_options(
+      index_preview_variant: :thumb,
+      show_preview_variant: :thumb
+    ),
     is_featured: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -49,6 +53,7 @@ class EventDashboard < Administrate::BaseDashboard
     finishing_at
     status
     description
+    featured_image
     is_featured
     created_at
     updated_at
@@ -63,6 +68,7 @@ class EventDashboard < Administrate::BaseDashboard
     finishing_at
     status
     description
+    featured_image
     is_featured
     slug
   ].freeze
