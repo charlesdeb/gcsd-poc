@@ -13,10 +13,11 @@ class PageDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     slug: Field::String,
-    body: Field::Text.with_options(
-      truncate: 120,
-      searchable: true
-    ),
+    body: RichTextAreaField,
+    # body: Field::Text.with_options(
+    #   truncate: 120,
+    #   searchable: true
+    # ),
     featured_image: Field::ActiveStorage.with_options(
       index_preview_variant: :thumb,
       show_preview_variant: :thumb
