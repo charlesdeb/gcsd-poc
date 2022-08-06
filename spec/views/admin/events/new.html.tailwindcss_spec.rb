@@ -6,6 +6,8 @@ RSpec.describe "admin/events/new", type: :view do
   end
 
   it "renders new admin_event form" do
+    skip "we're using administrate ATM"
+
     render
 
     assert_select "form[action=?][method=?]", admin_events_path, "post" do

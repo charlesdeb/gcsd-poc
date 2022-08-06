@@ -8,6 +8,8 @@ RSpec.describe 'admin/events/show', type: :view do
   end
 
   it 'renders attributes in <p>' do
+    skip "we're using administrate ATM"
+
     render
   end
 end

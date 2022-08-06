@@ -8,6 +8,7 @@ RSpec.describe 'admin/events/edit', type: :view do
   end
 
   it 'renders the edit admin_event form' do
+    skip "we're using administrate ATM"
     render
 
     assert_select 'form[action=?][method=?]', admin_event_path(@event), 'post' do

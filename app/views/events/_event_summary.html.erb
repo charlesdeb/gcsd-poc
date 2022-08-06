@@ -1,6 +1,6 @@
 <div class="relative bg-gray-800">
   <div class="h-56 bg-red-700 bg-blend-normal sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
-    <%= image_tag event.featured_image, class: 'w-full h-full object-cover', alt: event.title %>
+    <%= image_tag event.featured_image, class: 'w-full h-full object-cover', alt: event.title if event.featured_image.representable? %>
   </div>
   <div class="relative max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div class="md:ml-auto md:w-1/2 md:pl-10">

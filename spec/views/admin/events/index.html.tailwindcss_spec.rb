@@ -25,6 +25,7 @@ RSpec.describe 'admin/events/index', type: :view do # rubocop:disable Metrics/Bl
   end
 
   it 'renders a list of events' do
+    skip "we're using administrate ATM"
     pending 'build the real index page'
     render
     assert_select 'tr>td', text: 'Title'.to_s, count: 2
