@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :events, only: %i[index show] do
     get 'future', on: :collection
+    get 'past', on: :collection
   end
 
   # namespace :admin do

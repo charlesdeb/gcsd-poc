@@ -48,10 +48,22 @@ RSpec.feature 'Surfer visits home page', type: :feature do
     end  
   end
 
-  scenario 'they see a list of past events' do
-    visit root_path
+  context('past events') do
+    let(:past_title) { 'Groovy Past Event' }
+    let!(:past_event) do
+      FactoryBot.create(:event, finishing_at: Date.today.last_week,
+                         title: past_title)
+    end
 
-    expect(page).to have_text('Past Events')
-    expect(page).to have_link past_link_title, href: past_link_url
+    scenario 'they see a link to past events' do
+      visit root_path
+
+      expect(page).to have_link 'Past Events', href: past_events_path
+    end
+    
+    skip 'they see a list of past events' do
+      visit root_path
+  
+    end
   end
 end

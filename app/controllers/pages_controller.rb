@@ -8,6 +8,7 @@ class PagesController < ApplicationController
     # get a future event to show on the home page - if there is one
     @future_event = Event.featured.future.published.first
     @future_events = Event.future.published
+    @past_events = Event.past.published
   end
 
   def show; end

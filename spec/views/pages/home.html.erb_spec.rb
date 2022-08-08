@@ -13,6 +13,7 @@ RSpec.describe 'pages/home', type: :view do
   context 'there are no future events' do
     it 'shows no link for future events' do
       assign(:future_events, [])
+      assign(:past_events, [])
 
       render
       
@@ -26,6 +27,7 @@ RSpec.describe 'pages/home', type: :view do
                FactoryBot.create(:event, starting_at: Date.today.next_week, title: title), 
                FactoryBot.create(:event, starting_at: Date.today.tomorrow, title: title)
              ])
+      assign(:past_events, [])
 
       render
 
