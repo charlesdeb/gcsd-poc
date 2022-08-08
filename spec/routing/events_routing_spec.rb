@@ -11,5 +11,9 @@ RSpec.describe EventsController, type: :routing do
     it 'routes to #show' do
       expect(get: '/events/1').to route_to('events#show', id: '1')
     end
+
+    it 'routes to #future' do
+      expect(get: '/events/future').to route_to('events#future')
+    end
   end
 end

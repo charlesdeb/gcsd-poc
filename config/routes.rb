@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # home page is produced by running the home action of the PagesController
+  # with its own (home) template as the slug
+  root controller: 'pages', action: 'home', slug: 'home'
+
   namespace :admin do
     resources :users
     resources :events
@@ -11,11 +15,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # home page is produced by running the home action of the PagesController
-  # with its own (home) template as the slug
-  root controller: 'pages', action: 'home', slug: 'home'
-
-  resources :events, only: %i[index show]
+  resources :events, only: %i[index show] do
+    get 'future', on: :collection
+  end
 
   # namespace :admin do
   #   resources :events
