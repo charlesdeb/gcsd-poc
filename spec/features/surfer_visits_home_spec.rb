@@ -15,10 +15,12 @@ RSpec.feature 'Surfer visits home page', type: :feature do
 
   context('future events') do
     let(:future_featured_title) { 'Groovy Future Featured Event' }
+    let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }
     let!(:future_featured_event) do
       FactoryBot.create(:event, starting_at: Date.today.next_week,
-                        is_featured: true, title: future_featured_title)
+                        is_featured: true, title: future_featured_title,
+                        description: future_featured_description)
     end
 
     let!(:future_event) do
@@ -26,11 +28,21 @@ RSpec.feature 'Surfer visits home page', type: :feature do
                                 is_featured: false, title: future_title)
     end
 
-    scenario 'they see a featured future event' do
-      visit root_path
+    context('featured event') do 
+      scenario 'they see a featured future event' do
+        visit root_path
+  
+        expect(page).to have_text(future_featured_title)
+        expect(page).to have_text(future_featured_description)
+      end
+  
+      scenario 'they see links to see more of the featured event' do
+        visit root_path
 
-      expect(page).to have_text(future_featured_title)
-      expect(page).to have_link future_featured_title, href: event_path(future_featured_event)
+        expect(page).to have_link future_featured_title, href: event_path(future_featured_event)
+        # expect(page).to have_link I18n.t('more'), href: event_path(future_featured_event)
+        expect(page).to have_link 'More', href: event_path(future_featured_event)
+      end
     end
 
     scenario 'they see a link for future events' do

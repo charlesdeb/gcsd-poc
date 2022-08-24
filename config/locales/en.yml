@@ -36,5 +36,6 @@ en:
         email: 'Email Address'
         password: 'Password'
         sign-in: 'Sign In'
+  # general messages
   forgot_your_password: 'Forgot your password?'
-  hello: 'Hello world'
+  more: 'More'
