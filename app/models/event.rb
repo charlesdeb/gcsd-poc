@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
+  validates :slug, uniqueness: true
 
   validates :is_featured, inclusion: {
     in: [true, false],

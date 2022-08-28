@@ -32,6 +32,15 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     expect(subject.errors[:slug]).to include("can't be blank")
   end
 
+  it 'is invalid with duplicate slugs' do
+    subject.save
+    duplicate = subject.dup
+    duplicate.description = 'some description'
+
+    expect(duplicate.valid?).to be false
+    expect(duplicate.errors[:slug]).to include("has already been taken")
+  end
+
   it 'is invalid without starting_at' do
     subject.starting_at = nil
 

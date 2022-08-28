@@ -2,6 +2,7 @@
 
 class Page < ApplicationRecord
   validates :title, :slug, :body, presence: true
+  validates :slug, uniqueness: true
 
   has_rich_text :body
 
