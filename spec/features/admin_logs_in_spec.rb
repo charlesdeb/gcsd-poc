@@ -2,18 +2,27 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Admin logs in', type: :feature do # rubocop:disable Metrics/BlockLength
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }
 
-  scenario 'they see a home page' do
-    visit root_path
+  let(:password) { 'secret_squirrel' }
+  let!(:admin) { FactoryBot.create(:admin_user, password: password) }
 
-    expect(page).to have_text(body)
+  before(:each) do
+    visit root_path
   end
 
-  context('future events') do # rubocop:disable Metrics/BlockLength
+  scenario 'they see a sign in link' do
+    # TODO: figure out translation. This gem might help for devise: https://github.com/tigrish/devise-i18n
+    expect(page).to have_text('Sign In')
+  end
+
+  context('with a bad password') do
+  end
+
+  context('with a good password') do # rubocop:disable Metrics/BlockLength
     let(:future_featured_title) { 'Groovy Future Featured Event' }
     let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }
