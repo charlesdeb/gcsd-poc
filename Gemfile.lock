@@ -159,6 +159,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -341,6 +343,7 @@ DEPENDENCIES
   image_processing
   importmap-rails
   jbuilder
+  launchy
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3)

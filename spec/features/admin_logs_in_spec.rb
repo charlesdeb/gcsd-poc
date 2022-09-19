@@ -2,88 +2,66 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Admin logs in', type: :feature do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Admin tries to log in', type: :feature do # rubocop:disable Metrics/BlockLength
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }
 
-  let(:password) { 'secret_squirrel' }
-  let!(:admin) { FactoryBot.create(:admin_user, password: password) }
+  let(:correct_password) { 'secret_squirrel' }
+  let(:wrong_password) { 'rubbish' }
+  let(:email) { 'squirrel@example.com' }
+  let!(:admin) { FactoryBot.create(:admin_user, email: email, password: correct_password) }
 
   before(:each) do
     visit root_path
   end
 
-  scenario 'they see a sign in link' do
+  scenario 'there is a working sign in link' do
     # TODO: figure out translation. This gem might help for devise: https://github.com/tigrish/devise-i18n
     expect(page).to have_text('Sign In')
+    click_link 'Sign In'
+    expect(page).to have_text('Sign in to your account')
   end
 
+  # TODO: this is just testing that devise works - which is redundant
   context('with a bad password') do
-  end
-
-  context('with a good password') do # rubocop:disable Metrics/BlockLength
-    let(:future_featured_title) { 'Groovy Future Featured Event' }
-    let(:future_featured_description) { 'Some stuff about a future featured event' }
-    let(:future_title) { 'Groovy Future Event' }
-    let!(:future_featured_event) do
-      FactoryBot.create(:event, starting_at: Date.today.next_week,
-                                is_featured: true, title: future_featured_title,
-                                description: future_featured_description)
+    before(:each) do
+      visit new_user_session_path
+      fill_in 'Email Address', with: email
+      fill_in 'Password', with: wrong_password
+      click_button 'Sign In'
     end
 
-    let!(:future_event) do
-      FactoryBot.create(:event, starting_at: Date.today.next_week,
-                                is_featured: false, title: future_title)
+    scenario 'sees failure message' do
+      expect(page).to have_text('Sign in to your account')
+      expect(page).to have_text('Invalid Email or password.')
     end
 
-    context('featured event') do
-      scenario 'they see a featured future event' do
-        visit root_path
-
-        expect(page).to have_text(future_featured_title)
-        expect(page).to have_text(future_featured_description)
-      end
-
-      scenario 'they see links to see more of the featured event' do
-        visit root_path
-
-        expect(page).to have_link future_featured_title, href: event_path(future_featured_event)
-        # expect(page).to have_link I18n.t('more'), href: event_path(future_featured_event)
-        expect(page).to have_link 'More', href: event_path(future_featured_event)
-      end
-    end
-
-    scenario 'they see a link for future events' do
-      visit root_path
-
-      expect(page).to have_link 'Coming Events', href: future_events_path
+    scenario 'is not logged in' do
+      skip 'add something that only shows when a user is logged in'
     end
   end
 
-  context('no future events') do
-    scenario 'they see no link for future events' do
-      visit root_path
-
-      expect(page).not_to have_link 'Coming Events', href: future_events_path
-    end
-  end
-
-  context('past events') do
-    let(:past_title) { 'Groovy Past Event' }
-    let!(:past_event) do
-      FactoryBot.create(:event, finishing_at: Date.today.last_week,
-                                title: past_title)
+  # TODO: this is mostly just testing that devise works - which is redundant
+  context('with a good password') do
+    before(:each) do
+      visit new_user_session_path
+      fill_in 'Email Address', with: email
+      fill_in 'Password', with: correct_password
+      click_button 'Sign In'
     end
 
-    scenario 'they see a link to past events' do
-      visit root_path
-
-      expect(page).to have_link 'Past Events', href: past_events_path
+    scenario 'sees signed in message' do
+      expect(page).to have_text('Signed in successfully.')
+      expect(page).to_not have_text('Invalid Email or password.')
     end
 
-    skip 'they see a list of past events' do
-      visit root_path
+    scenario 'is now on the home page' do
+      expect(page).to have_current_path(root_path)
+    end
+
+    scenario 'is logged in' do
+      skip 'add something that only shows when a user is logged in'
     end
   end
 end

@@ -21,6 +21,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def initials
-    h.tag.div(object.initials, class: 'text-gray-500 hover:text-gray-700 bg-transparent p-1 border-orange border-2 rounded-full')
+    h.tag.div(object.initials,
+              class: 'text-gray-500 hover:text-gray-700 bg-transparent p-1 border-orange border-2 rounded-full')
   end
 end

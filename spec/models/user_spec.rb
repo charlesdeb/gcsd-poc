@@ -39,4 +39,22 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
   it "has 'user' role by default" do
     expect(subject.role.to_sym).to eq(:user)
   end
+
+  describe '.initials' do
+    let(:user) { FactoryBot.build(:user, first_name: 'Bob', last_name: 'Smith') }
+
+    it 'handles initials when two names' do
+      expect(user.initials).to eq('BS')
+    end
+
+    it 'handles initials when first name only' do
+      user.last_name = nil
+      expect(user.initials).to eq('B')
+    end
+
+    it 'handles initials when last name only' do
+      user.first_name = nil
+      expect(user.initials).to eq('S')
+    end
+  end
 end

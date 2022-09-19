@@ -30,6 +30,6 @@ class User < ApplicationRecord
   end
 
   def initials
-    "#{first_name.first.upcase}#{last_name.first.upcase}".strip
+    "#{first_name.present? ? first_name.first.upcase : nil}#{last_name.present? ? last_name.first.upcase : nil}"
   end
 end
