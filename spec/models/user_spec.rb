@@ -7,7 +7,8 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
     User.new(
       email: 'bob@example.com',
       password: '123456',
-      first_name: 'Bob'
+      first_name: 'Bob',
+      locale: :en
     )
   end
 
@@ -34,6 +35,13 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
 
     expect(subject.valid?).to be false
     expect(subject.errors.full_messages).to include("First name and last name can't both be blank")
+  end
+
+  it 'is invalid without locale' do
+    subject.locale = nil
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:locale]).to include("can't be blank")
   end
 
   it "has 'user' role by default" do

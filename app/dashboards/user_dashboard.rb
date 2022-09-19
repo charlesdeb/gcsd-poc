@@ -24,6 +24,10 @@ class UserDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     role: UserRoleField,
+    locale: Field::Select.with_options(
+      collection: %i[en tr fr],
+      searchable: false
+    ),
     profile_image: Field::ActiveStorage.with_options(
       index_preview_variant: :thumb,
       show_preview_variant: :thumb
@@ -55,6 +59,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name
     last_name
     time_zone
+    locale
     role
     profile_image
     reset_password_token
@@ -77,8 +82,9 @@ class UserDashboard < Administrate::BaseDashboard
     first_name
     last_name
     time_zone
+    locale
     role
-    profile_image 
+    profile_image
     reset_password_token
     reset_password_sent_at
     remember_created_at
