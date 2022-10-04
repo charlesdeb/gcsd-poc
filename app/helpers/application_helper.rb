@@ -4,7 +4,9 @@
 module ApplicationHelper
   # TODO: add some tests
   def language_select(request_path)
-    select_tag 'locale', language_options(request_path), onchange: 'language_changer(event);'
+    select_tag 'locale', language_options(request_path),
+               'x-data': '{}', 'x-title': 'Language Selector',
+               'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
   end
 
   private
@@ -24,6 +26,7 @@ module ApplicationHelper
       # return the array for this option
       [language, locale, { 'data-url': url }]
     end
+
     options_for_select(options_array, I18n.locale)
   end
 
