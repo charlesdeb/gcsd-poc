@@ -15,13 +15,13 @@ module ApplicationHelper
     # get the parameters that were used to determine the current route
     url_params = Rails.application.routes.recognize_path request_path
 
-    # build an array of arrays for options
+    # build an array of arrays for options_for_select
     options_array = I18n.available_locales.map do |current_locale|
       # get the url for the current request, but with the specified locale
       url = url_for(url_params.merge({ locale: current_locale }))
 
       # map the locale to a human-readable language
-      language = locale_to_language(current_locale)
+      language = I18n.t('.lang', locale: current_locale)
 
       # return the array for this option
       [language, current_locale, { 'data-url': url }]
@@ -31,18 +31,7 @@ module ApplicationHelper
   end
 
   def selected_locale(url_params)
-    # get the get locale from the URL, then the i18n default
+    # get the locale from the URL if set
     url_params[:locale] || I18n.locale
-  end
-
-  def locale_to_language(locale)
-    case locale
-    when :tr
-      'Türkçe'
-    when :fr
-      'Français'
-    else
-      'English'
-    end
   end
 end
