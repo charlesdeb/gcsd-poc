@@ -175,6 +175,9 @@ GEM
     mobility (1.2.9)
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
+    mobility-actiontext (1.1.1)
+      actiontext (>= 6.0)
+      mobility (~> 1.2)
     msgpack (1.5.6)
     net-imap (0.2.3)
       digest
@@ -351,6 +354,7 @@ DEPENDENCIES
   jbuilder
   launchy
   mobility
+  mobility-actiontext
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3)
