@@ -21,7 +21,7 @@ module ApplicationHelper
       url = url_for(url_params.merge({ locale: current_locale }))
 
       # map the locale to a human-readable language
-      language = I18n.t('.lang', locale: current_locale)
+      language = t('language', locale: current_locale)
 
       # return the array for this option
       [language, current_locale, { 'data-url': url }]

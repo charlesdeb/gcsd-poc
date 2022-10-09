@@ -30,14 +30,5 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  helpers:
-    label:
-      user:
-        email: 'Email Address'
-        password: 'Password'
-        sign-in: 'Sign In'
   # general messages
-  forgot_your_password: 'Forgot your password?'
-  more: 'More'
-  lang: 'English'
-
+  language: 'English'

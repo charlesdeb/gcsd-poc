@@ -2,7 +2,7 @@
   <div class="max-w-md w-full space-y-8">
     <div>
       <%= image_tag 'icon-500x500.png', size: '40x40', class: 'mx-auto h-12 w-auto', alt: 'GCSD' %>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= t('.sign_in_to_your_account')%></h2>
       <p class="hidden mt-2 text-center text-sm text-gray-600">
         Or
         <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> start your 14-day free trial </a>
@@ -13,11 +13,11 @@
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="field">
           <%= f.label :email, class: "sr-only" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", required: true, placeholder: I18n.t('helpers.label.user.email') %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", required: true, placeholder: t('activerecord.attributes.user.email') %>
         </div>
         <div class="field">
           <%= f.label :password, class: "sr-only" %>
-          <%= f.password_field :password, autocomplete: "current-password", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", required: true, placeholder: I18n.t('helpers.label.user.password') %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", required: true, placeholder: t('activerecord.attributes.user.password') %>
         </div>
       </div>
       <div class="flex items-center justify-between">
@@ -29,13 +29,13 @@
         </div>
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
           <div class="text-sm">
-            <%= link_to (t 'forgot_your_password'), new_password_path(resource_name), class: "font-medium text-indigo-600 hover:text-indigo-500" %><br />
+            <%= link_to (t 'devise.shared.links.forgot_your_password'), new_password_path(resource_name), class: "font-medium text-indigo-600 hover:text-indigo-500" %><br />
           </div>
         <% end %>
       </div>
       <div>
-        <%= f.button I18n.t('helpers.label.user.sign-in'), data: {turbo: false}, class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-          <%= content_tag(:span, I18n.t('helpers.label.user.sign-in') )%>
+        <%= f.button t('.sign_in'), data: {turbo: false}, class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <%= content_tag(:span, t('.sign_in') )%>
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             <!-- Heroicon name: solid/lock-closed -->
             <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

@@ -8,6 +8,8 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    before_action :set_locale
+
     before_action :authenticate_admin
     # before_action :authenticate_user!
 
@@ -21,5 +23,24 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
+    private
+
+    def set_locale
+      I18n.locale = extract_locale || I18n.default_locale
+    end
+
+    def extract_locale
+      if current_user.nil?
+        parsed_locale = params[:locale]
+        I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
+      else
+        I18n.available_locales.map(&:to_s).include?(current_user['locale']) ? current_user['locale'] : nil
+      end
+    end
+
+    def default_url_options
+      { locale: I18n.locale }
+    end
   end
 end
