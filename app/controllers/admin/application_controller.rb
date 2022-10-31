@@ -8,6 +8,8 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    before_action :authenticate_admin
+
     # Administrate doesn't seem to include the base app's helpers, so this is
     # needed (https://github.com/thoughtbot/administrate/issues/1238) in order
     # to use language_select in administrate views.
@@ -26,8 +28,6 @@ module Admin
     # helper_method :url_for
 
     before_action :set_locale
-
-    before_action :authenticate_admin
     # before_action :authenticate_user!
 
     def authenticate_admin
@@ -48,12 +48,7 @@ module Admin
     end
 
     def extract_locale
-      if current_user.nil?
-        parsed_locale = params[:locale]
-        I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
-      else
-        I18n.available_locales.map(&:to_s).include?(current_user['locale']) ? current_user['locale'] : nil
-      end
+      I18n.available_locales.map(&:to_s).include?(current_user['locale']) ? current_user['locale'] : nil
     end
 
     def default_url_options
