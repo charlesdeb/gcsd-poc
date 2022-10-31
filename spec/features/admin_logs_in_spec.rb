@@ -17,23 +17,23 @@ RSpec.feature 'Admin tries to log in', type: :feature do # rubocop:disable Metri
   end
 
   scenario 'there is a working sign in link' do
-    # TODO: figure out translation. This gem might help for devise: https://github.com/tigrish/devise-i18n
-    expect(page).to have_text('Sign In')
-    click_link 'Sign In'
-    expect(page).to have_text('Sign in to your account')
+    expect(page).to have_text(I18n.t('devise.shared.links.sign_in'))
+    click_link I18n.t('devise.shared.links.sign_in')
+    expect(page).to have_text(I18n.t('devise.sessions.new.sign_in_to_your_account'))
   end
 
-  # TODO: this is just testing that devise works - which is redundant
+  # This is mostly just testing that devise works - which is a bit redundant
   context('with a bad password') do
     before(:each) do
       visit new_user_session_path
-      fill_in 'Email Address', with: email
-      fill_in 'Password', with: wrong_password
-      click_button 'Sign In'
+      fill_in I18n.t('activerecord.attributes.user.email'), with: email
+      fill_in I18n.t('activerecord.attributes.user.password'), with: wrong_password
+      click_button I18n.t('devise.shared.links.sign_in')
     end
 
     scenario 'sees failure message' do
-      expect(page).to have_text('Sign in to your account')
+      expect(page).to have_text(I18n.t('devise.sessions.new.sign_in_to_your_account'))
+      # TODO: find the devise text key for this
       expect(page).to have_text('Invalid Email or password.')
     end
 
@@ -42,13 +42,13 @@ RSpec.feature 'Admin tries to log in', type: :feature do # rubocop:disable Metri
     end
   end
 
-  # TODO: this is mostly just testing that devise works - which is redundant
+  # This is mostly just testing that devise works - which is a bit redundant
   context('with a good password') do
     before(:each) do
       visit new_user_session_path
-      fill_in 'Email Address', with: email
-      fill_in 'Password', with: correct_password
-      click_button 'Sign In'
+      fill_in I18n.t('activerecord.attributes.user.email'), with: email
+      fill_in I18n.t('activerecord.attributes.user.password'), with: correct_password
+      click_button I18n.t('devise.shared.links.sign_in')
     end
 
     scenario 'sees signed in message' do
@@ -57,7 +57,7 @@ RSpec.feature 'Admin tries to log in', type: :feature do # rubocop:disable Metri
     end
 
     scenario 'is now on the home page' do
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(root_path(locale: I18n.default_locale))
     end
 
     scenario 'is logged in' do

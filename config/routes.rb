@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   /#{I18n.available_locales.join("|")}/ do
     # home page is produced by running the home action of the PagesController
     # with its own (home) template as the slug
+    # root controller: 'pages', action: 'home', slug: 'home', locale: I18n.default_locale
     root controller: 'pages', action: 'home', slug: 'home'
 
     namespace :admin do

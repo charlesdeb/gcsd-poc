@@ -2,7 +2,7 @@
 
 # Helper methods
 module ApplicationHelper
-  def language_select(request_path = root_path)
+  def locale_select(request_path = root_path)
     select_tag 'locale',
                language_options(request_path),
                'x-data': '{}', 'x-title': 'Language Selector',

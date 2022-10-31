@@ -39,16 +39,16 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
       scenario 'they see links to see more of the featured event' do
         visit root_path
 
-        expect(page).to have_link future_featured_title, href: event_path(future_featured_event)
-        # expect(page).to have_link I18n.t('more'), href: event_path(future_featured_event)
-        expect(page).to have_link 'More', href: event_path(future_featured_event)
+        expect(page).to have_link future_featured_title, href: event_path(I18n.default_locale, future_featured_event)
+        expect(page).to have_link I18n.t('events.event_summary.more'),
+                                  href: event_path(I18n.default_locale, future_featured_event)
       end
     end
 
     scenario 'they see a link for future events' do
       visit root_path
 
-      expect(page).to have_link 'Coming Events', href: future_events_path
+      expect(page).to have_link 'Coming Events', href: future_events_path(locale: I18n.default_locale)
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     scenario 'they see no link for future events' do
       visit root_path
 
-      expect(page).not_to have_link 'Coming Events', href: future_events_path
+      expect(page).not_to have_link 'Coming Events', href: future_events_path(locale: I18n.default_locale)
     end
   end
 
@@ -69,8 +69,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
 
     scenario 'they see a link to past events' do
       visit root_path
-
-      expect(page).to have_link 'Past Events', href: past_events_path
+      expect(page).to have_link 'Past Events', href: past_events_path(locale: I18n.default_locale)
     end
 
     skip 'they see a list of past events' do

@@ -38,7 +38,7 @@ RSpec.describe '/events', type: :request do
   describe 'GET /show' do
     it 'renders a successful response' do
       event = Event.create! valid_attributes
-      get event_url(event)
+      get event_url(I18n.locale, event)
       expect(response).to be_successful
     end
   end

@@ -12,7 +12,7 @@ module Admin
 
     # Administrate doesn't seem to include the base app's helpers, so this is
     # needed (https://github.com/thoughtbot/administrate/issues/1238) in order
-    # to use language_select in administrate views.
+    # to use locale_select in administrate views.
     helper all_helpers_from_path 'app/helpers'
 
     # the following confusing pile of includes gets stuck at the end, but is
@@ -22,8 +22,7 @@ module Admin
     # include ActionView::Helpers::FormTagHelper
     # include ActionView::RoutingUrlFor
 
-    # helper_method :zoobie2
-    # helper_method :language_select
+    # helper_method :locale_select
     # helper_method :options_for_select
     # helper_method :url_for
 

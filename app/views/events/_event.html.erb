@@ -1,7 +1,7 @@
 <div id="<%= dom_id event %>">
   <h2 class="my-5 text-2xl tracking-tight font-extrabold text-orange sm:text-3xl md:text-4xl xl:text-5xl">
     <% if action_name != "show" %>
-      <%= link_to event.title, event, class: "" %>
+      <%= link_to event.title, event_path(id: event), class: "" %>
     <% else %>
       <%= event.title %>
     <% end %>
@@ -27,7 +27,7 @@
     <%= event.is_featured %>
   </p>
   <% if action_name != "show" %>
-    <%= link_to "Show this event", event, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%# <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>
