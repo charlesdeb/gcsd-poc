@@ -26,8 +26,7 @@ module Admin
     # helper_method :options_for_select
     # helper_method :url_for
 
-    before_action :set_locale
-    before_action :set_mobility_locale
+    before_action :set_locales
     # before_action :authenticate_user!
 
     def authenticate_admin
@@ -43,20 +42,17 @@ module Admin
 
     private
 
-    def set_locale
-      I18n.locale = extract_locale || I18n.default_locale
-    end
+    def set_locales
+      # set UI locale - which is defined by the current user
+      I18n.locale = extract_locale { current_user['locale'] } || I18n.default_locale
 
-    def set_mobility_locale
-      Mobility.locale = extract_mobility_locale || I18n.default_locale
+      # set mobility locale - which comes from a query param
+      Mobility.locale = extract_locale { params[:mobility_locale] } || I18n.locale
     end
 
     def extract_locale
-      I18n.available_locales.map(&:to_s).include?(current_user['locale']) ? current_user['locale'] : nil
-    end
-
-    def extract_mobility_locale
-      I18n.available_locales.map(&:to_s).include?(params[:mobility_locale]) ? params[:mobility_locale] : nil
+      locale = yield
+      I18n.available_locales.map(&:to_s).include?(locale) ? locale : nil
     end
 
     def default_url_options

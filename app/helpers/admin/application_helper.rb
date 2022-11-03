@@ -23,14 +23,23 @@ module Admin
 
     def mobility_locale_select(request_path = root_path)
       select_tag 'locale',
-                 locale_options(request_path),
+                 mobility_locale_options(request_path),
                  'x-data': '{}', 'x-title': 'Language Selector',
                  'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
     end
 
+    # over-ride this helper so we can add the mobility_locale as a param
+    def resource_index_route(resource_name, mobility_locale = Mobility.locale)
+      url_for(
+        action: 'index',
+        controller: "/#{namespace}/#{resource_name}",
+        mobility_locale: mobility_locale
+      )
+    end
+
     private
 
-    def locale_options(request_path)
+    def mobility_locale_options(request_path)
       # get the parameters that were used to determine the current route
       url_params = Rails.application.routes.recognize_path request_path
 
