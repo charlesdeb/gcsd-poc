@@ -13,7 +13,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     expect(page).to have_text(body)
   end
 
-  context('future events') do # rubocop:disable Metrics/BlockLength
+  context('there are future events') do # rubocop:disable Metrics/BlockLength
     let(:future_featured_title) { 'Groovy Future Featured Event' }
     let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }
@@ -28,7 +28,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
                                 is_featured: false, title: future_title)
     end
 
-    context('featured event') do
+    context('there are featured events') do
       scenario 'they see a featured future event' do
         visit root_path
 
@@ -52,7 +52,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     end
   end
 
-  context('no future events') do
+  context('there are no future events') do
     scenario 'they see no link for future events' do
       visit root_path
 
@@ -60,7 +60,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     end
   end
 
-  context('past events') do
+  context('there are past events') do
     let(:past_title) { 'Groovy Past Event' }
     let!(:past_event) do
       FactoryBot.create(:event, finishing_at: Date.today.last_week,
