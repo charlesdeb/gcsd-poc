@@ -2,29 +2,46 @@
 
 require 'rails_helper'
 
-# xxrubocop:disable Metrics/BlockLength
-
 RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Metrics/BlockLength
   let(:title) { 'Groovy Event' }
-  let(:description) { 'Some stuff about anevent' }
+  let(:description) { 'Some stuff about an event' }
   let(:event) do
     FactoryBot.create(:event, starting_at: Date.today.next_week,
                               title: title, description: description)
   end
 
   before(:each) do
+    # TODO: refactor into a helper
+    image_name = 'some-image-100x150.png'
+    image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name
+
+    event.featured_image.attach(
+      io: File.open(image_path),
+      filename: image_name,
+      content_type: 'image/png'
+    )
     visit event_path event
   end
 
-  context('general event details') do
+  context('overview of event') do
     scenario 'they see the title' do
-      within('div.event-header') do
+      within('div.event-overview') do
         expect(page).to have_text(title)
       end
     end
-    
-    scenario 'they see the description'
-    scenario 'they see the picture'
+
+    scenario 'they see the description' do
+      within('div.event-overview') do
+        expect(page).to have_text(description)
+      end
+    end
+
+    scenario 'they see the picture' do
+      within('div.event-overview') do
+        expect(page).to have_css("img[alt='#{title}']")
+      end
+    end
+
     scenario 'they see the dates in their current time zone'
     scenario 'they see a donate button'
     scenario 'they see a register button'

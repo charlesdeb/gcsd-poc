@@ -18,9 +18,11 @@ Rails.application.routes.draw do
 
     devise_for :users
 
-    resources :events, only: %i[index show] do
-      get 'future', on: :collection
-      get 'past', on: :collection
+    defaults locale: I18n.locale do
+      resources :events, only: %i[index show] do
+        get 'future', on: :collection
+        get 'past', on: :collection
+      end
     end
 
     # namespace :admin do
