@@ -5,7 +5,7 @@
         <div class="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-orange-100 lg:block"></div>
         <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
           <div>
-            <h2 class="hidden text-lg font-semibold text-indigo-600">Case Study</h2>
+            <h2 class="text-lg font-semibold text-indigo-600"><%= l event.starting_at, format: :short %></h2>
             <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
           </div>
         </div>
@@ -35,9 +35,6 @@
             </div>
           </div>
           <div class="mt-8 lg:mt-0">
-            <div class="hidden mx-auto max-w-prose text-base lg:max-w-none">
-              <p class="text-lg text-gray-500">Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi.</p>
-            </div>
             <div class="prose prose-indigo mx-auto text-gray-500 lg:col-start-1 lg:row-start-1 lg:max-w-none">
               <%= event.description %>
             </div>

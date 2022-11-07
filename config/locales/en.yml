@@ -32,3 +32,8 @@
 en:
   # general messages
   language: 'English'
+  # date and time stuff
+  time:
+    formats:
+      short: '%e %B %y at %k.%M %p (%Z)'
+      starting_at: 'Starting at %A %e %B %y at %k.%M %p (%Z)'

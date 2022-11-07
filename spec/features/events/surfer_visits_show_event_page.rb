@@ -6,11 +6,12 @@ RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Me
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let(:event) do
-    FactoryBot.create(:event, starting_at: Date.today.next_week,
+    FactoryBot.create(:event, starting_at: DateTime.now.utc,
                               title: title, description: description)
   end
 
   before(:each) do
+    p event
     # TODO: refactor into a helper
     image_name = 'some-image-100x150.png'
     image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name
@@ -42,7 +43,11 @@ RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Me
       end
     end
 
-    scenario 'they see the dates in their current time zone'
+    scenario 'they see the start date in their current time zone' do
+      within('div.event-overview') do
+        expect(page).to have_content(I18n.l(event.starting_at, format: :short).strip)
+      end
+    end
     scenario 'they see a donate button'
     scenario 'they see a register button'
   end

@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'events/show', type: :view do
+  let(:starting_at) { DateTime.now.utc }
   before(:each) do
     @event = assign(:event,
                     Event.create!(
@@ -10,14 +11,15 @@ RSpec.describe 'events/show', type: :view do
                       slug: 'slug-1',
                       status: 'Status',
                       description: 'MyText',
-                      starting_at: Date.today.next_week,
-                      finishing_at: Date.today.next_week
+                      starting_at: starting_at,
+                      finishing_at: DateTime.now.next_day
                     ))
   end
 
-  it 'renders attributes in <p>' do
+  it 'renders attributes' do
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to include(I18n.l(starting_at, format: :short))
   end
 end
