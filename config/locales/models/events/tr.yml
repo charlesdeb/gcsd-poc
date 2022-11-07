@@ -1,0 +1,14 @@
+tr:
+  activerecord:
+    models:
+      event:
+        one: Etkinlik
+        other: Etkinlikler
+    attributes:
+      event:
+        title: "Başlık"
+        starting_at: "Baslangıç Tarihi"
+        finishing_at: "Bitiş Tarihi"
+        description: "Açıklama"
+        featured_image: "Öne çıkan görsel"
+        is_featured: "Öne çıkan mı?"

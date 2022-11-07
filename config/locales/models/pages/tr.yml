@@ -1,0 +1,10 @@
+tr:
+  activerecord:
+    models:
+      page:
+        one: Sayfa
+        other: Sayfalar
+    attributes:
+      page:
+        title: "Başlık"
+        body: "İçerikler"
