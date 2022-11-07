@@ -18,9 +18,6 @@ RSpec.describe 'events/show', type: :view do
   it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Title/)
-    expect(rendered).to match(/slug-1/)
-    expect(rendered).to match(/Status/)
     expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/false/)
   end
 end

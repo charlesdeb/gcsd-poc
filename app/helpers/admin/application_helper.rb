@@ -28,15 +28,6 @@ module Admin
                  'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
     end
 
-    # over-ride this helper so we can add the mobility_locale as a param
-    def resource_index_route(resource_name, mobility_locale = Mobility.locale)
-      url_for(
-        action: 'index',
-        controller: "/#{namespace}/#{resource_name}",
-        mobility_locale: mobility_locale
-      )
-    end
-
     private
 
     def mobility_locale_options(request_path)

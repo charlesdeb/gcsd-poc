@@ -2,11 +2,11 @@
   <div class="event-overview">
     <div class="overflow-hidden bg-white">
       <div class="relative mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
-        <div class="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-gray-50 lg:block"></div>
+        <div class="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-orange-100 lg:block"></div>
         <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
           <div>
             <h2 class="hidden text-lg font-semibold text-indigo-600">Case Study</h2>
-            <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl"><%= event.title %></h3>
+            <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
           </div>
         </div>
         <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
@@ -46,22 +46,6 @@
       </div>
     </div>
   </div>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Slug:</strong>
-    <%= event.slug %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Starting at:</strong>
-    <%= event.starting_at %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= event.status %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Is featured:</strong>
-    <%= event.is_featured %>
-  </p>
   <% if action_name != "show" %>
     <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%# <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

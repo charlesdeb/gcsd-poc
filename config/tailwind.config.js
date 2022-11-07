@@ -14,8 +14,11 @@ module.exports = {
         lora: ['Lora', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        beige: '#fffcf5',
-        orange: '#c66c39',
+        orange: {
+          100: '#fffcf5',
+          600: '#c66c39',
+          DEFAULT: '#c66c39',
+        },
       },
     },
   },

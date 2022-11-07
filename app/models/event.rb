@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  extend Mobility
+
   validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
   validates :slug, uniqueness: true
 
@@ -14,6 +16,9 @@ class Event < ApplicationRecord
   has_one_attached :featured_image do |attachable|
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
+
+  translates :description, backend: :action_text
+  translates :title, backend: :action_text, plain: true
 
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }

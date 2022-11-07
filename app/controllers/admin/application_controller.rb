@@ -56,7 +56,7 @@ module Admin
     end
 
     def default_url_options
-      { locale: I18n.locale }
+      { locale: I18n.locale, mobility_locale: Mobility.locale }
     end
   end
 end

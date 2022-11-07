@@ -8,16 +8,21 @@ Rails.application.routes.draw do
     # root controller: 'pages', action: 'home', slug: 'home', locale: I18n.default_locale
     root controller: 'pages', action: 'home', slug: 'home'
 
-    namespace :admin do
-      resources :users
-      resources :events
-      resources :pages
+    # Add a mobility locale to the admin area for translating content
+    scope '(:mobility_locale)', mobility_locale:
+    /#{I18n.available_locales.join("|")}/ do
+      namespace :admin do
+        resources :users
+        resources :events
+        resources :pages
 
-      root to: 'events#index'
+        root to: 'events#index'
+      end
     end
 
     devise_for :users
 
+    # TODO: not sure if we really want this...
     defaults locale: I18n.locale do
       resources :events, only: %i[index show] do
         get 'future', on: :collection
