@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'events/show', type: :view do
-  let(:starting_at) { DateTime.now.utc }
+  let(:starting_at) { Time.zone.now }
   before(:each) do
     @event = assign(:event,
                     Event.create!(
@@ -12,7 +12,7 @@ RSpec.describe 'events/show', type: :view do
                       status: 'Status',
                       description: 'MyText',
                       starting_at: starting_at,
-                      finishing_at: DateTime.now.next_day
+                      finishing_at: Time.zone.now.next_day
                     ))
   end
 

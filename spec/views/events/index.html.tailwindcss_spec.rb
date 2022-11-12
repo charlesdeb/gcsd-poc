@@ -10,16 +10,16 @@ RSpec.describe 'events/index', type: :view do # rubocop:disable Metrics/BlockLen
                slug: 'slug-1',
                status: 'Status',
                description: 'MyText',
-               starting_at: Date.today.next_week,
-               finishing_at: Date.today.next_week
+               starting_at: Time.zone.today.next_week,
+               finishing_at: Time.zone.today.next_week
              ),
              Event.create!(
                title: 'Title',
                slug: 'slug-2',
                status: 'Status',
                description: 'MyText',
-               starting_at: Date.today.next_week,
-               finishing_at: Date.today.next_week
+               starting_at: Time.zone.today.next_week,
+               finishing_at: Time.zone.today.next_week
              )
            ])
   end

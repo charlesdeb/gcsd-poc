@@ -18,13 +18,13 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }
     let!(:future_featured_event) do
-      FactoryBot.create(:event, starting_at: Date.today.next_week,
+      FactoryBot.create(:event, starting_at: Time.zone.today.next_week,
                                 is_featured: true, title: future_featured_title,
                                 description: future_featured_description)
     end
 
     let!(:future_event) do
-      FactoryBot.create(:event, starting_at: Date.today.next_week,
+      FactoryBot.create(:event, starting_at: Time.zone.today.next_week,
                                 is_featured: false, title: future_title)
     end
 
@@ -63,7 +63,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
   context('there are past events') do
     let(:past_title) { 'Groovy Past Event' }
     let!(:past_event) do
-      FactoryBot.create(:event, finishing_at: Date.today.last_week,
+      FactoryBot.create(:event, finishing_at: Time.zone.today.last_week,
                                 title: past_title)
     end
 

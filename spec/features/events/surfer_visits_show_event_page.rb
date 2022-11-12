@@ -6,12 +6,12 @@ RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Me
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let(:event) do
-    FactoryBot.create(:event, starting_at: DateTime.now.utc,
+    FactoryBot.create(:event, starting_at: Time.zone.now,
                               title: title, description: description)
   end
 
   before(:each) do
-    p event
+    # p event
     # TODO: refactor into a helper
     image_name = 'some-image-100x150.png'
     image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name

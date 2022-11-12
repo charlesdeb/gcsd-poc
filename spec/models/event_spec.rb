@@ -7,8 +7,8 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     Event.new(
       title: 'Some Title',
       slug: 'some-title',
-      starting_at: Date.today.next_week,
-      finishing_at: Date.today.next_week,
+      starting_at: Time.zone.today.next_week,
+      finishing_at: Time.zone.today.next_week,
       status: :published,
       description: 'some description'
     )
@@ -38,7 +38,7 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     duplicate.description = 'some description'
 
     expect(duplicate.valid?).to be false
-    expect(duplicate.errors[:slug]).to include("has already been taken")
+    expect(duplicate.errors[:slug]).to include('has already been taken')
   end
 
   it 'is invalid without starting_at' do
@@ -80,7 +80,7 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     expect(subject.is_featured).to eq(false)
   end
 
-  describe 'scopes: ' do
+  describe 'scopes: ' do # rubocop:disable Metrics/BlockLength
     context 'featured' do
       let!(:featured_event) { FactoryBot.create(:event, is_featured: true) }
       let!(:not_featured_event) { FactoryBot.create(:event, is_featured: false) }
@@ -91,8 +91,8 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     end
 
     context 'future' do
-      let!(:future_event) { FactoryBot.create(:event, starting_at: Date.today.next_week) }
-      let!(:past_event) { FactoryBot.create(:event, starting_at: Date.today.last_week) }
+      let!(:future_event) { FactoryBot.create(:event, starting_at: Time.zone.today.next_week) }
+      let!(:past_event) { FactoryBot.create(:event, starting_at: Time.zone.today.last_week) }
 
       it 'only returns one event' do
         expect(Event.future.count).to eq(1)
@@ -109,8 +109,8 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     end
 
     context 'past' do
-      let!(:future_event) { FactoryBot.create(:event, starting_at: Date.today.next_week) }
-      let!(:past_event) { FactoryBot.create(:event, finishing_at: Date.today.last_week) }
+      let!(:future_event) { FactoryBot.create(:event, starting_at: Time.zone.today.next_week) }
+      let!(:past_event) { FactoryBot.create(:event, finishing_at: Time.zone.today.last_week) }
 
       it 'only returns one event' do
         expect(Event.past.count).to eq(1)
