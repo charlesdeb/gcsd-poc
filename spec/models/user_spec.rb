@@ -7,8 +7,9 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
     User.new(
       email: 'bob@example.com',
       password: '123456',
-      first_name: 'Bob',
-      locale: :en
+      first_name: 'Bob'
+      # locale: :en          # not needed since the DB specifies this
+      # time_zone: 'London'  # not needed since the DB specifies this
     )
   end
 
@@ -42,6 +43,13 @@ RSpec.describe User, type: :model do # rubocop:disable Metrics/BlockLength
 
     expect(subject.valid?).to be false
     expect(subject.errors[:locale]).to include("can't be blank")
+  end
+
+  it 'is invalid without time_zone' do
+    subject.time_zone = nil
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:time_zone]).to include("can't be blank")
   end
 
   it "has 'user' role by default" do
