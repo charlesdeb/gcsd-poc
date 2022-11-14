@@ -11,4 +11,5 @@ pin 'trix'
 pin '@rails/actiontext', to: 'actiontext.js'
 pin 'alpinejs' # @3.10.3
 pin 'luxon' # @3.1.0
+pin 'gcsd'
 pin 'timezone_select'

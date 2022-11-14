@@ -6,7 +6,6 @@
         <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
           <div>
             <h2 class="text-lg font-semibold text-indigo-600"><time datetime="<%= l(event.starting_at) %>" x-data x-text="$store.timeZoneSelect.formatDateTime('<%= event.starting_at.to_fs(:iso8601)%>')">&nbsp;</time></h2>
-            <h2 class="hidden text-lg font-semibold text-indigo-600"><%= l event.starting_at, format: :short %></h2>
             <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
           </div>
         </div>

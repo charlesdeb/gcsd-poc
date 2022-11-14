@@ -3,11 +3,13 @@ import '@hotwired/turbo-rails';
 import 'controllers';
 import 'trix';
 import '@rails/actiontext';
+// import { gcsd } from 'gcsd';
+import 'gcsd';
+
 // alpine stuff
 import Alpine from 'alpinejs';
-window.Alpine = Alpine;
+window.Alpine = Alpine; // only required so that we can see the alpinejs debug tool
 
-// luxon stuff
-import { DateTime } from 'luxon';
-window.DateTime = DateTime;
-
+// luxon stuff - now in timezone_select.js since that is where it is used
+// import { DateTime } from 'luxon';
+// window.DateTime = DateTime;
