@@ -9,6 +9,15 @@ module ApplicationHelper
                'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
   end
 
+  def timezone_select
+    select_tag 'time-zone',
+               timezone_options,
+               'x-cloak': '',
+               'x-data': {},
+               'x-title': 'Timezone Selector',
+               'x-on:change': '$store.timeZoneSelect.updateTimeZone(document.querySelector(\'select#time-zone\').value)'
+  end
+
   private
 
   def language_options(request_path)
@@ -33,5 +42,10 @@ module ApplicationHelper
   def selected_locale(url_params)
     # get the locale from the URL if set
     url_params[:locale] || I18n.locale
+  end
+
+  def timezone_options
+    # TODO: get these from system settings or something...
+    options_for_select(%w[Europe/London Europe/Paris Europe/Berlin Asia/Singapore Australia/Sydney Pacific/Auckland])
   end
 end

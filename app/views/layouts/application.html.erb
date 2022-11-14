@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= params[:locale] %>">
   <head>
     <title><%= (yield(:title) + " - " unless yield(:title).blank?).to_s + "GCSD" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">

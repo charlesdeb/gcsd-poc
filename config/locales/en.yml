@@ -35,5 +35,5 @@ en:
   # date and time stuff
   time:
     formats:
-      short: '%e %B %y at %k.%M %p (%Z)'
+      short: '%e %B %y at%k.%M %p (%Z)'
       starting_at: 'Starting at %A %e %B %y at %k.%M %p (%Z)'

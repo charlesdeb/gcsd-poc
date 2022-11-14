@@ -37,4 +37,19 @@ RSpec.describe ApplicationHelper, :type => :helper do # rubocop:disable Metrics/
       end
     end
   end
+
+  describe '#timezone_select' do
+    it 'contains a select tag' do
+      expect(helper.timezone_select).to include('<select')
+    end
+
+    it 'contains given timezones' do
+      expect(helper.timezone_select).to include('<option value="Europe/London"')
+      expect(helper.timezone_select).to include('<option value="Europe/Paris"')
+      expect(helper.timezone_select).to include('<option value="Europe/Berlin"')
+      expect(helper.timezone_select).to include('<option value="Asia/Singapore"')
+      expect(helper.timezone_select).to include('<option value="Australia/Sydney"')
+      expect(helper.timezone_select).to include('<option value="Pacific/Auckland"')
+    end
+  end
 end

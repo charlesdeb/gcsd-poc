@@ -10,3 +10,5 @@ pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin 'trix'
 pin '@rails/actiontext', to: 'actiontext.js'
 pin 'alpinejs' # @3.10.3
+pin 'luxon' # @3.1.0
+pin 'timezone_select'
