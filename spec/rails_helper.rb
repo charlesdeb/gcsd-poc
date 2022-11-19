@@ -69,4 +69,19 @@ RSpec.configure do |config|
   # https://stackoverflow.com/questions/41910712/helper-devise-could-not-find-the-wardenproxy-instance-on-request-environmen
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller
+
+  # Use features from ShowMeTheCookies, https://github.com/nruth/show_me_the_cookies
+  config.include ShowMeTheCookies, :type => :feature
+  config.include ShowMeTheCookies, :type => :system
+
+  # next two configs from:
+  # https://medium.com/table-xi/a-quick-guide-to-rails-system-tests-in-rspec-b6e9e8a8b5f6
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
+    # driven_by :selenium # uncomment this if you want to see the browser do it's thing - but it's a little slower
+  end
 end

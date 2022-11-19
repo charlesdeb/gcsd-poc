@@ -2,13 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Metrics/BlockLength
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let(:event) do
     FactoryBot.create(:event, starting_at: Time.zone.now,
                               title: title, description: description)
   end
+
+  let(:default_time_zone) { 'Europe/London' }
 
   before(:each) do
     # p event
@@ -24,7 +26,7 @@ RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Me
     visit event_path event
   end
 
-  context('overview of event') do
+  context('overview of event') do # rubocop:disable Metrics/BlockLength
     scenario 'they see the title' do
       within('div.event-overview') do
         expect(page).to have_text(title)
@@ -43,11 +45,17 @@ RSpec.feature 'Surfer visits show event', type: :feature do # rubocop:disable Me
       end
     end
 
-    scenario 'they see the start date in their current time zone' do
+    # see i18n tests for more timezone related tests
+    scenario 'they see the start date (in the default time zone)', js: true do
       within('div.event-overview') do
-        expect(page).to have_content(I18n.l(event.starting_at, format: :short).strip)
+        expected_date_string = I18n.l(
+          event.starting_at.in_time_zone(default_time_zone),
+          format: :starting_at
+        ).strip
+        find(:xpath, ".//time[text()='#{expected_date_string}']")
       end
     end
+
     scenario 'they see a donate button'
     scenario 'they see a register button'
   end

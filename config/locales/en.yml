@@ -36,4 +36,5 @@ en:
   time:
     formats:
       short: '%e %B %y at%k.%M %p (%Z)'
-      starting_at: 'Starting at %A %e %B %y at %k.%M %p (%Z)'
+      # this emulates Luxon's { ...DateTime.DATETIME_MED, weekday: 'long' } format
+      starting_at: '%A, %b %e, %Y, %-l:%M %p'

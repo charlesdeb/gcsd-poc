@@ -90,5 +90,6 @@ group :test do
   gem "capybara"
   gem "launchy"
   gem "selenium-webdriver"
+  gem "show_me_the_cookies"
   gem "webdrivers"
 end
