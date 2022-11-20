@@ -6,23 +6,13 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let(:event) do
-    FactoryBot.create(:event, starting_at: Time.zone.now,
+    FactoryBot.create(:event_with_image, starting_at: Time.zone.now,
                               title: title, description: description)
   end
 
   let(:default_time_zone) { 'Europe/London' }
 
   before(:each) do
-    # p event
-    # TODO: refactor into a helper
-    image_name = 'some-image-100x150.png'
-    image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name
-
-    event.featured_image.attach(
-      io: File.open(image_path),
-      filename: image_name,
-      content_type: 'image/png'
-    )
     visit event_path event
   end
 

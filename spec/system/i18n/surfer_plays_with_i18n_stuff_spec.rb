@@ -15,18 +15,6 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do # ruboc
   let(:default_time_zone) { 'Europe/London' }
   let(:new_time_zone) { 'Asia/Singapore' }
 
-  before(:each) do
-    # TODO: refactor into a helper
-    image_name = 'some-image-100x150.png'
-    image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name
-
-    event.featured_image.attach(
-      io: File.open(image_path),
-      filename: image_name,
-      content_type: 'image/png'
-    )
-  end
-
   context 'default timezone' do
     before(:each) do
       # this page has i18n stuff on it
