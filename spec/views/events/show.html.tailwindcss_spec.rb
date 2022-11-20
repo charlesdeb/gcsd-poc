@@ -20,6 +20,5 @@ RSpec.describe 'events/show', type: :view do
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/MyText/)
-    expect(rendered).to include(I18n.l(starting_at, format: :short))
   end
 end

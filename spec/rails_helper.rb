@@ -65,6 +65,9 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # Always show full formatting
+  config.formatter = :documentation
+
   # allow stuff like current_user to work in tests
   # https://stackoverflow.com/questions/41910712/helper-devise-could-not-find-the-wardenproxy-instance-on-request-environmen
   config.include Devise::Test::ControllerHelpers, type: :view
