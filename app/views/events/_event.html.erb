@@ -2,17 +2,21 @@
   <div class="event-overview">
     <div class="overflow-hidden bg-white">
       <div class="relative mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
-        <div class="absolute top-0 bottom-0 left-3/4 hidden w-screen bg-orange-100 lg:block"></div>
-        <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8">
+        <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
+        <div class="mx-auto max-w-prose text-base lg:flex lg:max-w-none lg:justify-between lg:gap-8">
           <div>
-            <h2 class="text-lg font-semibold text-indigo-600"><time id="starting-at" datetime="<%= l(event.starting_at) %>" x-data x-text="$store.timeZoneSelect.formatDateTime('<%= event.starting_at.to_fs(:iso8601)%>')"></time></h2>
-            <h2 class="hidden text-lg font-semibold text-indigo-600"><xtimex datetime="<%= l(event.starting_at) %>"><%= l(event.starting_at.in_time_zone('Europe/London'), format: :starting_at) %></xtimex></h2>
+            <h2 class="text-lg font-semibold text-orange-800"><time id="starting-at" datetime="<%= l(event.starting_at) %>" x-data x-text="$store.timeZoneSelect.formatDateTime('<%= event.starting_at.to_fs(:iso8601)%>')"></time></h2>
             <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
+          </div>
+          <div  class="mt-5 lg:mt-3">
+            <%#= TODO: add real links to these buttons  %>
+            <%= link_to t('.donate'), '#', class: "shadow bg-orange-300 px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-orange-200"%>
+            <%= link_to t('.register_now'), '#', class: "shadow bg-orange px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-orange-200"%>
           </div>
         </div>
         <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
           <div class="relative lg:col-start-2 lg:row-start-1">
-            <svg class="absolute top-0 right-0 -mt-20 -mr-20 hidden lg:block" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
+            <svg class="absolute top-0 right-0 -mt-20 -mr-20 hidden lg:xblock" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
               <defs>
                 <pattern id="de316486-4a29-4312-bdfc-fbce2132a2c1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                   <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />

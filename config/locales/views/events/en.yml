@@ -3,3 +3,6 @@ en:
     event_summary:
       more: More
       register_now: Register Now!
+    event:
+      donate: Donate
+      register_now: Register Now!

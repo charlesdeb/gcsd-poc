@@ -2,4 +2,7 @@ tr:
   events:
     event_summary:
       more: Daha fazla
-      register_now: Hemen kaydol
+      register_now: Hemen kaydol!
+    event:
+      donate: Bağış
+      register_now: Hemen kaydol!

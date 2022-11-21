@@ -7,7 +7,7 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
   let(:description) { 'Some stuff about an event' }
   let(:event) do
     FactoryBot.create(:event_with_image, starting_at: Time.zone.now,
-                              title: title, description: description)
+                                         title: title, description: description)
   end
 
   let(:default_time_zone) { 'Europe/London' }
@@ -46,8 +46,18 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
       end
     end
 
-    scenario 'they see a donate button'
-    scenario 'they see a register button'
+    scenario 'they see a donate button' do
+      within('div.event-overview') do
+        expect(page).to have_link(I18n.t('events.event.donate'))
+      end
+    end
+
+    scenario 'they see a register now button' do
+      within('div.event-overview') do
+        expect(page).to have_link(I18n.t('events.event.register_now'))
+      end
+    end
+
   end
 
   context('actions') do
