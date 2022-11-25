@@ -5,39 +5,39 @@ require 'rails_helper'
 RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Metrics/BlockLength
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
-  let(:event) do
+  let!(:event) do
     FactoryBot.create(:event_with_image, starting_at: Time.zone.now,
                                          title: title, description: description)
   end
 
   let(:default_time_zone) { 'Europe/London' }
 
-  before(:each) do
-    visit event_path event
-  end
-
   context('overview of event') do # rubocop:disable Metrics/BlockLength
+    before(:each) do
+      visit event_path event
+    end
+
     scenario 'they see the title' do
-      within('div.event-overview') do
+      within('div.overview') do
         expect(page).to have_text(title)
       end
     end
 
     scenario 'they see the description' do
-      within('div.event-overview') do
+      within('div.overview') do
         expect(page).to have_text(description)
       end
     end
 
     scenario 'they see the picture' do
-      within('div.event-overview') do
+      within('div.overview') do
         expect(page).to have_css("img[alt='#{title}']")
       end
     end
 
     # see i18n tests for more timezone related tests
     scenario 'they see the start date (in the default time zone)', js: true do
-      within('div.event-overview') do
+      within('div.overview') do
         expected_date_string = I18n.l(
           event.starting_at.in_time_zone(default_time_zone),
           format: :starting_at
@@ -47,17 +47,16 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
     end
 
     scenario 'they see a donate button' do
-      within('div.event-overview') do
+      within('div.overview') do
         expect(page).to have_link(I18n.t('events.event.donate'))
       end
     end
 
     scenario 'they see a register now button' do
-      within('div.event-overview') do
+      within('div.overview') do
         expect(page).to have_link(I18n.t('events.event.register_now'))
       end
     end
-
   end
 
   context('actions') do
@@ -65,8 +64,45 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
     scenario('they can register for the event')
   end
 
-  context('summary information') do
-    scenario('they the session types (in a tab control)')
+  context('summary information') do # rubocop:disable Metrics/BlockLength
+    let!(:session_type_names) { %w[Plenaries Worship Workshops] }
+    let!(:session_types) { session_type_names.map { |name| create(:session_type, name: name) } }
+    let!(:sessions) do
+      sessions = session_type_names.map.with_index do |name, index|
+        create(:session,
+               title: "#{name} session",
+               description: "#{name} session's description",
+               session_type_id: session_types[index].id,
+               event_id: event.id)
+      end
+
+      sessions << create(
+        :session,
+        title: "#{session_type_names[0]} session",
+        description: "#{session_type_names[0]} session's description",
+        session_type_id: session_types[0].id,
+        event_id: event.id
+      )
+      sessions
+    end
+
+    before(:each) do
+      visit event_path event
+    end
+
+    scenario 'they see the section header' do
+      within('div.session-types') do
+        expect(page).to have_selector 'h2', text: I18n.t('events.sessions_summary.sessions_summary')
+      end
+    end
+
+    scenario 'they see the session types (in a tab control)', js: true do
+      within('div.session-types') do
+        expect(page).to have_link('Plenaries (2)')
+        expect(page).to have_link('Worship (1)')
+        expect(page).to have_link('Workshops (1)')
+      end
+    end
 
     context('for each session type') do
       scenario('they see the image')

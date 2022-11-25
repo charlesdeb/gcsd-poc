@@ -1,7 +1,7 @@
 <div id="<%= dom_id event %>">
-  <div class="event-overview">
-    <div class="overflow-hidden bg-white">
-      <div class="relative mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8">
+  <div class="overflow-hidden bg-white">
+    <div class="relative mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="overview">
         <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
         <div class="mx-auto max-w-prose text-base lg:flex lg:max-w-none lg:justify-between lg:gap-8">
           <div>
@@ -46,6 +46,7 @@
           </div>
         </div>
       </div>
+      <%= render 'sessions_summary' %>
     </div>
   </div>
   <% if action_name != "show" %>

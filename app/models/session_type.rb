@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionType < ApplicationRecord
-    validates :name, :order_by, presence: true, uniqueness: true
+  validates :name, :order_by, presence: true
 end

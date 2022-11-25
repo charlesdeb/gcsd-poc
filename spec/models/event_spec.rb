@@ -80,6 +80,29 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     expect(subject.is_featured).to eq(false)
   end
 
+  describe '#session_types_with_counts' do
+    let!(:event) { FactoryBot.create(:event) }
+    let!(:worship) { FactoryBot.create(:session_type, name: 'Worship') }
+    let!(:plenary) { FactoryBot.create(:session_type, name: 'Plenary') }
+    let!(:session1) { FactoryBot.create(:session, title: 'Worship 1', session_type: worship, event: event) }
+    let!(:session2) { FactoryBot.create(:session, title: 'Worship 2', session_type: worship, event: event) }
+    let!(:session3) { FactoryBot.create(:session, title: 'Plenary 1', session_type: plenary, event: event) }
+
+    it 'returns correct number of session types' do
+      expect(event.session_types_with_counts.length).to eq(2)
+    end
+
+    it 'includes the counts' do
+      expect(event.session_types_with_counts.first.count).to eq(1)
+      expect(event.session_types_with_counts.last.count).to eq(2)
+    end
+
+    it 'returns the types in alphabetical order' do
+      expect(event.session_types_with_counts.first.name).to eq('Plenary')
+      expect(event.session_types_with_counts.last.name).to eq('Worship')
+    end
+  end
+
   describe 'scopes: ' do # rubocop:disable Metrics/BlockLength
     context 'featured' do
       let!(:featured_event) { FactoryBot.create(:event, is_featured: true) }

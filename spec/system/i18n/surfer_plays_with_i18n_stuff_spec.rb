@@ -27,7 +27,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do # ruboc
     end
 
     scenario 'they see the start date in the default time zone' do
-      within('div.event-overview') do
+      within('div.overview') do
         expected_date_string = I18n.l(
           event.starting_at.in_time_zone(default_time_zone),
           format: :starting_at
@@ -67,7 +67,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do # ruboc
       expect(time_zone_cookie[:value]).to eq(default_time_zone)
 
       select new_time_zone, from: 'time-zone'
-      within('div.event-overview') do
+      within('div.overview') do
         expected_date_string = I18n.l(
           event.starting_at.in_time_zone(new_time_zone),
           format: :starting_at

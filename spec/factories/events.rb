@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-FactoryBot.define do
-  factory :event do
+FactoryBot.define do # rubocop:disable Metrics/BlockLength
+  factory :event do # rubocop:disable Metrics/BlockLength
     title { 'My Event' }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
@@ -20,6 +20,17 @@ FactoryBot.define do
           filename: image_name,
           content_type: 'image/png'
         )
+      end
+    end
+
+    factory :event_with_sessions do
+      transient do
+        sessions_count { 3 }
+      end
+
+      after(:create) do |event, evaluator|
+        create_list :session, evaluator.sessions_count, event: event
+        event.reload
       end
     end
   end

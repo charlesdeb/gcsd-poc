@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :session_type do
-    name { "My Session type" }
+    sequence(:name) { |n| "Session type: #{n}" }
     description { "Description of a session type" }
     order_by { 10 }
   end

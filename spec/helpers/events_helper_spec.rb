@@ -13,5 +13,30 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe EventsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:event) { create(:event_with_sessions) }
+
+  describe 'session_type_tab' do
+    context 'first tab' do
+      subject do
+        helper.session_type_tab event.sessions[0], 0
+      end
+
+      # TODO: seems like a very fragile test...
+      it 'is selected' do
+        expect(subject).to include('text-orange-900')
+      end
+    end
+
+    context 'other tabs' do
+      subject do
+        helper.session_type_tab event.sessions[1], 1
+      end
+
+      # TODO: seems like a very fragile test...
+      it 'is not selected' do
+        expect(subject).to include('text-orange-500')
+        expect(subject).to include('hover:text-orange-700')
+      end
+    end
+  end
 end

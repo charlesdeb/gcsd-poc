@@ -6,3 +6,5 @@ en:
     event:
       donate: Donate
       register_now: Register Now!
+    sessions_summary:
+      sessions_summary: Sessions Summary

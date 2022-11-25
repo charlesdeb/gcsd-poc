@@ -17,6 +17,8 @@ class Event < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
 
+  has_many :sessions
+
   translates :description, backend: :action_text
   translates :title, backend: :action_text, plain: true
 
@@ -24,4 +26,12 @@ class Event < ApplicationRecord
   scope :future, -> { where('starting_at >= ?', Date.today) }
   scope :past, -> { where('finishing_at < ?', Date.today) }
   scope :published, -> { where(status: :published) }
+
+  def session_types_with_counts
+    sessions
+      .select('count(sessions.session_type_id) as count, sessions.session_type_id, session_types.name')
+      .joins(:session_type)
+      .group('sessions.session_type_id, session_types.name')
+      .order('session_types.name')
+  end
 end
