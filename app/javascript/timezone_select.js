@@ -42,6 +42,3 @@ Alpine.store('timeZoneSelect', {
       .toLocaleString({ ...DateTime.DATETIME_MED, weekday: 'long' });
   },
 });
-
-// todo: might have to put this into an onload listener at some stage
-Alpine.start();
