@@ -18,6 +18,7 @@ RSpec.describe '/events', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) do
     # skip('Add a hash of attributes valid for your model')
     attributes_for(:event)

@@ -12,4 +12,6 @@ class Session < ApplicationRecord
 
   belongs_to :event
   belongs_to :session_type
+
+  default_scope { i18n }
 end

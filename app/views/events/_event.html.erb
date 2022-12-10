@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <%= render 'sessions_summary' %>
+      <%= render partial: 'sessions_summary', locals: {event: event} %>
     </div>
   </div>
   <% if action_name != "show" %>

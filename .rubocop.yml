@@ -1,2 +1,6 @@
 Style/HashSyntax:
   Enabled: false
+
+AllCops:
+  Exclude:
+    - 'db/**/*'

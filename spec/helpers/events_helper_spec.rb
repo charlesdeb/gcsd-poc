@@ -18,7 +18,7 @@ RSpec.describe EventsHelper, type: :helper do
   describe 'session_type_tab' do
     context 'first tab' do
       subject do
-        helper.session_type_tab event.sessions[0], 0
+        helper.session_type_tab event.session_types_with_counts.first, 0
       end
 
       # TODO: seems like a very fragile test...
@@ -29,7 +29,7 @@ RSpec.describe EventsHelper, type: :helper do
 
     context 'other tabs' do
       subject do
-        helper.session_type_tab event.sessions[1], 1
+        helper.session_type_tab event.session_types_with_counts.first, 1
       end
 
       # TODO: seems like a very fragile test...

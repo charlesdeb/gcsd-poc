@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_175153) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_155133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_175153) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "title", limit: 40
     t.datetime "starting_at", precision: nil
     t.string "status", limit: 15
     t.boolean "is_featured", default: false
@@ -64,11 +63,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_175153) do
     t.datetime "finishing_at"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["starting_at"], name: "index_events_on_starting_at"
-    t.index ["title"], name: "index_events_on_title"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "title", limit: 50
     t.string "slug", limit: 30
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,12 +73,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_175153) do
   end
 
   create_table "session_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description"
     t.integer "order_by", default: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_session_types_on_name", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

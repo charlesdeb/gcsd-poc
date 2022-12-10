@@ -82,8 +82,8 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
 
   describe '#session_types_with_counts' do
     let!(:event) { FactoryBot.create(:event) }
-    let!(:worship) { FactoryBot.create(:session_type, name: 'Worship') }
-    let!(:plenary) { FactoryBot.create(:session_type, name: 'Plenary') }
+    let!(:worship) { FactoryBot.create(:session_type, name: 'Worship', order_by: 20) }
+    let!(:plenary) { FactoryBot.create(:session_type, name: 'Plenary', order_by: 10) }
     let!(:session1) { FactoryBot.create(:session, title: 'Worship 1', session_type: worship, event: event) }
     let!(:session2) { FactoryBot.create(:session, title: 'Worship 2', session_type: worship, event: event) }
     let!(:session3) { FactoryBot.create(:session, title: 'Plenary 1', session_type: plenary, event: event) }
@@ -93,13 +93,13 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     end
 
     it 'includes the counts' do
-      expect(event.session_types_with_counts.first.count).to eq(1)
-      expect(event.session_types_with_counts.last.count).to eq(2)
+      expect(event.session_types_with_counts[0].count).to eq(1)
+      expect(event.session_types_with_counts[1].count).to eq(2)
     end
 
-    it 'returns the types in alphabetical order' do
-      expect(event.session_types_with_counts.first.name).to eq('Plenary')
-      expect(event.session_types_with_counts.last.name).to eq('Worship')
+    it 'returns the types in order_by order' do
+      expect(event.session_types_with_counts[0].name).to eq('Plenary')
+      expect(event.session_types_with_counts[1].name).to eq('Worship')
     end
   end
 
