@@ -5,7 +5,7 @@ FactoryBot.define do # rubocop:disable Metrics/BlockLength
     title { 'My Event' }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
-    finishing_at { Time.zone.today.next_week }
+    finishing_at { Time.zone.today.next_week.days_since(1) }
     status { :published }
     description { 'Some event information' }
     is_featured { false }

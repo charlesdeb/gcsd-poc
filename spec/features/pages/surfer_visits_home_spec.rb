@@ -63,8 +63,12 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
   context('there are past events') do
     let(:past_title) { 'Groovy Past Event' }
     let!(:past_event) do
-      FactoryBot.create(:event, finishing_at: Time.zone.today.last_week,
-                                title: past_title)
+      FactoryBot.create(
+        :event,
+        starting_at: Time.zone.today.last_week,
+        finishing_at: Time.zone.today.last_week.days_since(1),
+        title: past_title
+      )
     end
 
     scenario 'they see a link to past events' do

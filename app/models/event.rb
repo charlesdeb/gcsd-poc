@@ -12,6 +12,8 @@ class Event < ApplicationRecord
     message: 'must be true or false'
   }
 
+  validates :finishing_at, comparison: { greater_than: :starting_at, message: 'must be after the start date' }
+
   has_rich_text :description
 
   has_one_attached :featured_image do |attachable|

@@ -7,7 +7,7 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     Event.new(
       title: 'Some Title',
       slug: 'some-title',
-      starting_at: Time.zone.today.next_week,
+      starting_at: Time.zone.today,
       finishing_at: Time.zone.today.next_week,
       status: :published,
       description: 'some description'
@@ -53,6 +53,13 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
 
     expect(subject.valid?).to be false
     expect(subject.errors[:finishing_at]).to include("can't be blank")
+  end
+
+  it 'is invalid when starting_at is after finishing_at' do
+    subject.finishing_at = subject.starting_at.days_ago(1)
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:finishing_at]).to include('must be after the start date')
   end
 
   it 'is invalid without a status' do
@@ -132,8 +139,20 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     end
 
     context 'past' do
-      let!(:future_event) { FactoryBot.create(:event, starting_at: Time.zone.today.next_week) }
-      let!(:past_event) { FactoryBot.create(:event, finishing_at: Time.zone.today.last_week) }
+      let!(:future_event) do
+        FactoryBot.create(
+          :event,
+          starting_at: Time.zone.today.next_week,
+          finishing_at: Time.zone.today.next_week.days_since(1)
+        )
+      end
+      let!(:past_event) do
+        FactoryBot.create(
+          :event,
+          starting_at: Time.zone.today.last_week,
+          finishing_at: Time.zone.today.last_week.days_since(1)
+        )
+      end
 
       it 'only returns one event' do
         expect(Event.past.count).to eq(1)

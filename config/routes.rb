@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :users
         resources :events
         resources :pages
+        resources :sessions
         resources :session_types
 
         root to: 'events#index'

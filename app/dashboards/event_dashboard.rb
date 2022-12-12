@@ -25,6 +25,7 @@ class EventDashboard < Administrate::BaseDashboard
       show_preview_variant: :thumb
     ),
     is_featured: Field::Boolean,
+    sessions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String
@@ -40,6 +41,7 @@ class EventDashboard < Administrate::BaseDashboard
     title
     starting_at
     finishing_at
+    sessions
     status
   ].freeze
 
@@ -55,6 +57,7 @@ class EventDashboard < Administrate::BaseDashboard
     description
     featured_image
     is_featured
+    sessions
     created_at
     updated_at
   ].freeze
@@ -64,13 +67,14 @@ class EventDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     title
+    slug
     starting_at
     finishing_at
     status
     description
     featured_image
     is_featured
-    slug
+    sessions
   ].freeze
 
   # COLLECTION_FILTERS

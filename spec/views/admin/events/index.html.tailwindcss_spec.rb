@@ -11,7 +11,7 @@ RSpec.describe 'admin/events/index', type: :view do # rubocop:disable Metrics/Bl
                status: 'Status',
                description: 'MyText',
                starting_at: Time.zone.today.next_week,
-               finishing_at: Time.zone.today.next_week
+               finishing_at: Time.zone.today.next_week.days_since(1)
              ),
              Event.create!(
                title: 'Title',
@@ -19,7 +19,7 @@ RSpec.describe 'admin/events/index', type: :view do # rubocop:disable Metrics/Bl
                status: 'Status',
                description: 'MyText',
                starting_at: Time.zone.today.next_week,
-               finishing_at: Time.zone.today.next_week
+               finishing_at: Time.zone.today.next_week.days_since(1)
              )
            ])
   end

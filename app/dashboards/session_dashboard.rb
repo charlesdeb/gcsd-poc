@@ -2,7 +2,7 @@
 
 require 'administrate/base_dashboard'
 
-class SessionTypeDashboard < Administrate::BaseDashboard
+class SessionDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -11,9 +11,17 @@ class SessionTypeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    name: Field::String,
-    description: Field::String,
-    order_by: Field::Number,
+    title: Field::String,
+    description: RichTextAreaField,
+    event: Field::BelongsTo,
+    limit: Field::Number,
+    # plain_text_translations: Field::HasMany,
+    # rich_text_description: Field::HasOne,
+    # rich_text_description_en: Field::HasOne,
+    # rich_text_description_fr: Field::HasOne,
+    # rich_text_description_tr: Field::HasOne,
+    # rich_text_translations: Field::HasMany,
+    session_type: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -25,18 +33,20 @@ class SessionTypeDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    name
-    description
-    order_by
+    title
+    event
+    session_type
+    limit
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    name
-    description
-    order_by
+    title
+    event
+    limit
+    session_type
     created_at
     updated_at
   ].freeze
@@ -45,9 +55,11 @@ class SessionTypeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    name
+    title
     description
-    order_by
+    event
+    limit
+    session_type
   ].freeze
 
   # COLLECTION_FILTERS
@@ -62,10 +74,10 @@ class SessionTypeDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how session types are displayed
+  # Overwrite this method to customize how sessions are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(session_type)
-    session_type.name
+  def display_resource(session)
+    session.title
   end
 end
