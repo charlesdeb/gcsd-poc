@@ -21,6 +21,7 @@ class Event < ApplicationRecord
   end
 
   has_many :sessions
+  has_many :time_slots
 
   translates :description, backend: :action_text
   translates :title, backend: :action_text, plain: true

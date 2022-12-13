@@ -1,8 +1,6 @@
-# frozen_string_literal: true
-
 require 'administrate/base_dashboard'
 
-class SessionDashboard < Administrate::BaseDashboard
+class TimeSlotDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -11,18 +9,10 @@ class SessionDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    title: Field::String,
-    description: RichTextAreaField,
     event: Field::BelongsTo,
-    limit: Field::Number,
-    # plain_text_translations: Field::HasMany,
-    # rich_text_description: Field::HasOne,
-    # rich_text_description_en: Field::HasOne,
-    # rich_text_description_fr: Field::HasOne,
-    # rich_text_description_tr: Field::HasOne,
-    # rich_text_translations: Field::HasMany,
-    session_type: Field::BelongsTo,
-    time_slot: Field::BelongsTo,
+    starting_at: Field::DateTime,
+    finishing_at: Field::DateTime,
+    sessions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -34,23 +24,20 @@ class SessionDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    title
     event
-    time_slot
-    session_type
-    limit
+    starting_at
+    finishing_at
+    sessions
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    title
-    description
     event
-    session_type
-    time_slot
-    limit
+    starting_at
+    finishing_at
+    sessions
     created_at
     updated_at
   ].freeze
@@ -59,12 +46,10 @@ class SessionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    title
-    description
     event
-    session_type
-    time_slot
-    limit
+    starting_at
+    finishing_at
+    sessions
   ].freeze
 
   # COLLECTION_FILTERS
@@ -79,10 +64,11 @@ class SessionDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how sessions are displayed
+  # Overwrite this method to customize how time slots are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(session)
-    session.title
+  def display_resource(time_slot)
+    # "TimeSlot #{time_slot.starting_at} for #{time_slot.event.name}"
+    time_slot.starting_at
   end
 end

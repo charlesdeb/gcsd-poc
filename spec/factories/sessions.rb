@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :session do
-    title {'Art for Fun'}
-    description {'A great workshop'}
+    title { 'Art for Fun' }
+    description { 'A great workshop' }
+    time_slot
     event
     session_type
   end

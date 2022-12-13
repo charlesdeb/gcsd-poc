@@ -5,13 +5,15 @@ require 'rails_helper'
 RSpec.describe Session, type: :model do # rubocop:disable Metrics/BlockLength
   let(:event) { create(:event) }
   let(:session_type) { create(:session_type) }
+  let(:time_slot) { create(:time_slot) }
 
   subject do
     Session.new(
       title: 'Some Title',
       description: 'some-description',
       event_id: event.id,
-      session_type_id: session_type.id
+      session_type_id: session_type.id,
+      time_slot_id: time_slot.id
     )
   end
 

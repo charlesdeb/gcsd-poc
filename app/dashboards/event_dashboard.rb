@@ -25,7 +25,12 @@ class EventDashboard < Administrate::BaseDashboard
       show_preview_variant: :thumb
     ),
     is_featured: Field::Boolean,
-    sessions: Field::HasMany,
+    sessions: Field::HasMany.with_options(
+      limit: 30
+    ),
+    time_slots: Field::HasMany.with_options(
+      limit: 30
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String
@@ -58,6 +63,7 @@ class EventDashboard < Administrate::BaseDashboard
     featured_image
     is_featured
     sessions
+    time_slots
     created_at
     updated_at
   ].freeze
@@ -93,6 +99,6 @@ class EventDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(event)
-    "Event '#{event.title}'"
+    event.title
   end
 end

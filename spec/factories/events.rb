@@ -26,9 +26,11 @@ FactoryBot.define do # rubocop:disable Metrics/BlockLength
     factory :event_with_sessions do
       transient do
         sessions_count { 3 }
+        time_slots_count { 3 }
       end
 
       after(:create) do |event, evaluator|
+        create_list :time_slot, evaluator.time_slots_count, event: event
         create_list :session, evaluator.sessions_count, event: event
         event.reload
       end

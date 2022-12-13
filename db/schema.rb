@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_155133) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_231005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,8 +84,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_155133) do
     t.bigint "session_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "time_slot_id", null: false
     t.index ["event_id"], name: "index_sessions_on_event_id"
     t.index ["session_type_id"], name: "index_sessions_on_session_type_id"
+    t.index ["time_slot_id"], name: "index_sessions_on_time_slot_id"
+  end
+
+  create_table "time_slots", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "starting_at", null: false
+    t.datetime "finishing_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_time_slots_on_event_id"
+    t.index ["starting_at"], name: "index_time_slots_on_starting_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,4 +126,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_155133) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "sessions", "events"
   add_foreign_key "sessions", "session_types"
+  add_foreign_key "sessions", "time_slots"
+  add_foreign_key "time_slots", "events"
 end
