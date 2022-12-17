@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Surfer visits show event', type: :system do
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let!(:event) do
@@ -12,7 +12,7 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
 
   let(:default_time_zone) { 'Europe/London' }
 
-  context('overview of event') do # rubocop:disable Metrics/BlockLength
+  context('overview of event') do
     before(:each) do
       visit event_path event
     end
@@ -64,7 +64,7 @@ RSpec.feature 'Surfer visits show event', type: :system do # rubocop:disable Met
     scenario('they can register for the event')
   end
 
-  context('summary information') do # rubocop:disable Metrics/BlockLength
+  context('summary information') do
     let!(:session_type_names) { %w[Plenaries Worship Workshops] }
     let!(:session_types) { session_type_names.map { |name| create(:session_type, name: name) } }
     let!(:sessions) do

@@ -72,7 +72,8 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(time_slot)
+    "#{time_slot.starting_at} (#{time_slot.title})"
     # "TimeSlot #{time_slot.starting_at} for #{time_slot.event.name}"
-    "#{time_slot.title} at #{I18n.l(time_slot.starting_at, format: :short)}"
+    # "#{time_slot.title} at #{I18n.l(time_slot.starting_at, format: :short)}"
   end
 end

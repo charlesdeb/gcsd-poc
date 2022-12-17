@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Session, type: :model do # rubocop:disable Metrics/BlockLength
+RSpec.describe Session, type: :model do
   let(:event) { create(:event) }
   let(:session_type) { create(:session_type) }
   let(:time_slot) { create(:time_slot) }

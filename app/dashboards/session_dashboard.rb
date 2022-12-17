@@ -13,6 +13,7 @@ class SessionDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     description: RichTextAreaField,
+    requirements: RichTextAreaField,
     event: Field::BelongsTo,
     limit: Field::Number,
     # plain_text_translations: Field::HasMany,
@@ -46,9 +47,10 @@ class SessionDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     title
-    description
     event
     session_type
+    description
+    requirements
     time_slot
     limit
     created_at
@@ -61,6 +63,7 @@ class SessionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     title
     description
+    requirements
     event
     session_type
     time_slot

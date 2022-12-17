@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :time_slot do
+    sequence(:title) { |n| "Time slot #{n}" }
     event
-    starting_at { '2022-12-12 22:00:00' }
-    finishing_at { '2022-12-12 22:50:00' }
+    starting_at { Time.zone.now }
+    finishing_at { Time.zone.now.advance(hours: 1) }
   end
 end
