@@ -29,7 +29,7 @@ RSpec.describe Page, type: :model do
     duplicate.body = 'some body'
 
     expect(duplicate.valid?).to be false
-    expect(duplicate.errors[:slug]).to include("has already been taken")
+    expect(duplicate.errors[:slug]).to include('has already been taken')
   end
 
   it 'is invalid without a body' do

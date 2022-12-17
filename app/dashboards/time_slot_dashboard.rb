@@ -10,6 +10,7 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     event: Field::BelongsTo,
+    title: Field::String,
     starting_at: Field::DateTime,
     finishing_at: Field::DateTime,
     sessions: Field::HasMany,
@@ -25,6 +26,7 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     event
+    title
     starting_at
     finishing_at
     sessions
@@ -35,6 +37,7 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     event
+    title
     starting_at
     finishing_at
     sessions
@@ -47,6 +50,7 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     event
+    title
     starting_at
     finishing_at
     sessions
@@ -69,6 +73,6 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   #
   def display_resource(time_slot)
     # "TimeSlot #{time_slot.starting_at} for #{time_slot.event.name}"
-    time_slot.starting_at
+    "#{time_slot.title} at #{I18n.l(time_slot.starting_at, format: :short)}"
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
+RSpec.describe Event, type: :model do
   subject do
     Event.new(
       title: 'Some Title',
@@ -110,7 +110,7 @@ RSpec.describe Event, type: :model do # rubocop:disable Metrics/BlockLength
     end
   end
 
-  describe 'scopes: ' do # rubocop:disable Metrics/BlockLength
+  describe 'scopes: ' do
     context 'featured' do
       let!(:featured_event) { FactoryBot.create(:event, is_featured: true) }
       let!(:not_featured_event) { FactoryBot.create(:event, is_featured: false) }

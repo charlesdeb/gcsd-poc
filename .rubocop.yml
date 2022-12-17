@@ -4,3 +4,8 @@ Style/HashSyntax:
 AllCops:
   Exclude:
     - 'db/**/*'
+
+# Most rspec blocks are long
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
