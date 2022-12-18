@@ -18,6 +18,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :sessions
         resources :session_types
         resources :time_slots
+        resources :presenters
 
         root to: 'events#index'
       end

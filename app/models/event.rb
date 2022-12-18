@@ -4,16 +4,6 @@ class Event < ApplicationRecord
   extend Mobility
   include ActiveModel::Serialization
 
-  validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
-  validates :slug, uniqueness: true
-
-  validates :is_featured, inclusion: {
-    in: [true, false],
-    message: 'must be true or false'
-  }
-
-  validates :finishing_at, comparison: { greater_than: :starting_at, message: 'must be after the start date' }
-
   has_rich_text :description
 
   has_one_attached :featured_image do |attachable|
@@ -25,6 +15,16 @@ class Event < ApplicationRecord
 
   translates :description, backend: :action_text
   translates :title, backend: :action_text, plain: true
+
+  validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
+  validates :slug, uniqueness: true
+
+  validates :is_featured, inclusion: {
+    in: [true, false],
+    message: 'must be true or false'
+  }
+
+  validates :finishing_at, comparison: { greater_than: :starting_at, message: 'must be after the start date' }
 
   default_scope { i18n }
   scope :featured, -> { where(is_featured: true) }
