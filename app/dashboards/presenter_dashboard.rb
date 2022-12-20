@@ -14,8 +14,8 @@ class PresenterDashboard < Administrate::BaseDashboard
       show_preview_variant: :thumb
     ),
     name: Field::String,
-    # description: RichTextAreaField,
     bio: RichTextAreaField,
+    sessions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -39,6 +39,7 @@ class PresenterDashboard < Administrate::BaseDashboard
     featured_image
     name
     bio
+    sessions
     created_at
     updated_at
   ].freeze
@@ -50,6 +51,7 @@ class PresenterDashboard < Administrate::BaseDashboard
     featured_image
     name
     bio
+    sessions
   ].freeze
 
   # COLLECTION_FILTERS
@@ -68,6 +70,6 @@ class PresenterDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(presenter)
-    "\"#{presenter.name}\""
+    presenter.name
   end
 end

@@ -14,6 +14,7 @@ class Session < ApplicationRecord
 
   belongs_to :event
   belongs_to :session_type
+  has_and_belongs_to_many :presenters
 
   # we may want to create a session before knowing when it is scheduled
   belongs_to :time_slot, optional: true

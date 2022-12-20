@@ -16,12 +16,7 @@ class SessionDashboard < Administrate::BaseDashboard
     requirements: RichTextAreaField,
     event: Field::BelongsTo,
     limit: Field::Number,
-    # plain_text_translations: Field::HasMany,
-    # rich_text_description: Field::HasOne,
-    # rich_text_description_en: Field::HasOne,
-    # rich_text_description_fr: Field::HasOne,
-    # rich_text_description_tr: Field::HasOne,
-    # rich_text_translations: Field::HasMany,
+    presenters: Field::HasMany,
     session_type: Field::BelongsTo,
     time_slot: Field::BelongsTo,
     created_at: Field::DateTime,
@@ -49,6 +44,7 @@ class SessionDashboard < Administrate::BaseDashboard
     title
     event
     session_type
+    presenters
     description
     requirements
     time_slot
@@ -61,11 +57,12 @@ class SessionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    event
+    session_type
     title
     description
     requirements
-    event
-    session_type
+    presenters
     time_slot
     limit
   ].freeze

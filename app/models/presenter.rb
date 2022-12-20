@@ -12,6 +12,8 @@ class Presenter < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
 
+  has_and_belongs_to_many :sessions
+
   translates :bio, backend: :action_text
 
   validates :name, presence: true
