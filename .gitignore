@@ -35,3 +35,12 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# The .env file is used for both dev and test
+# and creates more problems than it solves
+.env
+
+# .env.*.local files are where we put actual
+# secrets we need for dev and test, so
+# we really don't want them in version control
+.env.*.local

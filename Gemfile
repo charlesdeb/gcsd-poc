@@ -51,6 +51,11 @@ gem 'rails-i18n'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing"
 
+# All runtime config comes from the UNIX environment
+# but we use dotenv to store that in files for
+# development and testing
+gem "dotenv-rails", groups: [:development, :test]
+
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "devise"
