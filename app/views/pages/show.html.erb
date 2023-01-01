@@ -1,4 +1,7 @@
 <% content_for :title, @page.title %>
-<div class="py-8">
-  <%= @page.body %>
-</div>
+<article>
+  <h1 class="text-3xl font-bold leading-tight text-gray-900"><%=  yield(:title) %></h1>
+  <section class="py-8">
+    <%= @page.body %>
+  </section>
+</article>

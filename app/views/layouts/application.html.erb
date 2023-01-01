@@ -12,22 +12,17 @@
   <body class="min-h-full">
     <%= render "layouts/shared/menu" %>
     <div class="py-10">
-      <header>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <!-- next two flash messages required by devise -->
-          <% if notice %>
-            <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 notice"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 alert"><%= alert %></p>
-          <% end %>
-          <h1 class="text-3xl font-bold leading-tight text-gray-900"><%=  yield(:title) %></h1>
-        </div>
-      </header>
-      <main>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <%= yield %>
-        </div>
+      <aside class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- next two flash messages required by devise -->
+        <% if notice %>
+          <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 alert"><%= alert %></p>
+        <% end %>
+      </aside>
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <%= yield %>
       </main>
     </div>
   </body>

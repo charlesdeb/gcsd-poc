@@ -1,18 +1,18 @@
-<div id="<%= dom_id event %>">
+<article id="<%= dom_id event %>">
   <div class="overflow-hidden bg-white">
     <div class="relative mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 space-y-8">
       <div class="overview">
         <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
         <div class="mx-auto max-w-prose text-base lg:flex lg:max-w-none lg:justify-between lg:gap-8">
-          <div>
+          <header>
             <h2 class="text-lg font-semibold text-orange-800"><time id="starting-at" datetime="<%= l(event.starting_at) %>" x-data x-text="$store.timeZoneSelect.formatDateTime('<%= event.starting_at.to_fs(:iso8601)%>')"></time></h2>
             <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
-          </div>
-          <div  class="mt-5 lg:mt-3">
+          </header>
+          <section class="mt-5 lg:mt-3">
             <%#= TODO: add real links to these buttons  %>
             <%= link_to t('.donate'), '#', class: "shadow bg-orange-300 px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-orange-200"%>
             <%= link_to t('.register_now'), '#', class: "shadow bg-orange px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-orange-200"%>
-          </div>
+          </section>
         </div>
         <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
           <div class="relative lg:col-start-2 lg:row-start-1">
@@ -50,8 +50,12 @@
     </div>
   </div>
   <% if action_name != "show" %>
-    <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%# <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <section>
+      <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to 'Edit this event', edit_admin_event_path(id: event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"   %>
+      <% end %>
+    </section>
     <hr class="mt-6">
   <% end %>
-</div>
+</article>

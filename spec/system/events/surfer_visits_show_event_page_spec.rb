@@ -91,13 +91,13 @@ RSpec.feature 'Surfer visits show event', type: :system do
     end
 
     scenario 'they see the section header' do
-      within('div.session-types') do
+      within('section.session-types') do
         expect(page).to have_selector 'h2', text: I18n.t('events.sessions_summary.sessions_summary')
       end
     end
 
     scenario 'they see the session types (in a tab control)', js: true do
-      within('div.session-types') do
+      within('section.session-types') do
         expect(page).to have_link('Plenaries (2)')
         expect(page).to have_link('Worship (1)')
         expect(page).to have_link('Workshops (1)')
