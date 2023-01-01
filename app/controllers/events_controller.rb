@@ -9,10 +9,8 @@ class EventsController < ApplicationController
   def index
     # get future or past published events
     @events = if params[:scope].in?(%w[future past])
-                p "getting #{params[:scope]} published events"
                 Event.published.send(params[:scope])
               else
-                p 'getting all published events'
                 Event.published
               end
   end
