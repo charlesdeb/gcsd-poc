@@ -62,6 +62,13 @@ gem "brakeman"
 # bundler-audit checks our dependencies for vulnerabilities
 gem "bundler-audit"
 
+# lograge changes Rails' logging to a more
+# traditional one-line-per-event format
+gem "lograge"
+
+# Foreman runs all processes for local development
+gem "foreman"
+
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "devise"
