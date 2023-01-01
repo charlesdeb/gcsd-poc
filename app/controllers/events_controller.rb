@@ -5,13 +5,16 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
 
-  # GET /events or /events.json
+  # GET /events, /past_events or /future_events
   def index
-    @events = Event.all
-  end
-
-  def future
-    @events = Event.future.published
+    # get future or past published events
+    @events = if params[:scope].in?(%w[future past])
+                p "getting #{params[:scope]} published events"
+                Event.published.send(params[:scope])
+              else
+                p 'getting all published events'
+                Event.published
+              end
   end
 
   # GET /events/1 or /events/1.json

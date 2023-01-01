@@ -26,19 +26,31 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     devise_for :users
 
-    # TODO: not sure if we really want this...
+    # TODO: not sure if we really want to default this
     defaults locale: I18n.locale do
-      resources :events, only: %i[index show] do
-        get 'future', on: :collection
-        get 'past', on: :collection
-      end
+      resources :events, only: %i[index show]
     end
 
     # namespace :admin do
     #   resources :events
     # end
 
-    # catch all route to catch any page - this could be a security risk...
+    ####
+    # Custom routes start here
+    #
+    # For each new custom route:
+    #
+    # * Be sure you have the canonical route declared above
+    # * Add the new custom route below the existing ones
+    # * Document why it's needed
+    # * Explain anything else non-standard
+
+    # shortcut route for past and future events
+    get '/future_events', action: :index, controller: 'events', scope: 'future'
+    get '/past_events', action: :index, controller: 'events', scope: 'past'
+
+    # catch all route to catch pages in the CMS which could have any slug name
+    # Is this a security risk?
     match '*slug', controller: 'pages', action: 'show', via: :get, as: 'page', constraints: lambda { |request|
       !request.path_parameters[:slug].start_with?('rails/')
     }

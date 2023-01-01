@@ -11,21 +11,21 @@ RSpec.describe EventsController, type: :routing do
       )
     end
 
+    it 'routes to #index for future events' do
+      expect(get: '/future_events').to route_to(
+        controller: 'events', action: 'index', scope: 'future'
+      )
+    end
+
+    it 'routes to #index for past events' do
+      expect(get: '/past_events').to route_to(
+        controller: 'events', action: 'index', scope: 'past'
+      )
+    end
+
     it 'routes to #show' do
       expect(get: '/events/1').to route_to(
         controller: 'events', action: 'show', id: '1', locale: default_locale
-      )
-    end
-
-    it 'routes to #future' do
-      expect(get: '/events/future').to route_to(
-        controller: 'events', action: 'future', locale: default_locale
-      )
-    end
-
-    it 'routes to #past' do
-      expect(get: '/events/past').to route_to(
-        controller: 'events', action: 'past', locale: default_locale
       )
     end
   end
