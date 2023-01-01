@@ -56,6 +56,12 @@ gem "image_processing"
 # development and testing
 gem "dotenv-rails", groups: [:development, :test]
 
+# Brakeman analyzes our code for security vulnerabilities
+gem "brakeman"
+
+# bundler-audit checks our dependencies for vulnerabilities
+gem "bundler-audit"
+
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "devise"
