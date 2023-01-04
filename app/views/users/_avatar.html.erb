@@ -1,0 +1,10 @@
+<%# Avatar for a user %>
+<%# user:: expected to be an User %>
+<% if user.profile_image.attached? %>
+  <%= image_tag(user.profile_image.variant(:thumb), class: 'h-8 w-8 rounded-full')
+%>
+<% else %>
+  <span class="text-gray-500 hover:text-gray-700 bg-transparent p-1 border-orange border-2 rounded-full">
+    <%= user.initials %>
+  </span>
+<% end %>

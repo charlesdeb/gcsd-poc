@@ -5,7 +5,7 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './app/decorators/**/*.{rb,erb,haml,html,slim}',
+    './app/decorators/**/*.{rb,erb,haml,html,slim}' /** delete this if we really ditch decoarators */,
   ],
   theme: {
     extend: {

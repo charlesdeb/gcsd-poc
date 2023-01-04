@@ -7,11 +7,13 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
-  # decorate the devise current_user object with drpaer stuff
+  # decorate the devise current_user object with draper stuff
   # https://www.devroom.io/2012/04/14/decorating-devise-s-current_user-with-draper/
-  def current_user
-    UserDecorator.decorate(super) unless super.nil?
-  end
+  # currently, decorators have been retired in favour of partials - but that
+  # decision may be revised.
+  # def current_user
+  #   UserDecorator.decorate(super) unless super.nil?
+  # end
 
   protected
 

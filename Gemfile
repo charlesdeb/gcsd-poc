@@ -77,7 +77,8 @@ gem "administrate"
 
 gem "administrate-field-active_storage"
 
-gem "draper"
+# used for decorating views - but not currently in use
+# gem "draper"
 
 # for translating model column values
 gem "mobility"
