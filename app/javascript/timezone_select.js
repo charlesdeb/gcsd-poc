@@ -7,7 +7,7 @@ Alpine.store('timeZoneSelect', {
     defaultTimeZone: 'Europe/London',
   },
   init() {
-    // Set up locale
+    // Grab page locale; we'll need it for date formatting
     const htmlLocale = document.querySelector('HTML').attributes['lang'].value;
 
     this.state.locale = htmlLocale;

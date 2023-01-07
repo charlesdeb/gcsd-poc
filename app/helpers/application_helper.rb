@@ -16,6 +16,7 @@ module ApplicationHelper
                timezone_options,
                'x-cloak': '',
                'x-data': {},
+               'x-bind:value': '$store.timeZoneSelect.state.timeZone',
                'x-title': 'Timezone Selector',
                'x-on:change': '$store.timeZoneSelect.updateTimeZone(document.querySelector(\'select#time-zone\').value)'
   end
