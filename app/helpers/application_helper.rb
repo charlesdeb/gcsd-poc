@@ -18,7 +18,8 @@ module ApplicationHelper
                'x-data': {},
                'x-bind:value': '$store.timeZoneSelect.state.timeZone',
                'x-title': 'Timezone Selector',
-               'x-on:change': '$store.timeZoneSelect.updateTimeZone(document.querySelector(\'select#time-zone\').value)'
+               'x-on:change': '$store.timeZoneSelect.updateTimeZone(document.querySelector("select#time-zone").value)',
+               'data-time-zone-select': ''
   end
 
   # Tab headers for the session types of an event

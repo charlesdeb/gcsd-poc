@@ -9,16 +9,18 @@ Turbo.setProgressBarDelay(100);
 import 'controllers';
 import 'trix';
 import '@rails/actiontext';
-import 'gcsd';
 
 // alpine stuff
 import Alpine from 'alpinejs';
 window.Alpine = Alpine; // only required so that we can see the alpinejs debug tool
 
-window.addEventListener('load', (event) => {
-  /** Pages, that use Alpine.store need to be loaded before starting Alpine */
-  /** @todo this may need revising - since we don't want to depend on 3rd
-   * party sites to load before ours becomes fully functional */
+import { TimeZoneSelect } from './lib/timezone_select';
+TimeZoneSelect.start(window);
+
+window.addEventListener('turbo:load', (event) => {
+  /** Pages that use Alpine.store need to be loaded before starting Alpine,
+   * but should already have been started by TimeZoneSelect.start(), so this is
+   * probably not needed */
   Alpine.start();
 });
 
