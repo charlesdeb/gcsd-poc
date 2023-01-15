@@ -10,20 +10,13 @@ import 'controllers';
 import 'trix';
 import '@rails/actiontext';
 
-// alpine stuff
 import Alpine from 'alpinejs';
 window.Alpine = Alpine; // only required so that we can see the alpinejs debug tool
 
-import { TimeZoneSelect } from './lib/timezone_select';
-TimeZoneSelect.start(window);
-
 window.addEventListener('turbo:load', (event) => {
-  /** Pages that use Alpine.store need to be loaded before starting Alpine,
-   * but should already have been started by TimeZoneSelect.start(), so this is
-   * probably not needed */
+  /** 
+   * Pages that use Alpine.store need to be loaded before starting Alpine. 
+   * Don't called Alpine.start() more than once.
+   */
   Alpine.start();
 });
-
-// luxon stuff - now in timezone_select.js since that is where it is used
-// import { DateTime } from 'luxon';
-// window.DateTime = DateTime;

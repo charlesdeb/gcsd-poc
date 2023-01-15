@@ -52,13 +52,10 @@ const start = function (window) {
         .toLocaleString({ ...DateTime.DATETIME_MED, weekday: 'long' });
     },
   });
-
-  /** Start Alpine once everything has loaded */
-  window.addEventListener('turbo:load', (event) => {
-    Alpine.start();
-  });
 };
 
 export const TimeZoneSelect = {
   start: start,
 };
+
+TimeZoneSelect.start(window);
