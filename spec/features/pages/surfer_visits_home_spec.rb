@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Surfer visits home page', type: :feature do
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }
@@ -13,7 +13,7 @@ RSpec.feature 'Surfer visits home page', type: :feature do # rubocop:disable Met
     expect(page).to have_text(body)
   end
 
-  context('there are future events') do # rubocop:disable Metrics/BlockLength
+  context('there are future events') do
     let(:future_featured_title) { 'Groovy Future Featured Event' }
     let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }

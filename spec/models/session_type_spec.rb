@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SessionType, type: :model do # rubocop:disable Metrics/BlockLength
+RSpec.describe SessionType, type: :model do
   subject do
     SessionType.new(
       name: 'Workshop',

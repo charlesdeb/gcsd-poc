@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
   # stuff for an event
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
@@ -37,7 +37,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do # ruboc
     end
   end
 
-  context 'surfer changes time' do # rubocop:disable Metrics/BlockLength
+  context 'surfer changes time' do
     before(:each) do
       # this page has i18n stuff on it
       visit event_path event

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-FactoryBot.define do # rubocop:disable Metrics/BlockLength
-  factory :event do # rubocop:disable Metrics/BlockLength
+FactoryBot.define do
+  factory :event do
     title { 'My Event' }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }

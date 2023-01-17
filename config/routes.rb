@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
+Rails.application.routes.draw do
   scope '(:locale)', locale:
   /#{I18n.available_locales.join("|")}/ do
     # home page is produced by running the home action of the PagesController

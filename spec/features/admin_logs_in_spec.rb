@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Admin tries to log in', type: :feature do # rubocop:disable Metrics/BlockLength
+RSpec.feature 'Admin tries to log in', type: :feature do
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }

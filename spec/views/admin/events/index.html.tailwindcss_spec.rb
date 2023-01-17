@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'admin/events/index', type: :view do # rubocop:disable Metrics/BlockLength
+RSpec.describe 'admin/events/index', type: :view do
   before(:each) do
     assign(:events, [
              Event.create!(
