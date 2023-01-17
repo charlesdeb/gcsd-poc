@@ -37,7 +37,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
     end
   end
 
-  context 'surfer changes time' do
+  context 'surfer changes timezone' do
     before(:each) do
       # this page has i18n stuff on it
       visit event_path event
@@ -50,10 +50,11 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
       expect(time_zone_cookie[:value]).to eq(new_time_zone)
     end
 
-    scenario 'timezone cookie is remembered' do
+    scenario 'timezone cookie is remembered across pages' do
       select new_time_zone, from: 'time-zone'
 
-      # visit page again
+      # change pages
+      visit root_path
       visit event_path event
 
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
