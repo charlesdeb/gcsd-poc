@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'support/with_clues'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -87,4 +90,6 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
     # driven_by :selenium # uncomment this if you want to see the browser do it's thing - but it's a little slower
   end
+
+  config.include TestSupport::WithClues, type: :system
 end
