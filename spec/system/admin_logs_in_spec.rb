@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Admin tries to log in', type: :feature do
+RSpec.feature 'Admin tries to log in' do
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }

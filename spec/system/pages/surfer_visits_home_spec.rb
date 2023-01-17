@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Surfer visits home page', type: :feature do
+RSpec.feature 'Surfer visits home page' do
   let(:body) { 'Welcome to Global Creative Studio Days' }
   let(:slug) { 'home' }
   let!(:home_page) { FactoryBot.create(:page, slug: slug, body: body) }
