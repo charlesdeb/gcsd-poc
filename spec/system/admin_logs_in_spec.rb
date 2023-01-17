@@ -10,16 +10,26 @@ RSpec.feature 'Admin tries to log in' do
   let(:correct_password) { 'secret_squirrel' }
   let(:wrong_password) { 'rubbish' }
   let(:email) { 'squirrel@example.com' }
-  let!(:admin) { FactoryBot.create(:admin_user, email: email, password: correct_password) }
+  let!(:admin) do
+    FactoryBot.create(
+      :admin_user, first_name: 'Zaphod', last_name: 'Beeblebrox', email: email,
+                   password: correct_password
+    )
+  end
+
+  let(:signed_in_regexp) { /#{I18n.t('devise.sessions.signed_in')}/i }
+  let(:sign_in_regexp) { /#{I18n.t('devise.sessions.new.sign_in')}/i }
+  let(:sign_in_to_your_account_regexp) { /#{I18n.t('devise.sessions.new.sign_in_to_your_account')}/i }
+  let(:not_signed_in_regexp) { /#{I18n.t('devise.failure.invalid', authentication_keys: 'Email')}/i }
 
   before(:each) do
     visit root_path
   end
 
   scenario 'there is a working sign in link' do
-    expect(page).to have_text(I18n.t('devise.shared.links.sign_in'))
-    click_link I18n.t('devise.shared.links.sign_in')
-    expect(page).to have_text(I18n.t('devise.sessions.new.sign_in_to_your_account'))
+    expect(page).to have_text(sign_in_regexp)
+    find('a', text: sign_in_regexp).click
+    expect(page).to have_text(sign_in_to_your_account_regexp)
   end
 
   # This is mostly just testing that devise works - which is a bit redundant
@@ -32,13 +42,14 @@ RSpec.feature 'Admin tries to log in' do
     end
 
     scenario 'sees failure message' do
-      expect(page).to have_text(I18n.t('devise.sessions.new.sign_in_to_your_account'))
-      # TODO: find the devise text key for this
-      expect(page).to have_text('Invalid Email or password.')
+      expect(page).to have_text(sign_in_to_your_account_regexp)
+      expect(page).to have_text(not_signed_in_regexp)
     end
 
     scenario 'is not logged in' do
-      skip 'add something that only shows when a user is logged in'
+      within('nav') do
+        expect(page).to have_text(sign_in_regexp)
+      end
     end
   end
 
@@ -52,8 +63,8 @@ RSpec.feature 'Admin tries to log in' do
     end
 
     scenario 'sees signed in message' do
-      expect(page).to have_text('Signed in successfully.')
-      expect(page).to_not have_text('Invalid Email or password.')
+      expect(page).to have_text(signed_in_regexp)
+      expect(page).to_not have_text(not_signed_in_regexp)
     end
 
     scenario 'is now on the home page' do
@@ -61,7 +72,9 @@ RSpec.feature 'Admin tries to log in' do
     end
 
     scenario 'is logged in' do
-      skip 'add something that only shows when a user is logged in'
+      within('nav') do
+        expect(page).to have_button(admin.initials)
+      end
     end
   end
 end

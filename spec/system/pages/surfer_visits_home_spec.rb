@@ -48,6 +48,7 @@ RSpec.feature 'Surfer visits home page' do
     scenario 'they see a link for future events' do
       visit root_path
 
+      # TODO: i18n this
       expect(page).to have_link 'Coming Events', href: future_events_path(locale: I18n.default_locale)
     end
   end
@@ -56,6 +57,7 @@ RSpec.feature 'Surfer visits home page' do
     scenario 'they see no link for future events' do
       visit root_path
 
+      # TODO: i18n this
       expect(page).not_to have_link 'Coming Events', href: future_events_path(locale: I18n.default_locale)
     end
   end
@@ -73,6 +75,7 @@ RSpec.feature 'Surfer visits home page' do
 
     scenario 'they see a link to past events' do
       visit root_path
+      # TODO: i18n this
       expect(page).to have_link 'Past Events', href: past_events_path(locale: I18n.default_locale)
     end
 
