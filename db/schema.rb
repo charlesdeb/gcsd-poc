@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_19_223919) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_220645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,25 +55,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_19_223919) do
 
   create_table "events", force: :cascade do |t|
     t.datetime "starting_at", precision: nil
-    t.string "status", limit: 15
+    t.text "status"
     t.boolean "is_featured", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug", limit: 30
+    t.text "slug"
     t.datetime "finishing_at"
     t.index ["slug"], name: "index_events_on_slug", unique: true
     t.index ["starting_at"], name: "index_events_on_starting_at"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "slug", limit: 30
+    t.text "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
   create_table "presenters", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_presenters_on_name"
