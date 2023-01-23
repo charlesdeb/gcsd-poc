@@ -176,6 +176,48 @@ CREATE TABLE public.events (
 
 
 --
+-- Name: TABLE events; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.events IS 'GCSD Events';
+
+
+--
+-- Name: COLUMN events.starting_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.starting_at IS 'Time event starts';
+
+
+--
+-- Name: COLUMN events.status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.status IS 'published, draft etc...';
+
+
+--
+-- Name: COLUMN events.is_featured; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.is_featured IS 'Is this event featured on the home page?';
+
+
+--
+-- Name: COLUMN events.slug; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.slug IS 'unique, human readable name used in URL for event';
+
+
+--
+-- Name: COLUMN events.finishing_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.finishing_at IS 'Time event finishes';
+
+
+--
 -- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -204,6 +246,20 @@ CREATE TABLE public.pages (
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
 );
+
+
+--
+-- Name: TABLE pages; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.pages IS 'Static pages';
+
+
+--
+-- Name: COLUMN pages.slug; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pages.slug IS 'unique, human readable name used in URL for page';
 
 
 --
@@ -238,6 +294,20 @@ CREATE TABLE public.presenters (
 
 
 --
+-- Name: TABLE presenters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.presenters IS 'People that present sessions at a GCSD event';
+
+
+--
+-- Name: COLUMN presenters.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.presenters.name IS 'Name of a presenter';
+
+
+--
 -- Name: presenters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -267,6 +337,27 @@ CREATE TABLE public.presenters_sessions (
 
 
 --
+-- Name: TABLE presenters_sessions; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.presenters_sessions IS 'Join table of Presenters that present Sessions';
+
+
+--
+-- Name: COLUMN presenters_sessions.session_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.presenters_sessions.session_id IS 'Refers to a Session';
+
+
+--
+-- Name: COLUMN presenters_sessions.presenter_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.presenters_sessions.presenter_id IS 'Refers to a Presenter';
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -285,6 +376,20 @@ CREATE TABLE public.session_types (
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
 );
+
+
+--
+-- Name: TABLE session_types; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.session_types IS 'Lookup table of Session types';
+
+
+--
+-- Name: COLUMN session_types.order_by; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.session_types.order_by IS 'Orders these types in dropdowns';
 
 
 --
@@ -322,6 +427,41 @@ CREATE TABLE public.sessions (
 
 
 --
+-- Name: TABLE sessions; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.sessions IS 'Sessions that take place during an Event';
+
+
+--
+-- Name: COLUMN sessions."limit"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions."limit" IS 'Maximum number of attenders for the session. Nil implies no limit';
+
+
+--
+-- Name: COLUMN sessions.event_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions.event_id IS 'Refers to the Event this Session is part of';
+
+
+--
+-- Name: COLUMN sessions.session_type_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions.session_type_id IS 'Refers to this Session''s Session Type';
+
+
+--
+-- Name: COLUMN sessions.time_slot_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions.time_slot_id IS 'Refers to the Time Slot when this Session takes place';
+
+
+--
 -- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -352,6 +492,34 @@ CREATE TABLE public.time_slots (
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
 );
+
+
+--
+-- Name: TABLE time_slots; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.time_slots IS 'Time Slots within an Event';
+
+
+--
+-- Name: COLUMN time_slots.event_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.time_slots.event_id IS 'Refers to the Event this Session is part of';
+
+
+--
+-- Name: COLUMN time_slots.starting_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.time_slots.starting_at IS 'Time that the Time Slot starts';
+
+
+--
+-- Name: COLUMN time_slots.finishing_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.time_slots.finishing_at IS 'Time that the Time Slot finishes';
 
 
 --
@@ -397,6 +565,48 @@ CREATE TABLE public.users (
     time_zone character varying DEFAULT 'London'::character varying NOT NULL,
     locale character varying DEFAULT 'en'::character varying NOT NULL
 );
+
+
+--
+-- Name: TABLE users; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.users IS 'Users in the GCSD system. Managed by Devise';
+
+
+--
+-- Name: COLUMN users.first_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.first_name IS 'First name of the User. Required if last_name null';
+
+
+--
+-- Name: COLUMN users.last_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.last_name IS 'Last name of the User. Required if first_name null';
+
+
+--
+-- Name: COLUMN users.role; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.role IS 'One of user, attender or admin';
+
+
+--
+-- Name: COLUMN users.time_zone; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.time_zone IS 'User''s preferred time zone';
+
+
+--
+-- Name: COLUMN users.locale; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.locale IS 'User''s preferred locale (i.e. language)';
 
 
 --
@@ -806,6 +1016,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221219223919'),
 ('20230122220645'),
 ('20230123171322'),
-('20230123175037');
+('20230123175037'),
+('20230123204147');
 
 
