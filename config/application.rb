@@ -23,5 +23,11 @@ module Gcsd
 
     config.i18n.available_locales = %i[en tr fr]
     config.i18n.default_locale = :en
+
+    # We want to be able to use any feature of our database, and the SQL format
+    # makes that possible.
+    # For this app, that makes heavy use of timezones, we must ensure that
+    # timezones are stored with all timestamps.
+    config.active_record.schema_format = :sql
   end
 end
