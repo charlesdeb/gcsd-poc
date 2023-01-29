@@ -170,7 +170,7 @@ CREATE TABLE public.events (
     is_featured boolean DEFAULT false,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
-    slug text,
+    slug text NOT NULL,
     finishing_at timestamp(6) with time zone
 );
 
@@ -242,7 +242,7 @@ ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 
 CREATE TABLE public.pages (
     id bigint NOT NULL,
-    slug text,
+    slug text NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
 );
@@ -287,7 +287,7 @@ ALTER SEQUENCE public.pages_id_seq OWNED BY public.pages.id;
 
 CREATE TABLE public.presenters (
     id bigint NOT NULL,
-    name text,
+    name text NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL
 );
@@ -1017,6 +1017,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230122220645'),
 ('20230123171322'),
 ('20230123175037'),
-('20230123204147');
+('20230123204147'),
+('20230129204853');
 
 
