@@ -1,3 +1,8 @@
 fr:
   # general messages
   language: 'Français'
+  gcsd: Journée Mondiale du Studio Créatif
+  pages:
+    home:
+      welcome_to: Bienvenue aux
+      gcsd: Journée Mondiale du Studio Créatif

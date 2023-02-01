@@ -1,3 +1,9 @@
 tr:
   # general messages
   language: 'Türkçe'
+  gcsd: Küresel Yaratıcı Stüdyo Günleri
+  pages:
+    home:
+      welcome_to: Hoş Geldiniz
+      gcsd: Küresel Yaratıcı Stüdyo Günlerine
+
