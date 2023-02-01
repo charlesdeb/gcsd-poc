@@ -2,12 +2,12 @@
 
 FactoryBot.define do
   factory :event do
-    title { 'My Event' }
+    title { Faker::Lorem.unique.word }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
     finishing_at { Time.zone.today.next_week.days_since(1) }
     status { :published }
-    description { 'Some event information' }
+    description { Faker::Lorem.sentence }
     is_featured { false }
 
     factory :event_with_image do

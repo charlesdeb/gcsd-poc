@@ -7,5 +7,7 @@ require 'rails_helper'
 
 RSpec.describe FactoryBot do
   # ensure that my factories are valid by linting them
-  it { FactoryBot.lint(traits: true) }
+  it 'has factories set up properly' do
+    FactoryBot.lint(traits: true)
+  end
 end

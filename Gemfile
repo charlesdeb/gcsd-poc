@@ -91,6 +91,10 @@ group :development, :test do
   gem "htmlbeautifier"
   gem "rspec-rails"
   gem "rubocop"
+
+  # We use Faker to generate values for attributes
+  # in each factory
+  gem "faker"
 end
 
 group :development do

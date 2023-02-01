@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :presenter do
-    name { 'Billy Bob' }
+    name { Faker::Name.unique.name }
 
     factory :presenter_with_bio_and_image do
       after(:build) do |event|
-        event.bio = 'Loves to eat curry by the beach'
+        event.bio = Faker::Lorem.sentence(word_count: 15)
         image_name = 'presenter.png'
         image_path = File.join Rails.root, 'spec', 'factories', 'assets', 'images', image_name
 

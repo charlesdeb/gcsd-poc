@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :session do
-    title { 'Art for Fun' }
-    description { 'A great workshop' }
+    title { Faker::Lorem.unique.sentence(word_count: 3) }
+    description { Faker::Lorem.sentence(word_count: 10) }
     time_slot
     event
     session_type
