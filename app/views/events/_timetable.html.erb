@@ -1,12 +1,13 @@
 <%# Timetable component for an event %>
 <%# event:: expected to be an Event %>
+<%= javascript_import_module_tag "lib/timetable" %>
 <section class="event-timetable">
   <h2 class="mt-2 text-2xl font-bold leading-8 tracking-tight text-orange sm:text-3xl"><%= t('.timetable') %></h2>
   <div class="flex space-x-2 mt-8">
-    <div class="md:w-1/3">
+    <div class="md:w-1/3 timetable-time-slots">
       <%= render partial: 'timetable_time_slots', locals: {event: event} %>
     </div>
-    <div class="md:w-2/3 p-3 border">
+    <div class="md:w-2/3 p-2 border timetable-details">
       <%= render partial: 'timetable_details', locals: {event: event} %>
     </div>
   </div>

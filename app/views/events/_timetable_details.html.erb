@@ -1,5 +1,10 @@
 <%# Timetable details component for an event %>
 <%# event:: expected to be an Event %>
-<div class="timetable-details">
-  details
+<div class="">
+  <div class="time-slot-sessions">
+    <p>Click on a time slot on the left to see what sessions are running in each time slot</p>
+  </div>
+  <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
+    <%= render partial: 'time_slots/timetable_time_slot_sessions', locals: {time_slot: time_slot} %>
+  <% end %>
 </div>
