@@ -122,12 +122,12 @@ RSpec.feature 'Surfer visits show event', type: :system do
     scenario('they see the day header for each day')
     scenario('they see the time slots')
 
-    context('for each timeslot') do
+    context('for each time_slot') do
       scenario('they see the start time')
       scenario('they see the duration')
       scenario('they see the session type title')
       scenario('they see a link to reveal all sessions for the time slot')
-      scenario('they see the sessions for the timeslot (as a list)')
+      scenario('they see the sessions for the time_slot (as a list)')
 
       context('for each session') do
         scenario('they see the title')

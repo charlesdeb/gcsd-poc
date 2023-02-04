@@ -7,4 +7,6 @@ fr:
       donate: faire un don
       register_now: S'inscrire Maintenant!
     sessions_summary:
-      sessions_summary: Sessions Summary
+      sessions_summary: Résumé des séances
+    timetable:
+      timetable: Calendrier

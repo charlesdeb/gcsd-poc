@@ -39,6 +39,36 @@ module ApplicationHelper
             class: "#{color_class} first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-50 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10" # rubocop:disable Layout/LineLength
   end
 
+  # an Alpine-enabled <time> component with an optional format object for Luxon.
+  #
+  # See Alpine timeZoneSelect store for more information
+  #
+  # Params:
+  # +options+:: +Hash+ contains
+  #    +:time+:: +DateTime+ time we are showing.
+  #    +:format+:: +Hash+ formatting options suitable for toLocaleString in the
+  #                       Javascript DateTime object. If not provided, default
+  #                       is `...DateTime.DATETIME_MED, weekday: 'long'`
+  #
+  # Returns something like this:
+  # <time datetime="Sat, 02 Apr 2022 01:00:00 +0000"
+  #       x-data="{'format':{'hour':'numeric','minute':'numeric'}}"
+  #       x-text="$store.timeZoneSelect.formatDateTime('2022-04-02T01:00:00Z', format)">12:00 PM</time>
+  def alpine_time(options = {})
+    return 'Unknown Time' if options[:time].blank?
+
+    x_data = options[:format] ? { format: options[:format] }.to_json : ''
+    x_text = if options[:format]
+               "$store.timeZoneSelect.formatDateTime('#{options[:time].to_fs(:iso8601)}', format)"
+             else
+               "$store.timeZoneSelect.formatDateTime('#{options[:time].to_fs(:iso8601)}')"
+             end
+
+    content_tag :time, nil,
+                datetime: l(options[:time]),
+                'x-data': x_data, 'x-text': x_text
+  end
+
   private
 
   def language_options(request_path)

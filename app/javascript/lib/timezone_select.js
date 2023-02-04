@@ -45,11 +45,15 @@ const start = function (window) {
       this.state.timeZone = timeZone;
       gcsd.setCookie('gcsd_timezone', this.state.timeZone, 30);
     },
-    formatDateTime(dateTime) {
+    /** @param object format we want to show the dateTime in  */
+    formatDateTime(
+      dateTime,
+      format = { ...DateTime.DATETIME_MED, weekday: 'long' }
+    ) {
       return DateTime.fromISO(dateTime)
         .setLocale(this.state.locale)
         .setZone(this.state.timeZone)
-        .toLocaleString({ ...DateTime.DATETIME_MED, weekday: 'long' });
+        .toLocaleString(format);
     },
   });
 };

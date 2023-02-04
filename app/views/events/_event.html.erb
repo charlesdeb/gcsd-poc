@@ -7,7 +7,10 @@
         <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
         <div class="text-base space-y-6">
           <header class="w-full">
-            <h2 class="text-lg font-semibold text-orange-800"><time id="starting-at" datetime="<%= l(event.starting_at) %>" x-data x-text="$store.timeZoneSelect.formatDateTime('<%= event.starting_at.to_fs(:iso8601)%>')"></time></h2>
+            <h2 class="text-lg font-semibold text-orange-800">
+              <%#= alpine_time time: event.starting_at %>
+              <%= alpine_time  %>
+            </h2>
             <h3 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-4xl"><%= event.title %></h3>
           </header>
           <section class="mt-5 lg:mt-3">
@@ -49,6 +52,7 @@
         </div>
       </div>
       <%= render partial: 'sessions_summary', locals: {event: event} %>
+      <%= render partial: 'timetable', locals: {event: event} %>
     </div>
   </div>
   <% if action_name != "show" %>

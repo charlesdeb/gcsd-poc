@@ -9,6 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        // timetable time_slots grid
+        timetable: '1fr 2fr',
+      },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
         lora: ['Lora', ...defaultTheme.fontFamily.sans],
