@@ -21,12 +21,13 @@ const start = function (window) {
         .querySelectorAll('.timetable-details .time-slot-sessions')
         .forEach((slot) => {
           slot.classList.add('hidden');
+          slot.classList.remove('flex-col');
         });
 
       /** show this one */
       document
         .querySelector(`.timetable-details [data-time_slot="${timeSlot}"]`)
-        .classList.remove('hidden');
+        .classList.replace('hidden', 'flex-col');
 
       /** deselect all the time slots */
       document

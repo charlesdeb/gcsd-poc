@@ -1,7 +1,6 @@
 <%# Sessions component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<div class="hidden p-2 time-slot-sessions" data-time_slot="time_slot_<%= time_slot.id %>">
-  <h3 class="text-orange-500 text-xl"><%= time_slot.title %></h3>
+<div class="hidden px-2 space-y-4 time-slot-sessions" data-time_slot="time_slot_<%= time_slot.id %>">
   <% time_slot.sessions.each do |session|%>
     <%= render partial: 'sessions/timetable_session', locals: {session: session }%>
   <% end %>

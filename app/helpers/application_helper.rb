@@ -69,6 +69,34 @@ module ApplicationHelper
                 'x-data': x_data, 'x-text': x_text
   end
 
+  # shows a header for a session in the timetable view
+  # Params
+  # +session+:: Session
+  def timetable_session_header(session)
+    content_tag(:header,
+                content_tag(:h2,
+                            session.title,
+                            class: 'text-xl font-bold') + timetable_session_presenter(session),
+                class: 'bg-orange-200 text-white -mx-2 px-2 py-4')
+  end
+
+  # Shows a presenter for a session in the timetable view
+  # Or says "various" if a session has more than one presenter
+  # Params
+  # +session+:: Session
+  def timetable_session_presenter(session)
+    return '' if session.presenters.blank?
+
+    person_info = content_tag(:p, t('with'), class: 'text-sm')
+    person_info += if session.presenters.count > 1
+                     content_tag(:h2, t('various_presenters'), class: 'text-lg')
+                   else
+                     content_tag(:h2, session.presenters.first.name, class: 'text-lg')
+                   end
+
+    person_info
+  end
+
   private
 
   def language_options(request_path)

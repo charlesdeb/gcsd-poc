@@ -33,6 +33,8 @@ en:
   # general messages
   language: 'English'
   gcsd: Global Creative Studio Days
+  with: with
+  various_presenters: various presenters
   # date and time stuff
   time:
     formats:
