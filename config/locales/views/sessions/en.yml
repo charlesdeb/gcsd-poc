@@ -1,0 +1,6 @@
+en:
+  sessions:
+    timetable_session:
+      requirements: Special Requirements
+      participant_limit: Participant Limit
+      limited_to: "%{limit} people"

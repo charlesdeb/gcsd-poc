@@ -2,6 +2,19 @@
 <%# session:: expected to be a Session %>
 <article class="flex-col space-y-4 session">
   <%= timetable_session_header session%>
-  <%= session.description %>
-  <%= session.requirements %>
+  <div class="flex space-x-4">
+    <%= session.description %>
+    <%= timetable_session_image session%>
+  </div>
+  <div class="text-orange-400">
+    <%= session.presenters.first.bio if session.presenters.first %>
+  </div>
+  <% if session.requirements.present? %>
+    <h3 class="font-bold"><%= t('.requirements')%></h3>
+    <%= session.requirements %>
+  <% end %>
+  <% if session.limit.present? %>
+    <h3 class="font-bold"><%= t('.participant_limit')%></h3>
+    <%= t('.limited_to', limit: session.limit) %>
+  <% end %>
 </article>

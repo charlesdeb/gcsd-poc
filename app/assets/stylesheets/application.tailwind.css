@@ -6,9 +6,20 @@
   @import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
 
   h1,
+  h2 {
+    @apply uppercase;
+  }
+
+  h1,
   h2,
   h3 {
-    @apply font-lora uppercase;
+    @apply font-lora;
+  }
+}
+
+@layer components {
+  .trix-content ul li {
+    @apply list-disc;
   }
 }
 

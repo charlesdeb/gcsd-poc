@@ -77,7 +77,7 @@ module ApplicationHelper
                 content_tag(:h2,
                             session.title,
                             class: 'text-xl font-bold') + timetable_session_presenter(session),
-                class: 'bg-orange-200 text-white -mx-2 px-2 py-4')
+                class: 'bg-orange-200 text-white -mx-4 px-4 py-4')
   end
 
   # Shows a presenter for a session in the timetable view
@@ -87,14 +87,31 @@ module ApplicationHelper
   def timetable_session_presenter(session)
     return '' if session.presenters.blank?
 
-    person_info = content_tag(:p, t('with'), class: 'text-sm')
-    person_info += if session.presenters.count > 1
-                     content_tag(:h2, t('various_presenters'), class: 'text-lg')
-                   else
-                     content_tag(:h2, session.presenters.first.name, class: 'text-lg')
-                   end
+    presenter_name = if session.presenters.count > 1
+                       t('various_presenters')
+                     else
+                       session.presenters.first.name
+                     end
 
-    person_info
+    content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
+  end
+
+  # Shows an image related to a session in the timetable view
+  # This is currently just the first image it finds for a presenter
+  # Params
+  # +session+:: Session
+  def timetable_session_image(session)
+    return if session.presenters.blank?
+
+    #  image_tag event.featured_image, class: 'w-full h-full object-cover', alt: event.title if event.featured_image.representable?
+
+    session.presenters.each do |presenter|
+      if presenter.featured_image.representable?
+        return image_tag presenter.featured_image, class: 'w-1/3 h-full float-right',
+                                                   alt: presenter.name
+      end
+    end
+    nil
   end
 
   private
