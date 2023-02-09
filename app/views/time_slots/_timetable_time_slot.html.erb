@@ -1,10 +1,12 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<div class="p-2 border-orange-400 odd:border-l first:border-t border-r border-b text-center" data-time_slot="time_slot_<%= time_slot.id %>">
-  <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'} %>
-  <br>
-  <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'} %>
-</div>
-<div class="p-2 border-orange-400 [&:nth-child(2)]:border-t border-r border-b" data-time_slot="time_slot_<%= time_slot.id %>">
-  <%= time_slot.title %>
-</div>
+<tr class="border-collapse border-orange-400 border hover:bg-orange-100 hover:border-orange-100 hover:text-white" data-time_slot="time_slot_<%= time_slot.id %>">
+  <td class="w-1/3 p-2 text-center">
+    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'} %>
+    <br>
+    <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'} %>
+  </td>
+  <td class="w-2/3 p-2">
+    <%= time_slot.title %>
+  </td>
+</tr>

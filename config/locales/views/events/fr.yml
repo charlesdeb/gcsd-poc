@@ -10,3 +10,5 @@ fr:
       sessions_summary: Résumé des séances
     timetable:
       timetable: Calendrier
+    timetable_details:
+      click_a_slot: Cliquez sur un créneau horaire à gauche pour voir quelles sessions sont en cours

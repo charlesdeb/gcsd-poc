@@ -1,10 +1,11 @@
 <%# Timetable timeslots component for an event %>
 <%# event:: expected to be an Event %>
-<div class="grid grid-cols-timetable" x-data="timetable" x-on:click="chooseSlot($event)">
+<%# <div class="grid grid-cols-timetable" x-data="timetable" x-on:click="chooseSlot($event)"> %>
+<table class="flex flex-col" x-data="timetable" x-on:click="chooseSlot($event)">
   <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
     <%= render partial: 'time_slots/timetable_time_slot', locals: {time_slot: time_slot} %>
   <% end %>
-</div>
+</table>
 <!-- 
 console.log({event:$event.target.dataset.time_slot}); 
 document.querySelectorAll('.timetable-details .time-slot-sessions').forEach((slot)=>{slot.classList.add('hidden')}); 

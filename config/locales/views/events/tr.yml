@@ -10,3 +10,5 @@ tr:
       sessions_summary: Oturum Özeti
     timetable:
       timetable: Program
+    timetable_details:
+      click_a_slot: Hangi oturumların çalıştığını görmek için soldaki bir zaman aralığına tıklayın

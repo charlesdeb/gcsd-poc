@@ -13,7 +13,7 @@ const start = function (window) {
     chooseSlot(event) {
       // console.log({ event });
 
-      const timeSlot = event.target.dataset.time_slot;
+      const timeSlot = event.target.parentElement.dataset.time_slot;
       // console.log({ timeSlot });
 
       /** hide all the other timeslot sessions */
@@ -30,13 +30,11 @@ const start = function (window) {
         .classList.replace('hidden', 'flex-col');
 
       /** deselect all the time slots */
-      document
-        .querySelectorAll('.timetable-time-slots .grid div')
-        .forEach((slot) => {
-          slot.classList.remove('bg-orange-400');
-          slot.classList.remove('font-bold');
-          slot.classList.remove('text-white');
-        });
+      document.querySelectorAll('.timetable-time-slots tr').forEach((slot) => {
+        slot.classList.remove('bg-orange-400');
+        slot.classList.remove('font-bold');
+        slot.classList.remove('text-white');
+      });
 
       /** select this one */
       document

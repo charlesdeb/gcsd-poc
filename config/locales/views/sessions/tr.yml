@@ -1,0 +1,6 @@
+tr:
+  sessions:
+    timetable_session:
+      requirements: Gerekli malzemeler
+      participant_limit: Katılımcı Limiti
+      limited_to: "%{limit} kişi"

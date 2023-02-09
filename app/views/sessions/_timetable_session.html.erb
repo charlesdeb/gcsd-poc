@@ -10,11 +10,11 @@
     <%= session.presenters.first.bio if session.presenters.first %>
   </div>
   <% if session.requirements.present? %>
-    <h3 class="font-bold"><%= t('.requirements')%></h3>
+    <h3 class="font-bold capitalize"><%= t('.requirements')%></h3>
     <%= session.requirements %>
   <% end %>
   <% if session.limit.present? %>
-    <h3 class="font-bold"><%= t('.participant_limit')%></h3>
+    <h3 class="font-bold capitalize"><%= t('.participant_limit')%></h3>
     <%= t('.limited_to', limit: session.limit) %>
   <% end %>
 </article>

@@ -18,7 +18,7 @@ module ApplicationHelper
                'x-data': {},
                'x-bind:value': '$store.timeZoneSelect.state.timeZone',
                'x-title': 'Timezone Selector',
-               'x-on:change': '$store.timeZoneSelect.updateTimeZone(document.querySelector("select#time-zone").value)',
+               'x-on:change': '$store.timeZoneSelect.updateTimeZone($event.target.value)',
                'data-time-zone-select': ''
   end
 
@@ -103,8 +103,6 @@ module ApplicationHelper
   def timetable_session_image(session)
     return if session.presenters.blank?
 
-    #  image_tag event.featured_image, class: 'w-full h-full object-cover', alt: event.title if event.featured_image.representable?
-
     session.presenters.each do |presenter|
       if presenter.featured_image.representable?
         return image_tag presenter.featured_image, class: 'w-1/3 h-full float-right',
@@ -142,6 +140,7 @@ module ApplicationHelper
 
   def timezone_options
     # TODO: get these from system settings or something...
+    # TODO: i18n required
     options_for_select(%w[Europe/London Europe/Paris Europe/Berlin Asia/Singapore Australia/Sydney Pacific/Auckland])
   end
 end
