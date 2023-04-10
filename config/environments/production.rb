@@ -92,4 +92,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # prevent some weird error relating to a missing $green variable as per
+  # https://stackoverflow.com/questions/70401077/rails-7-asset-pipeline-sasscsyntaxerror-with-tailwind
+  # sassc-rails seems to be a dependency of administrate
+  config.assets.css_compressor = nil
 end

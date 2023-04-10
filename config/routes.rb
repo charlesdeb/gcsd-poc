@@ -24,7 +24,11 @@ Rails.application.routes.draw do
       end
     end
 
-    devise_for :users
+    # Don't run devise if we're pre-compiling, because database.yml doesn't 
+    # exist, the devise_for assumes its existence
+    unless Rake.respond_to?(:application) && (Rake.application.top_level_tasks.include? 'assets:precompile')
+      devise_for :users
+    end
 
     # TODO: not sure if we really want to default this
     defaults locale: I18n.locale do

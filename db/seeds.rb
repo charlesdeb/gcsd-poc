@@ -12,13 +12,21 @@
 
 I18n.locale = :en
 
-# create users
-User
-  .where('email' => 'chabekah@gmail.com',
-         'first_name' => 'Charles',
-         'last_name' => 'de Bueger', 'role' => 'user',
-         'time_zone' => 'London', 'locale' => 'en')
-  .first_or_create!
+raise 'There is a missing ADMIN_USER_PASSWORD in ENV. Please set this, and try again' if ENV['ADMIN_USER_PASSWORD'].nil?
+
+# create first user
+if User.where('email' => 'chabekah@gmail.com').empty?
+  User
+    .create!(
+      'email' => 'chabekah@gmail.com',
+      'password' => ENV['ADMIN_USER_PASSWORD'],
+      'first_name' => 'Charles',
+      'last_name' => 'de Bueger', 'role' => 'user',
+      'time_zone' => 'London', 'locale' => 'en'
+    )
+end
+
+# file is broken from here on.
 
 # create Session Types
 plenary_session_type = SessionType

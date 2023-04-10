@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+# If running the rails server then create or migrate existing database
+if [ "${*}" == "./bin/rails server" ]; then
+  ./bin/rails db:prepare
+  # DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:setup # creates prd database and seeds it. Only used for first deploy
+  # DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:seed # seeds database. Only used for first deploy
+  # DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails db:reset # drops old prd database and creates a new one. Only needed for first deploy
+fi
+
+exec "${@}"
