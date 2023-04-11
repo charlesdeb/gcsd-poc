@@ -1,7 +1,7 @@
 /** Functionality for the timezone_select picker */
 
 import Alpine from 'alpinejs';
-import { gcsd } from './gcsd';
+import { gcsd } from 'lib/gcsd'; 
 import { DateTime } from 'luxon';
 
 const start = function (window) {
