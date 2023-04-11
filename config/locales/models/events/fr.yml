@@ -1,0 +1,14 @@
+fr:
+  activerecord:
+    models:
+      event:
+        one: Événement
+        other: Événements
+    attributes:
+      event:
+        title: "Titre"
+        starting_at: "À partir de"
+        finishing_at: "Se terminant à"
+        description: "Description"
+        featured_image: "L'image sélectionnée"
+        is_featured: "Mis en exergue?"

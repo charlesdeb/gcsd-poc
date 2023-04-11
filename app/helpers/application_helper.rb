@@ -112,6 +112,12 @@ module ApplicationHelper
     nil
   end
 
+  # Switches whether we show Past Events, Future Events or just Events on the
+  # event index page
+  def event_index_header(scope = nil)
+    [scope, t('activerecord.models.event.other')].join(' ')
+  end
+
   private
 
   def language_options(request_path)

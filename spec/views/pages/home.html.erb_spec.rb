@@ -16,7 +16,7 @@ RSpec.describe 'pages/home', type: :view do
 
       render
 
-      expect(rendered).not_to match(/Coming Events/)
+      expect(rendered).not_to match(/Future Events/)
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe 'pages/home', type: :view do
       assign(:events, Event.published)
       render
 
-      expect(rendered).to have_link 'Coming Events', href: future_events_path
+      expect(rendered).to have_link 'Future Events', href: future_events_path
     end
   end
 

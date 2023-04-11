@@ -3,7 +3,7 @@ tr:
     event_summary:
       more: Daha fazla
       register_now: Hemen kaydol!
-    event:
+    full_event:
       donate: Bağış
       register_now: Hemen kaydol!
     sessions_summary:

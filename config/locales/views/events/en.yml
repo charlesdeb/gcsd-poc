@@ -3,7 +3,7 @@ en:
     event_summary:
       more: More
       register_now: Register Now!
-    event:
+    full_event:
       donate: Donate
       register_now: Register Now!
     sessions_summary:

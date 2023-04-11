@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      event:
+        one: Event
+        other: Events
+    attributes:
+      event:
+        title: "Title"
+        starting_at: "Starting At"
+        finishing_at: "Ending At"
+        description: "Description"
+        featured_image: "Featured Image"
+        is_featured: "Featured?"
