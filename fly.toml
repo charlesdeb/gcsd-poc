@@ -8,6 +8,10 @@ primary_region = "lhr"
 [env]
   PORT = 8080
 
+[mounts]
+  source="gcsd_data"
+  destination="/fly_storage"
+
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
