@@ -44,14 +44,19 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
     end
 
     scenario 'timezone cookie is set to the new value' do
-      select new_time_zone, from: 'time-zone'
+      within('nav#main-menu') do
+        select new_time_zone, from: 'time-zone'
+      end
+
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
 
       expect(time_zone_cookie[:value]).to eq(new_time_zone)
     end
 
     scenario 'timezone cookie is remembered across pages' do
-      select new_time_zone, from: 'time-zone'
+      within('nav#main-menu') do
+        select new_time_zone, from: 'time-zone'
+      end
 
       # change pages
       visit root_path
@@ -67,7 +72,10 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
 
       expect(time_zone_cookie[:value]).to eq(default_time_zone)
 
-      select new_time_zone, from: 'time-zone'
+      within('nav#main-menu') do
+        select new_time_zone, from: 'time-zone'
+      end
+
       within('div.overview') do
         expected_date_string = I18n.l(
           event.starting_at.in_time_zone(new_time_zone),

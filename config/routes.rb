@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   scope '(:locale)', locale:
   /#{I18n.available_locales.join("|")}/ do
     # home page is produced by running the home action of the PagesController
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       end
     end
 
-    # Don't run devise if we're pre-compiling, because database.yml doesn't 
+    # Don't run devise if we're pre-compiling, because database.yml doesn't
     # exist, the devise_for assumes its existence
     unless Rake.respond_to?(:application) && (Rake.application.top_level_tasks.include? 'assets:precompile')
       devise_for :users

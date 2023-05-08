@@ -48,13 +48,14 @@ RSpec.feature 'Surfer visits show event', type: :system do
 
     scenario 'they see a donate button' do
       within('div.overview') do
-        expect(page).to have_link(I18n.t('events.event.donate'))
+        expect(page).to have_link(I18n.t('events.full_event.donate'))
       end
     end
 
     scenario 'they see a register now button' do
       within('div.overview') do
-        expect(page).to have_link(I18n.t('events.event.register_now'))
+        # save_and_open_page
+        expect(page).to have_link(I18n.t('events.full_event.register_now'))
       end
     end
   end

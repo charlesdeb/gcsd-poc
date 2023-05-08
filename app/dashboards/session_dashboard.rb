@@ -16,6 +16,10 @@ class SessionDashboard < Administrate::BaseDashboard
     requirements: RichTextAreaField,
     event: Field::BelongsTo,
     limit: Field::Number,
+    featured_image: Field::ActiveStorage.with_options(
+      index_preview_variant: :thumb,
+      show_preview_variant: :thumb
+    ),
     presenters: Field::HasMany,
     session_type: Field::BelongsTo,
     time_slot: Field::BelongsTo,
@@ -44,6 +48,7 @@ class SessionDashboard < Administrate::BaseDashboard
     title
     event
     session_type
+    featured_image
     presenters
     description
     requirements
@@ -62,6 +67,7 @@ class SessionDashboard < Administrate::BaseDashboard
     title
     description
     requirements
+    featured_image
     presenters
     time_slot
     limit

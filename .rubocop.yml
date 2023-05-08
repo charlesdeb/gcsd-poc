@@ -2,10 +2,13 @@ Style/HashSyntax:
   Enabled: false
 
 AllCops:
+  NewCops: enable
   Exclude:
-    - 'db/**/*'
+    - db/**/*
 
 # Most rspec blocks are long
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
+    - spec/**/*
+    - config/environments/**/* # Most config blocks are long
+    - config/routes.rb # this doesn't work - and I don't know why
