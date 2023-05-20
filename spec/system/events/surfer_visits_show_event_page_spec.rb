@@ -2,15 +2,23 @@
 
 require 'rails_helper'
 
+# so we can use strip_tags in these tests
+include ActionView::Helpers::SanitizeHelper # rubocop:disable Style/MixinUsage
+
 RSpec.feature 'Surfer visits show event', type: :system do
   let(:title) { 'Groovy Event' }
   let(:description) { 'Some stuff about an event' }
   let!(:event) do
-    FactoryBot.create(:event_with_image, starting_at: Time.zone.now,
-                                         title: title, description: description)
+    FactoryBot.create(
+      :event_with_image_and_sessions,
+      starting_at: Time.zone.now,
+      title: title,
+      description: description
+    )
   end
 
   let(:default_time_zone) { 'Europe/London' }
+  let(:new_time_zone) { 'Asia/Singapore' }
 
   context('overview of event') do
     before(:each) do
@@ -119,16 +127,51 @@ RSpec.feature 'Surfer visits show event', type: :system do
   end
 
   context('full programme details') do
-    scenario('they see can change the time zone')
-    scenario('they see the day header for each day')
-    scenario('they see the time slots')
+    before(:each) do
+      visit event_path event
+    end
 
-    context('for each time_slot') do
-      scenario('they see the start time')
-      scenario('they see the duration')
-      scenario('they see the session type title')
-      scenario('they see a link to reveal all sessions for the time slot')
-      scenario('they see the sessions for the time_slot (as a list)')
+    scenario('they can change the time zone') do
+      within('section#event-timetable') do
+        select new_time_zone, from: 'time-zone'
+      end
+    end
+
+    scenario('they see the time slots') do
+      time_slots_count = event.time_slots.count
+      within('section#event-timetable') do
+        expect(page).to have_selector('#timetable-time-slots tr', count: time_slots_count)
+      end
+    end
+
+    context 'for each time_slot', js: true do
+      scenario 'they see the right info' do
+        event.time_slots.each do |time_slot|
+          within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
+            # TODO: figure out timezones here
+            # expect(page).to have_text(
+            #   I18n.l(time_slot.starting_at,
+            #          format: '%I:%M')
+            # )
+            expect(page).to have_text(time_slot.title)
+          end
+        end
+      end
+
+      scenario 'they can click to see the sessions for the time slot' do
+        time_slot = event.time_slots.first
+
+        # session stuff should not be visible before clicking the time slot
+        expect(page).not_to have_text(/#{time_slot.sessions.first.title}/i)
+
+        within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
+          # click on something that isn't actually a real link
+          page.find('td', text: time_slot.title).click
+        end
+        # session stuff should now be visible
+        expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
+        expect(page).to have_text(/#{strip_tags(time_slot.sessions.first.description)}/i)
+      end
 
       context('for each session') do
         scenario('they see the title')

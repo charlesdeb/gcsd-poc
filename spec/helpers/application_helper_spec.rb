@@ -54,7 +54,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
   end
 
   describe '#session_type_tab' do
-    let(:event) { create(:event_with_sessions) }
+    let(:event) { create(:event_with_image_and_sessions) }
     context 'first tab' do
       subject do
         helper.session_type_tab event.session_types_with_counts.first, 0

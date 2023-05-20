@@ -30,7 +30,7 @@ const start = function (window) {
         .classList.replace('hidden', 'flex-col');
 
       /** deselect all the time slots */
-      document.querySelectorAll('.timetable-time-slots tr').forEach((slot) => {
+      document.querySelectorAll('#timetable-time-slots tr').forEach((slot) => {
         slot.classList.remove('bg-orange-400');
         slot.classList.remove('font-bold');
         slot.classList.remove('text-white');
@@ -39,7 +39,7 @@ const start = function (window) {
       /** select this one */
       document
         .querySelectorAll(
-          `.timetable-time-slots [data-time_slot="${timeSlot}"]`
+          `#timetable-time-slots [data-time_slot="${timeSlot}"]`
         )
         .forEach((slot) => {
           slot.classList.add('bg-orange-400');
