@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# a (static) page
 class Page < ApplicationRecord
   extend Mobility
 

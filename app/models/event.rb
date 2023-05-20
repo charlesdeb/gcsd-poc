@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# an event
 class Event < ApplicationRecord
   extend Mobility
   include ActiveModel::Serialization
