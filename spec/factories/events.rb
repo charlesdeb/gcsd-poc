@@ -6,7 +6,6 @@ FactoryBot.define do
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
     finishing_at { Time.zone.today.next_week.days_since(1) }
-    # status { :published }
     description { Faker::Lorem.sentence }
     is_featured { false }
 
@@ -29,7 +28,7 @@ FactoryBot.define do
       end
     end
 
-    factory :event_with_image_and_sessions do
+    factory :published_event_with_image_and_sessions, traits: [:published] do
       transient do
         sessions_count { 3 }
         time_slots_count { 3 }

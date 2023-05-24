@@ -14,12 +14,11 @@
       <div class="mt-3 text-lg text-gray-300 line-clamp-4"><%= event.description %></div>
       <div class="mt-8">
         <div class="inline-flex rounded-md shadow space-x-4">
-          <%= link_to t('.more'), event, class: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base capitalize font-medium rounded-md text-orange bg-white hover:bg-orange-100" %>
-          <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange hover:mix-blend-screen">
-            <%= t ('.register_now') %>
-          </a>
-        </div>
+          <%= link_to t('.more'), event, class: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base capitalize font-medium rounded-md text-orange bg-white hover:bg-orange-100" if event.published? %>
+          <%= link_to t('.register_now'), '#', class: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange hover:mix-blend-screen" if event.registerable? %>
+        </a>
       </div>
     </div>
   </div>
+</div>
 </section>

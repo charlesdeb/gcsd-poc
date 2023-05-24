@@ -8,11 +8,11 @@ class PagesController < ApplicationController
     # Get some events to show on the home page.
     # These are not related to the page resource at all, but since the home
     # page is a special case, this should be OK.
-    @future_featured_event = Event.featured.future.published.first
+    @future_featured_event = Event.featured.future.publicly_viewable.first
 
     # We don't actually show a list of these on the home page; we just want to
     # know if they exist.
-    @events = Event.published
+    @events = Event.publicly_viewable
   end
 
   def show; end

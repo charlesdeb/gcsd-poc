@@ -5,6 +5,12 @@ class Event < ApplicationRecord
   extend Mobility
   include ActiveModel::Serialization
 
+  # draft:       not shown on the website at all
+  # coming_soon: only main event info is shown - no details. Surfer cannot
+  #              register
+  # published:   full event details are shown. Surfer can register (if there is
+  #              EventBrite information
+  # archived:    Not shown on the website at all TODO: do we need this?
   enum :status, { draft: 0, coming_soon: 1, published: 2, archived: 3 }
 
   has_rich_text :description
@@ -33,7 +39,7 @@ class Event < ApplicationRecord
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
   scope :past, -> { where('finishing_at < ?', Date.today) }
-  scope :published, -> { where(status: :published) }
+  scope :publicly_viewable, -> { published.or(coming_soon) }
 
   def session_types_with_counts
     session_ids = Event.find(id).sessions.ids
@@ -55,5 +61,22 @@ class Event < ApplicationRecord
     #   .select(:session_type_id, SessionType.arel_table[:order_by], Session.arel_table[:session_type_id].count)
     #   .group(:session_type_id, SessionType.arel_table[:order_by])
     #   .order(SessionType.arel_table[:order_by])
+  end
+
+  # surfers can only register for published, future events with an EventBrite
+  # code
+  # TODO: add Eventbrite stuff
+  def registerable?
+    published? && future?
+  end
+
+  # surfers can only see events that are published (with full session info)
+  # or those that are coming soon with partial/missing session info
+  def publicly_viewable?
+    published? || coming_soon?
+  end
+
+  def future?
+    starting_at >= DateTime.now
   end
 end

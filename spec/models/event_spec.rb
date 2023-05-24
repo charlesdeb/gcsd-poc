@@ -104,6 +104,63 @@ RSpec.describe Event, type: :model do
     expect(subject.is_featured).to eq(false)
   end
 
+  describe '#registerable?' do
+    context 'should be true' do
+      it 'for a published future event' do
+        subject.status = :published
+        subject.starting_at = Time.zone.today.next_week
+
+        expect(subject.registerable?).to be(true)
+      end
+    end
+
+    context 'should be false' do
+      it 'for a draft event' do
+        subject.status = :draft
+
+        expect(subject.registerable?).to be(false)
+      end
+
+      it 'for an archived draft event' do
+        subject.status = :archived
+
+        expect(subject.registerable?).to be(false)
+      end
+
+      it 'for a coming soon, future event' do
+        subject.status = :coming_soon
+        subject.starting_at = Time.zone.today.next_week
+
+        expect(subject.registerable?).to be(false)
+      end
+
+      it 'for a published, past event' do
+        subject.status = :published
+        subject.starting_at = Time.zone.today.last_week
+
+        expect(subject.registerable?).to be(false)
+      end
+    end
+  end
+
+  describe '#future?' do
+    context 'for a future event' do
+      it 'is true' do
+        subject.starting_at = Time.zone.today.next_week
+
+        expect(subject.future?).to be(true)
+      end
+    end
+
+    context 'for a past event' do
+      it 'is false' do
+        subject.starting_at = Time.zone.today.last_week
+
+        expect(subject.future?).to be(false)
+      end
+    end
+  end
+
   describe '#session_types_with_counts' do
     let!(:event) { FactoryBot.create(:event) }
     let!(:worship) { FactoryBot.create(:session_type, name: 'Worship', order_by: 20) }
@@ -146,12 +203,15 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    context 'published' do
+    context 'public' do
+      let!(:draft_event) { FactoryBot.create(:event, status: :draft) }
+      let!(:coming_soon_event) { FactoryBot.create(:event, status: :coming_soon) }
       let!(:published_event) { FactoryBot.create(:event, status: :published) }
+      let!(:archived_event) { FactoryBot.create(:event, status: :archived) }
       let!(:not_published_event) { FactoryBot.create(:event, status: :draft) }
 
-      it 'only returns one event' do
-        expect(Event.published.count).to eq(1)
+      it 'only returns two events' do
+        expect(Event.publicly_viewable.count).to eq(2)
       end
     end
 
