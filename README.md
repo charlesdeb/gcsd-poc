@@ -18,7 +18,7 @@ It uses:
 3. ... database setup stuff
 4. bundle install
 
-## Running the app
+## Running the app locally
 
 Since this project uses Tailwind, which compiles a custom style sheet, instead of starting the app with `rails s` use `./bin/dev` instead, which uses foreman to spin up the dev server _and_ watch all files so that `/app/assets/builds/tailwind.css` is rebuilt.
 
@@ -33,3 +33,9 @@ Since this project uses Tailwind, which compiles a custom style sheet, instead o
 
 - All runtime configuration should be supplied in the UNIX environment
 - Rails logging uses lograge.
+- Deployed with fy.io. To deploy:
+
+```bash
+> flyctl deploy
+
+```

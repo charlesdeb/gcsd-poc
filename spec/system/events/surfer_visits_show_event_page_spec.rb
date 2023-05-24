@@ -168,9 +168,11 @@ RSpec.feature 'Surfer visits show event', type: :system do
           # click on something that isn't actually a real link
           page.find('td', text: time_slot.title).click
         end
+
         # session stuff should now be visible
         expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
-        expect(page).to have_text(/#{strip_tags(time_slot.sessions.first.description)}/i)
+        stripped_description = strip_tags(time_slot.sessions.first.description.body.to_s).squish
+        expect(page).to have_text(/#{stripped_description}/i)
       end
 
       context('for each session') do
