@@ -9,7 +9,7 @@ RSpec.describe 'events/show', type: :view do
                     Event.create!(
                       title: 'Title',
                       slug: 'slug-1',
-                      status: 'Status',
+                      status: :draft,
                       description: 'MyText',
                       starting_at: starting_at,
                       finishing_at: Time.zone.now.next_day

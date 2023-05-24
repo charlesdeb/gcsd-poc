@@ -5,6 +5,8 @@ class Event < ApplicationRecord
   extend Mobility
   include ActiveModel::Serialization
 
+  enum :status, { draft: 0, coming_soon: 1, published: 2, archived: 3 }
+
   has_rich_text :description
 
   has_one_attached :featured_image do |attachable|

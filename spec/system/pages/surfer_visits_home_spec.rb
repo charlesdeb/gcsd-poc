@@ -18,14 +18,22 @@ RSpec.feature 'Surfer visits home page' do
     let(:future_featured_description) { 'Some stuff about a future featured event' }
     let(:future_title) { 'Groovy Future Event' }
     let!(:future_featured_event) do
-      FactoryBot.create(:event, starting_at: Time.zone.today.next_week,
-                                is_featured: true, title: future_featured_title,
-                                description: future_featured_description)
+      FactoryBot.create(
+        :published_event,
+        starting_at: Time.zone.today.next_week,
+        is_featured: true,
+        title: future_featured_title,
+        description: future_featured_description
+      )
     end
 
     let!(:future_event) do
-      FactoryBot.create(:event, starting_at: Time.zone.today.next_week,
-                                is_featured: false, title: future_title)
+      FactoryBot.create(
+        :published_event,
+        starting_at: Time.zone.today.next_week,
+        is_featured: false,
+        title: future_title
+      )
     end
 
     context('there are featured events') do
@@ -67,6 +75,7 @@ RSpec.feature 'Surfer visits home page' do
     let!(:past_event) do
       FactoryBot.create(
         :event,
+        status: :published,
         starting_at: Time.zone.today.last_week,
         finishing_at: Time.zone.today.last_week.days_since(1),
         title: past_title

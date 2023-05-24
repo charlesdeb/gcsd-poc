@@ -22,8 +22,8 @@ RSpec.describe 'pages/home', type: :view do
 
   context 'there are future events' do
     it 'shows link for future events' do
-      FactoryBot.create(:event, starting_at: Time.zone.today.next_week, title: title)
-      FactoryBot.create(:event, starting_at: Time.zone.today.tomorrow, title: title)
+      FactoryBot.create(:published_event, starting_at: Time.zone.today.next_week, title: title)
+      FactoryBot.create(:published_event, starting_at: Time.zone.today.tomorrow, title: title)
       assign(:events, Event.published)
       render
 

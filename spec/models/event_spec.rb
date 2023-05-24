@@ -62,11 +62,28 @@ RSpec.describe Event, type: :model do
     expect(subject.errors[:finishing_at]).to include('must be after the start date')
   end
 
-  it 'is invalid without a status' do
-    subject.status = nil
+  context 'status' do
+    it 'is invalid without a status' do
+      subject.status = nil
 
-    expect(subject.valid?).to be false
-    expect(subject.errors[:status]).to include("can't be blank")
+      expect(subject.valid?).to be false
+      expect(subject.errors[:status]).to include("can't be blank")
+    end
+
+    it 'is valid with known statuses' do
+      known_statuses = %i[draft coming_soon published archived]
+      known_statuses.each do |status|
+        subject.status = status
+        expect(subject.valid?).to be true
+      end
+    end
+
+    it 'is invalid with unknown statuses' do
+      unknown_statuses = %i[zoobie]
+      unknown_statuses.each do |status|
+        expect { subject.status = status }.to raise_error(ArgumentError)
+      end
+    end
   end
 
   it 'is invalid without a description' do

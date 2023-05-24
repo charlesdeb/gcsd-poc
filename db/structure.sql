@@ -166,12 +166,12 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.events (
     id bigint NOT NULL,
     starting_at timestamp(6) with time zone,
-    status text,
     is_featured boolean DEFAULT false,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
     slug text NOT NULL,
-    finishing_at timestamp(6) with time zone
+    finishing_at timestamp(6) with time zone,
+    status integer DEFAULT 0 NOT NULL
 );
 
 
@@ -187,13 +187,6 @@ COMMENT ON TABLE public.events IS 'GCSD Events';
 --
 
 COMMENT ON COLUMN public.events.starting_at IS 'Time event starts';
-
-
---
--- Name: COLUMN events.status; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.events.status IS 'published, draft etc...';
 
 
 --
@@ -215,6 +208,13 @@ COMMENT ON COLUMN public.events.slug IS 'unique, human readable name used in URL
 --
 
 COMMENT ON COLUMN public.events.finishing_at IS 'Time event finishes';
+
+
+--
+-- Name: COLUMN events.status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.status IS 'draft, coming_soon, published or archived';
 
 
 --
@@ -1018,6 +1018,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230123171322'),
 ('20230123175037'),
 ('20230123204147'),
-('20230129204853');
+('20230129204853'),
+('20230524131124');
 
 

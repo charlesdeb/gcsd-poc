@@ -18,7 +18,7 @@ class EventDashboard < Administrate::BaseDashboard
     finishing_at: Field::DateTime.with_options(
       format: '%a, %d %b %Y %H:%M'
     ),
-    status: Field::String,
+    status: EventStatusField,
     description: RichTextAreaField,
     featured_image: Field::ActiveStorage.with_options(
       index_preview_variant: :thumb,

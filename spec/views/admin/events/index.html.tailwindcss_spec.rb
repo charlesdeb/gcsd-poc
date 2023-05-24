@@ -8,7 +8,7 @@ RSpec.describe 'admin/events/index', type: :view do
              Event.create!(
                title: 'Title',
                slug: 'slug-1',
-               status: 'Status',
+               status: :draft,
                description: 'MyText',
                starting_at: Time.zone.today.next_week,
                finishing_at: Time.zone.today.next_week.days_since(1)
@@ -16,7 +16,7 @@ RSpec.describe 'admin/events/index', type: :view do
              Event.create!(
                title: 'Title',
                slug: 'slug-2',
-               status: 'Status',
+               status: :coming_soon,
                description: 'MyText',
                starting_at: Time.zone.today.next_week,
                finishing_at: Time.zone.today.next_week.days_since(1)

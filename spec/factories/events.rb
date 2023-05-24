@@ -6,9 +6,15 @@ FactoryBot.define do
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
     finishing_at { Time.zone.today.next_week.days_since(1) }
-    status { :published }
+    # status { :published }
     description { Faker::Lorem.sentence }
     is_featured { false }
+
+    traits_for_enum :status
+
+    factory :draft_event, traits: [:draft]
+    factory :coming_soon_event, traits: [:coming_soon]
+    factory :published_event, traits: [:published]
 
     factory :event_with_image do
       after(:build) do |event|
