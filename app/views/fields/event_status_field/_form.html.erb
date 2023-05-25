@@ -2,5 +2,5 @@
   <%= f.label field.attribute %>
 </div>
 <div class="field-unit__field">
-  <%= f.select field.attribute, options_for_select(Event.statuses.map {|key, value| [key.titleize, Event.statuses.key(value)]}, field.attribute) %>
+  <%= f.select field.attribute, options_for_select(Event.statuses.map {|key, value| [key.titleize, Event.statuses.key(value)]}, field.data) %>
 </div>

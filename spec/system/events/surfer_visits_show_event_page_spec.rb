@@ -88,6 +88,14 @@ RSpec.feature 'Surfer visits show event', type: :system do
       # save_and_open_page
       expect(page).not_to have_link(I18n.t('events.full_event.register_now'))
     end
+
+    scenario 'they don\'t see the summary' do
+      expect(page).not_to have_selector 'section#event-sessions-summary'
+    end
+
+    scenario 'they don\'t see the timetable' do
+      expect(page).not_to have_selector 'section#event-timetable'
+    end
   end
 
   context 'published future event' do
@@ -139,14 +147,15 @@ RSpec.feature 'Surfer visits show event', type: :system do
         visit event_path event
       end
 
-      scenario 'they see the section header' do
-        within('section.session-types') do
+      scenario 'they see the summary' do
+        expect(page).to have_selector 'section#event-sessions-summary'
+        within('section#event-sessions-summary') do
           expect(page).to have_selector 'h2', text: I18n.t('events.sessions_summary.sessions_summary')
         end
       end
 
       scenario 'they see the session types (in a tab control)', js: true do
-        within('section.session-types') do
+        within('section#event-sessions-summary') do
           expect(page).to have_link('Plenaries (2)')
           expect(page).to have_link('Worship (1)')
           expect(page).to have_link('Workshops (1)')
@@ -169,6 +178,11 @@ RSpec.feature 'Surfer visits show event', type: :system do
     context('full programme details') do
       before(:each) do
         visit event_path event
+      end
+
+      scenario 'they can see the timetable' do
+        # save_and_open_page
+        expect(page).to have_selector 'section#event-timetable'
       end
 
       scenario('they can change the time zone') do

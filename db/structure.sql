@@ -171,7 +171,8 @@ CREATE TABLE public.events (
     updated_at timestamp(6) with time zone NOT NULL,
     slug text NOT NULL,
     finishing_at timestamp(6) with time zone,
-    status integer DEFAULT 0 NOT NULL
+    status integer DEFAULT 0 NOT NULL,
+    registration_url text
 );
 
 
@@ -200,7 +201,7 @@ COMMENT ON COLUMN public.events.is_featured IS 'Is this event featured on the ho
 -- Name: COLUMN events.slug; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON COLUMN public.events.slug IS 'unique, human readable name used in URL for event';
+COMMENT ON COLUMN public.events.slug IS 'a URL for registering with an external site like EventBrite';
 
 
 --
@@ -1019,6 +1020,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230123175037'),
 ('20230123204147'),
 ('20230129204853'),
-('20230524131124');
+('20230524131124'),
+('20230525171238');
 
 

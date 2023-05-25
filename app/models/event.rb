@@ -35,6 +35,10 @@ class Event < ApplicationRecord
 
   validates :finishing_at, comparison: { greater_than: :starting_at, message: 'must be after the start date' }
 
+  validates :registration_url, url: true
+
+  validate :registration_url_required_to_publish
+
   default_scope { i18n }
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
@@ -63,9 +67,7 @@ class Event < ApplicationRecord
     #   .order(SessionType.arel_table[:order_by])
   end
 
-  # surfers can only register for published, future events with an EventBrite
-  # code
-  # TODO: add Eventbrite stuff
+  # surfers can only register for published, future events
   def registerable?
     published? && future?
   end
@@ -78,5 +80,12 @@ class Event < ApplicationRecord
 
   def future?
     starting_at >= DateTime.now
+  end
+
+  def registration_url_required_to_publish
+    return unless published? && registration_url.blank?
+
+    errors.add :base, :invalid,
+               message: 'Event cannot be published without registration_url'
   end
 end

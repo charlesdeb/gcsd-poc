@@ -29,5 +29,8 @@ module Gcsd
     # For this app, that makes heavy use of timezones, we must ensure that
     # timezones are stored with all timestamps.
     config.active_record.schema_format = :sql
+
+    # custom validators
+    config.autoload_paths += Dir[File.join(Rails.root, 'app', 'models', 'validators')]
   end
 end

@@ -10,7 +10,8 @@ RSpec.describe Event, type: :model do
       starting_at: Time.zone.today,
       finishing_at: Time.zone.today.next_week,
       status: :published,
-      description: 'some description'
+      description: 'some description',
+      registration_url: Faker::Internet.url
     )
   end
 
@@ -62,7 +63,14 @@ RSpec.describe Event, type: :model do
     expect(subject.errors[:finishing_at]).to include('must be after the start date')
   end
 
-  context 'status' do
+  it 'is invalid when registration_url is not a URL' do
+    subject.registration_url = 'bogus URL'
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:registration_url]).to include('is not a valid HTTP or HTTPS URL')
+  end
+
+  context 'statuses' do
     it 'is invalid without a status' do
       subject.status = nil
 
@@ -76,6 +84,21 @@ RSpec.describe Event, type: :model do
         subject.status = status
         expect(subject.valid?).to be true
       end
+    end
+
+    it 'it is invalid when published without a registration url' do
+      subject.status = :published
+      subject.registration_url = nil
+
+      expect(subject.valid?).to be false
+      expect(subject.errors.full_messages).to include('Event cannot be published without registration_url')
+    end
+
+    it 'it is valid when published with a registration url' do
+      subject.status = :published
+      subject.registration_url = 'https://example.com'
+
+      expect(subject.valid?).to be true
     end
 
     it 'is invalid with unknown statuses' do
@@ -204,11 +227,10 @@ RSpec.describe Event, type: :model do
     end
 
     context 'public' do
-      let!(:draft_event) { FactoryBot.create(:event, status: :draft) }
-      let!(:coming_soon_event) { FactoryBot.create(:event, status: :coming_soon) }
-      let!(:published_event) { FactoryBot.create(:event, status: :published) }
-      let!(:archived_event) { FactoryBot.create(:event, status: :archived) }
-      let!(:not_published_event) { FactoryBot.create(:event, status: :draft) }
+      let!(:draft_event) { FactoryBot.create(:draft_event) }
+      let!(:coming_soon_event) { FactoryBot.create(:coming_soon_event) }
+      let!(:published_event) { FactoryBot.create(:published_event) }
+      let!(:archived_event) { FactoryBot.create(:archived_event) }
 
       it 'only returns two events' do
         expect(Event.publicly_viewable.count).to eq(2)

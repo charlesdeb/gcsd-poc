@@ -31,6 +31,7 @@ class EventDashboard < Administrate::BaseDashboard
     time_slots: Field::HasMany.with_options(
       limit: 30
     ),
+    registration_url: Field::Url,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     slug: Field::String
@@ -62,6 +63,7 @@ class EventDashboard < Administrate::BaseDashboard
     description
     featured_image
     is_featured
+    registration_url
     sessions
     time_slots
     created_at
@@ -80,6 +82,7 @@ class EventDashboard < Administrate::BaseDashboard
     description
     featured_image
     is_featured
+    registration_url
     sessions
   ].freeze
 

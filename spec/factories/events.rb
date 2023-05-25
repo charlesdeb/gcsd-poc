@@ -11,9 +11,15 @@ FactoryBot.define do
 
     traits_for_enum :status
 
+    trait :published do
+      registration_url { Faker::Internet.url }
+      status { :published }
+    end
+
     factory :draft_event, traits: [:draft]
     factory :coming_soon_event, traits: [:coming_soon]
     factory :published_event, traits: [:published]
+    factory :archived_event, traits: [:archived]
 
     factory :event_with_image do
       after(:build) do |event|

@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  validates :locale, :time_zone, presence: true
+  validates :locale, :time_zone, :role, presence: true
   validate :needs_a_name
 
   # for i18n, check out https://github.com/shlima/translate_enum
