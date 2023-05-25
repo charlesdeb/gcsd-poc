@@ -73,9 +73,24 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
       # TODO: seems like a very fragile test...
       it 'is not selected' do
+        p subject
         expect(subject).to include('text-orange-500')
         expect(subject).to include('hover:text-orange-700')
       end
+    end
+  end
+
+  describe '#main_menu_item_class' do
+    it 'includes \'active\' when menu_item is the same as the active_menu_item' do
+      subject = helper.main_menu_item_class :foo, :foo
+
+      expect(subject).to include('active')
+    end
+
+    it 'does not include \'active\' when menu_item is not the same as the active_menu_item' do
+      subject = helper.main_menu_item_class :foo, :bar
+
+      expect(subject).not_to include('active')
     end
   end
 end

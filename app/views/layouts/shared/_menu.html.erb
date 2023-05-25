@@ -8,11 +8,10 @@
           <% end %>
         </div>
         <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-          <!-- Current: "border-indigo-500 text-orange-900", Default: "border-transparent text-orange-500 hover:border-orange-300 hover:text-orange-700" -->
-          <%= link_to "About", page_path(:about), class: "border-orange-800 text-orange-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium" %>
-          <a href="#" class="border-transparent text-orange-500 hover:border-orange-500 hover:text-orange-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"> Team </a>
-          <a href="#" class="border-transparent text-orange-500 hover:border-orange-500 hover:text-orange-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"> Projects </a>
-          <a href="#" class="border-transparent text-orange-500 hover:border-orange-500 hover:text-orange-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"> Calendar </a>
+          <%= link_to "Events", events_path, class: main_menu_item_class(:events, active_menu_item) %>
+          <%= link_to "About", page_path(:about), class: main_menu_item_class(:about, active_menu_item) %>
+          <%= link_to "Team", page_path(:team), class: main_menu_item_class(:team, active_menu_item) %>
+          <%= link_to "Finance", page_path(:finance), class: main_menu_item_class(:finance, active_menu_item) %>
         </div>
       </div>
       <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-3">

@@ -13,6 +13,8 @@ class PagesController < ApplicationController
     # We don't actually show a list of these on the home page; we just want to
     # know if they exist.
     @events = Event.publicly_viewable
+
+    update_active_menu_item(:home)
   end
 
   def show; end
@@ -21,6 +23,9 @@ class PagesController < ApplicationController
 
   def find_page
     @page = Page.find_by(slug: params[:slug])
-    render file: 'public/404.html', layout: false, status: 404 unless @page
+    update_active_menu_item(params[:slug]) if @page
+    return if @page
+
+    render file: 'public/404.html', layout: false, status: 404
   end
 end

@@ -5,6 +5,9 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
 
+  # every thing in 
+  before_action { |c| c.update_active_menu_item(:events) }
+
   # GET /events, /past_events or /future_events
   def index
     # get future or past published events

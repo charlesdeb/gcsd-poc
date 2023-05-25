@@ -118,6 +118,20 @@ module ApplicationHelper
     [scope, t('activerecord.models.event.other')].join(' ')
   end
 
+  # highlight the current page (or page family) in the main menu
+  # Params
+  # +menu_item+:: Symbol        The menu item we need a class for
+  # +active_menu_item+:: Symbol The active menu item
+  def main_menu_item_class(menu_item, active_menu_item)
+    if menu_item == active_menu_item
+      # currently selected menu item
+      'border-orange-900 text-orange-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium active'
+    else
+      # other menu item
+      'border-transparent text-orange-600 hover:border-orange-600 hover:text-orange-800 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' # rubocop:disable Layout/LineLength
+    end
+  end
+
   private
 
   def language_options(request_path)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# parent controller class for application
 class ApplicationController < ActionController::Base
   include HttpAuthConcern
   protect_from_forgery with: :exception
@@ -15,6 +16,16 @@ class ApplicationController < ActionController::Base
   # def current_user
   #   UserDecorator.decorate(super) unless super.nil?
   # end
+
+  # code idea from https://boringrails.com/tips/boring-breadcrumbs-rails
+  # active_menu_item is used for keeping track of which main menu item is active
+  helper_method :active_menu_item
+
+  attr_reader :active_menu_item
+
+  def update_active_menu_item(page)
+    @active_menu_item = page.to_sym
+  end
 
   protected
 
