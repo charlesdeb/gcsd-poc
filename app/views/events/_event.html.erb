@@ -6,8 +6,8 @@
       <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
         <div class="relative lg:col-start-1 lg:row-start-1">
-          <div class='flex gap-x-3'>
-            <div class="relative mx-auto max-w-prose text-base lg:max-w-none">
+          <div class='flex gap-x-3 md:gap-x-6'>
+            <div class="relative max-w-prose text-base lg:max-w-none">
               <figure>
                 <div class="w-36 aspect-w-12 aspect-h-7 lg:aspect-none">
                   <%= link_to event_path(id: event) do %>
@@ -29,8 +29,7 @@
           </div>
         </div>
         <div class="mt-8 lg:mt-0">
-          <div class="prose prose-indigo mx-auto text-gray-500 line-clamp-4
- lg:col-start-2 lg:row-start-1 lg:max-w-none">
+          <div class="prose prose-indigo text-gray-500 line-clamp-4 lg:col-start-2 lg:row-start-1 lg:max-w-none">
             <%= event.description %>
           </div>
         </div>
