@@ -8,10 +8,10 @@
           <% end %>
         </div>
         <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-          <%= link_to "Events", events_path, class: main_menu_item_class(:events, active_menu_item) %>
-          <%= link_to "About", page_path(:about), class: main_menu_item_class(:about, active_menu_item) %>
-          <%= link_to "Team", page_path(:team), class: main_menu_item_class(:team, active_menu_item) %>
-          <%= link_to "Finance", page_path(:finance), class: main_menu_item_class(:finance, active_menu_item) %>
+          <%= link_to "Events", events_path, class: wide_main_menu_item_class(:events, active_menu_item) %>
+          <%= link_to "About", page_path(:about), class: wide_main_menu_item_class(:about, active_menu_item) %>
+          <%= link_to "Team", page_path(:team), class: wide_main_menu_item_class(:team, active_menu_item) %>
+          <%= link_to "Finance", page_path(:finance), class: wide_main_menu_item_class(:finance, active_menu_item) %>
         </div>
       </div>
       <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-3">
@@ -49,8 +49,9 @@
             -->
           <div x-show="open" x-on:click.outside="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
             <!-- Active: "bg-orange-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-orange-700" role="menuitem" tabindex="-1" id="user-menu-item-0"> Your Profile </a>
-            <a href="#" class="block px-4 py-2 text-sm text-orange-700" role="menuitem" tabindex="-1" id="user-menu-item-1"> Settings </a>
+            <%= link_to 'Admin', admin_root_path, class: "block px-4 py-2 text-sm text-orange-700", role: "menuitem", tabindex: "-1" if (current_user and current_user.admin?) %>
+            <a href="#" class="hidden block px-4 py-2 text-sm text-orange-700" role="menuitem" tabindex="-1" id="user-menu-item-0"> Your Profile </a>
+            <a href="#" class="hidden block px-4 py-2 text-sm text-orange-700" role="menuitem" tabindex="-1" id="user-menu-item-1"> Settings </a>
             <% if current_user %>
               <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: " px-4 py-2 text-sm text-orange-700"  %>
             <% end %>
@@ -84,14 +85,28 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu">
     <div class="pt-2 pb-3 space-y-1">
-      <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-orange-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-800" -->
-      <%= link_to "About", page_path(:about), class: "bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium" %>
-      <a href="#" class="border-transparent text-orange-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"> Team </a>
-      <a href="#" class="border-transparent text-orange-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"> Projects </a>
-      <a href="#" class="border-transparent text-orange-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"> Calendar </a>
+      <%= link_to "Events", events_path, class: narrow_main_menu_item_class(:events, active_menu_item) %>
+      <%= link_to "About", page_path(:about), class: narrow_main_menu_item_class(:about, active_menu_item) %>
+      <%= link_to "Team", page_path(:team), class: narrow_main_menu_item_class(:team, active_menu_item) %>
+      <%= link_to "Finance", page_path(:finance), class: narrow_main_menu_item_class(:finance, active_menu_item) %>
     </div>
     <div class="pt-4 pb-3 border-t border-orange-200">
       <div class="flex items-center px-4">
+        <% if current_user %>
+          <button type="button" x-on:click="open = ! open" class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true" >
+            <span class="sr-only">Open user menu</span>
+            <%#= current_user.avatar %>
+            <%= render partial: 'users/avatar', locals: {user: current_user }  %>
+          </button>
+          <div class="ml-3">
+            <div class="text-base font-medium text-orange-800"><%= current_user.full_name %></div>
+            <div class="text-sm font-medium text-orange-500"><%= current_user.email %></div>
+          </div>
+        <% else %>
+          <%= link_to t('devise.shared.links.sign_in'), new_user_session_path, class: "text-orange-500  hover:text-orange-700 inline-flex items-center px-1 pt-1 text-base font-medium" %>
+        <% end %>
+      </div>
+      <div class="hidden flex items-center px-4">
         <div class="flex-shrink-0">
           <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
         </div>
@@ -108,9 +123,12 @@
         </button>
       </div>
       <div class="mt-3 space-y-1">
-        <a href="#" class="block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100"> Your Profile </a>
-        <a href="#" class="block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100"> Settings </a>
-        <a href="#" class="block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100"> Sign out </a>
+        <a href="#" class="hidden block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100"> Your Profile </a>
+        <a href="#" class="hidden block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100"> Settings </a>
+        <% if current_user %>
+          <%= link_to 'Admin', admin_root_path, class: narrow_main_menu_item_class(:admin, active_menu_item) if current_user.admin? %>
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: {turbo: false}, class: "block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100" %>
+        <% end %>
       </div>
     </div>
   </div>

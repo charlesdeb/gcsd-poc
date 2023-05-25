@@ -80,15 +80,15 @@ RSpec.describe ApplicationHelper, :type => :helper do
     end
   end
 
-  describe '#main_menu_item_class' do
+  describe '#wide_main_menu_item_class' do
     it 'includes \'active\' when menu_item is the same as the active_menu_item' do
-      subject = helper.main_menu_item_class :foo, :foo
+      subject = helper.wide_main_menu_item_class :foo, :foo
 
       expect(subject).to include('active')
     end
 
     it 'does not include \'active\' when menu_item is not the same as the active_menu_item' do
-      subject = helper.main_menu_item_class :foo, :bar
+      subject = helper.wide_main_menu_item_class :foo, :bar
 
       expect(subject).not_to include('active')
     end

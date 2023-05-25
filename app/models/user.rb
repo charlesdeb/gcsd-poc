@@ -26,6 +26,10 @@ class User < ApplicationRecord
     "#{first_name.present? ? first_name.first.upcase : nil}#{last_name.present? ? last_name.first.upcase : nil}"
   end
 
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   private
 
   def set_default_role
