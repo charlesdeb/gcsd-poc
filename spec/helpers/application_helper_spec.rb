@@ -44,12 +44,16 @@ RSpec.describe ApplicationHelper, :type => :helper do
     end
 
     it 'contains given timezones' do
+      expect(helper.timezone_select).to include('<option value="UTC+0"')
       expect(helper.timezone_select).to include('<option value="Europe/London"')
       expect(helper.timezone_select).to include('<option value="Europe/Paris"')
-      expect(helper.timezone_select).to include('<option value="Europe/Berlin"')
+      expect(helper.timezone_select).to include('<option value="Europe/Bucharest"')
+      expect(helper.timezone_select).to include('<option value="Asia/Almaty"')
       expect(helper.timezone_select).to include('<option value="Asia/Singapore"')
       expect(helper.timezone_select).to include('<option value="Australia/Sydney"')
       expect(helper.timezone_select).to include('<option value="Pacific/Auckland"')
+      expect(helper.timezone_select).to include('<option value="America/New_York"')
+      expect(helper.timezone_select).to include('<option value="America/Vancouver"')
     end
   end
 

@@ -3,7 +3,7 @@
 <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col">
   <div class="overflow-y-auto">
     <div class="time-slot-sessions">
-      <h3 class="bg-orange-300 px-4 py-8 text-white font-bold text-xl"><%= t('.click_a_slot')%>
+      <h3 class="bg-orange-500 px-4 py-8 text-white font-bold text-xl"><%= t('.click_a_slot')%>
       </h3>
     </div>
     <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>

@@ -4,6 +4,7 @@ tr:
   gcsd: Küresel Yaratıcı Stüdyo Günleri
   with: ile
   various_presenters: çeşitli sunucularla
+  loading: Yükleniyor...
   pages:
     home:
       welcome_to: Hoş Geldiniz

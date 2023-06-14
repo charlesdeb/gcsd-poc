@@ -1,6 +1,6 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<tr class="border-collapse border-orange-400 border hover:bg-orange-100 hover:border-orange-100 hover:text-white" data-time_slot="<%= dom_id(time_slot) %>">
+<tr class="border-collapse border-orange-400 border hover:bg-orange-400  hover:text-white" data-time_slot="<%= dom_id(time_slot) %>">
   <td class="w-1/3 p-2 text-center">
     <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'} %>
     <br>

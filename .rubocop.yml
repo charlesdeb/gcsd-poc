@@ -1,6 +1,9 @@
 Style/HashSyntax:
   Enabled: false
 
+Metrics/ModuleLength:
+  Enabled: false
+
 AllCops:
   NewCops: enable
   Exclude:

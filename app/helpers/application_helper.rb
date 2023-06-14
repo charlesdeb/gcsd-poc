@@ -64,7 +64,7 @@ module ApplicationHelper
                "$store.timeZoneSelect.formatDateTime('#{options[:time].to_fs(:iso8601)}')"
              end
 
-    content_tag :time, nil,
+    content_tag :time, t('loading'),
                 datetime: l(options[:time]),
                 'x-data': x_data, 'x-text': x_text
   end
@@ -77,7 +77,7 @@ module ApplicationHelper
                 content_tag(:h2,
                             session.title,
                             class: 'text-xl font-bold') + timetable_session_presenter(session),
-                class: 'bg-orange-200 text-white -mx-4 px-4 py-4')
+                class: 'bg-orange-500 text-white -mx-4 px-4 py-4')
   end
 
   # Shows a presenter for a session in the timetable view
@@ -173,8 +173,17 @@ module ApplicationHelper
   end
 
   def timezone_options
-    # TODO: get these from system settings or something...
+    # TODO: get these from system settings or something...,
     # TODO: i18n required
-    options_for_select(%w[Europe/London Europe/Paris Europe/Berlin Asia/Singapore Australia/Sydney Pacific/Auckland])
+    options_for_select([['UTC', 'UTC+0'],
+                        ['Europe/London', 'Europe/London'],
+                        ['Europe/Paris', 'Europe/Paris'],
+                        ['Europe/Bucharest', 'Europe/Bucharest'],
+                        ['Asia/Almaty', 'Asia/Almaty'],
+                        ['Asia/Singapore', 'Asia/Singapore'],
+                        ['Australia/Sydney', 'Australia/Sydney'],
+                        ['Pacific/Auckland', 'Pacific/Auckland'],
+                        ['America/New York', 'America/New_York'],
+                        ['America/Vancouver', 'America/Vancouver']])
   end
 end

@@ -35,6 +35,7 @@ en:
   gcsd: Global Creative Studio Days
   with: with
   various_presenters: various presenters
+  loading: Loading...
   # date and time stuff
   time:
     formats:
