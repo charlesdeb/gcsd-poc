@@ -101,14 +101,14 @@ module ApplicationHelper
   # Params
   # +session+:: Session
   def timetable_session_image(session)
-    return if session.presenters.blank?
+    return if session.featured_image.blank?
 
-    session.presenters.each do |presenter|
-      if presenter.featured_image.representable?
-        return image_tag presenter.featured_image, class: 'w-1/3 h-full float-right',
-                                                   alt: presenter.name
-      end
+    if session.featured_image.representable?
+      return image_tag session.featured_image,
+                       class: 'w-1/3 h-full float-right',
+                       alt: session.title
     end
+
     nil
   end
 

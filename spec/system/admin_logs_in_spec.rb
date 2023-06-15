@@ -26,9 +26,19 @@ RSpec.feature 'Admin tries to log in' do
     visit root_path
   end
 
-  scenario 'there is a working sign in link' do
-    expect(page).to have_text(sign_in_regexp)
-    find('a', text: sign_in_regexp).click
+  scenario 'there is a working sign in link (desktop)' do
+    within('nav #desktop-menu') do
+      expect(page).to have_text(sign_in_regexp)
+      find('a', text: sign_in_regexp).click
+    end
+    expect(page).to have_text(sign_in_to_your_account_regexp)
+  end
+
+  scenario 'there is a working sign in link (mobile)' do
+    within('nav #mobile-menu') do
+      expect(page).to have_text(sign_in_regexp)
+      find('a', text: sign_in_regexp).click
+    end
     expect(page).to have_text(sign_in_to_your_account_regexp)
   end
 

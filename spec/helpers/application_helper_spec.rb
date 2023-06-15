@@ -5,9 +5,9 @@ require 'rails_helper'
 RSpec.describe ApplicationHelper, :type => :helper do
   describe '#locale_select' do
     before(:each) do
-      allow(I18n).to receive(:available_locales) { %i[en tr fr] }
+      allow(I18n).to receive(:available_locales) { %i[en fr] }
     end
-    let(:locale) { :tr }
+    let(:locale) { :fr }
 
     it 'contains a select tag' do
       expect(helper.locale_select).to include('<select')
@@ -17,13 +17,13 @@ RSpec.describe ApplicationHelper, :type => :helper do
       let(:request_path) { '/' }
 
       before(:each) do
-        allow(I18n).to receive(:locale) { :tr }
+        allow(I18n).to receive(:locale) { :fr }
       end
 
       subject { helper.locale_select(request_path) }
 
       it 'contains a selected option of default locale' do
-        expect(subject).to include('<option data-url="/tr" selected="selected"')
+        expect(subject).to include('<option data-url="/fr" selected="selected"')
       end
     end
 

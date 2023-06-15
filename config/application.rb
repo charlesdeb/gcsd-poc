@@ -21,7 +21,7 @@ module Gcsd
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.i18n.available_locales = %i[en tr fr]
+    config.i18n.available_locales = %i[en fr]
     config.i18n.default_locale = :en
 
     # We want to be able to use any feature of our database, and the SQL format

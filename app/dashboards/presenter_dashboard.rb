@@ -9,10 +9,11 @@ class PresenterDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    featured_image: Field::ActiveStorage.with_options(
-      index_preview_variant: :thumb,
-      show_preview_variant: :thumb
-    ),
+    # Al
+    # featured_image: Field::ActiveStorage.with_options(
+    #   index_preview_variant: :thumb,
+    #   show_preview_variant: :thumb
+    # ),
     name: Field::String,
     bio: RichTextAreaField,
     sessions: Field::HasMany,
@@ -27,7 +28,6 @@ class PresenterDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    featured_image
     name
     bio
   ].freeze
@@ -36,7 +36,6 @@ class PresenterDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    featured_image
     name
     bio
     sessions
@@ -48,7 +47,6 @@ class PresenterDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    featured_image
     name
     bio
     sessions

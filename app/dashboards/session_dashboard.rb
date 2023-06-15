@@ -35,6 +35,7 @@ class SessionDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     title
+    featured_image
     event
     time_slot
     session_type

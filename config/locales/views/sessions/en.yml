@@ -4,3 +4,8 @@ en:
       requirements: Special Requirements
       participant_limit: Participant Limit
       limited_to: "%{limit} people"
+  # use in the dashboard views
+  helpers:
+    label:
+      session:
+        featured_image: Image

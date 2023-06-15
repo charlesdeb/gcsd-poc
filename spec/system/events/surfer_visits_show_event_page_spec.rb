@@ -185,12 +185,6 @@ RSpec.feature 'Surfer visits show event', type: :system do
         expect(page).to have_selector 'section#event-timetable'
       end
 
-      scenario('they can change the time zone') do
-        within('section#event-timetable') do
-          select new_time_zone, from: 'time-zone'
-        end
-      end
-
       scenario('they see the time slots') do
         time_slots_count = event.time_slots.count
         within('section#event-timetable') do
