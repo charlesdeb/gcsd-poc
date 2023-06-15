@@ -6,6 +6,7 @@ module ApplicationHelper
   def locale_select(request_path = root_path)
     select_tag 'locale',
                language_options(request_path),
+               'class': i18n_selector_classes,
                'x-data': '{}', 'x-title': 'Language Selector',
                'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
   end
@@ -14,12 +15,17 @@ module ApplicationHelper
   def timezone_select
     select_tag 'time-zone',
                timezone_options,
+               class: i18n_selector_classes,
                'x-cloak': '',
                'x-data': {},
                'x-bind:value': '$store.timeZoneSelect.state.timeZone',
                'x-title': 'Timezone Selector',
                'x-on:change': '$store.timeZoneSelect.updateTimeZone($event.target.value)',
                'data-time-zone-select': ''
+  end
+
+  def i18n_selector_classes
+    'text-xs sm:text-base'
   end
 
   # Tab headers for the session types of an event
@@ -142,7 +148,7 @@ module ApplicationHelper
       'border-orange-900 block px-4 py-2 border-l-4 text-base font-medium text-orange-900 bg-orange-200 hover:text-orange-800 hover:bg-orange-50' # rubocop:disable Layout/LineLength
     else
       # other menu item
-      'block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-100'
+      'block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-200 w-full text-start'
     end
   end
 
