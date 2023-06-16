@@ -9,6 +9,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_import_module_tag "lib/timezone_select" %>
+    <%#= TODO: Figure out how import this just in the _timetable.html.erb 
+               partial, but without disabling turbostreams 
+               (with data: {turbo: false}) in all links that lead onto pages 
+               that show the partial. 
+               https://stackoverflow.com/questions/70690025/where-to-place-javascript-used-in-one-page-only-in-rails-7-with-importmap
+               is clever, but doesn't handle the alpine side of things. %>
+    <%= javascript_import_module_tag "lib/timetable" %>
+    <%= yield :head %>
   </head>
   <body class="min-h-full bg-pageBg">
     <%= render "layouts/shared/menu" %>

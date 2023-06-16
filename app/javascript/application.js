@@ -10,13 +10,19 @@ import 'controllers';
 import 'trix';
 import '@rails/actiontext';
 
+// import 'alpine-turbo-drive-adapter';
 import Alpine from 'alpinejs';
 window.Alpine = Alpine; // only required so that we can see the alpinejs debug tool
 
-window.addEventListener('turbo:load', (event) => {
-  /** 
-   * Pages that use Alpine.store need to be loaded before starting Alpine. 
-   * Don't called Alpine.start() more than once.
+// Will not work properly with Turbo - since it is only fired on full-page
+// load, and not after turbo does its thing with partial loads
+// const eventOfInterest = 'DOMContentLoaded';
+const eventOfInterest = 'turbo:load';
+window.addEventListener(eventOfInterest, (event) => {
+  // console.log(`${eventOfInterest} happened, starting Alpine`);
+  /**
+   * Pages that use Alpine.store need to be loaded before starting Alpine.
+   * Don't call Alpine.start() more than once.
    */
   Alpine.start();
 });

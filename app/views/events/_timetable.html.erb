@@ -1,6 +1,9 @@
 <%# Timetable component for an event %>
 <%# event:: expected to be an Event %>
-<%= javascript_import_module_tag "lib/timetable" %>
+<%# The next line doesn't work. The file is imported run and parsed AFTER the 
+    Alpine stuff has run - and it needs access to the code in this file.
+    For now, this file has to be imported in application.html.erb %>
+<%#= javascript_import_module_tag "lib/timetable" %>
 <section id="event-timetable">
   <div class="flex items-center space-x-8">
     <h2 class="text-2xl font-bold capitalize leading-8 tracking-tight text-orange sm:text-3xl"><%= t('.timetable') %></h2>
