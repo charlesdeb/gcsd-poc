@@ -3,8 +3,8 @@ FactoryBot.define do
     name { Faker::Name.unique.name }
 
     factory :presenter_with_bio do
-      after(:build) do |event|
-        event.bio = Faker::Lorem.sentence(word_count: 15)
+      after(:build) do |presenter|
+        presenter.bio = Faker::Lorem.sentence(word_count: 15)
 
         # No longer storing images with presenters
         # image_name = 'presenter.png'

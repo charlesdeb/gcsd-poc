@@ -80,7 +80,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
       pending
       within('section.register_interest') do
         # save_and_open_page
-        expect(page).to have_form_stuff...
+        # expect(page).to have_form_stuff...
       end
     end
 
@@ -223,13 +223,46 @@ RSpec.feature 'Surfer visits show event', type: :system do
           expect(page).to have_text(/#{stripped_description}/i)
         end
 
-        context('for each session') do
-          scenario('they see the title')
-          scenario('they see the presenter')
-          scenario('they see a link for all the presenters sessions')
-          scenario('they see a link to the full session details')
-          scenario('they can favourite a session')
-          scenario('they can unfavourite a session')
+        context('for a session') do
+          let(:time_slot) { event.time_slots.first }
+
+          before(:each) do
+            # click on a time slot
+            within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
+              # click on something that isn't actually a real link
+              page.find('td', text: time_slot.title).click
+            end
+          end
+
+          scenario('they see the title') do
+            expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
+          end
+
+          scenario('they see the description') do
+            stripped_description = strip_tags(time_slot.sessions.first.description.body.to_s).squish
+            expect(page).to have_text(/#{stripped_description}/i)
+          end
+
+          scenario('they see the presenter name') do
+            # save_and_open_page
+            expect(page).to have_text(/#{time_slot.sessions.first.presenters.first.name}/i)
+          end
+
+          scenario('they see the presenter\'s bio') do
+            stripped_bio = strip_tags(time_slot.sessions.first.presenters.first.bio.body.to_s).squish
+            expect(page).to have_text(/#{stripped_bio}/i)
+          end
+        end
+
+        context('for a session with more than one presenter') do
+          scenario('they see the presenter names')
+          scenario('they do not see the bios of the presenters')
+          scenario('they see the session presenter_bio override')
+        end
+
+        context('for a session with a presenter bio override') do
+          scenario('they do not see the bio of the presenter')
+          scenario('they see the session presenter_bio override')
         end
       end
     end

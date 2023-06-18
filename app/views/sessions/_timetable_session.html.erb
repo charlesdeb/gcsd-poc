@@ -7,7 +7,7 @@
     <%= timetable_session_image session%>
   </div>
   <div class="text-orange-700">
-    <%= session.presenters.first.bio if session.presenters.first %>
+    <%= timetable_session_presenter_bio(session) %>
   </div>
   <% if session.requirements.present? %>
     <h3 class="font-bold capitalize"><%= t('.requirements')%></h3>

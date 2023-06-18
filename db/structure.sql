@@ -423,7 +423,8 @@ CREATE TABLE public.sessions (
     session_type_id bigint NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
-    time_slot_id bigint
+    time_slot_id bigint,
+    presenter_bio_override text
 );
 
 
@@ -460,6 +461,13 @@ COMMENT ON COLUMN public.sessions.session_type_id IS 'Refers to this Session''s 
 --
 
 COMMENT ON COLUMN public.sessions.time_slot_id IS 'Refers to the Time Slot when this Session takes place';
+
+
+--
+-- Name: COLUMN sessions.presenter_bio_override; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions.presenter_bio_override IS 'Override the bio of the presenter(s) for the session if a) there is more than one presenter, or b) the session''s presenter needs a special bio';
 
 
 --
@@ -1021,6 +1029,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230123204147'),
 ('20230129204853'),
 ('20230524131124'),
-('20230525171238');
+('20230525171238'),
+('20230617171620'),
+('20230617185222');
 
 

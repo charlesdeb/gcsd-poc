@@ -6,7 +6,7 @@ module ApplicationHelper
   def locale_select(request_path = root_path)
     select_tag 'locale',
                language_options(request_path),
-               'class': i18n_selector_classes,
+               class: i18n_selector_classes,
                'x-data': '{}', 'x-title': 'Language Selector',
                'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
   end
@@ -98,7 +98,7 @@ module ApplicationHelper
                      else
                        session.presenters.first.name
                      end
-
+    # TODO: internationalise this properly
     content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
   end
 
@@ -149,6 +149,19 @@ module ApplicationHelper
     else
       # other menu item
       'block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-200 w-full text-start'
+    end
+  end
+
+  # show the presenter bio override of the session if it exists
+  def timetable_session_presenter_bio(session)
+    if session.presenter_bio_override.blank?
+      session.presenters.each do |presenter|
+        next if presenter.bio.body.blank?
+
+        return render html: presenter.bio
+      end
+    else
+      render html: session.presenter_bio_override
     end
   end
 

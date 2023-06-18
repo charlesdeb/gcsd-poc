@@ -77,7 +77,6 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
       # TODO: seems like a very fragile test...
       it 'is not selected' do
-        p subject
         expect(subject).to include('text-orange-500')
         expect(subject).to include('hover:text-orange-700')
       end
@@ -95,6 +94,31 @@ RSpec.describe ApplicationHelper, :type => :helper do
       subject = helper.wide_main_menu_item_class :foo, :bar
 
       expect(subject).not_to include('active')
+    end
+  end
+
+  describe '#timetable_session_presenter_bio' do
+    it 'shows the presenter_bio_override if set' do
+      presenter_bio = 'Presenter bio'
+      presenter_bio_override = 'Presenter override'
+      presenter = create(:presenter, bio: presenter_bio)
+      session = create(:session, presenter_bio_override: presenter_bio_override, presenters: [presenter])
+
+      subject = helper.timetable_session_presenter_bio(session)
+
+      expect(subject).to include(presenter_bio_override)
+      expect(subject).not_to include(presenter_bio)
+    end
+
+    it 'shows the bio of the first session presenter with a bio' do
+      presenter2_bio = 'Presenter bio'
+      presenter1 = create(:presenter)
+      presenter2 = create(:presenter, bio: presenter2_bio)
+      session = create(:session, presenters: [presenter1, presenter2])
+
+      subject = helper.timetable_session_presenter_bio(session)
+
+      expect(subject).to include(presenter2_bio)
     end
   end
 end

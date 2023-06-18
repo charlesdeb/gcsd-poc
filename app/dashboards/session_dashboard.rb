@@ -14,6 +14,7 @@ class SessionDashboard < Administrate::BaseDashboard
     title: Field::String,
     description: RichTextAreaField,
     requirements: RichTextAreaField,
+    presenter_bio_override: RichTextAreaField,
     event: Field::BelongsTo,
     limit: Field::Number,
     featured_image: Field::ActiveStorage.with_options(
@@ -51,6 +52,7 @@ class SessionDashboard < Administrate::BaseDashboard
     session_type
     featured_image
     presenters
+    presenter_bio_override
     description
     requirements
     time_slot
@@ -70,6 +72,7 @@ class SessionDashboard < Administrate::BaseDashboard
     requirements
     featured_image
     presenters
+    presenter_bio_override
     time_slot
     limit
   ].freeze

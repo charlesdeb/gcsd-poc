@@ -9,9 +9,9 @@ class Presenter < ApplicationRecord
   has_rich_text :bio
 
   # will not be used unless we show a library of presenters
-  # has_one_attached :featured_image do |attachable|
-  #   attachable.variant :thumb, resize_to_limit: [50, 50]
-  # end
+  has_one_attached :featured_image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [50, 50]
+  end
 
   has_and_belongs_to_many :sessions
 

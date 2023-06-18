@@ -19,6 +19,17 @@ FactoryBot.define do
           content_type: 'image/png'
         )
       end
+
+      factory :session_with_image_and_presenters do
+        transient do
+          presenters_count { 1 }
+        end
+
+        after(:create) do |session, evaluator|
+          create_list :presenter_with_bio, evaluator.presenters_count, sessions: [session]
+          session.reload
+        end
+      end
     end
   end
 end

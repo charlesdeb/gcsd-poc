@@ -6,8 +6,9 @@ class Session < ApplicationRecord
 
   has_rich_text :description
   has_rich_text :requirements
+  has_rich_text :presenter_bio_override
 
-  # using has_many_attached is not very well supported with the 
+  # using has_many_attached is not very well supported with the
   # administrate-field-active_storage gem, so for now, we"re only going to
   # allow one image per session.
   has_one_attached :featured_image do |attachable|
@@ -17,6 +18,7 @@ class Session < ApplicationRecord
   translates :title, backend: :action_text, plain: true
   translates :description, backend: :action_text
   translates :requirements, backend: :action_text
+  translates :presenter_bio_override, backend: :action_text
 
   belongs_to :event
   belongs_to :session_type
