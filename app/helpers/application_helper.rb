@@ -155,14 +155,16 @@ module ApplicationHelper
   # show the presenter bio override of the session if it exists
   def timetable_session_presenter_bio(session)
     if session.presenter_bio_override.blank?
+      bio = nil
       session.presenters.each do |presenter|
         next if presenter.bio.body.blank?
 
-        return render html: presenter.bio
+        bio = presenter.bio
       end
     else
-      render html: session.presenter_bio_override
+      bio = session.presenter_bio_override
     end
+    render html: bio
   end
 
   private

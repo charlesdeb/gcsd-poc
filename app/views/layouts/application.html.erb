@@ -16,6 +16,10 @@
                https://stackoverflow.com/questions/70690025/where-to-place-javascript-used-in-one-page-only-in-rails-7-with-importmap
                is clever, but doesn't handle the alpine side of things. %>
     <%= javascript_import_module_tag "lib/timetable" %>
+    <%= tag(:link, rel: 'apple-touch-icon', sizes: '180x180', href: asset_path('apple-touch-icon.png')) %>
+    <%= tag(:link, rel: 'icon', type: 'image/png', sizes: '32x32', href: asset_path('favicon-32x32.png')) %>
+    <%= tag(:link, rel: 'icon', type: 'image/png', sizes: '16x16', href: asset_path('favicon-16x16.png')) %>
+    <%= tag(:link, rel: 'manifest', href: asset_path('site.webmanifest')) %>
     <%= yield :head %>
   </head>
   <body class="min-h-full bg-pageBg">

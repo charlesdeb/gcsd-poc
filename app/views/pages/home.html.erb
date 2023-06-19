@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="relative mx-auto w-full h-auto  sm:w-1/2 lg:h-full">
-    <%= image_tag @page.featured_image, class: 'w-full h-full object-cover', alt: @page.title if @page.featured_image.representable? %>
+    <%= image_tag @page.featured_image.variant(resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', alt: @page.title if @page.featured_image.representable? %>
   </div>
 </article>
 <%= render partial: "events/event_summary", locals: {event: @future_featured_event } if @future_featured_event %>
