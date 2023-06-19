@@ -318,3 +318,8 @@
   }
 }
 @import 'actiontext.css';
+
+/* this is not the greatest link styling in the world..  */
+.trix-content a {
+  @apply underline
+}

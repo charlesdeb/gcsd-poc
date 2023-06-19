@@ -111,7 +111,7 @@ module ApplicationHelper
 
     if session.featured_image.representable?
       return image_tag session.featured_image,
-                       class: 'w-1/3 h-full float-right',
+                       class: 'w-1/3 lg:w-2/5 ml-4 h-full float-right shadow-md shadow-celery-400 border border-celery-700',
                        alt: session.title
     end
 
