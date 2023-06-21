@@ -292,9 +292,9 @@
   h2,
   h3 {
     /* @apply font-lora; */
-    /* @apply font-montserrat; */
+    @apply font-montserrat;
     /* @apply font-philosopher; */
-    @apply font-mulish;
+    /* @apply font-mulish; */
   }
 }
 
