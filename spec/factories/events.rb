@@ -44,7 +44,7 @@ FactoryBot.define do
           create_list :session_with_image_and_presenters,
                       evaluator.sessions_count,
                       event: event,
-                      time_slot: time_slots.first
+                      time_slots: [time_slots.first]
           event.reload
         end
       end

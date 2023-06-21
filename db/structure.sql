@@ -490,6 +490,30 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
+-- Name: sessions_time_slots; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sessions_time_slots (
+    session_id bigint NOT NULL,
+    time_slot_id bigint NOT NULL
+);
+
+
+--
+-- Name: COLUMN sessions_time_slots.session_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions_time_slots.session_id IS 'A session';
+
+
+--
+-- Name: COLUMN sessions_time_slots.time_slot_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sessions_time_slots.time_slot_id IS 'A time slot for the session';
+
+
+--
 -- Name: time_slots; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -917,6 +941,27 @@ CREATE INDEX index_sessions_on_time_slot_id ON public.sessions USING btree (time
 
 
 --
+-- Name: index_sessions_time_slots_on_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sessions_time_slots_on_session_id ON public.sessions_time_slots USING btree (session_id);
+
+
+--
+-- Name: index_sessions_time_slots_on_session_id_and_time_slot_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_sessions_time_slots_on_session_id_and_time_slot_id ON public.sessions_time_slots USING btree (session_id, time_slot_id);
+
+
+--
+-- Name: index_sessions_time_slots_on_time_slot_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sessions_time_slots_on_time_slot_id ON public.sessions_time_slots USING btree (time_slot_id);
+
+
+--
 -- Name: index_time_slots_on_event_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1031,6 +1076,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230524131124'),
 ('20230525171238'),
 ('20230617171620'),
-('20230617185222');
+('20230617185222'),
+('20230621204520');
 
 

@@ -209,6 +209,11 @@ RSpec.feature 'Surfer visits show event', type: :system do
         scenario 'they can click to see the sessions for the time slot' do
           time_slot = event.time_slots.first
 
+          p event
+          p time_slot
+          p time_slot.sessions
+          p time_slot.sessions.first
+
           # session stuff should not be visible before clicking the time slot
           expect(page).not_to have_text(/#{time_slot.sessions.first.title}/i)
 

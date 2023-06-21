@@ -6,7 +6,8 @@ class TimeSlot < ApplicationRecord
 
   belongs_to :event
 
-  has_many :sessions
+  # has_many :sessions
+  has_and_belongs_to_many :sessions
 
   translates :title, backend: :action_text, plain: true
 

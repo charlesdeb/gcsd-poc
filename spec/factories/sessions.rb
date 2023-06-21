@@ -4,9 +4,18 @@ FactoryBot.define do
   factory :session do
     title { Faker::Lorem.unique.sentence(word_count: 3) }
     description { Faker::Lorem.sentence(word_count: 10) }
-    time_slot
     event
     session_type
+
+    factory :session_with_time_slots do
+      transient do
+        time_slots_count { 1 }
+      end
+
+      after(:create) do |session, evaluator|
+        create_list(:time_slot, evaluator.time_slots_count, sessions: [session])
+      end
+    end
 
     factory :session_with_image do
       after(:build) do |session|

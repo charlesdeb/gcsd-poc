@@ -23,7 +23,7 @@ class SessionDashboard < Administrate::BaseDashboard
     ),
     presenters: Field::HasMany,
     session_type: Field::BelongsTo,
-    time_slot: Field::BelongsTo,
+    time_slots: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -38,7 +38,7 @@ class SessionDashboard < Administrate::BaseDashboard
     title
     featured_image
     event
-    time_slot
+    time_slots
     session_type
     limit
   ].freeze
@@ -55,7 +55,7 @@ class SessionDashboard < Administrate::BaseDashboard
     presenter_bio_override
     description
     requirements
-    time_slot
+    time_slots
     limit
     created_at
     updated_at
@@ -73,7 +73,7 @@ class SessionDashboard < Administrate::BaseDashboard
     featured_image
     presenters
     presenter_bio_override
-    time_slot
+    time_slots
     limit
   ].freeze
 
