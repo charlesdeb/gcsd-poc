@@ -1,4 +1,4 @@
-<nav x-data="{hamburgerOpen : false}" class="sticky top-0 z-10 bg-orange-100 border-b border-orange-300" id="main-menu" >
+<nav x-data="{hamburgerOpen : false}" x-cloak class="sticky top-0 z-10 bg-orange-100 border-b border-orange-300" id="main-menu" >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="desktop-menu">
     <div class="flex justify-between h-16">
       <!-- start side of nav -->
@@ -18,11 +18,13 @@
         </div>
       </div>
       <!-- end side of nav -->
-      <div class="flex items-center">
+      <div class="flex items-center gap-x-1">
         <!-- i18n controls -->
-        <div class="mr-1 sm:mr-4 flex items-center space-x-1 sm:space-x-3 text-sm md:text-">
+        <div class="sm:mr-4 flex items-center space-x-1 sm:space-x-3 text-sm md:text-">
           <%= timezone_select %>
-          <%= locale_select request.path %>
+          <div class="hidden md:block">
+            <%= locale_select request.path %>
+          </div>
           <button type="button" class="hidden bg-white p-1 rounded-full text-orange-400 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
@@ -64,7 +66,7 @@
           </div>
         </div>
         <!-- Mobile menu button -->
-        <div class="-mr-2 flex items-center md:hidden">
+        <div class="flex items-center md:hidden">
           <button type="button" class="bg-white inline-flex items-center justify-center p-1 sm:p-2  text-orange-400 hover:text-orange-800 hover:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-orange-500" 
           @click="hamburgerOpen = !hamburgerOpen" aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
@@ -94,6 +96,9 @@
 </div>
 <!-- Mobile menu, show/hide based on menu state. -->
 <div class="md:hidden" id="mobile-menu" x-show="hamburgerOpen">
+  <div class="px-4 w-full">
+    <%= locale_select request.path %>
+  </div>
   <div class="pt-2 pb-3 space-y-1">
     <%= link_to "Events", events_path, class: narrow_main_menu_item_class(:events, active_menu_item) %>
     <%= link_to "About", page_path(:about), class: narrow_main_menu_item_class(:about, active_menu_item) %>
