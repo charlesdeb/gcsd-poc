@@ -2,33 +2,33 @@
 <%# event:: expected to be an Event %>
 <article id="<%= dom_id event %>">
   <div class="overflow-hidden">
-    <div class="relative mx-auto max-w-7xl py-4 space-y-8">
+    <div class="relative mx-auto max-w-prose lg:max-w-7xl py-4 space-y-8">
       <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
-      <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+      <div class="space-y-3 lg:grid lg:grid-cols-2 lg:gap-8 lg:space-y-0">
         <div class="relative lg:col-start-1 lg:row-start-1">
-          <div class='flex gap-x-3 md:gap-x-6'>
+          <div class='space-y-3 md:space-y-0 md:flex gap-x-3 md:gap-x-6'>
             <div class="relative max-w-prose text-base lg:max-w-none">
               <figure>
-                <div class="w-36 aspect-w-12 aspect-h-7 lg:aspect-none">
+                <div class="md:w-36 aspect-w-12 aspect-h-7 lg:aspect-none">
                   <%= link_to event_path(id: event) do %>
                     <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg', width: '1184', height: '1376', alt: event.title if event.featured_image.representable? %>
                   <% end %>
                 </div>
               </figure>
             </div>
-            <div class="text-base space-y-6">
+            <div class="text-base space-y-6 md:gap-y-0">
               <header class="w-full">
                 <h2 class="text-base font-semibold text-orange-800">
                   <%= alpine_time time: event.starting_at %>
                 </h2>
                 <%= link_to event_path(id: event) do %>
-                  <h2 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange sm:text-2xl"><%= event.title %></h2>
+                  <h2 class="mt-2 text-3xl font-bold leading-8 tracking-tight text-orange md:text-2xl"><%= event.title %></h2>
                 <% end %>
               </header>
             </div>
           </div>
         </div>
-        <div class="mt-8 lg:mt-0">
+        <div class="">
           <div class="prose prose-indigo text-gray-500 line-clamp-4 lg:col-start-2 lg:row-start-1 lg:max-w-none">
             <%= event.description %>
           </div>
