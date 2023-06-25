@@ -10,8 +10,8 @@ fr:
   # main menu boilerplate
   menu:
     events: Événements
-    about: A notre sujet
-    team: Ce que nous sommes
+    about: Qui sommes-nous?
+    team: Équipe
     finance: Finance
 
   # pages boilerplate

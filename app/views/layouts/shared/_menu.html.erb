@@ -1,6 +1,6 @@
 <nav x-data="{hamburgerOpen : false}" x-cloak class="sticky top-0 z-10 bg-orange-100 border-b border-orange-300" id="main-menu" >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="desktop-menu">
-    <div class="flex justify-between h-16">
+    <div class="flex justify-between h-16 gap-x-3">
       <!-- start side of nav -->
       <div class="flex">
         <!-- home link -->
@@ -10,7 +10,7 @@
           <% end %>
         </div>
         <!-- page links (desktop) -->
-        <div class="hidden sm:-my-px md:ml-6 md:flex md:space-x-5">
+        <div class="hidden sm:-my-px md:ml-6 md:flex md:space-x-3">
           <%= link_to t('menu.events'), events_path, class: wide_main_menu_item_class(:events, active_menu_item) %>
           <%= menu_page_links(:wide, active_menu_item: active_menu_item) %>
         </div>
