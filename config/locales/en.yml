@@ -44,6 +44,13 @@ en:
       # this emulates Luxon's { ...DateTime.DATETIME_MED, weekday: 'long' } format
       starting_at: '%A, %b %-e, %Y, %-l:%M %p'
 
+  # main menu boilerplate
+  menu:
+    events: Events
+    about: About
+    team: Team
+    finance: Finance
+
   # pages boilerplate
   pages:
     home:

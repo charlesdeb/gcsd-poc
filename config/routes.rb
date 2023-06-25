@@ -30,10 +30,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       devise_for :users
     end
 
-    # TODO: not sure if we really want to default this
-    defaults locale: I18n.locale do
-      resources :events, only: %i[index show]
-    end
+    resources :events, only: %i[index show]
 
     # namespace :admin do
     #   resources :events

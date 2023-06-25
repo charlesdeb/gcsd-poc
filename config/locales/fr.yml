@@ -6,6 +6,15 @@ fr:
   with: avec
   various_presenters: divers intervenants
   loading: Chargement...
+
+  # main menu boilerplate
+  menu:
+    events: Événements
+    about: A notre sujet
+    team: Ce que nous sommes
+    finance: Finance
+
+  # pages boilerplate
   pages:
     home:
       welcome_to: Bienvenue aux

@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   before_action :update_allowed_parameters, if: :devise_controller?
 
-  before_action :set_locale
+  # before_action :set_locale
+  around_action :switch_locale
 
   # decorate the devise current_user object with draper stuff
   # https://www.devroom.io/2012/04/14/decorating-devise-s-current_user-with-draper/
@@ -40,8 +41,13 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_locale
-    I18n.locale = extract_locale || I18n.default_locale
+  # def set_locale
+  #   I18n.locale = extract_locale || I18n.default_locale
+  # end
+
+  def switch_locale(&)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &)
   end
 
   def extract_locale

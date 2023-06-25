@@ -24,6 +24,19 @@ module ApplicationHelper
                'data-time-zone-select': ''
   end
 
+  def menu_page_links(width, active_menu_item)
+    result =     %i[about team finance].map do |page_item|
+      link_class = (if width == :wide
+                      wide_main_menu_item_class(page_item, active_menu_item)
+                    else
+                      narrow_main_menu_item_class(page_item, active_menu_item)
+                    end)
+      link_to t("menu.#{page_item}"), page_path(page_item),
+              class: link_class
+    end
+    result.join.html_safe
+  end
+
   def i18n_selector_classes
     'text-xs sm:text-base'
   end
