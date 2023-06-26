@@ -2,8 +2,8 @@
 <%# event:: expected to be an Event %>
 <article id="<%= dom_id event %>">
   <div class="overflow-hidden">
-    <div class="relative lg:py-16 space-y-8">
-      <div class="mx-auto max-w-prose lg:max-w-none overview">
+    <div class="relative mx-auto max-w-prose md:max-w-none md:py-16 md:space-y-8">
+      <div class="overview">
         <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
         <div class="text-base space-y-6">
           <header class="w-full">
@@ -19,7 +19,7 @@
           </section>
         </div>
         <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
-          <div class="relative lg:col-start-2 lg:row-start-1">
+          <div class="relative float-none md:w-1/2 lg:w-full md:float-right md:ml-4 md:mb-4 lg:ml-0 lg:mb-0 lg:col-start-2 lg:row-start-1">
             <svg class="absolute top-0 right-0 -mt-20 -mr-20 hidden lg:xblock" width="404" height="384" fill="none" viewBox="0 0 404 384" aria-hidden="true">
               <defs>
                 <pattern id="de316486-4a29-4312-bdfc-fbce2132a2c1" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -30,7 +30,7 @@
             </svg>
             <div class="relative mx-auto max-w-prose text-base lg:max-w-none">
               <figure>
-                <div class="aspect-w-12 aspect-h-7 lg:aspect-none">
+                <div class="lg:aspect-none">
                   <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg', width: '1184', height: '1376', alt: event.title if event.featured_image.representable? %>
                 </div>
                 <div class='hidden'>
@@ -41,10 +41,8 @@
               </figure>
             </div>
           </div>
-          <div class="mt-8 lg:mt-0">
-            <div class="prose prose-indigo mx-auto text-gray-500 lg:col-start-1 lg:row-start-1 lg:max-w-none">
-              <%= event.description %>
-            </div>
+          <div class="mt-8 md:mt-0 mx-auto text-gray-500 lg:col-start-1 lg:row-start-1 lg:max-w-none">
+            <%= event.description %>
           </div>
         </div>
       </div>

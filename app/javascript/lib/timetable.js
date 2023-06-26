@@ -23,13 +23,13 @@ const start = function (window) {
         .querySelectorAll('.timetable-details .time-slot-sessions')
         .forEach((slot) => {
           slot.classList.add('hidden');
-          slot.classList.remove('flex-col');
+          slot.classList.remove('block');
         });
 
       /** show this one */
       document
         .querySelector(`.timetable-details [data-time_slot="${timeSlot}"]`)
-        .classList.replace('hidden', 'flex-col');
+        .classList.replace('hidden', 'block');
 
       /** deselect all the time slots */
       document.querySelectorAll('#timetable-time-slots tr').forEach((slot) => {
