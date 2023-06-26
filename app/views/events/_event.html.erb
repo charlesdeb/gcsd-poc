@@ -9,9 +9,9 @@
           <div class='space-y-3 md:space-y-0 md:flex gap-x-3 md:gap-x-6'>
             <div class="relative max-w-prose text-base lg:max-w-none">
               <figure>
-                <div class="md:w-36 aspect-w-12 aspect-h-7 lg:aspect-none">
+                <div class="md:w-36 lg:w-44">
                   <%= link_to event_path(id: event) do %>
-                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg', width: '1184', height: '1376', alt: event.title if event.featured_image.representable? %>
+                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg aspect-[3/2]', alt: event.title if event.featured_image.representable? %>
                   <% end %>
                 </div>
               </figure>
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="">
-          <div class="prose prose-indigo text-gray-500 line-clamp-4 lg:col-start-2 lg:row-start-1 lg:max-w-none">
+          <div class="prose prose-indigo text-gray-500 line-clamp-4 lg:line-clamp-5 lg:col-start-2 lg:row-start-1 lg:max-w-none">
             <%= event.description %>
           </div>
         </div>

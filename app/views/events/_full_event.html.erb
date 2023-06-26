@@ -56,9 +56,9 @@
   </div>
   <% if action_name != "show" %>
     <section>
-      <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <%= link_to "Show this event", event_path(id: event), class: "rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
       <% if user_signed_in? && current_user.admin? %>
-        <%= link_to 'Edit this event', edit_admin_event_path(id: event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"   %>
+        <%= link_to 'Edit this event', edit_admin_event_path(id: event), class: "rounded-lg py-3 ml-2 px-5 bg-celery-200 inline-block font-medium"   %>
       <% end %>
     </section>
     <hr class="mt-6">

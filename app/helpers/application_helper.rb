@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
   def menu_page_links(width, active_menu_item)
-    result =     %i[about team finance].map do |page_item|
+    result =     %i[about history finance].map do |page_item|
       link_class = (if width == :wide
                       wide_main_menu_item_class(page_item, active_menu_item)
                     else
