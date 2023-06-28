@@ -1,18 +1,18 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<tr class="border-collapse border-orange border hover:bg-orange  hover:text-white" x-on:click="chooseSlot($event)"
+<tr class="border-collapse border-orange border hover:bg-orange-300  hover:text-white" x-on:click="chooseSlot($event)"
  data-time_slot="<%= dom_id(time_slot) %>">
-  <td class="w-28 text-center py-2 px-3 md:p-1 lg:p-2 font-normal">
+  <td class="w-28 text-center py-2 px-3 md:p-1 lg:p-2">
     <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'} %>
     <br>
     <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'} %>
   </td>
-  <td class="table table-fixed w-full font-normal">
+  <td class="table table-fixed w-full">
     <div class="py-2 px-3 md:p-1 lg:p-2 ">
       <%= time_slot.title %>
     </div>
   </td>
-  <td class="w-12 py-2 px-3 md:p-1 lg:p-2 md:hidden font-normal">
+  <td class="w-12 py-2 px-3 md:p-1 lg:p-2 md:hidden">
     <% if time_slot.sessions.count > 0 %>
       <svg xmlns="http://www.w3.org/2000/svg" data-down_chevron viewBox="0 0 24 24" fill="currentColor" class="block w-6 h-6">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
@@ -25,6 +25,7 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
   </td>
 </tr>
 <% if time_slot.sessions.count > 0 %>
+  <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
     <td colspan="3">
       <% time_slot.sessions.order(:title).each do |session|%>

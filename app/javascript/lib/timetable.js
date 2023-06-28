@@ -14,147 +14,169 @@ const start = function (window) {
       selectedTimeSlot: null,
     },
     chooseSlot(event) {
-      // console.log({ event });
-
-      const selectedBgClass = 'bg-orange-500';
-
       const timeSlot =
         event.target.closest('[data-time_slot]')?.dataset.time_slot;
-      console.log({ timeSlot });
+
+      // console.log({ timeSlot });
+
+      this.selectTimeSlot(timeSlot);
 
       if (
-        !document.querySelector(
-          `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
-        )
+        getComputedStyle(
+          document.querySelector('.timetable-details-wide')
+        ).getPropertyValue('display') == 'block'
       ) {
-        /** no sessions for the time-slot, so do nothing */
-        console.log('no sessions');
-        return;
+        this.toggleDetailsWide(timeSlot);
+      } else {
+        this.toggleArrows(timeSlot);
+        this.toggleDetailsNarrow(timeSlot);
       }
+    },
+    /** does the given timeSlot have any sessions? Breaks don't */
+    hasSessions(timeSlot) {
+      return !!document.querySelector(
+        `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
+      );
+    },
+    selectTimeSlot(timeSlot) {
+      const selectedBgClass = 'bg-orange-500';
 
-      /** deselect all the time slots */
+      /** forst deselect all the time slots */
       document.querySelectorAll('#timetable-time-slots tr').forEach((slot) => {
         slot.classList.remove(selectedBgClass);
         slot.classList.remove('font-bold');
         slot.classList.remove('text-white');
       });
 
-      /** select this timeslot */
+      /** and now select the given one */
       document
         .querySelectorAll(
           `#timetable-time-slots [data-time_slot="${timeSlot}"]`
         )
+        .forEach((timeSlot) => {
+          timeSlot.classList.add(selectedBgClass);
+          timeSlot.classList.add('font-bold');
+          timeSlot.classList.add('text-white');
+        });
+    },
+    /** toggle visibility of timeslot sessions on wide screen  */
+    toggleDetailsWide(timeSlot) {
+      /** hide all the timeslot sessions on the right */
+      document
+        .querySelectorAll('.timetable-details-wide .time-slot-sessions')
         .forEach((slot) => {
-          console.log('selecting');
-          console.log({ slot });
-
-          slot.classList.add(selectedBgClass);
-          slot.classList.add('font-bold');
-          slot.classList.add('text-white');
+          slot.classList.add('hidden');
+          slot.classList.remove('block');
         });
 
-      if (
-        getComputedStyle(
-          document.querySelector('.timetable-details')
-        ).getPropertyValue('display') == 'block'
-      ) {
-        /** hide all the timeslot sessions on the right */
-        document
-          .querySelectorAll('.timetable-details .time-slot-sessions')
-          .forEach((slot) => {
-            slot.classList.add('hidden');
-            slot.classList.remove('block');
-          });
+      /** show these timeslot sessions on the right */
+      document
+        .querySelector(`.timetable-details-wide [data-time_slot="${timeSlot}"]`)
+        .classList.replace('hidden', 'block');
+    },
+    /** toggle visibility of timeslot sessions on narrow screen  */
+    toggleDetailsNarrow(timeSlot) {
+      if (!this.hasSessions(timeSlot)) {
+        /** no sessions for slot, but still ensure all others are closed  */
+        this.hideAllDetailsNarrow();
+        return;
+      }
 
-        /** show these timeslot sessions on the right */
+      if (
+        !document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
+          )
+          .classList.contains('hidden')
+      ) {
+        /** sessions for selected timeSlot already showing, so hide them */
         document
-          .querySelector(`.timetable-details [data-time_slot="${timeSlot}"]`)
+          .querySelector(
+            `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
+          )
+          .classList.add('hidden');
+      } else {
+        /** user clicked on different timeSlot, so ensure all sessions are hidden */
+        this.hideAllDetailsNarrow();
+
+        /** show the sessions for the given timeSlot */
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
+          )
+          .classList.remove('hidden');
+      }
+    },
+    /** change the up/down chevrons in narrow view */
+    toggleArrows(timeSlot) {
+      if (!this.hasSessions(timeSlot)) {
+        /** no sessions for slot, but ensure all down arrows are visible */
+        this.setAllArrowsDown();
+        return;
+      }
+
+      if (
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
+          )
+          .classList.contains('block')
+      ) {
+        /** user clicked on the selected timeslot, so switch arrows */
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
+          )
+          .classList.replace('block', 'hidden');
+
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-down_chevron]`
+          )
           .classList.replace('hidden', 'block');
       } else {
-        /** change the up/down chevrons */
-        if (
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
-            )
-            .classList.contains('block')
-        ) {
-          /** user clicked on the selected timeslot, so switch arrows */
-          console.log('clicked open slot');
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
-            )
-            .classList.replace('block', 'hidden');
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-down_chevron]`
-            )
-            .classList.replace('hidden', 'block');
-        } else {
-          /** user clicked another timeslot */
-          console.log('clicked closed slot');
+        /** user clicked another timeslot, so ensure all down arrows visible */
+        this.setAllArrowsDown();
 
-          /** set all arrows to down */
-          document
-            .querySelectorAll('#timetable-time-slots [data-up_chevron]')
-            .forEach((upChevron) => {
-              upChevron.classList.replace('block', 'hidden');
-            });
-          document
-            .querySelectorAll('#timetable-time-slots [data-down_chevron]')
-            .forEach((downChevron) => {
-              downChevron.classList.replace('hidden', 'block');
-            });
+        /** set arrow for selected timeslot to up */
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
+          )
+          .classList.replace('hidden', 'block');
+        document
+          .querySelector(
+            `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-down_chevron]`
+          )
+          .classList.replace('block', 'hidden');
 
-          /** set selected timeslot arrow to up */
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-up_chevron]`
-            )
-            ?.classList.replace('hidden', 'block');
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot="${timeSlot}"] [data-down_chevron]`
-            )
-            ?.classList.replace('block', 'hidden');
-          // document
-          //   .querySelectorAll(`tr[data-time_slot="${timeSlot}"] th`)
-          //   .forEach((th) => {
-          //     th.classList.add('sticky', 'top-4');
-          //   });
-        }
-
-        /** toggle/select these timeslot sessions narrow view  */
-        if (
-          !document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
-            )
-            .classList.contains('hidden')
-        ) {
-          /** sessions already showing, so hide them */
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
-            )
-            .classList.add('hidden');
-        } else {
-          /** user clicked on a hidden set of sessions */
-          document
-            .querySelectorAll(`#timetable-time-slots [data-time_slot_sessions]`)
-            .forEach((slot) => {
-              /** close any visible slots */
-              slot.classList.add('hidden');
-            });
-          /** show the one they clicked  */
-          document
-            .querySelector(
-              `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`
-            )
-            .classList.remove('hidden');
-        }
+        // this doesn't work unfortunately...
+        // document
+        //   .querySelectorAll(`tr[data-time_slot="${timeSlot}"] th`)
+        //   .forEach((th) => {
+        //     th.classList.add('sticky', 'top-4');
+        //   });
       }
+    },
+    setAllArrowsDown() {
+      document
+        .querySelectorAll('#timetable-time-slots [data-up_chevron]')
+        .forEach((upChevron) => {
+          upChevron.classList.replace('block', 'hidden');
+        });
+      document
+        .querySelectorAll('#timetable-time-slots [data-down_chevron]')
+        .forEach((downChevron) => {
+          downChevron.classList.replace('hidden', 'block');
+        });
+    },
+    hideAllDetailsNarrow() {
+      document
+        .querySelectorAll(`#timetable-time-slots [data-time_slot_sessions]`)
+        .forEach((slot) => {
+          /** close any visible slots */
+          slot.classList.add('hidden');
+        });
     },
   }));
 };
