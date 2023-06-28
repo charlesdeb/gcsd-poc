@@ -11,6 +11,8 @@ class Page < ApplicationRecord
   translates :title, backend: :action_text, plain: true
 
   has_one_attached :featured_image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [50, 50]
+    attachable.variant :thumb,
+                       { resize_to_limit: [50, 50], convert: :webp,
+                         saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 80 } }
   end
 end

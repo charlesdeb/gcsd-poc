@@ -9,18 +9,18 @@
     <div class="mt-10 sm:flex sm:space-x-3 sm:justify-center lg:justify-start text-center">
       <% if ! @events.future.empty? %>
         <div class="rounded-md shadow bg-orange">
-          <%= link_to t(".future_events"), future_events_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-lighten md:py-4 md:text-lg md:px-10"%>
+          <%= link_to t(".future_events"), future_events_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-orange-300 md:py-4 md:text-lg md:px-10"%>
         </div>
       <% end %>
       <% if ! @events.past.empty? %>
         <div class="mt-3 rounded-md shadow sm:mt-0">
-          <%= link_to t(".past_events"), past_events_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-orange bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"%>
+          <%= link_to t(".past_events"), past_events_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-orange bg-white hover:bg-orange-100 md:py-4 md:text-lg md:px-10"%>
         </div>
       <% end %>
     </div>
   </div>
   <div class="relative mx-auto w-full h-auto  sm:w-1/2 lg:h-full">
-    <%= image_tag @page.featured_image.variant(resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', alt: @page.title if @page.featured_image.representable? %>
+    <%= image_tag @page.featured_image.variant(resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', loading: :eager, alt: @page.title if @page.featured_image.representable? %>
   </div>
 </article>
 <%= render partial: "events/event_summary", locals: {event: @future_featured_event } if @future_featured_event %>

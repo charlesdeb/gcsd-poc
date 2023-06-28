@@ -305,6 +305,11 @@
 }
 
 @layer utilities {
+  /** tailwind's built in one doesn't work */
+  .break-words {
+    word-break: break-word;
+  }
+
   .bg-darken {
     @apply bg-black/30;
   }
@@ -321,5 +326,10 @@
 
 /* this is not the greatest link styling in the world..  */
 .trix-content a {
-  @apply underline
+  @apply underline;
+}
+
+.trix-content {
+  /** sometimes we need to break links and long words in half in mobile view */
+  @apply break-words;
 }

@@ -5,10 +5,12 @@
   <% end %>
   <%= render partial: 'full_event', locals: {event: @event} %>
   <% if current_user && current_user.admin? %>
-    <%= link_to 'Edit this event', edit_admin_event_path(id: @event), class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this event', event_path(id: @event), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 font-medium" %>
+    <div class="mt-2 flex flex-wrap gap-1 sm:gap-2">
+      <%= link_to 'Edit this event', edit_admin_event_path(id: @event), class: "rounded-lg p-1 sm:py-3 sm:px-5 bg-celery-200 inline-block font-medium" %>
+      <div class="inline-block ml-2">
+        <%= button_to 'Destroy this event', event_path(id: @event), method: :delete, class: "rounded-lg p-1 sm:py-3 sm:px-5 bg-celery-200 font-medium" %>
+      </div>
+      <%= link_to 'Back to events', admin_events_path, class: "rounded-lg p-1 sm:py-3 sm:px-5 bg-celery-200 inline-block font-medium" %>
     </div>
-    <%= link_to 'Back to events', admin_events_path, class: "ml-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
   <% end %>
 </div>

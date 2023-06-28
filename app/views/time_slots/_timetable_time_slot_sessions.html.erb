@@ -2,6 +2,6 @@
 <%# time_slot:: expected to be a TimeSlot %>
 <div class="hidden px-4 pb-4 space-y-4 time-slot-sessions" data-time_slot="time_slot_<%= time_slot.id %>">
   <% time_slot.sessions.order(:title).each do |session|%>
-    <%= render partial: 'sessions/timetable_session', locals: {session: session }%>
+    <%= render partial: 'sessions/timetable_session_wide', locals: {session: session }%>
   <% end %>
 </div>

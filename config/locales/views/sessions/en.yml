@@ -1,6 +1,10 @@
 en:
   sessions:
-    timetable_session:
+    timetable_session_wide:
+      requirements: Special Requirements
+      participant_limit: Participant Limit
+      limited_to: "%{limit} people"
+    timetable_session_narrow:
       requirements: Special Requirements
       participant_limit: Participant Limit
       limited_to: "%{limit} people"

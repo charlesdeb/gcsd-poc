@@ -1,0 +1,21 @@
+<%# Session component for the details of a time_slot within an event's timetable %>
+<%# session:: expected to be a Session %>
+<article class="flex-col space-y-4 session p-2">
+  <%= timetable_session_header(session, :narrow)%>
+  <div class="flex-col space-y-4">
+    <%= timetable_session_image session%>
+    <%= session.description %>
+    <div class="text-orange-700">
+      <%= timetable_session_presenter_bio(session) %>
+    </div>
+    <% if session.requirements.present? %>
+      <h3 class="font-bold capitalize"><%= t('.requirements')%></h3>
+      <%= session.requirements %>
+    <% end %>
+    <% if session.limit.present? %>
+      <h3 class="font-bold capitalize"><%= t('.participant_limit')%></h3>
+      <%= t('.limited_to', limit: session.limit) %>
+    <% end %>
+  </div>
+  <div class="clear-right "></div>
+</article>

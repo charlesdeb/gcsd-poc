@@ -32,5 +32,11 @@ module Gcsd
 
     # custom validators
     config.autoload_paths += Dir[File.join(Rails.root, 'app', 'models', 'validators')]
+
+    # use lazy loading by default
+    config.action_view.image_loading = :lazy
+
+    # allow webp image format
+    config.active_storage.web_image_content_types = %w[image/jpeg image/png image/webp image/jpg]
   end
 end

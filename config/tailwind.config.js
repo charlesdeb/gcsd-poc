@@ -14,8 +14,6 @@ module.exports = {
         timetable: '1fr 2fr',
       },
       fontFamily: {
-        // sans: ['Arimo', ...defaultTheme.fontFamily.sans],
-        // sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
         sans: ['Mulish', ...defaultTheme.fontFamily.sans],
         lora: ['Lora', ...defaultTheme.fontFamily.sans],
         montserrat: ['Montserrat', ...defaultTheme.fontFamily.sans],

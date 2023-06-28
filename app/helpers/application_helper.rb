@@ -3,9 +3,10 @@
 # Helper methods
 module ApplicationHelper
   # Drop-down for selecting locale in main nav
-  def locale_select(request_path = root_path)
+  def locale_select(request_path = root_path, id = :locale)
     select_tag 'locale',
                language_options(request_path),
+               id: id,
                class: i18n_selector_classes,
                'x-data': '{}', 'x-title': 'Language Selector',
                'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
@@ -91,12 +92,18 @@ module ApplicationHelper
   # shows a header for a session in the timetable view
   # Params
   # +session+:: Session
-  def timetable_session_header(session)
+  def timetable_session_header(session, width = :wide)
+    h2_class = 'text-xl font-bold'
+    header_class = if width == :wide
+                     'bg-orange-500 text-white -mx-4 px-4 py-4'
+                   else
+                     'bg-orange-200 text-skyblue-600 -m-2 px-2 py-2'
+                   end
     content_tag(:header,
                 content_tag(:h2,
                             session.title,
-                            class: 'text-xl font-bold') + timetable_session_presenter(session),
-                class: 'bg-orange-500 text-white -mx-4 px-4 py-4')
+                            class: h2_class) + timetable_session_presenter(session),
+                class: header_class)
   end
 
   # Shows a presenter for a session in the timetable view
@@ -124,7 +131,7 @@ module ApplicationHelper
 
     if session.featured_image.representable?
       return image_tag session.featured_image,
-                       class: 'w-1/3 lg:w-2/5 ml-4 h-full float-right shadow-md shadow-celery-400 border border-celery-700',
+                       class: 'w-1/2 lg:w-2/5 ml-3 mb-3 h-full float-right shadow-md shadow-celery-400 border border-celery-700',
                        alt: session.title
     end
 
@@ -147,7 +154,7 @@ module ApplicationHelper
       'border-orange-900 text-orange-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium active'
     else
       # other menu item
-      'border-transparent text-orange-600 hover:border-orange-600 hover:text-orange-800 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' # rubocop:disable Layout/LineLength
+      'border-transparent text-orange-700 hover:border-orange-700 hover:text-orange-800 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' # rubocop:disable Layout/LineLength
     end
   end
 
