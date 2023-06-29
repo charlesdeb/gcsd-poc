@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+echo "[ bin/db-dump-dev ] dumping development data"
+
+current_date_time=$(date +"%Y-%m-%d_%H_%M_%S")
+
+database_name="gcsd_development"
+dump_file_name="./db/dumps/${database_name}-${current_date_time}.sql"
+
+echo "[ bin/db-dump-dev ] Provide the Postgres password for the role with access to the ${database_name} database."
+
+pg_dump --file=$dump_file_name --clean \
+  --no-owner --exclude-table='ar_internal_metadata' \
+  --no-privileges --column-inserts \
+  --dbname=${database_name} --username=gcsd
+
+echo "[ bin/db-dump-dev ] SQL file is at : ${dump_file_name}"
