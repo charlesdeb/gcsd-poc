@@ -38,5 +38,18 @@ module Gcsd
 
     # allow webp image format
     config.active_storage.web_image_content_types = %w[image/jpeg image/png image/webp image/jpg]
+
+    # Email settings. It is being set here rather in a specific environment
+    # file because we are using the mail_interceptor gem which operates in
+    # multiple environments
+    config.action_mailer.smtp_settings = {
+      :user_name => ENV.fetch('SMTP_USER_NAME', nil),
+      :password => ENV.fetch('SMTP_PASSWORD', nil),
+      :domain => ENV.fetch('SMTP_DOMAIN', nil),
+      :address => ENV.fetch('SMTP_ADDRESS', nil),
+      :port => 587,
+      :authentication => :plain,
+      :enable_starttls_auto => true
+    }
   end
 end
