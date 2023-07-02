@@ -1,6 +1,15 @@
 fr:
   sessions:
-    timetable_session:
-      requirements: Matériaux nécessaires
-      participant_limit: Limite de participants
-      limited_to: "%{limit} personnes"
+    timetable_session_wide:
+      requirements: Exigences particulières
+      participant_limit: Limite du nombre de participants
+      limited_to: '%{limit} personnes'
+    timetable_session_narrow:
+      requirements: Exigences particulières
+      participant_limit: Limite du nombre de participants
+      limited_to: '%{limit} people'
+  # use in the dashboard views
+  helpers:
+    label:
+      session:
+        featured_image: Image

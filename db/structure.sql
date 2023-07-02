@@ -596,7 +596,14 @@ CREATE TABLE public.users (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     time_zone character varying DEFAULT 'London'::character varying NOT NULL,
-    locale character varying DEFAULT 'en'::character varying NOT NULL
+    locale character varying DEFAULT 'en'::character varying NOT NULL,
+    confirmation_token character varying,
+    confirmed_at timestamp(6) with time zone,
+    confirmation_sent_at timestamp(6) with time zone,
+    unconfirmed_email character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp(6) with time zone
 );
 
 
@@ -976,6 +983,13 @@ CREATE UNIQUE INDEX index_time_slots_on_event_id_and_starting_at ON public.time_
 
 
 --
+-- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_confirmation_token ON public.users USING btree (confirmation_token);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -987,6 +1001,13 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_unlock_token ON public.users USING btree (unlock_token);
 
 
 --
@@ -1077,6 +1098,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230525171238'),
 ('20230617171620'),
 ('20230617185222'),
-('20230621204520');
+('20230621204520'),
+('20230702193959');
 
 
