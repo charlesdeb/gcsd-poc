@@ -1,6 +1,6 @@
 <%# Sessions summary component for an event %>
 <%# event:: expected to be an Event %>
-<section id="event-sessions-summary">
+<section id="event-sessions-summary" x-data="sessionsSummaryTab" x-init="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
   <h2 class="mt-2 text-2xl font-bold leading-8 tracking-tight text-orange sm:text-3xl"><%= t('.sessions_summary') %></h2>
   <div class="sm:hidden mt-8">
     <label for="tabs" class="sr-only">Select a tab</label>
@@ -14,68 +14,17 @@
     </select>
   </div>
   <div class="hidden sm:block mt-8">
+    <%# tab controls for session types %>
     <nav class="isolate flex divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs">
       <!-- Current: "text-orange-900", Default: "text-orange-500 hover:text-orange-700" -->
       <% event.session_types_with_counts.each_with_index do |session_type_with_count, index| %>
         <%= session_type_tab session_type_with_count, index %>
       <% end%>
     </nav>
-    <ul class="p-4 space-y-4">
-      <li class="space-x-6 flex">
-        <a href='#' class="shrink-0">
-          <img class="h-20 w-28">
-        </a>
-        <div class="shrink-0">
-          <a href='#'>
-            <p class="text-lg font-bold">Chris Duffett</p>
-          </a>
-          <a href='#'>
-            <p>From Studio to Street</p>
-          </a>
-          <a href='#'>
-            <p>9am UTC, 2 April (50 minutes)</p>
-          </a>
-        </div>
-        <div class="">Chris will speak about pioneering creative ways of connecting the gospel with people around us.</div>
-      </li>
-      <li class="space-x-6 flex">
-        <a href='#' class="shrink-0">
-          <img class="h-20 w-28">
-        </a>
-        <div class="shrink-0">
-          <a href='#'>
-            <p class="text-lg font-bold">Ewa Rossano</p>
-          </a>
-          <a href='#'>
-            <p>Artist Talk</p>
-          </a>
-          <a href='#'>
-            <p>5am UTC, 2 April (50 minutes)</p>
-          </a>
-        </div>
-        <div>Ewa will show and talk us through some of her work and techniques. We will hear about her faith and testimony with time for some audience questions.
-        </div>
-      </li>
-      <li class="space-x-6 flex">
-        <a href='#' class="shrink-0">
-          <img class="h-20 w-28">
-        </a>
-        <div class="shrink-0">
-          <a href='#'>
-            <p class="text-lg font-bold">Various</p>
-          </a>
-          <a href='#'>
-            <p>Introduction and Communal Art Worship</p>
-          </a>
-          <a href='#'>
-            <p>5am UTC, 2 April (50 minutes)</p>
-          </a>
-        </div>
-        <div>Join us for a compilation of worship songs and music. Participants are encouraged to create as they listen to the
-          worship sets. Feel free to play an instrument, dance, sing, paint, draw, sculpt, write or create anything else as a form of
-          worship.
-        </div>
-      </li>
-    </ul>
+    <section id="session-summaries">
+      <% event.session_types_with_counts.each do |session_type | %>
+        <%= render partial: 'session_types/timetable_session_type_summary', locals: {session_type_id: session_type.id, event: event}  %>
+      <% end%>
+    </section>
   </div>
 </section>

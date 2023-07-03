@@ -179,6 +179,48 @@ const start = function (window) {
         });
     },
   }));
+
+  Alpine.data('sessionsSummaryTab', () => ({
+    selectedSessionType: null,
+
+    /** highlight the first sessionTupe to show on page load  */
+    setup(sessionType) {
+      this.selectedSessionType = sessionType;
+    },
+
+    chooseSessionType(event) {
+      const sessionType = event.target.closest('[data-session_type]')?.dataset
+        .session_type;
+
+      this.selectedSessionType = sessionType;
+
+      // unhighlight all tabs
+      document
+        .querySelectorAll('nav [data-session_type]')
+        .forEach((tabHeader) => {
+          tabHeader.classList.replace('text-orange-900', 'text-orange-500');
+          tabHeader.classList.remove('hover:text-orange-700');
+          tabHeader
+            .querySelector('span.inset-x-0')
+            .classList.replace('bg-orange-800', 'bg-transparent');
+        });
+
+      // highlight tab that was just clicked
+      document
+        .querySelector(`nav [data-session_type="${sessionType}"]`)
+        .classList.replace('text-orange-500', 'text-orange-900');
+      document
+        .querySelector(`nav [data-session_type="${sessionType}"]`)
+        .classList.add('hover:text-orange-700');
+      document
+        .querySelector(
+          `nav [data-session_type="${sessionType}"] span.inset-x-0`
+        )
+        .classList.replace('bg-transparent', 'bg-orange-800');
+
+      return;
+    },
+  }));
 };
 
 export const Timetable = {

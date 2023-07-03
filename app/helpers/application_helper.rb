@@ -43,20 +43,23 @@ module ApplicationHelper
   end
 
   # Tab headers for the session types of an event
-  def session_type_tab(session_type, position)
+  def session_type_tab(session_type, position) # rubocop:disable Metrics/MethodLength)
     bg_color_class = position.zero? ? 'bg-orange-800' : 'bg-transparent'
 
-    link_content = content_tag(:span, "#{session_type.name} (#{session_type.count})")
+    content = content_tag(:span, "#{session_type.name} (#{session_type.count})")
 
-    link_content += content_tag(
+    content += content_tag(
       :span, '',
       class: "#{bg_color_class} bg-orange-800 absolute inset-x-0 bottom-0 h-0.5", 'aria-hidden': true
     )
 
     color_class = position.zero? ? 'text-orange-900' : 'text-orange-500 hover:text-orange-700'
 
-    link_to link_content, '#',
-            class: "#{color_class} first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10" # rubocop:disable Layout/LineLength
+    content_tag :div,
+                content,
+                class: "#{color_class} first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10", # rubocop:disable Layout/LineLength)
+                'data-session_type': "session_type_#{session_type.id}",
+                'x-on:click': 'chooseSessionType'
   end
 
   # an Alpine-enabled <time> component with an optional format object for Luxon.
@@ -102,15 +105,16 @@ module ApplicationHelper
     content_tag(:header,
                 content_tag(:h2,
                             session.title,
-                            class: h2_class) + timetable_session_presenter(session),
+                            class: h2_class) + timetable_session_presenters(session),
                 class: header_class)
   end
 
-  # Shows a presenter for a session in the timetable view
+  # Shows a presenter for a session in the full_event view
   # Or says "various" if a session has more than one presenter
   # Params
   # +session+:: Session
-  def timetable_session_presenter(session)
+  # +display_type+:: either :timetable or :session_summary
+  def timetable_session_presenters(session, display_type = :timetable)
     return '' if session.presenters.blank?
 
     presenter_name = if session.presenters.count > 1
@@ -119,7 +123,32 @@ module ApplicationHelper
                        session.presenters.first.name
                      end
     # TODO: internationalise this properly
-    content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
+    if display_type == :timetable
+      content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
+    else
+      content_tag(:p, "#{t('with')} #{presenter_name}")
+    end
+  end
+
+  # Shows the time_slots for a session in the full_event view
+  # +session+:: Session
+  # +display_type+:: either :timetable or :session_summary
+  def timetable_session_time_slots(session, _display_type = :time_slot)
+    return '' if session.time_slots.blank?
+
+    time_slots = session.time_slots.map do |time_slot|
+      alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
+    end
+
+    # puts '--------> zoobie'
+    # puts time_slots
+
+    # if display_type == :timetable
+    #   content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
+    # else
+    content_tag(:p, time_slots.join(', ').html_safe)
+    # end
+    # 'foo'
   end
 
   # Shows an image related to a session in the timetable view
