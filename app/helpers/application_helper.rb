@@ -122,33 +122,23 @@ module ApplicationHelper
                      else
                        session.presenters.first.name
                      end
-    # TODO: internationalise this properly
     if display_type == :timetable
-      content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
+      content_tag(:h3, t('with_presenter', presenter: presenter_name), class: 'text-lg')
     else
-      content_tag(:p, "#{t('with')} #{presenter_name}")
+      content_tag(:p, t('with_presenter', presenter: presenter_name))
     end
   end
 
   # Shows the time_slots for a session in the full_event view
   # +session+:: Session
-  # +display_type+:: either :timetable or :session_summary
-  def timetable_session_time_slots(session, _display_type = :time_slot)
+  def timetable_session_time_slots(session)
     return '' if session.time_slots.blank?
 
     time_slots = session.time_slots.map do |time_slot|
       alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
     end
 
-    # puts '--------> zoobie'
-    # puts time_slots
-
-    # if display_type == :timetable
-    #   content_tag(:h3, "#{t('with')} #{presenter_name}", class: 'text-lg')
-    # else
     content_tag(:p, time_slots.join(', ').html_safe)
-    # end
-    # 'foo'
   end
 
   # Shows an image related to a session in the timetable view

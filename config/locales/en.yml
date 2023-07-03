@@ -34,7 +34,7 @@ en:
   language: 'English'
   gcsd: Global Creative Studio Days
   arts_release_studios: Arts Release Studios
-  with: with
+  with_presenter: "with %{presenter}"
   various_presenters: various presenters
   loading: Loading...
   # date and time stuff
