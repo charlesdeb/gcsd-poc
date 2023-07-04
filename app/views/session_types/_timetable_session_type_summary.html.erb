@@ -11,20 +11,18 @@
     <% event.sessions.where(session_type: session_type_id).order(title: :asc).each do |session| %>
       <div class="flex space-x-3">
         <!-- image -->
-        <div class="shrink-0 h-24 max-h-24 min-w-32 w-32 bg-celery-300">
-          <%= image_tag session.featured_image, class: 'h-24 w-32 min-w-32 max-h-24 object-cover' if session.featured_image.representable? %>
-        </div>
+        <%= link_to session_path(session), data: {turbo_frame: 'session_modal'} do %>
+          <div class="shrink-0 h-24 max-h-24 min-w-32 w-32 bg-celery-300">
+            <%= image_tag session.featured_image, alt: session.title, class: 'h-24 w-32 min-w-32 max-h-24 object-cover' if session.featured_image.representable? %>
+          </div>
+        <% end %>
         <!-- text -->
-        <div class="flex flex-col justify-betweenx">
-          <a href='#'>
+        <div class="">
+          <%= link_to session_path(session), data: {turbo_frame: 'session_modal'} do %>
             <p class="text-lg font-bold"><%= session.title %></p>
-          </a>
-          <a href='#'>
-            <%= timetable_session_presenters(session, :session_summary) %>
-          </a>
-          <a href='#'>
-            <%= timetable_session_time_slots(session) %>
-          </a>
+          <% end %>
+          <%= timetable_session_presenters(session, :session_summary) %>
+          <%= timetable_session_time_slots(session) %>
         </div>
       </div>
     <% end %>

@@ -31,6 +31,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     resources :events, only: %i[index show]
+    resources :sessions, only: %i[show]
 
     # namespace :admin do
     #   resources :events

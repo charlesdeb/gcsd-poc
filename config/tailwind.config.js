@@ -68,7 +68,9 @@ module.exports = {
         },
 
         pageBg: {
-          DEFAULT: '#f6f4ee' /** Kez's colour */,
+          // DEFAULT: '#f6f4ee' /** Kez's colour */,
+          DEFAULT: '#f9faf0' /** lighter */,
+          // DEFAULT: '#ffffff' /** lighter */,
         },
 
         gray: {

@@ -98,7 +98,7 @@ module ApplicationHelper
   def timetable_session_header(session, width = :wide)
     h2_class = 'text-xl font-bold'
     header_class = if width == :wide
-                     'bg-orange-500 text-white -mx-4 px-4 py-4'
+                     'bg-orange-500 text-white -mx-4 sm:-mx-6 px-4 sm:px-6 py-4'
                    else
                      'bg-orange-200 text-skyblue-600 -m-2 px-2 py-2'
                    end
@@ -138,20 +138,25 @@ module ApplicationHelper
       alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
     end
 
-    content_tag(:p, time_slots.join(', ').html_safe)
+    content_tag(:div, time_slots.join(', ').html_safe)
   end
 
   # Shows an image related to a session in the timetable view
   # This is currently just the first image it finds for a presenter
   # Params
   # +session+:: Session
-  def timetable_session_image(session)
+  def timetable_session_image(session, location = '')
     return if session.featured_image.blank?
 
+    common_image_class = 'shadow-md shadow-celery-400 border border-celery-700'
+    image_class = if location == :modal
+                    '' + common_image_class
+                  else
+                    'w-1/2 lg:w-2/5 ml-3 mb-3 h-full float-right ' + common_image_class
+                  end
+
     if session.featured_image.representable?
-      return image_tag session.featured_image,
-                       class: 'w-1/2 lg:w-2/5 ml-3 mb-3 h-full float-right shadow-md shadow-celery-400 border border-celery-700',
-                       alt: session.title
+      return image_tag session.featured_image, class: image_class, alt: session.title
     end
 
     nil
