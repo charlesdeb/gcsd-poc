@@ -1,0 +1,21 @@
+<%# Brief details of a session %>
+<%# session:: expected to be a Session %>
+<div class="flex space-x-3">
+  <!-- image -->
+  <%= link_to session_path(session), class: 'hidden sm:block', data: {turbo_frame: 'session_modal'} do %>
+    <div class="shrink-0 aspect-[3/2] w-32 max-h-24 min-w-32 bg-celery-300">
+      <%= image_tag session.featured_image, alt: session.title, class: 'aspect-[3/2] object-cover' if session.featured_image.representable? %>
+    </div>
+  <% end %>
+  <!-- text -->
+  <div class="sm:block">
+    <%= link_to session_path(session), data: {turbo_frame: 'session_modal'} do %>
+      <p class="text-lg font-bold"><%= session.title %></p>
+    <% end %>
+    <div class="inline-block sm:block"><%= timetable_session_presenters(session) %></div>
+    <span class="sm:hidden"> <%= t('at_session_times_html', session_times: timetable_session_time_slots(session) )%> </span>
+    <div class="hidden sm:block">
+      <%= timetable_session_time_slots(session) %>
+    </div>
+  </div>
+</div>

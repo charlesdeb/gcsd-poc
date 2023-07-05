@@ -25,7 +25,7 @@
     </nav>
     <section id="session-summaries">
       <% event.session_types_with_counts.each do |session_type | %>
-        <%= render partial: 'session_types/timetable_session_type_summary', locals: {session_type_id: session_type.id, event: event}  %>
+        <%= render partial: 'session_types/timetable_session_type_summaries', locals: {session_type_id: session_type.id, event: event}  %>
       <% end%>
     </section>
   </div>
