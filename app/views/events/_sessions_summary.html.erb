@@ -1,23 +1,23 @@
 <%# Sessions summary component for an event %>
 <%# event:: expected to be an Event %>
 <section id="event-sessions-summary" x-data="sessionsSummaryTab" x-init="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
-  <h2 class="mt-2 text-2xl font-bold leading-8 tracking-tight text-orange sm:text-3xl">
+  <h2 class="mt-8 text-2xl font-bold leading-8 tracking-tight text-orange space-y-2 sm:text-3xl">
     <%= t('.sessions_summary') %>
   </h2>
-  <div class="hidden mt-8">
-    <label for="tabs" class="sr-only">Select a tab</label>
-    <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-    <!-- todo: use real session types here -->
-    <select id="tabs" name="tabs" class="block w-full rounded-md border-orange-300 focus:border-orange-800 focus:ring-orange-800">
-      <option selected>My Account</option>
-      <option>Company</option>
-      <option>Team Members</option>
-      <option>Billing</option>
-    </select>
-  </div>
-  <div class="block mt-8">
+  <div class="">
+    <div class="sm:hidden">
+      <label for="tabs" class="sr-only"><%= t('.select_session_type') %>Select a tab</label>
+      <%= 
+    select_tag(
+      t('.session_type'),
+      session_type_options(event.session_types_with_counts).join('').html_safe,
+      class: 'block w-full border-orange-300 focus:border-orange-800 focus:ring-orange-800',
+      'x-on:click': 'chooseSessionType($event.target.value)'
+    )
+    %>
+    </div>
     <%# tab controls for session types %>
-    <nav class="isolate flex divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs">
+    <nav class="hidden sm:flex isolate  divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs">
       <!-- Current: "text-orange-900", Default: "text-orange-500 hover:text-orange-700" -->
       <% event.session_types_with_counts.each_with_index do |session_type_with_count, index| %>
         <%= session_type_tab session_type_with_count, index %>

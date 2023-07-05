@@ -188,9 +188,10 @@ const start = function (window) {
       this.selectedSessionType = sessionType;
     },
 
-    chooseSessionType(event) {
-      const sessionType = event.target.closest('[data-session_type]')?.dataset
-        .session_type;
+    chooseSessionType(sessionType) {
+      // console.log({ event });
+      // const sessionType = event.target.closest('[data-session_type]')?.dataset
+      //   .session_type;
 
       this.selectedSessionType = sessionType;
 

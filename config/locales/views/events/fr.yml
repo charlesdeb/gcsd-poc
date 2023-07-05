@@ -8,6 +8,8 @@ fr:
       register_now: S'inscrire Maintenant!
     sessions_summary:
       sessions_summary: Résumé des séances
+      select_session_type: Sélectionner un type de séance
+      session_type: Type de séance
     timetable:
       timetable: Calendrier
     timetable_details:

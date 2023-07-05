@@ -8,6 +8,8 @@ en:
       register_now: Register Now!
     sessions_summary:
       sessions_summary: Sessions Summary
+      select_session_type: Select a session type
+      session_type: Session type
     timetable:
       timetable: Timetable
     timetable_details:
