@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'session_modal', class: 'zoop' do %>
+<%= turbo_frame_tag 'session_modal' do %>
   <%= tag.div data: { controller: "turbo-modal" } do %>
     <!-- translucent overlay-->
     <div class="fixed inset-0 bg-gray-900 bg-opacity-90 transition-opacity z-[5]"
@@ -27,8 +27,15 @@
           <% end %>
           <!-- modal content -->
           <article class="flex-col space-y-4 session">
-            <%= timetable_session_header @session%>
-            <div class="flex gap-x-6 max-h-[65vh] overflow-y-auto pr-4 sm:pr-6">
+            <header class="bg-orange-500 shadow-sm text-white -mx-4 sm:-mx-6 px-4 sm:px-6 py-4">
+              <h2 class="text-xl font-bold">
+                <%= @session.title %>
+              </h2>
+              <h3 class="">
+                <%= timetable_session_presenters(@session) %>
+              </h3>
+            </header>
+            <div class="flex gap-x-6 max-h-[65vh] min-h-[8rem] overflow-y-auto pr-4 sm:pr-6">
               <div class="w-2/3 flex-col space-y-4">
                 <%= @session.description %>
                 <div class="text-orange-700">

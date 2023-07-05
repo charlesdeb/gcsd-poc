@@ -6,6 +6,7 @@ fr:
   with_presenter: "avec %{presenter}"
   various_presenters: divers intervenants
   loading: Chargement...
+  at_session_times_html: "à %{session_times}"
 
   # main menu boilerplate
   menu:

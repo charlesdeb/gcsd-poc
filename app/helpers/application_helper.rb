@@ -109,12 +109,11 @@ module ApplicationHelper
                 class: header_class)
   end
 
-  # Shows a presenter for a session in the full_event view
-  # Or says "various" if a session has more than one presenter
+  # The name of a session's presenter; "various" if a session has more than one
   # Params
   # +session+:: Session
-  # +display_type+:: either :timetable or :session_summary
-  def timetable_session_presenters(session, display_type = :timetable)
+  # TODO: should this be on the model?
+  def timetable_session_presenters(session)
     return '' if session.presenters.blank?
 
     presenter_name = if session.presenters.count > 1
@@ -122,11 +121,7 @@ module ApplicationHelper
                      else
                        session.presenters.first.name
                      end
-    if display_type == :timetable
-      content_tag(:h3, t('with_presenter', presenter: presenter_name), class: 'text-lg')
-    else
-      content_tag(:p, t('with_presenter', presenter: presenter_name))
-    end
+    t('with_presenter', presenter: presenter_name)
   end
 
   # Shows the time_slots for a session in the full_event view
@@ -138,7 +133,7 @@ module ApplicationHelper
       alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
     end
 
-    content_tag(:div, time_slots.join(', ').html_safe)
+    time_slots.join(', ').html_safe
   end
 
   # Shows an image related to a session in the timetable view
