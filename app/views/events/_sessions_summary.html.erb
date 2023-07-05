@@ -4,12 +4,7 @@
   <h2 class="mt-2 text-2xl font-bold leading-8 tracking-tight text-orange sm:text-3xl">
     <%= t('.sessions_summary') %>
   </h2>
-  <%= turbo_frame_tag "session_modal" do %>
-    <div >
-      <p>details</p>
-    </div>
-  <% end %>
-  <div class="sm:hidden mt-8">
+  <div class="hidden mt-8">
     <label for="tabs" class="sr-only">Select a tab</label>
     <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
     <!-- todo: use real session types here -->
@@ -20,7 +15,7 @@
       <option>Billing</option>
     </select>
   </div>
-  <div class="hidden sm:block mt-8">
+  <div class="block mt-8">
     <%# tab controls for session types %>
     <nav class="isolate flex divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs">
       <!-- Current: "text-orange-900", Default: "text-orange-500 hover:text-orange-700" -->
