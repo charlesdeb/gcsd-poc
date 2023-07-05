@@ -85,7 +85,7 @@ module ApplicationHelper
   # <time datetime="Sat, 02 Apr 2022 01:00:00 +0000"
   #       x-data="{'format':{'hour':'numeric','minute':'numeric'}}"
   #       x-text="$store.timeZoneSelect.formatDateTime('2022-04-02T01:00:00Z', format)">12:00 PM</time>
-  def alpine_time(options = {})
+  def alpine_time(options = {}) # rubocop:disable Metrics/MethodLength
     return 'Unknown Time' if options[:time].blank?
 
     x_data = options[:format] ? { format: options[:format] }.to_json : ''
@@ -95,9 +95,13 @@ module ApplicationHelper
                "$store.timeZoneSelect.formatDateTime('#{options[:time].to_fs(:iso8601)}')"
              end
 
+    # options[:class] = '' unless options[:class].blank?
+
     content_tag :time, t('loading'),
                 datetime: l(options[:time]),
-                'x-data': x_data, 'x-text': x_text
+                'x-data': x_data,
+                'x-text': x_text,
+                class: options[:class]
   end
 
   # shows a header for a session in the timetable view

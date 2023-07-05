@@ -1,6 +1,6 @@
 <%# Sessions summary component for an event %>
 <%# event:: expected to be an Event %>
-<section id="event-sessions-summary" x-data="sessionsSummaryTab" x-init="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
+<section id="event-sessions-summary" class="space-y-2" x-data="sessionsSummaryTab" x-init="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
   <h2 class="mt-8 text-2xl font-bold leading-8 tracking-tight text-orange space-y-2 sm:text-3xl">
     <%= t('.sessions_summary') %>
   </h2>

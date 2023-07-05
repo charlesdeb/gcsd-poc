@@ -2,10 +2,12 @@
 <%# time_slot:: expected to be a TimeSlot %>
 <tr class="border-collapse border-orange border hover:bg-orange-300  hover:text-white" x-on:click="chooseSlot($event)"
  data-time_slot="<%= dom_id(time_slot) %>">
-  <td class="w-28 text-center py-2 px-3 md:p-1 lg:p-2">
-    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'} %>
-    <br>
-    <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'} %>
+  <td class="w-28 sm:w-32 text-center py-2 px-3 md:p-1 lg:p-2">
+    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
+    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'}, class: 'sm:hidden' %>
+    <br class="sm:hidden">
+    <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'}, class: 'sm:hidden'
+ %>
   </td>
   <td class="table table-fixed w-full">
     <div class="py-2 px-3 md:p-1 lg:p-2 ">
@@ -27,9 +29,11 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
 <% if time_slot.sessions.count > 0 %>
   <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
-    <td colspan="3">
+    <td colspan="3" class="p-4 space-y-4">
       <% time_slot.sessions.order(:title).each do |session|%>
-        <%= render partial: 'sessions/timetable_session_narrow', locals: {session: session }%>
+        <div>
+          <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
+        </div>
       <% end %>
     </td>
   </tr>

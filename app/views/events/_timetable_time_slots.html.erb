@@ -1,7 +1,6 @@
 <%# Timetable timeslots component for an event %>
 <%# event:: expected to be an Event %>
-<%# <div class="grid grid-cols-timetable" x-data="timetable" x-on:click="chooseSlot($event)"> %>
-<table class="table-auto" x-data="timetable">
+<table class="table-auto">
   <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
     <%= render partial: 'time_slots/timetable_time_slot', locals: {time_slot: time_slot} %>
   <% end %>

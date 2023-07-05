@@ -1,7 +1,0 @@
-<%# All sessions for a given time_slot within an event's timetable (wide) %>
-<%# time_slot:: expected to be a TimeSlot %>
-<div class="hidden px-4 sm:px-6 pb-4 sm:pb-6 space-y-4 time-slot-sessions" data-time_slot="time_slot_<%= time_slot.id %>">
-  <% time_slot.sessions.order(:title).each do |session|%>
-    <%= render partial: 'sessions/timetable_session_wide', locals: {session: session }%>
-  <% end %>
-</div>

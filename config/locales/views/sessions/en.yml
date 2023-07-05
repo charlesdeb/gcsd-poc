@@ -1,18 +1,10 @@
 en:
   sessions:
-    timetable_session_wide:
-      requirements: Special Requirements
-      participant_limit: Participant Limit
-      limited_to: "%{limit} people"
-    timetable_session_narrow:
-      requirements: Special Requirements
-      participant_limit: Participant Limit
-      limited_to: "%{limit} people"
     show:
       close_pop_up: Close pop-up
       participant_limit: Participant Limit
       requirements: Special Requirements
-      limited_to: "%{limit} people"
+      limited_to: '%{limit} people'
       session_times: Session time(s)
   # use in the dashboard views
   helpers:

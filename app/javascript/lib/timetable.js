@@ -39,6 +39,7 @@ const start = function (window) {
       );
     },
     selectTimeSlot(timeSlot) {
+      this.state.selectedTimeSlot = timeSlot;
       const selectedBgClass = 'bg-orange-500';
 
       /** forst deselect all the time slots */

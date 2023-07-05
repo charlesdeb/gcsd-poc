@@ -1,13 +1,5 @@
 fr:
   sessions:
-    timetable_session_wide:
-      requirements: Exigences particulières
-      participant_limit: Limite du nombre de participants
-      limited_to: '%{limit} personnes'
-    timetable_session_narrow:
-      requirements: Exigences particulières
-      participant_limit: Limite du nombre de participants
-      limited_to: '%{limit} personnes'
     show:
       close_pop_up: Fermer la fenêtre pop-up
       requirements: Exigences particulières
