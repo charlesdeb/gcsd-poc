@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Message from <%= @contact_form[:email] %></h1>
+    <p>
+      They just sent a message from the contact form on the website.
+    </p>
+    <table>
+      <tr>
+        <td style="padding: 4px;">First Name</td>
+        <td style="padding: 4px;"><b><%= @contact_form[:first_name] %></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 4px;">Last Name</td>
+        <td style="padding: 4px;"><b><%= @contact_form[:last_name] %></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 4px;">Email</td>
+        <td style="padding: 4px;"><b><%= @contact_form[:email] %></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 4px;">Message</td>
+        <td style="padding: 4px;"><b><%= @contact_form[:message] %></b></td>
+      </tr>
+    </table>
+  </body>
+</html>
