@@ -12,7 +12,7 @@
       t('.session_type'),
       session_type_options(event.session_types_with_counts).join('').html_safe,
       class: 'block w-full border-orange-300 focus:border-orange-800 focus:ring-orange-800',
-      'x-on:click': 'chooseSessionType($event.target.value)'
+      'x-on:change': 'chooseSessionType($event.target.value)'
     )
     %>
     </div>
