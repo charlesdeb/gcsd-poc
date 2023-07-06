@@ -3,12 +3,12 @@
     <div>
       <%= image_tag 'logo-colour-500x527.png', size: '100x100', class: 'mx-auto h-24 w-auto', alt: 'GCSD' %>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900"><%= t('.sign_in_to_your_account')%></h2>
-      <p class="hidden mt-2 text-center text-sm text-gray-600">
-        Or
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> start your 14-day free trial </a>
-      </p>
     </div>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "mt-8 space-y-6"}) do |f| %>
+    <%#= This next line is commented out because we have our own session_path %>
+    <%#= route, and this one clashes. Instead, we have hard-coded %>
+    <%#= 'user_session_path' to avoid ambiguity %>
+    <%#= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "mt-8 space-y-6"}) do |f| #end %>
+    <%= form_for(resource, as: resource_name, url: user_session_path, html: {class: "mt-8 space-y-6"}) do |f| %>
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div class="field">

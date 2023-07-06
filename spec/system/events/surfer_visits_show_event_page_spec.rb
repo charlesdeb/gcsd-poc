@@ -22,7 +22,9 @@ RSpec.feature 'Surfer visits show event', type: :system do
     end
 
     before(:each) do
-      visit event_path event
+      # as per https://stackoverflow.com/questions/59295991/set-locale-via-default-url-options-for-rails-tests-rails-6-and-newer
+      # it seems like I need to specify the :locale
+      visit event_path :en, event
     end
 
     scenario 'they see the title' do
@@ -73,7 +75,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
     end
 
     before(:each) do
-      visit event_path event
+      visit event_path :en, event
     end
 
     scenario 'they see a \'let me know when I can sign up\' form' do
@@ -109,7 +111,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
     end
 
     before(:each) do
-      visit event_path event
+      visit event_path :en, event
     end
 
     # scenario('they can register for the event')
@@ -144,7 +146,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
       end
 
       before(:each) do
-        visit event_path event
+        visit event_path :en, event
       end
 
       scenario 'they see the summary' do
@@ -155,10 +157,10 @@ RSpec.feature 'Surfer visits show event', type: :system do
       end
 
       scenario 'they see the session types (in a tab control)', js: true do
-        within('section#event-sessions-summary') do
-          expect(page).to have_link('Plenaries (2)')
-          expect(page).to have_link('Worship (1)')
-          expect(page).to have_link('Workshops (1)')
+        within('section#event-sessions-summary nav') do
+          expect(page).to have_text('Plenaries (2)')
+          expect(page).to have_text('Worship (1)')
+          expect(page).to have_text('Workshops (1)')
         end
       end
 
@@ -177,7 +179,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
 
     context('full programme details') do
       before(:each) do
-        visit event_path event
+        visit event_path :en, event
       end
 
       scenario 'they can see the timetable' do
@@ -188,7 +190,7 @@ RSpec.feature 'Surfer visits show event', type: :system do
       scenario('they see the time slots') do
         time_slots_count = event.time_slots.count
         within('section#event-timetable') do
-          expect(page).to have_selector('#timetable-time-slots tr', count: time_slots_count)
+          expect(page).to have_selector('#timetable-time-slots tr[data-time_slot]', count: time_slots_count)
         end
       end
 
@@ -206,16 +208,13 @@ RSpec.feature 'Surfer visits show event', type: :system do
           end
         end
 
-        scenario 'they can click to see the sessions for the time slot' do
+        scenario 'they can click to see the sessions thumbnails for the time slot' do
           time_slot = event.time_slots.first
 
-          p event
-          p time_slot
-          p time_slot.sessions
-          p time_slot.sessions.first
-
-          # session stuff should not be visible before clicking the time slot
-          expect(page).not_to have_text(/#{time_slot.sessions.first.title}/i)
+          within('section#event-timetable') do
+            # session stuff should not be visible before clicking the time slot
+            expect(page).not_to have_text(/#{time_slot.sessions.first.title}/i)
+          end
 
           within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
             # click on something that isn't actually a real link
@@ -224,8 +223,10 @@ RSpec.feature 'Surfer visits show event', type: :system do
 
           # session stuff should now be visible
           expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
+
+          # but the full details are not visible until clicked on
           stripped_description = strip_tags(time_slot.sessions.first.description.body.to_s).squish
-          expect(page).to have_text(/#{stripped_description}/i)
+          expect(page).not_to have_text(/#{stripped_description}/i)
         end
 
         context('for a session') do
@@ -234,8 +235,13 @@ RSpec.feature 'Surfer visits show event', type: :system do
           before(:each) do
             # click on a time slot
             within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
-              # click on something that isn't actually a real link
+              # click the time slot
               page.find('td', text: time_slot.title).click
+            end
+
+            within("section#event-timetable .timetable-details [data-time_slot='time_slot_#{time_slot.id}']") do
+              # click a session within that time_slot
+              page.find('p', text: time_slot.sessions.first.title).click
             end
           end
 

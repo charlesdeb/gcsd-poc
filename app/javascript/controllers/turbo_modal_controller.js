@@ -2,6 +2,8 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="turbo-modal"
 export default class extends Controller {
+
+  // some code taken from https://www.bearer.com/blog/how-to-build-modals-with-hotwire-turbo-frames-stimulusjs
   static targets = ['modal', 'content'];
   hideModal() {
     // this.element.parentElement.removeAttribute('src'); // it might be nice to also remove the modal SRC

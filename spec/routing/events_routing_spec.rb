@@ -7,7 +7,13 @@ RSpec.describe EventsController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/events').to route_to(
-        controller: 'events', action: 'index', locale: default_locale
+        controller: 'events', action: 'index'
+      )
+    end
+
+    it 'routes to #index for default locale' do
+      expect(get: "/#{default_locale}/events").to route_to(
+        controller: 'events', action: 'index', locale: default_locale.to_s
       )
     end
 
@@ -25,7 +31,7 @@ RSpec.describe EventsController, type: :routing do
 
     it 'routes to #show' do
       expect(get: '/events/1').to route_to(
-        controller: 'events', action: 'show', id: '1', locale: default_locale
+        controller: 'events', action: 'show', id: '1'
       )
     end
   end

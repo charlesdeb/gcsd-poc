@@ -11,5 +11,11 @@ FactoryBot.define do
     end
 
     factory :admin_user, traits: [:admin]
+
+    # confirm the user - as per devise
+    after(:create) do |user|
+      user.confirm
+      user.save
+    end
   end
 end

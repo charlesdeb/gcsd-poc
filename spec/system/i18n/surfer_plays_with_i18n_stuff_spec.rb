@@ -18,7 +18,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
   context 'default timezone' do
     before(:each) do
       # this page has i18n stuff on it
-      visit event_path event
+      visit event_path :en, event
     end
 
     scenario 'timezone cookie is set to the default' do
@@ -40,7 +40,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
   context 'surfer changes timezone' do
     before(:each) do
       # this page has i18n stuff on it
-      visit event_path event
+      visit event_path :en, event
     end
 
     scenario 'timezone cookie is set to the new value' do
@@ -60,7 +60,7 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
 
       # change pages
       visit root_path
-      visit event_path event
+      visit event_path :en, event
 
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
 

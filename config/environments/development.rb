@@ -44,7 +44,6 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Setting added by CdeB after installing devise
-  # And then commented out after installing mail_interceptor
   config.action_mailer.default_url_options = {
     host: 'localhost',
     port: 3000
@@ -78,4 +77,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.action_controller.action_on_unpermitted_parameters = :raise
+
+  config.logger = Logger.new(STDOUT)
 end

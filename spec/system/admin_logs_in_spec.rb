@@ -12,8 +12,11 @@ RSpec.feature 'Admin tries to log in' do
   let(:email) { 'squirrel@example.com' }
   let!(:admin) do
     FactoryBot.create(
-      :admin_user, first_name: 'Zaphod', last_name: 'Beeblebrox', email: email,
-                   password: correct_password
+      :admin_user,
+      first_name: 'Zaphod',
+      last_name: 'Beeblebrox',
+      email: email,
+      password: correct_password
     )
   end
 

@@ -65,4 +65,12 @@ Rails.application.configure do
   # administrate uses scss - which doesn't play well with tailwind.
   # see https://github.com/thoughtbot/administrate/issues/2091
   config.assets.css_compressor = nil
+
+  # Setting added by CdeB after installing devise
+  config.action_mailer.default_url_options = {
+    host: 'localhost',
+    port: 3000
+  }
+
+  config.action_mailer.default_options = { from: 'no-reply@example.com' }
 end

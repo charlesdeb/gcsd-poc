@@ -23,7 +23,7 @@ const start = function (window) {
 
       if (
         getComputedStyle(
-          document.querySelector('.timetable-details-wide')
+          document.querySelector('.timetable-details')
         ).getPropertyValue('display') == 'block'
       ) {
         this.toggleDetailsWide(timeSlot);
@@ -64,7 +64,7 @@ const start = function (window) {
     toggleDetailsWide(timeSlot) {
       /** hide all the timeslot sessions on the right */
       document
-        .querySelectorAll('.timetable-details-wide .time-slot-sessions')
+        .querySelectorAll('.timetable-details .time-slot-sessions')
         .forEach((slot) => {
           slot.classList.add('hidden');
           slot.classList.remove('block');
@@ -72,7 +72,7 @@ const start = function (window) {
 
       /** show these timeslot sessions on the right */
       document
-        .querySelector(`.timetable-details-wide [data-time_slot="${timeSlot}"]`)
+        .querySelector(`.timetable-details [data-time_slot="${timeSlot}"]`)
         .classList.replace('hidden', 'block');
     },
     /** toggle visibility of timeslot sessions on narrow screen  */
