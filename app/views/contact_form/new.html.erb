@@ -1,0 +1,51 @@
+<div class='grid grid-cols-1 sm:grid-cols-2 gap-8'>
+  <h1 class="sm:row-start-1 sm:col-span-2"><%= t('.contact_us') %></h1>
+  <div class="hidden sm:block sm:row-start-3 sm:col-start-2 sm:row-span-4">
+    <%= image_tag("contact-placeholder.png")%>
+  </div>
+  <h2 class="hidden text-base font-semibold leading-7 text-gray-900">Profile</h2>
+  <p class="sm:row-start-2 sm:col-start-1 sm:col-span-2 mt-1 leading-6 text-gray-600">Got a question? You're in the right place. </p>
+  <%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: 'sm:row-start-3 sm:col-start-1 sm:border sm:border-gray-300 sm:bg-celery-100 sm:p-4' do |form| %>
+    <div class="pb-6">
+      <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-6">
+        <div class="col-span-6 md:col-span-3">
+          <%= form.label :first_name, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-1">
+            <%= form.text_field :first_name, autocomplete: "given-name", class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+        <div class="col-span-6 md:col-span-3">
+          <%= form.label :last_name, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-1">
+            <%= form.text_field :last_name, autocomplete: "family-name", class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <div class="mt-1">
+            <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6">
+          </div>
+        </div>
+        <div class="col-span-6 md:col-span-3">
+          <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
+          <div class="mt-1">
+            <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option>United States</option>
+              <option>Canada</option>
+              <option>Mexico</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-span-6">
+          <%= form.label :message, class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <div class="mt-1">
+            <%= form.text_area :message, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+      <%= form.submit "Send", class: "rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600" %>
+    </div>
+  <% end %>
+</div>

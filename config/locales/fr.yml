@@ -14,6 +14,7 @@ fr:
     about: Qui sommes-nous?
     history: Histoire
     finance: Finance
+    contact: Contact
 
   # pages boilerplate
   pages:
@@ -22,3 +23,8 @@ fr:
       gcsd: Journée Mondiale du Studio Créatif
       future_events: Événements à venir
       past_events: Événements passés
+
+  # contact_form
+  contact_form:
+    new:
+      contact_us: Contactez nous

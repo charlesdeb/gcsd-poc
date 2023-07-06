@@ -34,7 +34,7 @@ en:
   language: 'English'
   gcsd: Global Creative Studio Days
   arts_release_studios: Arts Release Studios
-  with_presenter: "with %{presenter}"
+  with_presenter: 'with %{presenter}'
   various_presenters: various presenters
   loading: Loading...
   # date and time stuff
@@ -43,7 +43,7 @@ en:
       short: '%e %B %y at%k.%M %p (%Z)'
       # this emulates Luxon's { ...DateTime.DATETIME_MED, weekday: 'long' } format
       starting_at: '%A, %b %-e, %Y, %-l:%M %p'
-  at_session_times_html: "at %{session_times}"
+  at_session_times_html: 'at %{session_times}'
 
   # main menu boilerplate
   menu:
@@ -51,6 +51,7 @@ en:
     about: About
     history: History
     finance: Finance
+    contact: Contact
 
   # pages boilerplate
   pages:
@@ -59,3 +60,8 @@ en:
       gcsd: Global Creative Studio Days
       future_events: Future Events
       past_events: Past Events
+
+  # contact_form
+  contact_form:
+    new:
+      contact_us: Contact Us
