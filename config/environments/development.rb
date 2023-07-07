@@ -78,5 +78,5 @@ Rails.application.configure do
 
   config.action_controller.action_on_unpermitted_parameters = :raise
 
-  config.logger = Logger.new(STDOUT)
+  # config.logger = Logger.new(STDOUT)
 end

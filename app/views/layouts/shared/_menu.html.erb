@@ -13,7 +13,7 @@
         <div class="hidden sm:-my-px md:ml-6 md:flex md:space-x-3">
           <%= link_to t('menu.events'), events_path, class: wide_main_menu_item_class(:events, active_menu_item) %>
           <%= menu_page_links(:wide, active_menu_item: active_menu_item) %>
-          <%= link_to t('menu.contact'), new_contact_form_path, class: wide_main_menu_item_class(:events, active_menu_item) %>
+          <%= link_to t('menu.contact'), new_contact_form_path, class: wide_main_menu_item_class(:contact, active_menu_item) %>
         </div>
       </div>
       <!-- end side of nav -->
@@ -101,7 +101,7 @@
   <div class="pt-2 pb-3 space-y-1">
     <%= link_to "Events", events_path, class: narrow_main_menu_item_class(:events, active_menu_item) %>
     <%= menu_page_links(:narrow, active_menu_item: active_menu_item) %>
-    <%= link_to t('menu.contact'), new_contact_form_path, class: wide_main_menu_item_class(:events, active_menu_item) %>
+    <%= link_to t('menu.contact'), new_contact_form_path, class: narrow_main_menu_item_class(:contact, active_menu_item) %>
   </div>
   <div class="pt-4 pb-3 border-t border-orange-200">
     <div class="flex items-center px-4">

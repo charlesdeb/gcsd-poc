@@ -25,12 +25,12 @@ module ApplicationHelper
                'data-time-zone-select': ''
   end
 
-  def menu_page_links(width, active_menu_item)
+  def menu_page_links(width, options)
     result =     %i[about history finance].map do |page_item|
       link_class = (if width == :wide
-                      wide_main_menu_item_class(page_item, active_menu_item)
+                      wide_main_menu_item_class(page_item, options[:active_menu_item])
                     else
-                      narrow_main_menu_item_class(page_item, active_menu_item)
+                      narrow_main_menu_item_class(page_item, options[:active_menu_item])
                     end)
       link_to t("menu.#{page_item}"), page_path(page_item),
               class: link_class
@@ -199,7 +199,7 @@ module ApplicationHelper
       'border-orange-900 block px-4 py-2 border-l-4 text-base font-medium text-orange-900 bg-orange-200 hover:text-orange-800 hover:bg-orange-50' # rubocop:disable Layout/LineLength
     else
       # other menu item
-      'block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-200 w-full text-start'
+      'block px-4 py-2 text-base font-medium text-orange-500 hover:text-orange-800 hover:bg-orange-200 w-full text-start' # rubocop:disable Layout/LineLength
     end
   end
 
