@@ -6,6 +6,7 @@ en:
     full_event:
       donate: Donate
       register_now: Register Now!
+      preview_session_information: Preview session information
     sessions_summary:
       sessions_summary: Sessions Summary
       select_session_type: Select a session type

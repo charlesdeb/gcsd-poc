@@ -48,9 +48,11 @@
           </div>
         </div>
       </div>
-      <% if event.published? %>
-        <%= render partial: 'sessions_summary', locals: {event: event} %>
-        <%= render partial: 'timetable', locals: {event: event} %>
+      <% if event.published? or (current_user and current_user.admin?)%>
+        <h2 class="font-bold text-xl text-skyblue-500"><%= t('.preview_session_information') if !event.published? %></h2>
+        <%#= TODO handle events with no sessions better %>
+        <%= render partial: 'sessions_summary', locals: {event: event} unless event.session_types_with_counts.blank?%>
+        <%= render partial: 'timetable', locals: {event: event} unless event.session_types_with_counts.blank? %>
       <% end %>
     </div>
   </div>

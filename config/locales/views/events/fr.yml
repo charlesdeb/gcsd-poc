@@ -6,6 +6,7 @@ fr:
     full_event:
       donate: faire un don
       register_now: S'inscrire Maintenant!
+      preview_session_information: Informations sur la session d'avant-première
     sessions_summary:
       sessions_summary: Résumé des séances
       select_session_type: Sélectionner un type de séance
