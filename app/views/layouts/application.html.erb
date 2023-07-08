@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= render '/shared/gtm_script' %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= javascript_import_module_tag "lib/timezone_select" %>
-    <%#= TODO: Figure out how import this just in the _timetable.html.erb 
+    <%#= TODO: Figure out how to import this just in the _timetable.html.erb
                partial, but without disabling turbostreams 
                (with data: {turbo: false}) in all links that lead onto pages 
                that show the partial. 
@@ -23,6 +24,7 @@
     <%= yield :head %>
   </head>
   <body class="min-h-screen bg-pageBg flex flex-col gap-y-10">
+    <%= render '/shared/gtm_no_script' %>
     <%= render "layouts/shared/menu" %>
     <aside class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- next two flash messages required by devise -->
