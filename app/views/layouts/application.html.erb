@@ -22,21 +22,20 @@
     <%= tag(:link, rel: 'manifest', href: asset_path('site.webmanifest')) %>
     <%= yield :head %>
   </head>
-  <body class="min-h-full bg-pageBg">
+  <body class="min-h-screen bg-pageBg flex flex-col gap-y-10">
     <%= render "layouts/shared/menu" %>
-    <div class="py-10">
-      <aside class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- next two flash messages required by devise -->
-        <% if notice %>
-          <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 notice"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 alert"><%= alert %></p>
-        <% end %>
-      </aside>
-      <main class="max-w-7xl mx-auto px-4 pt-12 sm:px-6 lg:px-8">
-        <%= yield %>
-      </main>
-    </div>
+    <aside class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- next two flash messages required by devise -->
+      <% if notice %>
+        <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 alert"><%= alert %></p>
+      <% end %>
+    </aside>
+    <main class="flex-auto max-w-7xl mx-auto px-4 pt-12 sm:px-6 lg:px-8">
+      <%= yield %>
+    </main>
+    <%= render "layouts/shared/footer" %>
   </body>
 </html>
