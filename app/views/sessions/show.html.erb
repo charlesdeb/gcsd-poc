@@ -1,4 +1,5 @@
 <%= turbo_frame_tag 'session_modal' do %>
+  <%# content_for :title, "#{@session.event.title} - #{@session.title}" %>
   <%= tag.div data: { 
     controller: "turbo-modal",
     turbo_modal_target: "modal",

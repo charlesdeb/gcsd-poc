@@ -71,7 +71,10 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
-  host = ENV.fetch('SMTP_DOMAIN', nil) # replace with your own url
+
+  # host = ENV.fetch('SMTP_DOMAIN', nil) 
+  host = ENV.fetch('SITE_DOMAIN', nil) 
+  
   config.action_mailer.default_url_options = { host: host }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

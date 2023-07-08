@@ -1,5 +1,6 @@
 <%# Full Event Component %>
 <%# event:: expected to be an Event %>
+<% content_for :title, event.title %>
 <article id="<%= dom_id event %>">
   <%= turbo_frame_tag "session_modal" do %>
   <% end %>
