@@ -5,7 +5,7 @@ FactoryBot.define do
     title { Faker::Lorem.unique.word }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
-    finishing_at { Time.zone.today.next_week.days_since(1) }
+    finishing_at { starting_at.days_since(1) }
     description { Faker::Lorem.sentence }
     is_featured { false }
 
@@ -14,6 +14,14 @@ FactoryBot.define do
     trait :published do
       registration_url { Faker::Internet.url }
       status { :published }
+    end
+
+    trait :archived do
+      status { :archived }
+    end
+
+    trait :draft do
+      status { :draft }
     end
 
     factory :draft_event, traits: [:draft]

@@ -43,7 +43,7 @@ class Event < ApplicationRecord
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
   scope :past, -> { where('finishing_at < ?', Date.today) }
-  scope :publicly_viewable, -> { published.or(coming_soon) }
+  scope :publicly_viewable, -> { order(starting_at: :desc).published.or(coming_soon) }
 
   def session_types_with_counts
     session_ids = Event.find(id).sessions.ids

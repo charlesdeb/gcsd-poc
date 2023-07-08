@@ -226,14 +226,19 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    context 'public' do
+    context 'publicly_viewable' do
       let!(:draft_event) { FactoryBot.create(:draft_event) }
-      let!(:coming_soon_event) { FactoryBot.create(:coming_soon_event) }
-      let!(:published_event) { FactoryBot.create(:published_event) }
+      let!(:published_event) { FactoryBot.create(:published_event, starting_at: Time.zone.today.last_week) }
+      let!(:coming_soon_event) { FactoryBot.create(:coming_soon_event, starting_at: Time.zone.today.next_week) }
       let!(:archived_event) { FactoryBot.create(:archived_event) }
 
       it 'only returns two events' do
         expect(Event.publicly_viewable.count).to eq(2)
+      end
+
+      it 'orders them newest to oldest' do
+        expect(Event.publicly_viewable.first).to eq(coming_soon_event)
+        expect(Event.publicly_viewable.last).to eq(published_event)
       end
     end
 
