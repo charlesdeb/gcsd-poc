@@ -9,7 +9,11 @@
  x-transition:enter-end="opacity-100 scale-100"
  x-cloak>
   <div class="md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6" data-sessions>
-    <% event.sessions.where(session_type: session_type_id).order(title: :asc).each do |session| %>
+    <% event.sessions.where(session_type: session_type_id)
+                     .order(title: :asc)
+                     .with_attached_featured_image
+                     .includes(%i[plain_text_translations presenters time_slots])
+                     .each do |session| %>
       <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
     <% end %>
   </div>

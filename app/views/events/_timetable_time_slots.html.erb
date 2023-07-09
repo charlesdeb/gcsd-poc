@@ -1,7 +1,9 @@
 <%# Timetable timeslots component for an event %>
 <%# event:: expected to be an Event %>
 <table class="table-auto">
-  <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
+  <% timeslots = event.time_slots.order(:starting_at)
+                                 .includes([:plain_text_translations])
+                                 .each do |time_slot| %>
     <%= render partial: 'time_slots/timetable_time_slot', locals: {time_slot: time_slot} %>
   <% end %>
 </table>

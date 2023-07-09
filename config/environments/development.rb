@@ -3,6 +3,20 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  # Bullet slows down the dev environment (because it is checking for duff
+  # queries, but after the N+1s have been fixed and the gem is not running
+  # then database performance was a bit better. For the full event page,
+  # constructing the initial HTML page went from 1.48 -> 1.19s (20% reduction)
+  # and the avg for subsequent loads from 0.679 -> 0.607s (10% reduction)
+  config.after_initialize do
+    Bullet.enable        = true
+    Bullet.alert         = false
+    Bullet.bullet_logger = true
+    Bullet.console       = true
+    Bullet.rails_logger  = true
+    Bullet.add_footer    = true
+  end
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

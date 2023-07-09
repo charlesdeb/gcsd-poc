@@ -101,6 +101,8 @@ group :development, :test do
 end
 
 group :development do
+  # find and kill n+1 issues
+  gem 'bullet'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 

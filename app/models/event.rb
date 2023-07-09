@@ -43,7 +43,12 @@ class Event < ApplicationRecord
   scope :featured, -> { where(is_featured: true) }
   scope :future, -> { where('starting_at >= ?', Date.today) }
   scope :past, -> { where('finishing_at < ?', Date.today) }
-  scope :publicly_viewable, -> { order(starting_at: :desc).published.or(coming_soon) }
+  scope :publicly_viewable, lambda {
+                              order(starting_at: :desc)
+                                .published.or(coming_soon)
+                                .with_attached_featured_image
+                                .includes(%i[plain_text_translations rich_text_description])
+                            }
 
   def session_types_with_counts
     session_ids = Event.find(id).sessions.ids
@@ -55,6 +60,7 @@ class Event < ApplicationRecord
       .joins(:sessions)
       .where(sessions: { id: session_ids })
       .order(:order_by)
+      .includes([:plain_text_translations])
 
     # While this works, it returns session objects, rather than session_type
     # which requires an extra call to session_type in order to grab the name.
