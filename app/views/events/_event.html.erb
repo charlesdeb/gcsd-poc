@@ -9,11 +9,11 @@
           <div class='space-y-3 md:space-y-0 md:flex gap-x-3 md:gap-x-6'>
             <div class="relative max-w-prose text-base lg:max-w-none">
               <figure>
-                <div class="md:w-36 lg:w-44">
-                  <%= link_to event_path(id: event) do %>
-                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg aspect-[3/2]', alt: event.title if event.featured_image.representable? %>
-                  <% end %>
-                </div>
+                <%= link_to event_path(id: event) do %>
+                  <div class="shrink-0 aspect-[3/2] md:w-36 md:min-w-36 lg:w-44 lg:min-w-44 bg-celery-300">
+                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg aspect-[3/2] w-full', alt: event.title if event.featured_image.representable? %>
+                  </div>
+                <% end %>
               </figure>
             </div>
             <div class="text-base space-y-6 md:gap-y-0">

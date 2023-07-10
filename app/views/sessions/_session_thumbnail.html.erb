@@ -3,7 +3,7 @@
 <div class="flex space-x-3">
   <!-- image -->
   <%= link_to session_path(session), class: 'hidden sm:block', data: {turbo_frame: 'session_modal'} do %>
-    <div class="shrink-0 aspect-[3/2] bg-celery-300">
+    <div class="shrink-0 aspect-[3/2] w-32 min-w-32 bg-celery-300">
       <%= image_tag session.featured_image, alt: session.title, class: 'aspect-[3/2] w-32 max-h-24 min-w-32 object-cover' if session.featured_image.representable? %>
     </div>
   <% end %>

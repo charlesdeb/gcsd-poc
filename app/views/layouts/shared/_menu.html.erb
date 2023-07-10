@@ -1,6 +1,6 @@
-<nav x-data="{hamburgerOpen : false}" x-cloak class="sticky top-0 z-10 bg-orange-50 border-b border-orange-300" id="main-menu" >
+<nav x-data="{hamburgerOpen : false}" class="sticky top-0 z-10 bg-orange-50 border-b border-orange-300" id="main-menu" >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="desktop-menu">
-    <div class="flex justify-between h-16 gap-x-3">
+    <div class="flex justify-between h-14 sm:h-16 gap-x-3">
       <!-- start side of nav -->
       <div class="flex">
         <!-- home link -->
@@ -92,7 +92,7 @@
       </div>
     </div>
   </div>
-</div>
+
 <!-- Mobile menu, show/hide based on menu state. -->
 <div class="md:hidden" id="mobile-menu" x-show="hamburgerOpen">
   <div class="px-4 w-full">
