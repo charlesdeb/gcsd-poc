@@ -27,7 +27,11 @@ RSpec.feature 'Surfer visits show event', type: :system do
       visit event_path :en, event
     end
 
-    scenario 'they see the title' do
+    scenario 'they see the event title in the header' do
+      expect(page.title).to include(title)
+    end
+
+    scenario 'they see the event title on the page' do
       within('div.overview') do
         expect(page).to have_text(title)
       end

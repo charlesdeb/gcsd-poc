@@ -13,6 +13,12 @@ RSpec.feature 'Surfer visits home page' do
     expect(page).to have_text(body)
   end
 
+  scenario 'they see the right title' do
+    visit root_path
+
+    expect(page).to have_title('GCSD')
+  end
+
   context('there are future events') do
     let(:future_featured_title) { 'Groovy Future Featured Event' }
     let(:future_featured_description) { 'Some stuff about a future featured event' }
