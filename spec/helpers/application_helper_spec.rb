@@ -144,4 +144,26 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.show_gtm?(env, current_user)).to be(false)
     end
   end
+
+  describe '#timetable_session_time_slots' do
+    it 'shows tbc if session has no time slot(s)' do
+      session = FactoryBot.create(:session)
+
+      expect(helper.timetable_session_time_slots(session)).to eq(I18n.t('.time_to_be_confirmed'))
+    end
+
+    it 'shows single time slot' do
+      # time_slot = FactoryBot.create(:time_slot)
+      # session = FactoryBot.create(:session, event: time_slot.event, time_slot: time_slot)
+      session = FactoryBot.create(:session_with_time_slots, time_slots_count: 1)
+
+      expect(helper.timetable_session_time_slots(session)).to have_selector('time', count: 1)
+    end
+
+    it 'shows multiple time slots' do
+      session = FactoryBot.create(:session_with_time_slots, time_slots_count: 3)
+
+      expect(helper.timetable_session_time_slots(session)).to have_selector('time', count: 3)
+    end
+  end
 end

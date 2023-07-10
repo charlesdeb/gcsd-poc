@@ -38,6 +38,8 @@ en:
   with_presenter: 'with %{presenter}'
   various_presenters: various presenters
   loading: Loading...
+  time_to_be_confirmed: Time to be confirmed
+
   # date and time stuff
   time:
     formats:

@@ -4,10 +4,13 @@ fr:
   gcsd: Journée Mondiale du Studio Créatif
   arts_release_studios: Arts Release Studios
   arts_release_studios_home: Arts Release Studios accueil
-  with_presenter: "avec %{presenter}"
+  with_presenter: 'avec %{presenter}'
   various_presenters: divers intervenants
   loading: Chargement...
-  at_session_times_html: "à %{session_times}"
+  time_to_be_confirmed: Heure à confirmer
+
+  # date and time stuff
+  at_session_times_html: 'à %{session_times}'
 
   # main menu boilerplate
   menu:
