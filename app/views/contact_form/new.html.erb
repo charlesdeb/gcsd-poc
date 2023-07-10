@@ -1,5 +1,5 @@
 <% content_for :title, t('.contact_us') %>
-<div class='grid grid-cols-1 sm:grid-cols-2 gap-8'>
+<article class='grid grid-cols-1 sm:grid-cols-2 gap-8'>
   <h1 class="sm:row-start-1 sm:col-span-2"><%= t('.contact_us') %></h1>
   <div class="hidden sm:block sm:row-start-3 sm:col-start-2 sm:row-span-4">
     <%= image_tag("contact-placeholder.png")%>
@@ -51,4 +51,4 @@
       <%= form.submit "Send", class: "rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600" %>
     </div>
   <% end %>
-</div>
+</article>

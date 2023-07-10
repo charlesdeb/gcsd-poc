@@ -1,14 +1,20 @@
 <% content_for :title, @page.title %>
-<article>
-  <h1><%=  yield(:title) %></h1>
-  <section class="py-8">
+<article class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+  <h1 class="sm:row-start-1 sm:col-span-2"><%=  yield(:title) %></h1>
+  <div class="block sm:row-start-2 sm:col-start-2 sm:row-span-4">
+    <%= image_tag("#{@page.slug}-placeholder.png")%>
+  </div>
+  <section class="sm:row-start-2 sm:col-start-1">
     <%= @page.body %>
   </section>
-  <% if current_user && current_user.admin? %>
-    <%= link_to 'Edit this page', edit_admin_page_path(id: @page), class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this page', page_path(id: @page), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 font-medium" %>
-    </div>
-    <%= link_to 'Back to pages', admin_pages_path, class: "ml-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
-  <% end %>
+  <div class="sm:row-start-3 sm:col-start-1
+">
+    <% if current_user && current_user.admin? %>
+      <%= link_to 'Edit this page', edit_admin_page_path(id: @page), class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
+      <div class="inline-block ml-2">
+        <%= button_to 'Destroy this page', page_path(id: @page), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-celery-200 font-medium" %>
+      </div>
+      <%= link_to 'Back to pages', admin_pages_path, class: "ml-2 rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
+    <% end %>
+  </div>
 </article>
