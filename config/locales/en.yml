@@ -34,6 +34,7 @@ en:
   language: 'English'
   gcsd: Global Creative Studio Days
   arts_release_studios: Arts Release Studios
+  arts_release_studios_home: Arts Release Studios home
   with_presenter: 'with %{presenter}'
   various_presenters: various presenters
   loading: Loading...

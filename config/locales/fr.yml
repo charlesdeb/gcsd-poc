@@ -3,6 +3,7 @@ fr:
   language: 'Français'
   gcsd: Journée Mondiale du Studio Créatif
   arts_release_studios: Arts Release Studios
+  arts_release_studios_home: Arts Release Studios accueil
   with_presenter: "avec %{presenter}"
   various_presenters: divers intervenants
   loading: Chargement...
