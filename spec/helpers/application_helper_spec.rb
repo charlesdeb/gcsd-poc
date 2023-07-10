@@ -121,4 +121,27 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(subject).to include(presenter2_bio)
     end
   end
+
+  describe '#show_gtm?' do
+    it 'is true in production for non-admin users' do
+      env = double('env', :production? => true)
+      current_user = double('current_user', :admin? => false)
+
+      expect(helper.show_gtm?(env, current_user)).to be(true)
+    end
+
+    it 'is false for admin users' do
+      env = double('env', :production? => true)
+      current_user = double('current_user', :admin? => true)
+
+      expect(helper.show_gtm?(env, current_user)).to be(false)
+    end
+
+    it 'is false in any env other than production' do
+      env = double('env', :production? => false)
+      current_user = double('current_user', :admin? => false)
+
+      expect(helper.show_gtm?(env, current_user)).to be(false)
+    end
+  end
 end

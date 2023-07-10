@@ -218,6 +218,11 @@ module ApplicationHelper
     render html: bio
   end
 
+  # should we show the google tag manager stuff?
+  def show_gtm?(env, current_user)
+    env.production? && !current_user.admin?
+  end
+
   private
 
   def language_options(request_path)
