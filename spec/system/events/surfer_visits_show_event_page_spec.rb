@@ -102,6 +102,29 @@ RSpec.feature 'Surfer visits show event', type: :system do
     scenario 'they don\'t see the timetable' do
       expect(page).not_to have_selector 'section#event-timetable'
     end
+
+    context 'with sessions' do
+      let!(:event) { FactoryBot.create(:coming_soon_event) }
+      let!(:time_slot) { FactoryBot.create(:time_slot, event: event) }
+      let!(:session) { FactoryBot.create(:session, time_slots: [time_slot], event: event) }
+
+      # let!(:event) do
+      #   FactoryBot.create(
+      #     :coming_soon_event,
+      #     starting_at: Time.zone.now,
+      #     title: title,
+      #     description: description
+      #   )
+      # end
+
+      before(:each) do
+        visit event_path :en, event
+      end
+
+      scenario 'they see the summary' do
+        expect(page).to have_selector 'section#event-sessions-summary'
+      end
+    end
   end
 
   context 'published future event' do

@@ -139,7 +139,7 @@ module ApplicationHelper
   # Shows the time_slots for a session in the full_event view
   # +session+:: Session
   def timetable_session_time_slots(session)
-    return t('time_to_be_confirmed') if session.time_slots.blank?
+    return t('time_to_be_confirmed') if session.time_slots.blank? || session.event.coming_soon?
 
     time_slots = session.time_slots.map do |time_slot|
       alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
@@ -220,7 +220,7 @@ module ApplicationHelper
 
   # should we show the google tag manager stuff?
   def show_gtm?(env, current_user)
-    env.production? && !current_user.admin?
+    env.production? && (current_user.nil? || !current_user.admin?)
   end
 
   private

@@ -26,13 +26,13 @@
   <body class="min-h-screen bg-pageBg flex flex-col gap-y-10">
     <%= render '/shared/gtm_no_script' %>
     <%= render "layouts/shared/menu" %>
-    <aside class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <aside class="max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- next two flash messages required by devise -->
       <% if notice %>
-        <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 notice"><%= notice %></p>
+        <p class="p-3 text-center font-bold text-green-700 border border-green-700 bg-green-200 w-full notice"><%= notice %></p>
       <% end %>
       <% if alert %>
-        <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 alert"><%= alert %></p>
+        <p class="p-3 text-center font-bold text-red-700 border border-red-700 bg-red-200 w-full alert"><%= alert %></p>
       <% end %>
     </aside>
     <main class="flex-auto max-w-7xl mx-auto px-4 pt-12 sm:px-6 lg:px-8">

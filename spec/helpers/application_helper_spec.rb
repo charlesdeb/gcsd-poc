@@ -130,6 +130,13 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.show_gtm?(env, current_user)).to be(true)
     end
 
+    it 'is true in production for non-logged in users' do
+      env = double('env', :production? => true)
+      current_user = nil
+
+      expect(helper.show_gtm?(env, current_user)).to be(true)
+    end
+
     it 'is false for admin users' do
       env = double('env', :production? => true)
       current_user = double('current_user', :admin? => true)
@@ -148,6 +155,14 @@ RSpec.describe ApplicationHelper, :type => :helper do
   describe '#timetable_session_time_slots' do
     it 'shows tbc if session has no time slot(s)' do
       session = FactoryBot.create(:session)
+
+      expect(helper.timetable_session_time_slots(session)).to eq(I18n.t('.time_to_be_confirmed'))
+    end
+
+    it 'shows tbc if session has time slot(s) and event status :coming_soon' do
+      coming_soon_event = FactoryBot.create(:coming_soon_event)
+      time_slot = FactoryBot.create(:time_slot, event: coming_soon_event)
+      session = FactoryBot.create(:session, time_slots: [time_slot], event: coming_soon_event)
 
       expect(helper.timetable_session_time_slots(session)).to eq(I18n.t('.time_to_be_confirmed'))
     end
