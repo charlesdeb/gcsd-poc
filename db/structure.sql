@@ -206,7 +206,8 @@ CREATE TABLE public.events (
     slug text NOT NULL,
     finishing_at timestamp(6) with time zone,
     status integer DEFAULT 0 NOT NULL,
-    registration_url text
+    registration_url text,
+    donation_url text
 );
 
 
@@ -250,6 +251,13 @@ COMMENT ON COLUMN public.events.finishing_at IS 'Time event finishes';
 --
 
 COMMENT ON COLUMN public.events.status IS 'draft, coming_soon, published or archived';
+
+
+--
+-- Name: COLUMN events.donation_url; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.events.donation_url IS 'A URL, probably at EventBrite, where a donation can be made.';
 
 
 --
@@ -1170,6 +1178,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230617185222'),
 ('20230621204520'),
 ('20230702193959'),
-('20230713122934');
+('20230713122934'),
+('20230713203552');
 
 

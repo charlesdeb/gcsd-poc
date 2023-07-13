@@ -223,6 +223,15 @@ module ApplicationHelper
     env.production? && (current_user.nil? || !current_user.admin?)
   end
 
+  # creates an html link for registering for an event
+  def register_link(event, options = {})
+    return nil unless event.published?
+
+    return nil unless event.starting_at >= Time.zone.today
+
+    link_to(t('.register_now'), event.registration_url, options)
+  end
+
   private
 
   def language_options(request_path)

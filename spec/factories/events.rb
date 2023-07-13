@@ -12,8 +12,11 @@ FactoryBot.define do
     traits_for_enum :status
 
     trait :published do
-      registration_url { Faker::Internet.url }
       status { :published }
+      registration_url { Faker::Internet.url }
+
+      # this is pretty likely to be set for a published event
+      donation_url { Faker::Internet.url }
     end
 
     trait :archived do

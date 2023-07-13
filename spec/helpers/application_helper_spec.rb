@@ -181,4 +181,40 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.timetable_session_time_slots(session)).to have_selector('time', count: 3)
     end
   end
+
+  describe '#register_link' do
+    before { helper.instance_variable_set(:@virtual_path, 'events.full_event') }
+
+    it 'shows nothing if event not published' do
+      %i[draft coming_soon archived].each do |status|
+        event = FactoryBot.create(:event, status: status)
+        expect(helper.register_link(event)).to be_blank
+      end
+    end
+
+    # useless test, since an event cannot be published without a rego URL
+    it 'shows nothing if no registration_url'
+
+    it 'shows nothing if event past' do
+      event = FactoryBot.create(
+        :event,
+        status: :published,
+        starting_at: Time.zone.today.last_week,
+        registration_url: 'https://example.com'
+      )
+
+      expect(helper.register_link(event)).to be_blank
+    end
+
+    it 'shows <a> with registration_url' do
+      event = FactoryBot.create(
+        :event,
+        status: :published,
+        starting_at: Time.zone.today.next_week,
+        registration_url: 'https://example.com'
+      )
+
+      expect(helper.register_link(event)).to have_link t('events.full_event.register_now'), href: event.registration_url
+    end
+  end
 end
