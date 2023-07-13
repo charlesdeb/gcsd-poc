@@ -7,10 +7,11 @@ class ContactFormController < ApplicationController
 
   def create
     @contact_form = ContactForm.new(contact_form_params)
+    @contact_form.validate
 
-    # TODO: ensure that mandatory forms are filled out
+    check = verify_recaptcha action: 'signup', minimum_score: 0.7, secret_key: ENV.fetch('RECAPTCHA_SECRET_V3', nil)
 
-    if @contact_form.save
+    if check && @contact_form.save
       NotifierMailer.with(contact_form: contact_form_params).contact_form_email.deliver_now
 
       flash[:notice] = 'Your message was sent successfully.'

@@ -87,6 +87,9 @@ gem 'mobility-actiontext'
 # Used for testing emails
 gem 'mail_interceptor', group: [:development, :staging]
 
+# Google Recaptcha for the contact form
+gem 'recaptcha'
+
 group :development, :test do
   # find and kill n+1 issues
   gem 'bullet'
