@@ -160,6 +160,40 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: contact_forms; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.contact_forms (
+    id bigint NOT NULL,
+    first_name text NOT NULL,
+    last_name text NOT NULL,
+    email text NOT NULL,
+    message text NOT NULL,
+    created_at timestamp(6) with time zone NOT NULL,
+    updated_at timestamp(6) with time zone NOT NULL
+);
+
+
+--
+-- Name: contact_forms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.contact_forms_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contact_forms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.contact_forms_id_seq OWNED BY public.contact_forms.id;
+
+
+--
 -- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -697,6 +731,13 @@ ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAU
 
 
 --
+-- Name: contact_forms id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.contact_forms ALTER COLUMN id SET DEFAULT nextval('public.contact_forms_id_seq'::regclass);
+
+
+--
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -783,6 +824,14 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: contact_forms contact_forms_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.contact_forms
+    ADD CONSTRAINT contact_forms_pkey PRIMARY KEY (id);
 
 
 --
@@ -882,6 +931,27 @@ CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_b
 --
 
 CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
+
+
+--
+-- Name: index_contact_forms_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_contact_forms_on_email ON public.contact_forms USING btree (email);
+
+
+--
+-- Name: index_contact_forms_on_first_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_contact_forms_on_first_name ON public.contact_forms USING btree (first_name);
+
+
+--
+-- Name: index_contact_forms_on_last_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_contact_forms_on_last_name ON public.contact_forms USING btree (last_name);
 
 
 --
@@ -1099,6 +1169,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230617171620'),
 ('20230617185222'),
 ('20230621204520'),
-('20230702193959');
+('20230702193959'),
+('20230713122934');
 
 

@@ -32,11 +32,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
     resources :events, only: %i[index show]
     resources :sessions, only: %i[show]
-
     resources :contact_form, only: %i[new create]
-    # namespace :admin do
-    #   resources :events
-    # end
 
     ####
     # Custom routes start here

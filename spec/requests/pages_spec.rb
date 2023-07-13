@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Pages', type: :request do
   describe 'GET /show' do
     it 'returns http success' do
-      slug = 'some_page'
+      slug = 'about'
       create(:page, slug: slug)
 
       get "/#{slug}"
