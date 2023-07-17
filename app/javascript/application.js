@@ -10,10 +10,10 @@ import 'controllers';
 import 'trix';
 import '@rails/actiontext';
 
-// import 'alpine-turbo-drive-adapter';
+import 'alpine-turbo-drive-adapter';
 import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-Alpine.plugin(focus);
+// import focus from '@alpinejs/focus';
+// Alpine.plugin(focus);
 window.Alpine = Alpine; // only required so that we can see the alpinejs debug tool
 
 // Will not work properly with Turbo - since it is only fired on full-page

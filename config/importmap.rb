@@ -13,5 +13,5 @@ pin '@rails/actiontext', to: 'actiontext.js'
 pin 'alpinejs', to: 'alpinejs.js'
 # Helps alpinejs work better with turbo https://github.com/SimoTod/alpine-turbo-drive-adapter
 pin 'alpine-turbo-drive-adapter', to: 'https://ga.jspm.io/npm:alpine-turbo-drive-adapter@2.0.0/dist/alpine-turbo-drive-adapter.esm.js'
-pin '@alpinejs/focus', to: '@alpinejs--focus.js' # @3.12.3
+# pin '@alpinejs/focus', to: '@alpinejs--focus.js' # @3.12.3
 pin 'luxon' # @3.1.0

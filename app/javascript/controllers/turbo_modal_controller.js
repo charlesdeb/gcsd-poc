@@ -2,24 +2,32 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="turbo-modal"
 export default class extends Controller {
-
   // some code taken from https://www.bearer.com/blog/how-to-build-modals-with-hotwire-turbo-frames-stimulusjs
   static targets = ['modal', 'content'];
-  hideModal() {
-    // this.element.parentElement.removeAttribute('src'); // it might be nice to also remove the modal SRC
-    // this.element.remove();
-    console.log('hiding modal');
-    // console.log({ window });
-    // console.log({ document: window.document });
 
-    // Remove the styles that prevent scrolling under a modal added by alpinejs
-    // trap, since they don't seem to be being removed on real mobile devices.
+  connect() {
+    // when the modal is showing, don't allow background scrolling
+    this.setBackgroundScoll(false);
+  }
+
+  // I was using x-trap with Alpine, but it was getting mixed up with Stimulus.
+  // TODO: refactor the modal so that it works properly with Alpine
+  setBackgroundScoll(isAllowScroll = true) {
     const htmlElement = window.document.querySelector('html');
-    console.log({ htmlElement });
-    htmlElement.style.overflow = '';
-    htmlElement.style.paddingRight = '';
+    if (isAllowScroll) {
+      htmlElement.style.overflow = '';
+      htmlElement.style.paddingRight = '';
+    } else {
+      htmlElement.style.overflow = 'hidden';
+      htmlElement.style.paddingRight = '0px';
+    }
+  }
 
-    // now remove the entire modal element
+  hideModal() {
+    // When the modal is gone, reinstate background scrolling
+    this.setBackgroundScoll(true);
+
+    // Remove the entire modal element
     this.modalTarget.remove();
   }
 
@@ -27,7 +35,6 @@ export default class extends Controller {
   // action: "keyup@window->turbo-modal#closeWithKeyboard"
   closeWithKeyboard(e) {
     if (e.code == 'Escape') {
-      console.log('escape clicked');
       this.hideModal();
     }
   }
@@ -35,7 +42,6 @@ export default class extends Controller {
   // hide modal when clicking outside of modal content
   // action: "click@window->turbo-modal#closeBackground"
   closeBackground(e) {
-    console.log({ window });
     if (e && this.contentTarget.contains(e.target)) {
       return;
     }
