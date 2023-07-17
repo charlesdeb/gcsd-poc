@@ -54,7 +54,7 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-          <div x-show="open" x-on:click.outside="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button-wide" tabindex="-1">
+          <div x-show="open" x-on:click.outside="open = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-sm py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button-wide" tabindex="-1">
             <!-- Active: "bg-orange-100", Not Active: "" -->
             <%= link_to 'Admin', admin_root_path, class: "block px-4 py-2 text-sm text-orange-700", role: "menuitem", tabindex: "-1" if (current_user and current_user.admin?) %>
             <a href="#" class="hidden block px-4 py-2 text-sm text-orange-700" role="menuitem" tabindex="-1" id="user-menu-item-0"> Your Profile </a>

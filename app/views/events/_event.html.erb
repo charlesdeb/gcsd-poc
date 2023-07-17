@@ -11,7 +11,7 @@
               <figure>
                 <%= link_to event_path(id: event) do %>
                   <div class="shrink-0 aspect-[3/2] md:w-36 md:min-w-36 lg:w-44 lg:min-w-44 bg-celery-300">
-                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg aspect-[3/2] w-full', alt: event.title if event.featured_image.representable? %>
+                    <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-sm aspect-[3/2] w-full', alt: event.title if event.featured_image.representable? %>
                   </div>
                 <% end %>
               </figure>

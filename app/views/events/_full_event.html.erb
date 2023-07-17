@@ -34,7 +34,7 @@
             <div class="relative mx-auto max-w-prose text-base lg:max-w-none">
               <figure>
                 <div class="lg:aspect-none">
-                  <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-lg', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
+                  <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-sm', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
                 </div>
                 <div class='hidden'>
                   <figcaption class="mt-3 flex text-sm text-gray-500">
