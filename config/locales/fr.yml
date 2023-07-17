@@ -11,6 +11,14 @@ fr:
 
   # date and time stuff
   at_session_times_html: 'à %{session_times}'
+  datetime:
+    distance_in_words:
+      x_minutes:
+        one:   "1 minute"
+        other: "%{count} minutes"
+      x_hours:
+        one:   "1 heure"
+        other: "%{count} heures"
 
   # main menu boilerplate
   menu:

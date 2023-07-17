@@ -71,4 +71,18 @@ RSpec.describe TimeSlot, type: :model do
     expect(subject.valid?).to be false
     expect(subject.errors[:finishing_at]).to include('must be after the start date')
   end
+
+  describe '#duration_parts' do
+    it 'returns length in minutes' do
+      subject.finishing_at = subject.starting_at.advance(minutes: 45)
+
+      expect(subject.duration_parts).to eq({ minutes: 45 })
+    end
+
+    it 'returns length in hours and minutes' do
+      subject.finishing_at = subject.starting_at.advance(hours: 1, minutes: 45)
+
+      expect(subject.duration_parts).to eq({ hours: 1, minutes: 45 })
+    end
+  end
 end

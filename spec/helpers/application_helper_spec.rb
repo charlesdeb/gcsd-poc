@@ -180,6 +180,12 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
       expect(helper.timetable_session_time_slots(session)).to have_selector('time', count: 3)
     end
+
+    it 'includes duration if requested' do
+      session = FactoryBot.create(:session_with_time_slots, time_slots_count: 1)
+
+      expect(helper.timetable_session_time_slots(session, is_show_duration: true)).to have_text('minutes')
+    end
   end
 
   describe '#register_link' do
@@ -215,6 +221,20 @@ RSpec.describe ApplicationHelper, :type => :helper do
       )
 
       expect(helper.register_link(event)).to have_link t('events.full_event.register_now'), href: event.registration_url
+    end
+  end
+
+  describe '#session_duration' do
+    it 'returns length in minutes' do
+      duration_parts = {  minutes: 45 }
+
+      expect(helper.session_duration(duration_parts)).to eq('45 minutes')
+    end
+
+    it 'returns length in hours and minutes' do
+      duration_parts = { hours: 1, minutes: 45 }
+
+      expect(helper.session_duration(duration_parts)).to eq('1 hour 45 minutes')
     end
   end
 end

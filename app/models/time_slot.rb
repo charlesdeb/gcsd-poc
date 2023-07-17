@@ -16,4 +16,8 @@ class TimeSlot < ApplicationRecord
   validates :title, :event_id, :starting_at, :finishing_at, presence: true
   validates :title, uniqueness: { scope: :event_id, message: 'has already been defined for this event' }
   validates :starting_at, uniqueness: { scope: :event_id, message: 'has already been defined for this event' }
+
+  def duration_parts
+    ActiveSupport::Duration.build(finishing_at - starting_at).parts
+  end
 end

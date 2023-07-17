@@ -8,13 +8,14 @@ export default class extends Controller {
   hideModal() {
     // this.element.parentElement.removeAttribute('src'); // it might be nice to also remove the modal SRC
     // this.element.remove();
-    // console.log('hiding modal');
+    console.log('hiding modal');
     // console.log({ window });
     // console.log({ document: window.document });
 
     // Remove the styles that prevent scrolling under a modal added by alpinejs
     // trap, since they don't seem to be being removed on real mobile devices.
     const htmlElement = window.document.querySelector('html');
+    console.log({ htmlElement });
     htmlElement.style.overflow = '';
     htmlElement.style.paddingRight = '';
 

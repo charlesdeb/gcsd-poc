@@ -5,6 +5,6 @@ FactoryBot.define do
     sequence(:title) { |n| "Time slot #{n}" }
     event
     starting_at { Time.zone.now }
-    finishing_at { Time.zone.now.advance(hours: 1) }
+    finishing_at { Time.zone.now.advance(minutes: 50) }
   end
 end

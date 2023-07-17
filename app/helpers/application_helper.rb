@@ -138,35 +138,19 @@ module ApplicationHelper
 
   # Shows the time_slots for a session in the full_event view
   # +session+:: Session
-  def timetable_session_time_slots(session)
+  def timetable_session_time_slots(session, is_show_duration: false)
     return t('time_to_be_confirmed') if session.time_slots.blank? || session.event.coming_soon?
 
     time_slots = session.time_slots.map do |time_slot|
-      alpine_time time: time_slot.starting_at, format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
+      time_tag =
+        alpine_time time: time_slot.starting_at,
+                    format: { hour: 'numeric', minute: 'numeric', weekday: 'short' }
+      duration = is_show_duration ? " (#{session_duration(time_slot.duration_parts)})" : ''
+
+      time_tag + duration
     end
 
     time_slots.join(', ').html_safe
-  end
-
-  # Shows an image related to a session in the timetable view
-  # This is currently just the first image it finds for a presenter
-  # Params
-  # +session+:: Session
-  def timetable_session_image(session, location = '')
-    return if session.featured_image.blank?
-
-    common_image_class = 'shadow-md shadow-celery-400 border border-celery-700'
-    image_class = if location == :modal
-                    '' + common_image_class
-                  else
-                    'w-1/2 lg:w-2/5 ml-3 mb-3 h-full float-right ' + common_image_class
-                  end
-
-    if session.featured_image.representable?
-      return image_tag session.featured_image, class: image_class, alt: session.title
-    end
-
-    nil
   end
 
   # Switches whether we show Past Events, Future Events or just Events on the
@@ -230,6 +214,17 @@ module ApplicationHelper
     return nil unless event.starting_at >= Time.zone.today
 
     link_to(t('.register_now'), event.registration_url, options)
+  end
+
+  # returns internationalised duration of a duration hash
+  # duration:: ActiveSupport::Duration#parts %>
+  def session_duration(duration_parts)
+    out = []
+    I18n.with_options(scope: 'datetime.distance_in_words') do |locale|
+      out.push locale.t(:x_hours, count: duration_parts[:hours]) if duration_parts.key?(:hours)
+      out.push locale.t(:x_minutes, count: duration_parts[:minutes]) if duration_parts.key?(:minutes)
+    end
+    out.join ' '
   end
 
   private
