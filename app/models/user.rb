@@ -17,6 +17,10 @@ class User < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
 
+  # Currently not used in administrate as it would take quite a bit of
+  # work to apply it broadly
+  belongs_to :default_event, class_name: 'Event', optional: true
+
   after_initialize :set_default_role, if: :new_record?
 
   # TODO: is this the right place for this? It's not an important domain concept.

@@ -645,7 +645,8 @@ CREATE TABLE public.users (
     unconfirmed_email character varying,
     failed_attempts integer DEFAULT 0 NOT NULL,
     unlock_token character varying,
-    locked_at timestamp(6) with time zone
+    locked_at timestamp(6) with time zone,
+    default_event_id bigint
 );
 
 
@@ -689,6 +690,13 @@ COMMENT ON COLUMN public.users.time_zone IS 'User''s preferred time zone';
 --
 
 COMMENT ON COLUMN public.users.locale IS 'User''s preferred locale (i.e. language)';
+
+
+--
+-- Name: COLUMN users.default_event_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.users.default_event_id IS 'A default event to use for this user when editing. Not currently used.';
 
 
 --
@@ -1068,6 +1076,13 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON public.users USING btre
 
 
 --
+-- Name: index_users_on_default_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_default_event_id ON public.users USING btree (default_event_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1137,6 +1152,14 @@ ALTER TABLE ONLY public.sessions
 
 
 --
+-- Name: users fk_rails_e5a059b8ef; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT fk_rails_e5a059b8ef FOREIGN KEY (default_event_id) REFERENCES public.events(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -1179,6 +1202,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230621204520'),
 ('20230702193959'),
 ('20230713122934'),
-('20230713203552');
+('20230713203552'),
+('20230717161556');
 
 

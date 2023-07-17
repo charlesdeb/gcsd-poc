@@ -6,10 +6,8 @@ By default, the navigation contains navigation links
 for all resources in the admin dashboard,
 as defined by the routes in the `admin/` namespace
 %>
-
 <nav class="navigation" role="navigation">
   <%= link_to(t("administrate.navigation.back_to_app"), root_url, class: "button button--alt button--nav") if defined?(root_url) %>
-
   <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
     <%= link_to(
       display_resource_name(resource),
@@ -17,12 +15,9 @@ as defined by the routes in the `admin/` namespace
       class: "navigation__link navigation__link--#{nav_link_state(resource)}"
     ) if accessible_action?(model_from_resource(resource), :index) %>
   <% end %>
-
   <%#= this is a helper from the main app. Administrate doesn't seem to include %>
   <%#= them by default, so there is a workaround in the administrate application %>
   <%#= locale_select request.path %>
-
-  <h2>Translation language</h2>
+  <p class="mt-3 font-bold"><%= t('.translation_language') %></p>
   <%= mobility_locale_select request.path %>
-
 </nav>

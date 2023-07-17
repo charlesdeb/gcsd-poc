@@ -34,7 +34,8 @@ class UserDashboard < Administrate::BaseDashboard
     ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    time_zone: TimeZoneField
+    time_zone: TimeZoneField,
+    default_event: Field::BelongsTo
   }.freeze
 
   # COLLECTION_ATTRIBUTES

@@ -1,0 +1,7 @@
+fr:
+  admin:
+    application:
+      default_event:
+        users_default_event: Événement par défaut de l'utilisateur courant
+      navigation:
+        translation_language: Langue de traduction
