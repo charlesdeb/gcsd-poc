@@ -1,6 +1,7 @@
 fr:
   # general messages
   language: 'Français'
+  locale: 'Français'
   gcsd: Journée Mondiale du Studio Créatif
   arts_release_studios: Arts Release Studios
   arts_release_studios_home: Arts Release Studios accueil
@@ -19,6 +20,7 @@ fr:
       x_hours:
         one:   "1 heure"
         other: "%{count} heures"
+  time-zone: Fuseau horaire
 
   # main menu boilerplate
   menu:

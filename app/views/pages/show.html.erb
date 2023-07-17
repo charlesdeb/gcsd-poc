@@ -1,8 +1,8 @@
-<% content_for :title, @page.title %>
+<%# content_for :title, @page.title %>
 <article class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-  <h1 class="sm:row-start-1 sm:col-span-2"><%=  yield(:title) %></h1>
-  <div class="block sm:row-start-2 sm:col-start-2 sm:row-span-4 ">
-    <%= image_tag(@page.featured_image) if @page.featured_image.representable? %>
+  <h1 class="sm:row-start-1 sm:col-span-2"><%= title @page.title %><%#= yield(:title) %></h1>
+  <div class="block sm:row-start-2 sm:col-start-2 sm:row-span-4">
+    <%= image_tag(@page.featured_image, class: "shadow-lg shadow-celery-300") if @page.featured_image.representable? %>
   </div>
   <section class="sm:row-start-2 sm:col-start-1">
     <%= @page.body %>

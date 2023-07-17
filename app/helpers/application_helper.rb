@@ -8,6 +8,7 @@ module ApplicationHelper
                language_options(request_path),
                id: id,
                class: i18n_selector_classes,
+               'aria-label': t('locale'),
                'x-data': '{}', 'x-title': 'Language Selector',
                'x-on:change': 'window.location = $event.target.querySelector("select option:checked").dataset.url'
   end
@@ -17,6 +18,7 @@ module ApplicationHelper
     select_tag 'time-zone',
                timezone_options,
                class: i18n_selector_classes,
+               'aria-label': t('time-zone'),
                'x-cloak': '',
                'x-data': {},
                'x-bind:value': '$store.timeZoneSelect.state.timeZone',
@@ -156,7 +158,7 @@ module ApplicationHelper
   # Switches whether we show Past Events, Future Events or just Events on the
   # event index page
   def event_index_header(scope = nil)
-    [scope, t('activerecord.models.event.other')].join(' ')
+    [scope, t('activerecord.models.event.other')].join(' ').humanize
   end
 
   # Highlight the current page (or page family) in the main menu in desktop

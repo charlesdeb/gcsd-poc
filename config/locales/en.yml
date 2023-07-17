@@ -32,6 +32,7 @@
 en:
   # general messages
   language: 'English'
+  locale: 'English'
   gcsd: Global Creative Studio Days
   arts_release_studios: Arts Release Studios
   arts_release_studios_home: Arts Release Studios home
@@ -55,6 +56,7 @@ en:
       x_hours:
         one:   "1 hour"
         other: "%{count} hours"
+  time-zone: Time zone
 
   # main menu boilerplate
   menu:

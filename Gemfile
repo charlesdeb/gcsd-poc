@@ -90,6 +90,9 @@ gem 'mail_interceptor', group: [:development, :staging]
 # Google Recaptcha for the contact form
 gem 'recaptcha'
 
+# Add meta tags to pages for better SEO
+gem 'meta-tags'
+
 group :development, :test do
   # find and kill n+1 issues
   gem 'bullet'

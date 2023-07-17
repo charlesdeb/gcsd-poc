@@ -1,6 +1,5 @@
 <%# Full Event Component %>
 <%# event:: expected to be an Event %>
-<% content_for :title, event.title %>
 <article id="<%= dom_id event %>">
   <%= turbo_frame_tag "session_modal" do %>
   <% end %>
@@ -13,7 +12,7 @@
             <h2 class="text-lg font-semibold text-orange-800">
               <%= alpine_time time: event.starting_at %>
             </h2>
-            <h2 class="mt-2 text-3xl font-bold leading-8 tracking-tighter text-orange sm:text-4xl"><%= event.title %></h2>
+            <h2 class="mt-2 text-3xl font-bold leading-8 tracking-tighter text-orange sm:text-4xl"><%= title event.title %></h2>
           </header>
           <section class="mt-5 lg:mt-3">
             <%= link_to t('.donate'), event.donation_url, class: "shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-200" unless event.donation_url.blank?%>
@@ -34,7 +33,7 @@
             <div class="relative mx-auto max-w-prose text-base lg:max-w-none">
               <figure>
                 <div class="lg:aspect-none">
-                  <%= image_tag event.featured_image, class: 'rounded-lg object-cover object-center shadow-sm', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
+                  <%= image_tag event.featured_image, class: 'object-cover object-center shadow-lg shadow-celery-300', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
                 </div>
                 <div class='hidden'>
                   <figcaption class="mt-3 flex text-sm text-gray-500">
