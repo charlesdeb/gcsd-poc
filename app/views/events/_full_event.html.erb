@@ -33,7 +33,7 @@
             <div class="relative mx-auto max-w-prose text-base lg:max-w-none">
               <figure>
                 <div class="lg:aspect-none">
-                  <%= image_tag event.featured_image, class: 'object-cover object-center shadow-lg shadow-celery-300', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
+                  <%= image_tag event.featured_image.variant(format: :webp), class: 'object-cover object-center shadow-lg shadow-celery-300', width: '1184', height: '1376', loading: :eager, alt: event.title if event.featured_image.representable? %>
                 </div>
                 <div class='hidden'>
                   <figcaption class="mt-3 flex text-sm text-gray-500">

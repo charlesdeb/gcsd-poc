@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="col-start-1 row-start-1 sm:col-start-3 sm:row-start-1">
-                <%= image_tag @session.featured_image, class: 'aspect-[3/2] object-cover shadow-md shadow-celery-300', alt: @session.title if @session.featured_image.representable? %>
+                <%= image_tag @session.featured_image.variant(format: :webp), class: 'aspect-[3/2] object-cover shadow-md shadow-celery-300', alt: @session.title if @session.featured_image.representable? %>
               </div>
               <div class="sm:block col-start-1 row-start-2 sm:col-start-3 sm:row-start-2 space-y-4">
                 <div>

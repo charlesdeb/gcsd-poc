@@ -3,7 +3,7 @@
 <%# event:: expected to be an Event %>
 <section class="relative bg-skyblue-950">
   <div class="h-56 bg-red-700 bg-blend-normal sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">
-    <%= image_tag event.featured_image.variant(resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', alt: event.title if event.featured_image.representable? %>
+    <%= image_tag event.featured_image.variant(format: :webp, resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', alt: event.title if event.featured_image.representable? %>
   </div>
   <div class="relative text-white max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
     <div class="md:ml-auto md:w-1/2 md:pl-10">
