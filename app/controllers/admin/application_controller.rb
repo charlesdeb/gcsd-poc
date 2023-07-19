@@ -26,6 +26,26 @@ module Admin
     # helper_method :options_for_select
     # helper_method :url_for
 
+    # Based on https://github.com/thoughtbot/administrate/issues/1837
+    def index # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      # only use this method for mobility'ised classes
+      return super unless resource_class.singleton_methods.include?(:i18n)
+
+      search_term = params[:search].to_s.strip
+      resources = search_term.blank? ? scoped_resource.all : i18n_search(search_term)
+      resources = apply_collection_includes(resources)
+      resources = order.apply(resources)
+      resources = resources.page(params[:page]).per(records_per_page)
+      page = Administrate::Page::Collection.new(dashboard, order: order)
+
+      render locals: {
+        resources: resources,
+        search_term: search_term,
+        page: page,
+        show_search_bar: show_search_bar?
+      }
+    end
+
     before_action :set_locales
     # before_action :authenticate_user!
 
@@ -57,6 +77,23 @@ module Admin
 
     def default_url_options
       { locale: I18n.locale, mobility_locale: Mobility.locale }
+    end
+
+    # From on https://github.com/thoughtbot/administrate/issues/1837
+    def i18n_search(search_term)
+      search_term = ActiveRecord::Base.sanitize_sql_like(search_term)
+      attributes = dashboard_class::ATTRIBUTE_TYPES.select { |_, field| field.searchable? }
+
+      resource_class.i18n do
+        def match((attribute, _field), search_term)
+          # TODO: add API to fields to allow matchers for other column types, e.g. `.eq(search_term)`
+          instance_eval(attribute.to_s).matches("%#{search_term}%")
+        end
+
+        attributes.reduce(nil) do |memo, nxt|
+          memo.nil? ? match(nxt, search_term) : memo.or(match(nxt, search_term))
+        end
+      end
     end
   end
 end
