@@ -465,7 +465,6 @@ CREATE TABLE public.sessions (
     session_type_id bigint NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
-    time_slot_id bigint,
     presenter_bio_override text
 );
 
@@ -496,13 +495,6 @@ COMMENT ON COLUMN public.sessions.event_id IS 'Refers to the Event this Session 
 --
 
 COMMENT ON COLUMN public.sessions.session_type_id IS 'Refers to this Session''s Session Type';
-
-
---
--- Name: COLUMN sessions.time_slot_id; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.sessions.time_slot_id IS 'Refers to the Time Slot when this Session takes place';
 
 
 --
@@ -1027,13 +1019,6 @@ CREATE INDEX index_sessions_on_session_type_id ON public.sessions USING btree (s
 
 
 --
--- Name: index_sessions_on_time_slot_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_sessions_on_time_slot_id ON public.sessions USING btree (time_slot_id);
-
-
---
 -- Name: index_sessions_time_slots_on_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1144,14 +1129,6 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
--- Name: sessions fk_rails_c514f60c63; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.sessions
-    ADD CONSTRAINT fk_rails_c514f60c63 FOREIGN KEY (time_slot_id) REFERENCES public.time_slots(id);
-
-
---
 -- Name: users fk_rails_e5a059b8ef; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1203,6 +1180,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230702193959'),
 ('20230713122934'),
 ('20230713203552'),
-('20230717161556');
+('20230717161556'),
+('20230720200235');
 
 

@@ -27,5 +27,18 @@ class Session < ApplicationRecord
 
   validates :title, :description, :event_id, :session_type_id, presence: true
 
+  validate :time_slots_must_be_for_sessions_event
+
   default_scope { i18n }
+
+  private
+
+  def time_slots_must_be_for_sessions_event
+    time_slots.each do |time_slot|
+      if time_slot.event_id != event_id
+        errors.add :base, :invalid,
+                   message: "Time Slot '#{time_slot.title}' is not for event '#{event.title}'"
+      end
+    end
+  end
 end
