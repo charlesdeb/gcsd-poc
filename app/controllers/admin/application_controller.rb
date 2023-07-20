@@ -36,7 +36,7 @@ module Admin
       resources = search_term.blank? ? scoped_resource.all : i18n_search(search_term)
       resources = apply_collection_includes(resources)
       resources = order.apply(resources)
-      resources = resources.page(params[:page]).per(records_per_page)
+      resources = resources.page(params[:_page]).per(records_per_page)
       page = Administrate::Page::Collection.new(dashboard, order: order)
 
       render locals: {
