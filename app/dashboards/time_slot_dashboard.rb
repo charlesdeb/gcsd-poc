@@ -9,8 +9,19 @@ class TimeSlotDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+
+    # Doesn't work at the moment;
+    # event: Field::BelongsTo.with_options(
+    #   searchable: true,
+    #   searchable_fields: ['title']
+    # ),
+
     event: Field::BelongsTo,
     title: Field::String,
+
+    # Also doesn't work
+    # starting_at: Field::DateTime.with_options(searchable: true),
+
     starting_at: Field::DateTime,
     finishing_at: Field::DateTime,
     sessions: Field::HasMany,

@@ -9,13 +9,10 @@ class PresenterDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    # Al
-    # featured_image: Field::ActiveStorage.with_options(
-    #   index_preview_variant: :thumb,
-    #   show_preview_variant: :thumb
-    # ),
     name: Field::String,
-    bio: RichTextAreaField,
+    bio: RichTextAreaField.with_options(
+      searchable: true
+    ),
     sessions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

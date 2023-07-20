@@ -18,4 +18,6 @@ class Presenter < ApplicationRecord
   translates :bio, backend: :action_text
 
   validates :name, presence: true
+
+  default_scope { i18n }
 end

@@ -9,6 +9,7 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin
+    before_action :set_locales
 
     # Administrate doesn't seem to include the base app's helpers, so this is
     # needed (https://github.com/thoughtbot/administrate/issues/1238) in order
@@ -46,11 +47,7 @@ module Admin
       }
     end
 
-    before_action :set_locales
-    # before_action :authenticate_user!
-
     def authenticate_admin
-      # TODO: Add authentication logic here.
       authenticate_user!
     end
 
@@ -79,8 +76,21 @@ module Admin
       { locale: I18n.locale, mobility_locale: Mobility.locale }
     end
 
-    # From on https://github.com/thoughtbot/administrate/issues/1837
+    # From https://github.com/thoughtbot/administrate/issues/1837
     def i18n_search(search_term)
+      # To search for time slots with events with a title that match the word
+      # "shadow" we need this query
+      #
+      # Event
+      #   .joins(:time_slots)
+      #   .select('time_slots.*')
+      #   .i18n do
+      #     title.matches('%shadow%')
+      #   end
+      #
+      # But I'm not sure how to modify the following code to primarily search
+      # the Event class (i.e. a belongs_to class) and not the resource_class
+
       search_term = ActiveRecord::Base.sanitize_sql_like(search_term)
       attributes = dashboard_class::ATTRIBUTE_TYPES.select { |_, field| field.searchable? }
 

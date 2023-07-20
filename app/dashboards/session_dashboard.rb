@@ -12,9 +12,15 @@ class SessionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    description: RichTextAreaField,
-    requirements: RichTextAreaField,
-    presenter_bio_override: RichTextAreaField,
+    description: RichTextAreaField.with_options(
+      searchable: true
+    ),
+    requirements: RichTextAreaField.with_options(
+      searchable: true
+    ),
+    presenter_bio_override: RichTextAreaField.with_options(
+      searchable: true
+    ),
     event: Field::BelongsTo,
     limit: Field::Number,
     featured_image: Field::ActiveStorage.with_options(
