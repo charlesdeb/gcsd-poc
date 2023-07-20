@@ -48,7 +48,7 @@ RSpec.describe Session, type: :model do
     expect(subject.errors[:session_type_id]).to include("can't be blank")
   end
 
-  it 'is invalid if the time_slot is not for the event' do
+  it 'is invalid if a time_slot is not for the event' do
     other_event = create(:event)
     other_time_slot = create(:time_slot, event: other_event)
 
@@ -56,7 +56,5 @@ RSpec.describe Session, type: :model do
 
     expect(subject.valid?).to be false
     expect(subject.errors[:base]).to include("Time Slot '#{other_time_slot.title}' is not for event '#{event.title}'")
-
-    # expect(subject.errors.full_messages).to include('Event cannot be published without registration_url')
   end
 end

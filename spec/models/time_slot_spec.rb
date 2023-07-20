@@ -72,6 +72,16 @@ RSpec.describe TimeSlot, type: :model do
     expect(subject.errors[:finishing_at]).to include('must be after the start date')
   end
 
+  it 'is invalid if a session is not for the event' do
+    other_event = create(:event)
+    other_session = create(:session, event: other_event)
+
+    subject.sessions = [other_session]
+
+    expect(subject.valid?).to be false
+    expect(subject.errors[:base]).to include("Session '#{other_session.title}' is not for event '#{event.title}'")
+  end
+
   describe '#duration_parts' do
     it 'returns length in minutes' do
       subject.finishing_at = subject.starting_at.advance(minutes: 45)

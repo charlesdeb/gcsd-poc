@@ -13,7 +13,8 @@ FactoryBot.define do
       end
 
       after(:create) do |session, evaluator|
-        create_list(:time_slot, evaluator.time_slots_count, sessions: [session])
+        create_list(:time_slot, evaluator.time_slots_count, event: session.event, sessions: [session])
+        session.reload
       end
     end
 
