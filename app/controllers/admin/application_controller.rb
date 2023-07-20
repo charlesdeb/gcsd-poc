@@ -90,6 +90,9 @@ module Admin
       #
       # But I'm not sure how to modify the following code to primarily search
       # the Event class (i.e. a belongs_to class) and not the resource_class
+      #
+      # TODO: check https://github.com/pablobm/administrate/blob/howto-search/docs/guides/customising_search.md
+      # which says that I'd need a custom filter in the time_slots admin controller
 
       search_term = ActiveRecord::Base.sanitize_sql_like(search_term)
       attributes = dashboard_class::ATTRIBUTE_TYPES.select { |_, field| field.searchable? }
