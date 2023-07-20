@@ -22,8 +22,8 @@ class TimeSlotDashboard < Administrate::BaseDashboard
     # Also doesn't work
     # starting_at: Field::DateTime.with_options(searchable: true),
 
-    starting_at: Field::DateTime,
-    finishing_at: Field::DateTime,
+    starting_at: Field::DateTime.with_options(format: '%a, %-d %b %Y %H:%M %Z'),
+    finishing_at: Field::DateTime.with_options(format: '%a, %-d %b %Y %H:%M %Z'),
     sessions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

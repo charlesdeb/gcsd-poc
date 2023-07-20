@@ -1,0 +1,21 @@
+fr:
+  views:
+    pagination:
+      first: "&laquo; Premier"
+      last: "Dernière &raquo;"
+      previous: "&lsaquo; Précédent"
+      next: "Suivant &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      entry:
+        zero: "entrée"
+        one: "entrée"
+        other: "entrées"
+      one_page:
+        display_entries:
+          zero: "aucun %{entry_name} n'a été trouvé"
+          one: "Afficher <b>1</b> %{entry_name}"
+          other: "Affichant <b>tous les %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Affichant %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> au total"
