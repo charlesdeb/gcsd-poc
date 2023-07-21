@@ -29,7 +29,12 @@ class SessionDashboard < Administrate::BaseDashboard
     ),
     presenters: Field::HasMany,
     session_type: Field::BelongsTo,
+
+    # Custom field which limits timeslots to the current event, but it is
+    # not ready for use yet.
+    # time_slots: TimeSlotsField,
     time_slots: Field::HasMany,
+
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze

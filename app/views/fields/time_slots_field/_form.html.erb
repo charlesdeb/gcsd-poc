@@ -1,0 +1,43 @@
+<%#
+# HasMany Form Partial
+
+This partial renders an input element for has_many relationships.
+By default, the input is a collection select box
+that displays all possible records to associate with.
+The collection select box supports multiple inputs,
+and is augmented with [Selectize].
+
+Selectize needs to be called in Javascript with something like 
+
+$('.field-unit--field-unit--time-slots-field select').selectize({});
+
+And it needs to be re-called each time the event_id of the session changes. 
+I'm currently not sure of the best place to put this javascript. Check 
+https://github.com/thoughtbot/administrate/blob/482bc010581440d289074ff454c85cff4e65c386/app/assets/javascripts/administrate/components/associative.js#L3
+for clues.
+
+Without selectize, we just have a regular select control with multi-select
+enabled which is a bit ugly. And it doesn't update automatically when the 
+session's event is updated - which will require some kind of onchange listener
+on that field. Figuring that out within administrate will be quite the brain-
+scratcher.
+
+## Local variables:
+
+- `f`:
+  A Rails form generator, used to help create the appropriate input fields.
+- `field`:
+  An instance of [Administrate::Field::HasMany][1].
+  Contains helper methods for displaying a collection select box.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/HasMany
+[Selectize]: https://selectize.dev/
+%>
+<div class="field-unit__label">
+  <%= f.label field.attribute, for: "#{f.object_name}_#{field.attribute_key}" %>
+</div>
+<div class="field-unit__field">
+  <%= f.select(field.attribute_key, nil, {}, multiple: true) do %>
+    <%= options_for_select(field.associated_resource_options, field.selected_options) %>
+  <% end %>
+</div>
