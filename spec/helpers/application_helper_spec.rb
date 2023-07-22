@@ -235,4 +235,20 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.session_duration(duration_parts)).to eq('1 hour 45 minutes')
     end
   end
+
+  describe '#timetable_time_slot_tr_class' do
+    it 'works for a time_slot that can have sessions' do
+      time_slot = FactoryBot.create(:time_slot_with_sessions)
+
+      expect(helper.timetable_time_slot_tr_class(time_slot)).to have_text('hover')
+      expect(helper.timetable_time_slot_tr_class(time_slot)).to_not have_text('text-orange-500')
+    end
+
+    it 'works for a time_slot with no sessions' do
+      time_slot = FactoryBot.create(:time_slot)
+
+      expect(helper.timetable_time_slot_tr_class(time_slot)).to have_text('text-orange-600 bg-orange-50')
+      expect(helper.timetable_time_slot_tr_class(time_slot)).to_not have_text('hover')
+    end
+  end
 end

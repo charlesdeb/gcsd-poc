@@ -19,6 +19,11 @@ const start = function (window) {
 
       // console.log({ timeSlot });
 
+      // if there are no sessions for the timeSlot, then there is nothing to do
+      if (!this.hasSessions(timeSlot)) {
+        return;
+      }
+
       this.selectTimeSlot(timeSlot);
 
       if (
@@ -32,7 +37,7 @@ const start = function (window) {
         this.toggleDetailsNarrow(timeSlot);
       }
     },
-    /** does the given timeSlot have any sessions? Breaks don't */
+    // Does the timeSlot have any sessions? Breaks don't
     hasSessions(timeSlot) {
       return !!document.querySelector(
         `#timetable-time-slots [data-time_slot_sessions="${timeSlot}"]`

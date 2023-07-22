@@ -13,7 +13,7 @@ class NotifierMailer < ApplicationMailer
 
     mail(
       'reply-to': email_address_with_name(email, "#{first_name} #{last_name}"),
-      subject: 'Contact form message from website'
+      subject: 'Contact form message from GCSD website'
     )
   end
 end

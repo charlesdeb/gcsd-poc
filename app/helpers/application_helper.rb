@@ -106,23 +106,6 @@ module ApplicationHelper
                 class: options[:class]
   end
 
-  # shows a header for a session in the timetable view
-  # Params
-  # +session+:: Session
-  def timetable_session_header(session, width = :wide)
-    h2_class = 'text-xl font-bold'
-    header_class = if width == :wide
-                     'bg-orange-500 text-white -mx-4 sm:-mx-6 px-4 sm:px-6 py-4'
-                   else
-                     'bg-orange-200 text-skyblue-600 -m-2 px-2 py-2'
-                   end
-    content_tag(:header,
-                content_tag(:h2,
-                            session.title,
-                            class: h2_class) + timetable_session_presenters(session),
-                class: header_class)
-  end
-
   # The name of a session's presenter; "various" if a session has more than one
   # Params
   # +session+:: Session
@@ -227,6 +210,14 @@ module ApplicationHelper
       out.push locale.t(:x_minutes, count: duration_parts[:minutes]) if duration_parts.key?(:minutes)
     end
     out.join ' '
+  end
+
+  # returns tailwind classes suitable for the a tr of a timetable time_slot
+  # time_slot:: TimeSlot
+  def timetable_time_slot_tr_class(time_slot)
+    return 'hover:bg-orange-300 hover:text-white' if time_slot.sessions.count.positive?
+
+    'text-orange-600 bg-orange-50'
   end
 
   private

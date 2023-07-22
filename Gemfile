@@ -125,6 +125,5 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'show_me_the_cookies'
-  gem 'webdrivers'
 end
 gem 'dockerfile-rails', '>= 1.2', :group => :development

@@ -1,6 +1,6 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<tr class="border-collapse border-orange border hover:bg-orange-300  hover:text-white" x-on:click="chooseSlot($event)"
+<tr class="border-collapse border-orange border <%= timetable_time_slot_tr_class(time_slot) %>" x-on:click="chooseSlot($event)"
  data-time_slot="<%= dom_id(time_slot) %>">
   <td class="w-28 sm:w-32 text-center py-2 px-3 md:p-1 lg:p-2">
     <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
