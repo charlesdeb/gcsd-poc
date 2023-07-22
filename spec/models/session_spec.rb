@@ -57,4 +57,33 @@ RSpec.describe Session, type: :model do
     expect(subject.valid?).to be false
     expect(subject.errors[:base]).to include("Time Slot '#{other_time_slot.title}' is not for event '#{event.title}'")
   end
+
+  it 'is valid if there are two sessions with the same title for different events' do
+    subject.save
+
+    new_event = FactoryBot.create(:event)
+
+    duplicate_session = Session.new(
+      title: subject.title,
+      description: 'some-description',
+      event_id: new_event.id,
+      session_type_id: session_type.id
+    )
+
+    expect(duplicate_session.valid?).to be true
+  end
+
+  it 'is invalid if there are two sessions with the same title for the same event' do
+    subject.save
+
+    duplicate_session = Session.new(
+      title: subject.title,
+      description: 'some-description',
+      event_id: event.id,
+      session_type_id: session_type.id
+    )
+
+    expect(duplicate_session.valid?).to be false
+    expect(duplicate_session.errors[:title]).to include("'#{subject.title}' has already been taken for this event")
+  end
 end

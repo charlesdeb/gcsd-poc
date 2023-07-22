@@ -153,6 +153,8 @@ RSpec.feature 'Surfer visits show event', type: :system do
     context('summary information') do
       let!(:session_type_names) { %w[Plenaries Worship Workshops] }
       let!(:session_types) { session_type_names.map { |name| create(:session_type, name: name) } }
+
+      # create one session of each type
       let!(:sessions) do
         sessions = session_type_names.map.with_index do |name, index|
           create(:session,
@@ -162,9 +164,10 @@ RSpec.feature 'Surfer visits show event', type: :system do
                  event_id: event.id)
         end
 
+        # add an extra plenary sessions
         sessions << create(
           :session,
-          title: "#{session_type_names[0]} session",
+          title: "Extra #{session_type_names[0]} session",
           description: "#{session_type_names[0]} session's description",
           session_type_id: session_types[0].id,
           event_id: event.id

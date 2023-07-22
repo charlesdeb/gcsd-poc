@@ -13,6 +13,7 @@ FactoryBot.define do
       end
 
       after(:create) do |session, evaluator|
+        session.title = Faker::Lorem.unique.sentence(word_count: 3)
         create_list(:time_slot, evaluator.time_slots_count, event: session.event, sessions: [session])
         session.reload
       end
@@ -36,6 +37,7 @@ FactoryBot.define do
         end
 
         after(:create) do |session, evaluator|
+          session.title = Faker::Lorem.unique.sentence(word_count: 3)
           create_list :presenter_with_bio, evaluator.presenters_count, sessions: [session]
           session.reload
         end

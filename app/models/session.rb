@@ -29,6 +29,10 @@ class Session < ApplicationRecord
 
   validate :time_slots_must_be_for_sessions_event
 
+  I18n.available_locales.each do |locale|
+    validates :"title_#{locale}", mobility_session_uniqueness: true
+  end
+
   default_scope { i18n }
 
   private
