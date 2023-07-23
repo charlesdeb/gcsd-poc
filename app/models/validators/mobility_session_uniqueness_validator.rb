@@ -15,12 +15,17 @@ class MobilitySessionUniquenessValidator < ActiveModel::EachValidator
 
   def translation_exists?(record, attribute)
     attribute, locale = attribute.to_s.split('_')
-    record.class.joins(:plain_text_translations).exists?(
-      { event_id: record.event_id,
-        action_text_rich_texts: {
-          locale: locale,
-          body: record.send(attribute)
-        } }
-    )
+
+    # exclude this current record in the search
+    where_clause =
+      record.id.nil? ? '1=1' : ['sessions.id != ?', record.id]
+
+    record.class.joins(:plain_text_translations)
+          .where(where_clause)
+          .exists?(
+            { event_id: record.event_id,
+              action_text_rich_texts: { locale: locale,
+                                        body: record.send(attribute) } }
+          )
   end
 end
