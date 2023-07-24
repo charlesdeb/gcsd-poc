@@ -13,5 +13,5 @@ en:
       session_type: Session type
     timetable:
       timetable: Timetable
-    timetable_details:
+    timetable_summaries:
       click_a_slot: Click on a time slot on the left to see what sessions are running

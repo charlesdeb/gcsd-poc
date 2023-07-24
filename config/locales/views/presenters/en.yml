@@ -10,7 +10,7 @@ en:
     #   sessions_summary: Sessions Summary
     # timetable:
     #   timetable: Timetable
-    # timetable_details:
+    # timetable_summaries:
     #   click_a_slot: Click on a time slot on the left to see what sessions are running
   # use in the dashboard views
   helpers:

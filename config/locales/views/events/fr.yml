@@ -13,5 +13,5 @@ fr:
       session_type: Type de séance
     timetable:
       timetable: Calendrier
-    timetable_details:
+    timetable_summaries:
       click_a_slot: Cliquez sur un créneau horaire à gauche pour voir quelles sessions sont en cours
