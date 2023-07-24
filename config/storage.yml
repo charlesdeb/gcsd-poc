@@ -6,33 +6,16 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# A Fly volume (hard to clone and keep in sync with each other)
 fly:
   service: Disk
   root: <%= Rails.root.join("/fly_storage") %>
 
-# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
-# microsoft:
-#   service: AzureStorage
-#   storage_account_name: your_account_name
-#   storage_access_key: <%= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
-#   container: your_container_name-<%= Rails.env %>
-
-# mirror:
-#   service: Mirror
-#   primary: local
-#   mirrors: [ amazon, google, microsoft ]
+# A free (up to 5GB S3 compatible) storage service
+filebase:
+  service: S3
+  endpoint: <%= ENV.fetch('FILEBASE_ENDPOINT', nil) %>
+  access_key_id: <%= ENV.fetch('FILEBASE_ACCESS_KEY_ID', nil) %>
+  secret_access_key: <%= ENV.fetch('FILEBASE_SECRET_ACCESS_KEY', nil) %>
+  bucket: <%= ENV.fetch('FILEBASE_BUCKET', nil) %>
+  region: <%= ENV.fetch('FILEBASE_REGION', nil) %>

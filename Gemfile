@@ -93,6 +93,9 @@ gem 'recaptcha'
 # Add meta tags to pages for better SEO
 gem 'meta-tags'
 
+# Support for AWS S3 and S3 compatible storage
+gem 'aws-sdk-s3', require: false
+
 group :development, :test do
   # find and kill n+1 issues
   gem 'bullet'
