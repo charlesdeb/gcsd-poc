@@ -61,7 +61,11 @@ RSpec.describe ApplicationHelper, :type => :helper do
     let(:event) { create(:published_event_with_image_and_sessions) }
     context 'first tab' do
       subject do
-        helper.session_type_tab event.session_types_with_counts.first, 0
+        helper.session_type_tab(
+          event: event,
+          session_type_with_count: event.session_types_with_counts.first,
+          position: 0
+        )
       end
 
       # TODO: seems like a very fragile test...
@@ -72,7 +76,11 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
     context 'other tabs' do
       subject do
-        helper.session_type_tab event.session_types_with_counts.first, 1
+        helper.session_type_tab(
+          event: event,
+          session_type_with_count: event.session_types_with_counts.first,
+          position: 1
+        )
       end
 
       # TODO: seems like a very fragile test...

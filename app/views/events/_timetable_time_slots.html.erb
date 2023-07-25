@@ -1,6 +1,6 @@
 <%# Timetable timeslots component for an event %>
 <%# event:: expected to be an Event %>
-<table class="table-auto">
+<table class="table-auto" data-controller="timetable-time-slots">
   <% timeslots = event.time_slots.order(:starting_at)
                                  .includes([:plain_text_translations])
                                  .each do |time_slot| %>

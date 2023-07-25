@@ -53,10 +53,10 @@ module ApplicationHelper
   end
 
   # Tab headers for the session types of an event
-  def session_type_tab(session_type, position) # rubocop:disable Metrics/MethodLength)
+  def session_type_tab(event:, session_type_with_count:, position:) # )
     bg_color_class = position.zero? ? 'bg-orange-800' : 'bg-transparent'
 
-    content = content_tag(:span, "#{session_type.name} (#{session_type.count})")
+    content = content_tag(:span, "#{session_type_with_count.name} (#{session_type_with_count.count})")
 
     content += content_tag(
       :span, '',
@@ -65,11 +65,21 @@ module ApplicationHelper
 
     color_class = position.zero? ? 'text-orange-900' : 'text-orange-500 hover:text-orange-700'
 
-    content_tag :div,
-                content,
-                class: "#{color_class} first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10", # rubocop:disable Layout/LineLength)
-                'data-session_type': "session_type_#{session_type.id}",
-                'x-on:click': "chooseSessionType('session_type_#{session_type.id}')"
+    # content_tag :div,
+    #             content,
+    #             class: "#{color_class} first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10", # rubocop:disable Layout/LineLength)
+    #             'data-session_type': "session_type_#{session_type.id}",
+    #             'x-on:click': "chooseSessionType('session_type_#{session_type.id}')"
+
+    link_to sessions_by_event_and_type_path(event.id, session_type_with_count.id, I18n.locale),
+            data: {
+              turbo_frame: 'session_type_summaries',
+              session_type: "session_type_#{session_type_with_count.id}",
+              action: 'session-type-tabs#select'
+            },
+            class: "#{color_class} block first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10" do
+      content
+    end
   end
 
   # an Alpine-enabled <time> component with an optional format object for Luxon.

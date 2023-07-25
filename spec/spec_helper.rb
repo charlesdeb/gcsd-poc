@@ -92,4 +92,7 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  # ActionDispatch::IntegrationTest.app.default_url_options[:locale] = I18n.locale
 end
+

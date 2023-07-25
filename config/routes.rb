@@ -31,7 +31,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     resources :events, only: %i[index show]
-    resources :sessions, only: %i[index show]
+    resources :sessions, only: %i[show]
     resources :contact_form, only: %i[new create]
 
     ####
@@ -49,7 +49,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     get '/past_events', action: :index, controller: 'events', scope: 'past'
 
     # routes for showing sub-sets of sessions
+    # get '/sessions', to: redirect('/')
     get '/sessions/by_time_slot/:time_slot', to: 'sessions#index', as: :sessions_by_time_slot
+    get '/sessions/by_event/:event/by_type/:session_type', to: 'sessions#index', as: :sessions_by_event_and_type
 
     # catch all route to catch pages in the CMS which could have any slug name
     # Is this a security risk?

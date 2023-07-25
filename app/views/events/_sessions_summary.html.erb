@@ -1,10 +1,11 @@
 <%# Sessions summary component for an event %>
 <%# event:: expected to be an Event %>
-<section id="event-sessions-summary" class="space-y-2" x-data="sessionsSummaryTab" x-init="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
+<section id="event-sessions-summary" class="space-y-2" x-xdata="sessionsSummaryTab" x-xinit="setup('session_type_<%= event.session_types_with_counts.first.id %>')">
   <h2 class="mt-8 text-2xl font-bold leading-8 tracking-tight text-orange space-y-2 sm:text-3xl">
     <%= t('.sessions_summary') %>
   </h2>
   <div class="">
+    <%# tab control for session type on mobile %>
     <div class="sm:hidden">
       <label for="tabs" class="sr-only"><%= t('.select_session_type') %>Select a tab</label>
       <%= 
@@ -16,17 +17,21 @@
     )
     %>
     </div>
-    <%# tab controls for session types %>
-    <nav class="hidden sm:flex isolate  divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs">
+    <%# tab control for session type on desktop %>
+    <nav class="hidden sm:flex isolate  divide-x divide-orange-300 rounded-lg shadow bg-orange-100" aria-label="Tabs", data-controller="session-type-tabs">
       <!-- Current: "text-orange-900", Default: "text-orange-500 hover:text-orange-700" -->
       <% event.session_types_with_counts.each_with_index do |session_type_with_count, index| %>
-        <%= session_type_tab session_type_with_count, index %>
+        <%= session_type_tab(event: event, session_type_with_count: session_type_with_count, position: index) %>
       <% end%>
     </nav>
+    <%# session summary content %>
     <section id="session-summaries">
-      <% event.session_types_with_counts.each do |session_type | %>
+      <% #@sessions = Session.where(event_id: event.id, session_type_id: event.session_types_with_counts.first.id) %>
+      <%#= render template: 'sessions/index' %>
+      <% #event.session_types_with_counts.each do |session_type | %>
+        <% session_type = event.session_types_with_counts.first %>
         <%= render partial: 'session_types/timetable_session_type_summaries', locals: {session_type_id: session_type.id, event: event}  %>
-      <% end%>
-    </section>
-  </div>
-</section>
+        <% #end%>
+      </section>
+    </div>
+  </section>

@@ -3,7 +3,7 @@
 <tr class="border-collapse border-orange border <%= timetable_time_slot_tr_class(time_slot) %>" x-on:xclick="chooseSlot($event)"
  data-time_slot="<%= dom_id(time_slot) %>">
   <td class="w-28 sm:w-32 text-center py-2 px-3 md:p-1 lg:p-2">
-    <%= link_to(sessions_by_time_slot_path(time_slot),data: { turbo_frame: 'timetable_time_slot_summaries'}) do %>
+    <%= link_to(sessions_by_time_slot_path(time_slot), data: { turbo_frame: 'timetable_time_slot_summaries', action: 'timetable-time-slots#select'}) do %>
       <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
       <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'}, class: 'sm:hidden' %>
       <br class="sm:hidden">
@@ -12,7 +12,7 @@
   </td>
   <td class="table table-fixed w-full">
     <div class="py-2 px-3 md:p-1 lg:p-2 ">
-      <%= link_to(sessions_by_time_slot_path(time_slot),data: { turbo_frame: 'timetable_time_slot_summaries'}) do %>
+      <%= link_to(sessions_by_time_slot_path(time_slot), data: { turbo_frame: 'timetable_time_slot_summaries', action: 'timetable-time-slots#select'}) do %>
         <%= time_slot.title %>
       <% end %>
     </div>

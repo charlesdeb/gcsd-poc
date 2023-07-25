@@ -7,7 +7,7 @@
 <%= @sessions %>
 <%= @sessions.count %>
 <%#= turbo_frame_tag @time_slot do %>
-  <%= turbo_frame_tag "timetable_time_slot_summaries" do %>
+  <%= turbo_frame_tag @turbo_frame_id do %>
     <% @sessions.order(title: :asc).each do |session|%>
       <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
     <% end %>
