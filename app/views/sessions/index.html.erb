@@ -1,0 +1,15 @@
+<%# Index page for session thumbnails %>
+<%# It should never actually show all the sessions, but only a small subset %>
+<%# in a turbo_frame %>
+<%# @sessions:: expected to be a Sessions relation %>
+<h1>Session index</h1>
+<%= params %>
+<%= @sessions %>
+<%= @sessions.count %>
+<%#= turbo_frame_tag @time_slot do %>
+  <%= turbo_frame_tag "timetable_time_slot_summaries" do %>
+    <% @sessions.order(title: :asc).each do |session|%>
+      <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
+    <% end %>
+    <%= turbo_stream.remove "timetable_time_slot_intro" %>
+  <% end %>

@@ -266,16 +266,18 @@ RSpec.feature 'Surfer visits show event', type: :system do
             # click on a time slot
             within("section#event-timetable tr[data-time_slot='time_slot_#{time_slot.id}']") do
               # click the time slot
-              page.find('td', text: time_slot.title).click
+              page.find('a', text: time_slot.title).click
             end
 
-            within("section#event-timetable .timetable-summaries [data-time_slot='time_slot_#{time_slot.id}']") do
+            within('section#event-timetable .timetable-summaries') do
+              expect(page).to have_text(/#{time_slot.sessions.first.title}/i, wait: 1)
               # click a session within that time_slot
               page.find('p', text: time_slot.sessions.first.title).click
             end
           end
 
           scenario('they see the title') do
+            # save_and_open_page
             expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
           end
 

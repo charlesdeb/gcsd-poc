@@ -1,15 +1,17 @@
-<%# Timetable details component for an event %>
+<%# Timetable summaries component for an event %>
 <%# event:: expected to be an Event %>
 <div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col">
   <div class="overflow-y-auto">
-    <%= turbo_frame_tag "timetable_time_slot_summaries" do %>
+    <%= turbo_frame_tag "timetable_time_slot_intro" do %>
       <div class="time-slot-sessions">
         <h3 class="bg-orange-500 px-4 py-8 text-white font-bold text-xl"><%= t('.click_a_slot')%>
         </h3>
       </div>
     <% end %>
-    <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
-      <%= render partial: 'time_slots/timetable_time_slot_summaries', locals: {time_slot: time_slot} %>
+    <%= turbo_frame_tag "timetable_time_slot_summaries", class: 'block p-4 space-y-4 transition bg-orange-300', data: 'sessions' do %>
+      <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
+        <%= render partial: 'time_slots/timetable_time_slot_summaries', locals: {time_slot: time_slot} %>
+      <% end %>
     <% end %>
   </div>
 </div>

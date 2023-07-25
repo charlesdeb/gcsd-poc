@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  scope '(:locale)', locale:
+  scope '(:locale)', locale: # rubocop:disable Metrics/BlockLength
   /#{I18n.available_locales.join("|")}/ do
     # home page is produced by running the home action of the PagesController
     # with its own (home) template as the slug
@@ -31,7 +31,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     end
 
     resources :events, only: %i[index show]
-    resources :sessions, only: %i[show]
+    resources :sessions, only: %i[index show]
     resources :contact_form, only: %i[new create]
 
     ####
@@ -47,6 +47,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     # shortcut route for past and future events
     get '/future_events', action: :index, controller: 'events', scope: 'future'
     get '/past_events', action: :index, controller: 'events', scope: 'past'
+
+    # routes for showing sub-sets of sessions
+    get '/sessions/by_time_slot/:time_slot', to: 'sessions#index', as: :sessions_by_time_slot
 
     # catch all route to catch pages in the CMS which could have any slug name
     # Is this a security risk?

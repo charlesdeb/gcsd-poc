@@ -1,17 +1,20 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
-<tr class="border-collapse border-orange border <%= timetable_time_slot_tr_class(time_slot) %>" x-on:click="chooseSlot($event)"
+<tr class="border-collapse border-orange border <%= timetable_time_slot_tr_class(time_slot) %>" x-on:xclick="chooseSlot($event)"
  data-time_slot="<%= dom_id(time_slot) %>">
   <td class="w-28 sm:w-32 text-center py-2 px-3 md:p-1 lg:p-2">
-    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
-    <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'}, class: 'sm:hidden' %>
-    <br class="sm:hidden">
-    <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'}, class: 'sm:hidden'
- %>
+    <%= link_to(sessions_by_time_slot_path(time_slot),data: { turbo_frame: 'timetable_time_slot_summaries'}) do %>
+      <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
+      <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'}, class: 'sm:hidden' %>
+      <br class="sm:hidden">
+      <%= alpine_time time: time_slot.starting_at, format: {weekday: 'short'}, class: 'sm:hidden' %>
+    <% end %>
   </td>
   <td class="table table-fixed w-full">
     <div class="py-2 px-3 md:p-1 lg:p-2 ">
-      <%= time_slot.title %>
+      <%= link_to(sessions_by_time_slot_path(time_slot),data: { turbo_frame: 'timetable_time_slot_summaries'}) do %>
+        <%= time_slot.title %>
+      <% end %>
     </div>
   </td>
   <td class="w-12 py-2 px-3 md:p-1 lg:p-2 md:hidden">

@@ -81,6 +81,18 @@ RSpec.configure do |config|
   config.include ShowMeTheCookies, :type => :feature
   config.include ShowMeTheCookies, :type => :system
 
+  # Adapted from
+  # https://stackoverflow.com/questions/69851082/how-do-i-correct-this-selenium-initialisation-command-deprecation-warning
+  Capybara.register_driver(:chrome) do |app|
+    options = Selenium::WebDriver::Chrome::Options.new(args: %w[window-size=1400,1200])
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+
+  Capybara.register_driver(:headless_chrome) do |app|
+    options = Selenium::WebDriver::Chrome::Options.new(args: %w[headless window-size=1400,1200])
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+
   # next two configs from:
   # https://medium.com/table-xi/a-quick-guide-to-rails-system-tests-in-rspec-b6e9e8a8b5f6
   config.before(:each, type: :system) do
@@ -88,9 +100,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :system, js: true) do
-    driven_by :selenium_chrome_headless
+    # driven_by :selenium_chrome_headless # default selenium driver
     # driven_by :selenium # uncomment this if you want to see the browser do it's thing - but it's a little slower
+    driven_by :headless_chrome
+    # driven_by :chrome # uncomment this if you want to see the browser do it's thing in a big window
   end
+
+  # Register custom drivers with ShowMeTheCookies
+  ShowMeTheCookies.register_adapter(:headless_chrome, ShowMeTheCookies::Selenium)
+  ShowMeTheCookies.register_adapter(:chrome, ShowMeTheCookies::Selenium)
 
   config.include TestSupport::WithClues, type: :system
   config.include Helpers
