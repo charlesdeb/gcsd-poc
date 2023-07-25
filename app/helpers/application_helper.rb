@@ -71,7 +71,7 @@ module ApplicationHelper
     #             'data-session_type': "session_type_#{session_type.id}",
     #             'x-on:click': "chooseSessionType('session_type_#{session_type.id}')"
 
-    link_to sessions_by_event_and_type_path(event.id, session_type_with_count.id, I18n.locale),
+    link_to sessions_by_event_and_type_path(event: event.id, session_type: session_type_with_count.id, locale: I18n.locale),
             data: {
               turbo_frame: 'session_type_summaries',
               session_type: "session_type_#{session_type_with_count.id}",
