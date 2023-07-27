@@ -33,7 +33,16 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
   <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
     <td colspan="3" class="p-4 space-y-4">
-      <% time_slot.sessions.order(:title).each do |session|%>
+      <% time_slot.sessions
+      .order(:title)
+      .includes([
+        :event,
+        :time_slots,
+        :plain_text_translations,
+        { featured_image_attachment: :blob },
+        :presenters
+      ])
+      .each do |session|%>
         <div>
           <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
         </div>

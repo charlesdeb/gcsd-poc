@@ -3,11 +3,6 @@
 # lists sessions
 class SessionsLister
   def list_sessions(params)
-    # if params[:time_slot].blank? && params[:event_id].blank? && params[:session_type_id].blank?
-
-    #   return Result.new(invalid_params: true)
-    # end
-
     if params[:time_slot].blank?
       where_clause = { event_id: params[:event],
                        session_type_id: params[:session_type] }
@@ -22,12 +17,16 @@ class SessionsLister
     # slows things down
     sessions = Session.joins(:time_slots)
                       .where(where_clause)
-    #  .includes([{ featured_image_attachment: :blob },
-    #             :plain_text_translations, :presenters,
-    #             :time_slots, :event])
+                      .includes([{ featured_image_attachment: :blob },
+                                 :plain_text_translations, :presenters,
+                                 :time_slots, :event])
 
     Result.new(sessions: sessions, turbo_frame_id: turbo_frame_id)
   end
+
+  private
+
+  def foo; end
 
   class Result
     attr_reader :sessions, :turbo_frame_id, :invalid_params

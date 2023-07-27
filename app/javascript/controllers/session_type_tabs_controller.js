@@ -2,12 +2,12 @@ import { Controller } from '@hotwired/stimulus';
 
 // Connects to data-controller="session-type-tabs"
 export default class extends Controller {
-  connect() {
-    console.log(this.element);
-    console.log('hi from session-type-tabs');
-  }
+  // connect() {
+  //   console.log(this.element);
+  //   console.log('hi from session-type-tabs');
+  // }
   select(event) {
-    console.log('session type selected');
+    // console.log('session type selected');
 
     const sessionType = event.target.closest('[data-session-type]')?.dataset
       .sessionType;
