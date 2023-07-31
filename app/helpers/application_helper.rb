@@ -73,7 +73,7 @@ module ApplicationHelper
 
     link_to sessions_by_event_and_type_path(event: event.id, session_type: session_type_with_count.id, locale: I18n.locale),
             data: {
-              turbo_frame: 'session_type_summaries',
+              turbo_frame: "session_type_#{session_type_with_count.id}",
               session_type: "session_type_#{session_type_with_count.id}",
               action: 'session-type-tabs#select'
             },

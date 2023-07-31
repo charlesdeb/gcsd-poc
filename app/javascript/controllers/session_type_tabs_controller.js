@@ -7,8 +7,6 @@ export default class extends Controller {
   //   console.log('hi from session-type-tabs');
   // }
   select(event) {
-    // console.log('session type selected');
-
     const sessionType = event.target.closest('[data-session-type]')?.dataset
       .sessionType;
 
@@ -35,6 +33,21 @@ export default class extends Controller {
     document
       .querySelector(`nav [data-session-type="${sessionType}"] span.inset-x-0`)
       .classList.replace('bg-transparent', 'bg-orange-800');
+
+    // hide all tab contents
+    // @todo can we do this with alpine transitions
+    document
+      .querySelectorAll('#session-summaries turbo-frame')
+      .forEach((sessionType) => {
+        sessionType.classList.add('hidden');
+        sessionType.classList.remove('md:grid');
+      });
+
+    // show the selected session_type tab
+    // @todo can we do this with alpine transitions
+    document
+      .querySelector(`#session-summaries #${sessionType}`)
+      .classList.replace('hidden', 'md:grid');
 
     return;
   }

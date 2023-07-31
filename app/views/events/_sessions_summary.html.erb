@@ -26,12 +26,20 @@
     </nav>
     <%# session summary content %>
     <section id="session-summaries">
-      <% #@sessions = Session.where(event_id: event.id, session_type_id: event.session_types_with_counts.first.id) %>
-      <%#= render template: 'sessions/index' %>
-      <% #event.session_types_with_counts.each do |session_type | %>
-        <% session_type = event.session_types_with_counts.first %>
-        <%= render partial: 'session_types/timetable_session_type_summaries', locals: {session_type_id: session_type.id, event: event}  %>
-        <% #end%>
-      </section>
-    </div>
-  </section>
+      <div class="border border-orange origin-top"  
+           x-show="selectedSessionType == 'session_type_<%= 'foo' %>'" 
+           x-transition:enter="transition ease-out duration-300 transform"
+           x-transition:enter-start="opacity-0 scale-75"
+           x-transition:enter-end="opacity-100 scale-100"
+           x-xcloak>
+        <% event.session_types_with_counts.each_with_index do |session_type, index | %>
+          <% if index == 0 %>
+            <%= render partial: 'session_types/timetable_session_type_summaries', locals: {session_type: session_type, event: event}  %>
+          <% else %>
+            <%= turbo_frame_tag session_type, class: 'hidden xmd:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' %>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</section>

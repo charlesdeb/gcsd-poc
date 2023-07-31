@@ -1,20 +1,13 @@
 <%# All session thumbnails for a given session_type within an event's %>
 <%# session summary %>
-<%# session_type_id:: expected to be the ID of a SessionType %>
+<%# session_type:: expected to be a SessionType %>
 <%# event:: expected to be an Event %>
-<div class="border border-orange origin-top" data-session_type=session_type_<%= session_type_id %> 
- x-xshow="selectedSessionType == 'session_type_<%= session_type_id %>'" 
- x-transition:enter="transition ease-out duration-300 transform"
- x-transition:enter-start="opacity-0 scale-75"
- x-transition:enter-end="opacity-100 scale-100"
- x-xcloak>
-  <%= turbo_frame_tag "session_type_summaries", class: 'md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' do %>
-    <% event.sessions.where(session_type: session_type_id)
+<%= turbo_frame_tag session_type, class: 'md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' do %>
+  <% event.sessions.where(session_type: session_type.id)
                      .order(title: :asc)
                      .with_attached_featured_image
                      .includes(%i[plain_text_translations presenters time_slots])
                      .each do |session| %>
-      <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
-    <% end %>
+    <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
   <% end %>
-</div>
+<% end %>
