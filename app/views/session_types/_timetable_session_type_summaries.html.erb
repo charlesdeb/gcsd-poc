@@ -2,7 +2,7 @@
 <%# session summary %>
 <%# session_type:: expected to be a SessionType %>
 <%# event:: expected to be an Event %>
-<%= turbo_frame_tag session_type, class: 'md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' do %>
+<%= turbo_frame_tag session_type, class: 'block md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' do %>
   <% event.sessions.where(session_type: session_type.id)
                      .order(title: :asc)
                      .with_attached_featured_image

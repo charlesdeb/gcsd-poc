@@ -44,11 +44,17 @@ module ApplicationHelper
     'text-xs sm:text-base'
   end
 
-  def session_type_options(session_types_with_counts)
-    session_types_with_counts.map.with_index do |session_type, _index|
-      tag.option "#{session_type.name} (#{session_type.count})",
-                 value: "session_type_#{session_type.id}",
-                 data: { session_type: "session_type_#{session_type.id}" }
+  def session_type_options(event, session_types_with_counts)
+    session_types_with_counts.map.with_index do |session_type_with_count, _index|
+      tag.option "#{session_type_with_count.name} (#{session_type_with_count.count})",
+                 #  value: "session_type_#{session_type.id}",
+                 value: "session_type_#{session_type_with_count.id}",
+                 #  data: { session_type: "session_type_#{session_type_with_count.id}" },
+                 data: { path: sessions_by_event_and_type_path(
+                   event: event.id,
+                   session_type: session_type_with_count.id,
+                   locale: I18n.locale
+                 ) }
     end
   end
 
@@ -71,15 +77,30 @@ module ApplicationHelper
     #             'data-session_type': "session_type_#{session_type.id}",
     #             'x-on:click': "chooseSessionType('session_type_#{session_type.id}')"
 
-    link_to sessions_by_event_and_type_path(event: event.id, session_type: session_type_with_count.id, locale: I18n.locale),
+    link_to sessions_by_event_and_type_path(
+      event: event.id,
+      session_type: session_type_with_count.id,
+      locale: I18n.locale
+    ),
             data: {
               turbo_frame: "session_type_#{session_type_with_count.id}",
               session_type: "session_type_#{session_type_with_count.id}",
-              action: 'session-type-tabs#select'
+              action: 'session-type-tabs#tabClick'
             },
             class: "#{color_class} block first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10" do
-      content
-    end
+              content
+            end
+
+    # content_tag :div,
+    #             content,
+    #             class: "#{color_class} block first:rounded-tl-lg last:rounded-tr-lg group relative min-w-0 flex-1 overflow-hidden bg-orange-100 py-4 px-4 text-sm font-medium text-center hover:bg-orange-200 focus:z-10 cursor-pointer",
+    #             data: {
+    #               path: sessions_by_event_and_type_path(event: event.id, session_type: session_type_with_count.id,
+    #                                                     locale: I18n.locale),
+    #               turbo_frame: "session_type_#{session_type_with_count.id}",
+    #               session_type: "session_type_#{session_type_with_count.id}",
+    #               action: 'click->session-type-tabs#tabClick'
+    #             }
   end
 
   # an Alpine-enabled <time> component with an optional format object for Luxon.
