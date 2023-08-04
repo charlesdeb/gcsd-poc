@@ -39,7 +39,11 @@
           <% if index == 0 %>
             <%= render partial: 'session_types/timetable_session_type_summaries', locals: {session_type: session_type, event: event}  %>
           <% else %>
-            <%= turbo_frame_tag session_type, class: '!hidden md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6', data: 'sessions' %>
+            <%= turbo_frame_tag session_type, class: '!hidden md:grid md:grid-cols-2 xl:grid-cols-3 p-4 space-y-4 md:space-y-0 md:gap-y-4 md:gap-x-6 min-h-[110px]', data: 'sessions' do %>
+              <div class="md:col-span-2 xl:col-span-3 m-auto">
+                <%= sessions_loading_spinner %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

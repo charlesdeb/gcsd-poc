@@ -45,9 +45,6 @@ export default class extends Controller {
   tabClick(event) {
     const parentDiv = event.target.closest('[data-session-type]');
     const sessionType = parentDiv.dataset.sessionType;
-    const path = parentDiv.dataset.path;
-
-    // console.log({ sessionType, path });
 
     /**
      * if the user changes the orientation to reveal the select control, then
@@ -89,13 +86,16 @@ export default class extends Controller {
       .querySelectorAll('#session-summaries turbo-frame')
       .forEach((sessionType) => {
         sessionType.classList.add('!hidden');
-        sessionType.classList.remove('md:grid');
+        sessionType.classList.remove('md:grid', 'block');
       });
 
     // show the selected session_type tab
     // @todo can we do this with alpine transitions?
     document
       .querySelector(`#session-summaries #${sessionType}`)
-      .classList.replace('!hidden', 'md:grid');
+      .classList.remove('!hidden');
+    document
+      .querySelector(`#session-summaries #${sessionType}`)
+      .classList.add('md:grid', 'block');
   }
 }

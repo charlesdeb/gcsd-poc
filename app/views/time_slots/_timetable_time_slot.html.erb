@@ -1,7 +1,7 @@
 <%# Timeslot component for a time_slot within an event's timetable %>
 <%# time_slot:: expected to be a TimeSlot %>
 <tr class="border-collapse border-orange border <%= timetable_time_slot_tr_class(time_slot) %>" xx-on:xclick="chooseSlot($event)"
- data-time_slot="<%= dom_id(time_slot) %>" data-xcontroller="timetable-time-slots" data-action="click->timetable-time-slots#rowClick" data-path="<%= sessions_by_time_slot_path(time_slot) %>">
+ data-time_slot="<%= dom_id(time_slot) %>" data-action="click->timetable-time-slots#rowClick" data-path="<%= sessions_by_time_slot_path(time_slot) %>">
   <td class="w-28 sm:w-32 text-center py-2 px-3 md:p-1 lg:p-2">
     <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric', weekday: 'short'}, class: 'hidden sm:inline' %>
     <%= alpine_time time: time_slot.starting_at, format: {hour: 'numeric', minute: 'numeric'}, class: 'sm:hidden' %>
@@ -29,7 +29,10 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
   <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden md:hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
     <td colspan="3" class="p-4 space-y-4">
-      <%= turbo_frame_tag time_slot do %>
+      <%= turbo_frame_tag time_slot, class: 'block min-h-[80px]' do %>
+        <div class="mx-auto py-6 w-min">
+          <%= sessions_loading_spinner %>
+        </div>
       <% end %>
       <%# time_slot.sessions
       .order(:title)

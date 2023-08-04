@@ -11,6 +11,9 @@
     <%#= turbo_frame_tag "timetable_time_slot_summaries", class: 'block p-4 space-y-4', data: 'sessions' do %>
       <% timeslots = event.time_slots.order(:starting_at).each do |time_slot| %>
         <%= turbo_frame_tag time_slot, class: 'hidden p-4 space-y-4', data: 'sessions' do %>
+          <div class="mx-auto mt-5 w-min">
+            <%= sessions_loading_spinner %>
+          </div>
         <% end %>
         <%#= render partial: 'time_slots/timetable_time_slot_summaries', locals: {time_slot: time_slot} %>
       <% end %>

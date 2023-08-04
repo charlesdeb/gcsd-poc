@@ -6,10 +6,8 @@
 <%= params %>
 <%= @sessions %>
 <%= @sessions.count %>
-<%#= turbo_frame_tag @time_slot do %>
-  <%= turbo_frame_tag @turbo_frame_id do %>
-    <% @sessions.order(title: :asc).each do |session|%>
-      <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
-    <% end %>
-    <%= turbo_stream.remove "timetable_time_slot_intro" %>
+<%= turbo_frame_tag @turbo_frame_id do %>
+  <% @sessions.order(title: :asc).each do |session|%>
+    <%= render partial: 'sessions/session_thumbnail', locals: {session: session}  %>
   <% end %>
+<% end %>
