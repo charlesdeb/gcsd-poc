@@ -47,7 +47,7 @@ export default class extends Controller {
     const sessionType = parentDiv.dataset.sessionType;
     const path = parentDiv.dataset.path;
 
-    console.log({ sessionType, path });
+    // console.log({ sessionType, path });
 
     /**
      * if the user changes the orientation to reveal the select control, then
@@ -83,13 +83,12 @@ export default class extends Controller {
   }
 
   showSummaryContents(sessionType) {
-    console.log(`in showSummaryContents, sessionType:`);
     // hide all tab contents
-    // @todo can we do this with alpine transitions
+    // @todo can we do this with alpine transitions?
     document
       .querySelectorAll('#session-summaries turbo-frame')
       .forEach((sessionType) => {
-        sessionType.classList.add('hidden');
+        sessionType.classList.add('!hidden');
         sessionType.classList.remove('md:grid');
       });
 
@@ -97,6 +96,6 @@ export default class extends Controller {
     // @todo can we do this with alpine transitions?
     document
       .querySelector(`#session-summaries #${sessionType}`)
-      .classList.replace('hidden', 'md:grid');
+      .classList.replace('!hidden', 'md:grid');
   }
 }

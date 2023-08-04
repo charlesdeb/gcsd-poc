@@ -6,31 +6,27 @@ export default class extends Controller {
   //   console.log(this.element);
   //   console.log('hi from timetable-time-slots');
   // }
-  select(event) {
-    // console.log('time slot selected');
 
-    const timeSlot =
-      event.target.closest('[data-time_slot]')?.dataset.time_slot;
-
-    // console.log({ timeSlot });
+  rowClick(event) {
+    const timeSlot = event.target.closest('tr').dataset.time_slot;
 
     // if there are no sessions for the timeSlot, then there is nothing to do
     if (!this.hasSessions(timeSlot)) {
       return;
     }
 
-    this.selectTimeSlot(timeSlot);
+    const path = event.target.closest('tr').dataset.path;
+    const frames = document.querySelectorAll(`turbo-frame#${timeSlot}`);
+    // console.log({ timeSlot, path });
 
-    if (
-      getComputedStyle(
-        document.querySelector('.timetable-summaries')
-      ).getPropertyValue('display') == 'block'
-    ) {
-      this.toggleDetailsWide(timeSlot);
-    } else {
-      this.toggleArrows(timeSlot);
-      this.toggleDetailsNarrow(timeSlot);
-    }
+    frames.forEach((frame) => {
+      frame.src = path;
+    });
+
+    /** Update display of wide and narrow in case screen orientation changes */
+    this.toggleDetailsWide(timeSlot);
+    this.toggleDetailsNarrow(timeSlot);
+    this.toggleArrows(timeSlot);
   }
 
   // Does the timeSlot have any sessions? Breaks don't
