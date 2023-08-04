@@ -23,6 +23,8 @@ export default class extends Controller {
       frame.src = path;
     });
 
+    this.selectTimeSlot(timeSlot);
+
     /** Update display of wide and narrow in case screen orientation changes */
     this.toggleDetailsWide(timeSlot);
     this.toggleDetailsNarrow(timeSlot);
