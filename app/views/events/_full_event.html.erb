@@ -8,16 +8,15 @@
       <div class="overview">
         <!-- <div class="mx-auto max-w-prose text-base lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-8"> -->
         <div class="text-base space-y-6">
-          <header class="w-full">
+          <header class="w-full space-y-2">
             <h2 class="text-lg font-semibold text-orange-800">
               <%= alpine_time time: event.starting_at %>
             </h2>
-            <h2 class="mt-2 text-3xl font-bold leading-8 tracking-tighter text-orange sm:text-4xl"><%= title event.title %></h2>
+            <h2 class="text-3xl font-bold leading-8 tracking-tighter text-orange sm:text-4xl"><%= title event.title %></h2>
           </header>
-          <section class="mt-5 lg:mt-3">
-            <%= link_to t('.donate'), event.donation_url, class: "shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-200" unless event.donation_url.blank?%>
-            <%= register_link(event, class: "shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-200") %>
-            <%= link_to t('.register_now'), '#', class: "hidden shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-200" if event.registerable? %>
+          <section class="xmt-5 xlg:mt-3">
+            <%= donate_link(event, class: "inline-flex space-x-1 items-center shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-400") %>
+            <%= register_link(event, class: "inline-flex space-x-1 items-center shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-400") %>
           </section>
         </div>
         <div class="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">

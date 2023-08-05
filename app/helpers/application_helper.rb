@@ -206,13 +206,31 @@ module ApplicationHelper
     env.production? && (current_user.nil? || !current_user.admin?)
   end
 
-  # creates an html link for registering for an event
+  # returns an html link for registering for an event
   def register_link(event, options = {})
     return nil unless event.published?
-
     return nil unless event.starting_at >= Time.zone.today
 
-    link_to(t('.register_now'), event.registration_url, options)
+    options[:target] = '_blank' if options[:target].blank?
+
+    if options[:target] == '_blank'
+      new_tab_link_to(t('.register_now'), event.donation_url, options)
+    else
+      link_to(t('.register_now'), event.registration_url, options)
+    end
+  end
+
+  # returns an html link for donating to event
+  def donate_link(event, options = {})
+    return nil if event.donation_url.blank?
+
+    options[:target] = '_blank' if options[:target].blank?
+
+    if options[:target] == '_blank'
+      new_tab_link_to(t('.donate'), event.donation_url, options)
+    else
+      link_to(t('.donate'), event.donation_url, options)
+    end
   end
 
   # returns internationalised duration of a duration hash
@@ -246,6 +264,26 @@ module ApplicationHelper
                7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
     </svg>
     ).html_safe
+  end
+
+  def new_tab_icon
+    %(
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+      <path fill-rule="evenodd"
+            d="M4.25 5.5a.75.75 0 00-.75.75v8.5c0 .414.336.75.75.75h8.5a.75.75 0 00.75-.75v-4a.75.75 0 011.5 0v4A2.25 2.25 0 0112.75 17h-8.5A2.25 2.25 0 012 14.75v-8.5A2.25 2.25 0 014.25 4h5a.75.75 0 010 1.5h-5z"
+            clip-rule="evenodd" />
+      <path fill-rule="evenodd"
+            d="M6.194 12.753a.75.75 0 001.06.053L16.5 4.44v2.81a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75h-4.5a.75.75 0 000 1.5h2.553l-9.056 8.194a.75.75 0 00-.053 1.06z"
+            clip-rule="evenodd" />
+    </svg>).html_safe
+  end
+
+  # a poor-mans version of link to with a new-tab icon
+  def new_tab_link_to(body, url, options)
+    link_to(url, options) do
+      "<span>#{body}</span>#{new_tab_icon}".html_safe
+    end
   end
 
   private

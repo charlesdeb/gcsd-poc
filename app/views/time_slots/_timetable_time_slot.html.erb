@@ -29,7 +29,7 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
   <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden md:hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
     <td colspan="3" class="p-4 space-y-4">
-      <%= turbo_frame_tag time_slot, class: 'block min-h-[80px]' do %>
+      <%= turbo_frame_tag time_slot, class: 'block min-h-[80px] space-y-4' do %>
         <div class="mx-auto py-6 w-min">
           <%= sessions_loading_spinner %>
         </div>

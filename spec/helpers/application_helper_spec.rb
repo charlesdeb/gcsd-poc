@@ -228,6 +228,32 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
       expect(helper.register_link(event)).to have_link t('events.full_event.register_now'), href: event.registration_url
     end
+
+    it 'defaults to target=_blank' do
+      event = FactoryBot.create(
+        :event,
+        status: :published,
+        starting_at: Time.zone.today.next_week,
+        registration_url: 'https://example.com'
+      )
+
+      result = helper.register_link(event)
+
+      expect(result).to have_css('a[target="_blank"]')
+    end
+
+    it 'uses target option if set' do
+      event = FactoryBot.create(
+        :event,
+        status: :published,
+        starting_at: Time.zone.today.next_week,
+        registration_url: 'https://example.com'
+      )
+
+      result = helper.register_link(event, { target: '_self' })
+
+      expect(result).to have_css('a[target="_self"]')
+    end
   end
 
   describe '#session_duration' do
