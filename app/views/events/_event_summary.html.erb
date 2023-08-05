@@ -15,7 +15,7 @@
       <div class="mt-8">
         <div class="inline-flex rounded-md shadow space-x-4">
           <%= link_to t('.more'), event, class: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base capitalize font-medium rounded-md text-orange bg-white hover:bg-orange-100" if event.published? %>
-          <%= link_to t('.register_now'), '#', class: "inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange hover:mix-blend-screen" if event.registerable? %>
+          <%= register_link(event, class: "inline-flex space-x-1 items-center shadow bg-orange px-8 py-3 border border-transparent text-base capitalize font-medium rounded-md text-white hover:bg-orange-400") %>
         </a>
       </div>
     </div>
