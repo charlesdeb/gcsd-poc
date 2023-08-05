@@ -48,7 +48,11 @@
     </div>
     <%= turbo_frame_tag 'recaptcha' do %>
       <div class="mb-3">
-        <%= recaptcha_v3 action: 'contact_us', site_key: ENV.fetch('RECAPTCHA_SITE_V3',nil), turbolinks: true %>
+        <% if @show_checkbox_recaptcha %>
+          <%= recaptcha_tags %>
+        <% else %>
+          <%= recaptcha_v3 action: 'contact_us', site_key: ENV.fetch('RECAPTCHA_SITE_V3',nil), turbolinks: true %>
+        <% end %>
       </div>
     <% end %>
     <div class="mt-6 flex items-center justify-end gap-x-6">
