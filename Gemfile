@@ -96,6 +96,9 @@ gem 'meta-tags'
 # Support for AWS S3 and S3 compatible storage
 gem 'aws-sdk-s3', require: false
 
+# use slugs for events
+gem 'friendly_id', '~> 5.4.0'
+
 group :development, :test do
   # find and kill n+1 issues
   gem 'bullet'

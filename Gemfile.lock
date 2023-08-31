@@ -146,6 +146,8 @@ GEM
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     foreman (0.87.2)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     htmlbeautifier (1.4.2)
@@ -388,6 +390,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   foreman
+  friendly_id (~> 5.4.0)
   htmlbeautifier
   image_processing
   importmap-rails

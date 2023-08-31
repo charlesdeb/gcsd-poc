@@ -214,7 +214,7 @@ module ApplicationHelper
     options[:target] = '_blank' if options[:target].blank?
 
     if options[:target] == '_blank'
-      new_tab_link_to(t('.register_now'), event.donation_url, options)
+      new_tab_link_to(t('.register_now'), event.registration_url, options)
     else
       link_to(t('.register_now'), event.registration_url, options)
     end

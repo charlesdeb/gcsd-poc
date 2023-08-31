@@ -3,6 +3,7 @@
 # an event
 class Event < ApplicationRecord
   extend Mobility
+  extend FriendlyId
   include ActiveModel::Serialization
 
   # draft:       not shown on the website at all
@@ -38,6 +39,8 @@ class Event < ApplicationRecord
   validates :registration_url, url: true
 
   validate :registration_url_required_to_publish
+
+  friendly_id :title, use: :slugged
 
   default_scope { i18n }
   scope :featured, -> { where(is_featured: true) }

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :event do
-    title { Faker::Lorem.unique.word }
+    title { Faker::Lorem.unique.sentence(word_count: 3) }
     sequence(:slug) { |n| "my-event-#{n}" }
     starting_at { Time.zone.today.next_week }
     finishing_at { starting_at.days_since(1) }

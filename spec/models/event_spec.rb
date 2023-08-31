@@ -6,7 +6,6 @@ RSpec.describe Event, type: :model do
   subject do
     Event.new(
       title: 'Some Title',
-      slug: 'some-title',
       starting_at: Time.zone.today,
       finishing_at: Time.zone.today.next_week,
       status: :published,
@@ -26,20 +25,17 @@ RSpec.describe Event, type: :model do
     expect(subject.errors[:title]).to include("can't be blank")
   end
 
-  it 'is invalid without a slug' do
-    subject.slug = nil
-
-    expect(subject.valid?).to be false
-    expect(subject.errors[:slug]).to include("can't be blank")
+  it 'has a slug generated from title (from friendly_id)' do
+    expect(subject.valid?).to be true
+    expect(subject.slug).to eq 'some-title'
   end
 
-  it 'is invalid with duplicate slugs' do
+  it 'doesn\'t allow duplicate slugs' do
     subject.save
     duplicate = subject.dup
     duplicate.description = 'some description'
 
-    expect(duplicate.valid?).to be false
-    expect(duplicate.errors[:slug]).to include('has already been taken')
+    expect(duplicate.valid?).to be true
   end
 
   it 'is invalid without starting_at' do

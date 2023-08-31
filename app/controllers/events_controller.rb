@@ -3,7 +3,7 @@
 # public controller for events
 # TODO: remove the update/delete actions
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy]
+  # before_action :set_event, only: %i[show edit update destroy]
 
   before_action { |c| c.update_active_menu_item(:events) }
 
@@ -18,7 +18,9 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show; end
+  def show
+    @event = Event.friendly.find(params[:id])
+  end
 
   # # GET /events/new
   # def new
