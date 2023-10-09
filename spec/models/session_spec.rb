@@ -27,6 +27,25 @@ RSpec.describe Session, type: :model do
     expect(subject.errors[:title]).to include("can't be blank")
   end
 
+  it 'has a slug generated from title (from friendly_id)' do
+    expect(subject.valid?).to be true
+    expect(subject.slug).to eq 'some-title'
+  end
+
+  it 'ensures slugs are not duplicated' do
+    subject.save
+
+    duplicate = subject.dup
+    other_event = create(:event)
+    duplicate.description = 'some description'
+    duplicate.event_id = other_event.id
+
+    expect(duplicate.valid?).to be true
+    # the event id should be added to the slug to prevent dupes 
+    expect(duplicate.slug).to eq("#{duplicate.title.parameterize}-#{duplicate.event_id}")
+
+  end
+
   it 'is invalid without a description' do
     subject.description = nil
 

@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   translates :title, backend: :action_text, plain: true
 
   validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
+
   validates :slug, uniqueness: true
 
   validates :is_featured, inclusion: {

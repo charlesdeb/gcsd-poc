@@ -3,6 +3,7 @@
 # an individual session with a GCSD event
 class Session < ApplicationRecord
   extend Mobility
+  extend FriendlyId
 
   has_rich_text :description
   has_rich_text :requirements
@@ -25,9 +26,13 @@ class Session < ApplicationRecord
   has_and_belongs_to_many :presenters
   has_and_belongs_to_many :time_slots
 
-  validates :title, :description, :event_id, :session_type_id, presence: true
+  validates :title, :slug, :description, :event_id, :session_type_id, presence: true
 
   validate :time_slots_must_be_for_sessions_event
+
+  validates :slug, uniqueness: true
+
+  friendly_id :slug_candidates, use: :slugged
 
   I18n.available_locales.each do |locale|
     validates :"title_#{locale}", mobility_session_uniqueness: true
@@ -44,5 +49,13 @@ class Session < ApplicationRecord
                    message: "Time Slot '#{time_slot.title}' is not for event '#{event.title}'"
       end
     end
+  end
+
+  # TODO: should we be using friendly_id scopes for this?
+  def slug_candidates
+    [
+      :title,
+      [:title, :event_id]
+    ]
   end
 end

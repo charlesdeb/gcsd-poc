@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+echo "[ bin/db-migrate ] dropping development database
+bin/rails db:drop RAILS_ENV=development
+
+# to unzip an lzo file from ElephantSQL
+# lzop -x wbxckkti.2023-08-05T00-18-36+00-00.sql.lzo
+
+echo "[ bin/db-migrate ] importing tables and data from sql file
+psql -U gcsd -d gcsd_development -f $1

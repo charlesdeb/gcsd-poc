@@ -498,7 +498,8 @@ CREATE TABLE public.sessions (
     session_type_id bigint NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
     updated_at timestamp(6) with time zone NOT NULL,
-    presenter_bio_override text
+    presenter_bio_override text,
+    slug text
 );
 
 
@@ -1088,6 +1089,13 @@ CREATE INDEX index_sessions_on_session_type_id ON public.sessions USING btree (s
 
 
 --
+-- Name: index_sessions_on_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_sessions_on_slug ON public.sessions USING btree (slug);
+
+
+--
 -- Name: index_sessions_time_slots_on_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1251,6 +1259,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230713203552'),
 ('20230717161556'),
 ('20230720200235'),
-('20230831170110');
+('20230831170110'),
+('20231009165940');
 
 

@@ -30,11 +30,12 @@ RSpec.describe Event, type: :model do
     expect(subject.slug).to eq 'some-title'
   end
 
-  it 'doesn\'t allow duplicate slugs' do
+  it 'ensures slugs are not duplicated' do
     subject.save
     duplicate = subject.dup
     duplicate.description = 'some description'
 
+    # a UUID should be added to the slug to prevent dupes 
     expect(duplicate.valid?).to be true
   end
 
