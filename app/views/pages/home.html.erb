@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= preload_link_tag(url_for(@page.featured_image.variant(format: :webp, resize_to_fit: [650, 650])), as: 'image') %>
+<% end %>
 <article class="pb-20 text-center space-y-8 lg:py-18 lg:text-left lg:flex lg:flex-row lg:space-y-0">
   <%
   set_meta_tags(
@@ -26,7 +29,7 @@
     </div>
   </div>
   <div class="relative mx-auto w-full h-auto  sm:w-1/2 lg:h-full">
-    <%= image_tag @page.featured_image.variant(format: :webp, resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', loading: :eager, alt: @page.title if @page.featured_image.representable? %>
+    <%= image_tag @page.featured_image.representation(format: :webp, resize_to_fit: [650, 650]), class: 'w-full h-full object-cover', loading: :eager, alt: @page.title if @page.featured_image.representable? %>
   </div>
 </article>
 <%= render partial: "events/event_summary", locals: {event: @future_featured_event } if @future_featured_event %>

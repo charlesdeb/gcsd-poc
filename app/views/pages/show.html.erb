@@ -1,13 +1,13 @@
 <%# content_for :title, @page.title %>
-<article class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-  <h1 class="sm:row-start-1 sm:col-span-2"><%= title @page.title %></h1>
-  <div class="block sm:row-start-2 sm:col-start-2 sm:row-span-4">
-    <%= image_tag(@page.featured_image.variant(format: :webp), class: "shadow-lg shadow-celery-300") if @page.featured_image.representable? %>
+<article class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <h1 class="md:row-start-1 md:col-span-2"><%= title @page.title %></h1>
+  <div class="block md:row-start-2 md:col-start-2 md:row-span-4">
+    <%= image_tag(@page.featured_image.variant(format: :webp), loading: :eager, class: "shadow-lg shadow-celery-300 w-full") if @page.featured_image.representable? %>
   </div>
-  <section class="sm:row-start-2 sm:col-start-1">
+  <section class="md:row-start-2 md:col-start-1">
     <%= @page.body %>
   </section>
-  <div class="sm:row-start-3 sm:col-start-1 flex flex-wrap gap-2">
+  <div class="md:row-start-3 md:col-start-1 flex flex-wrap gap-2">
     <% if current_user && current_user.admin? %>
       <%= link_to 'Edit this page', edit_admin_page_path(id: @page), class: "rounded-lg py-3 px-5 bg-celery-200 inline-block font-medium" %>
       <div class="inline-block">
