@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  scope '(:locale)', locale: # rubocop:disable Metrics/BlockLength
+Rails.application.routes.draw do
+  scope '(:locale)', locale:
   /#{I18n.available_locales.join("|")}/ do
     # home page is produced by running the home action of the PagesController
     # with its own (home) template as the slug
@@ -52,6 +52,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     # get '/sessions', to: redirect('/')
     get '/sessions/by_time_slot/:time_slot', to: 'sessions#index', as: :sessions_by_time_slot
     get '/sessions/by_event/:event/by_type/:session_type', to: 'sessions#index', as: :sessions_by_event_and_type
+
+    get '/sitemap', to: 'sitemap#index', :defaults => { :format => 'xml' }
 
     # catch all route to catch pages in the CMS which could have any slug name
     # Is this a security risk?

@@ -96,3 +96,9 @@ RSpec.configure do |config|
   # ActionDispatch::IntegrationTest.app.default_url_options[:locale] = I18n.locale
 end
 
+# from
+# https://stackoverflow.com/questions/76807842/setting-the-request-host-for-one-specific-example-in-rspec-system-test-using-cap
+# https://stackoverflow.com/questions/598933/how-do-i-change-the-default-www-example-com-domain-for-testing-in-rails
+# If we want to specify the host name for a capybara feature test, set it here
+# require 'capybara/rspec'
+# Capybara.app_host = 'http://my-domain.com'

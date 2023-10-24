@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc><%= request.base_url %>/</loc>
+      <lastmod><%= @pages[0].updated_at.strftime("%Y-%m-%d") %></lastmod>
+    </url>
+
+    <% I18n.available_locales.each do |locale| %>
+
+      <% @pages.each do |page| %>
+        <url>
+          <loc><%= request.base_url %>/<%= locale %>/<%= page.slug %></loc>
+          <lastmod><%= page.updated_at.strftime("%Y-%m-%d") %></lastmod>
+        </url>
+      <% end %>
+
+      <% @events.each do |event| %>
+        <url>
+          <loc><%= request.base_url %>/<%= locale %>/events/<%= event.slug %></loc>
+          <lastmod><%= event.updated_at.strftime("%Y-%m-%d") %></lastmod>
+        </url>
+      <% end %>
+
+      <% @sessions.each do |session| %>
+        <url>
+          <loc><%= request.base_url %>/<%= locale %>/sessions/<%= session.slug %></loc>
+          <lastmod><%= session.updated_at.strftime("%Y-%m-%d") %></lastmod>
+        </url>
+      <% end %>
+    <% end %>
+  </urlset>
