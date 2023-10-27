@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # Not sure if we need to build out these tests. Feature tests do most of this
