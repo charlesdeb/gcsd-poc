@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe 'pages/home', type: :view do
   let(:title) { 'Groovy Event' }
   before(:each) do
-    assign(:page, FactoryBot.create(:page))
+    assign(:page, FactoryBot.create(:page_with_image))
   end
 
   it 'shows the featured image if set'
