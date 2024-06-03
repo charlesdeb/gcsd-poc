@@ -9,9 +9,12 @@ class EventsController < ApplicationController
 
   # GET /events, /past_events or /future_events
   def index
-    # get future or past published events
-    @events = if params[:scope].in?(%w[future past])
-                Event.publicly_viewable.send(params[:scope])
+    # get future, past or all published events
+    @events = case params[:scope]
+              when 'future'
+                Event.publicly_viewable.future
+              when 'past'
+                Event.publicly_viewable.past
               else
                 Event.publicly_viewable
               end

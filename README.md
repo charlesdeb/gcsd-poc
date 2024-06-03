@@ -4,7 +4,7 @@ A demo app for multi-lingual, multi-timezone, multi-session events
 
 It uses:
 
-- Administrate for a quick developer frienly admin UI (but it's nasty for real users)
+- Administrate for a quick developer friendly admin UI (but less nice for real users)
 - Luxon (Javascript) for timezones
 - Tailwind for styling
 - Devise for authentication
@@ -29,11 +29,13 @@ Since this project uses Tailwind, which compiles a custom style sheet, instead o
 1. `bin/ci` contains all the tests and checks for the app
 2. `tmp/test.log` will use the production logging format _not_ the development one.
 
+To run JS tests, you'll need Chromedriver running. Visit <https://googlechromelabs.github.io/chrome-for-testing/#stable> to get it.
+
 ## Production
 
 - All runtime configuration should be supplied in the UNIX environment
 - Rails logging uses lograge.
-- Deployed with fy.io. To deploy:
+- Deployed with fly.io. To deploy:
 
 ```bash
 > flyctl deploy
