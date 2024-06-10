@@ -11,9 +11,6 @@ module HttpAuthConcern
   end
 
   def http_authenticate
-    # always apply Http Auth in production
-    # return true unless Rails.env == 'production'
-
     # Check ENV variable to see whether to use Http Auth
     return true unless ENV.fetch('USE_HTTP_AUTH', nil) == 'true'
 

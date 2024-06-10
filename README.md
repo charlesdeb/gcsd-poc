@@ -38,6 +38,16 @@ To run JS tests, you'll need Chromedriver running. Visit <https://googlechromela
 - Deployed with fly.io. To deploy:
 
 ```bash
-> flyctl deploy
+> flyctl deploy --config ./fly.production.toml --dockerfile ./Dockerfile.production
+```
 
+## Staging
+
+- All runtime configuration should be supplied in the UNIX environment
+- Rails logging uses lograge.
+- Staging is pointing at the same S3 compatible storage as production
+- Deployed with fly.io. To deploy:
+
+```bash
+> flyctl deploy --config ./fly.staging.toml --dockerfile ./Dockerfile.staging
 ```

@@ -9,8 +9,8 @@ LABEL fly_launch_runtime="rails"
 # Rails app lives here
 WORKDIR /rails
 
-# Set production environment
-ENV RAILS_ENV="production" \
+# Set environment. Unfortunately this variable needs to be set here for the precompile a little later on.
+ENV RAILS_ENV="staging" \
     BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1"
 
