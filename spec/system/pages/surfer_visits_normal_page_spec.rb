@@ -5,21 +5,33 @@ require 'rails_helper'
 RSpec.feature 'Surfer visits normal pages', type: :feature do
   let(:body) { 'This is the about page' }
   let(:slug) { 'about' }
-  let!(:about_page) { create(:page, slug: slug, body: body, title: 'About') }
-
-  scenario 'they see the page content' do
-    visit '/about'
-
-    expect(page).to have_text(body)
+  let(:meta_description) { 'SEO-friendly meta info for the about page' }
+  let!(:about_page) do
+    create(
+      :page, slug: slug, body: body,
+             title: 'About', meta_description: meta_description
+    )
   end
 
-  scenario 'they see the right title' do
-    visit '/about'
+  context('A real page') do
+    before(:each) do
+      visit '/about'
+    end
 
-    expect(page.title).to include(about_page.title)
+    scenario 'they see the page content' do
+      expect(page).to have_text(body)
+    end
+
+    scenario 'they see the right title' do
+      expect(page.title).to include(about_page.title)
+    end
+
+    scenario 'they see description in the page meta' do
+      find("head meta[name='description'][content='#{meta_description}']", visible: false)
+    end
   end
 
-  scenario 'they see a 404 page for an uknown page ' do
+  scenario 'they see a 404 page for an unknown page ' do
     visit '/glub-glub-glub'
 
     expect(page.status_code).to be(404)

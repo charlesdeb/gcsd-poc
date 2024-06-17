@@ -49,6 +49,10 @@ RSpec.feature 'Surfer visits show event', type: :system do
       end
     end
 
+    scenario 'they see description in the page meta' do
+      find("head meta[name='description'][content='#{description}']", visible: false)
+    end
+
     # see i18n tests for more timezone related tests
     scenario 'they see the start date (in the default time zone)', js: true do
       within('div.overview') do

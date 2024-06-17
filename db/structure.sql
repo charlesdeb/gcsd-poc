@@ -320,7 +320,8 @@ CREATE TABLE public.pages (
     id bigint NOT NULL,
     slug text NOT NULL,
     created_at timestamp(6) with time zone NOT NULL,
-    updated_at timestamp(6) with time zone NOT NULL
+    updated_at timestamp(6) with time zone NOT NULL,
+    meta_description text
 );
 
 
@@ -336,6 +337,13 @@ COMMENT ON TABLE public.pages IS 'Static pages';
 --
 
 COMMENT ON COLUMN public.pages.slug IS 'unique, human readable name used in URL for page';
+
+
+--
+-- Name: COLUMN pages.meta_description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pages.meta_description IS 'SEO-friendly meta info for the page';
 
 
 --
@@ -1260,6 +1268,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230717161556'),
 ('20230720200235'),
 ('20230831170110'),
-('20231009165940');
+('20231009165940'),
+('20240617165100');
 
 

@@ -9,6 +9,7 @@ class Page < ApplicationRecord
 
   translates :body, backend: :action_text
   translates :title, backend: :action_text, plain: true
+  translates :meta_description, backend: :action_text, plain: true
 
   has_one_attached :featured_image do |attachable|
     attachable.variant :thumb,

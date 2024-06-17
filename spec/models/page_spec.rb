@@ -3,7 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Page, type: :model do
-  subject { Page.new(title: 'some title', slug: 'a-slug', body: 'the rain in spain falls mainly on the plain') }
+  subject do
+    Page.new(
+      title: 'some title', slug: 'a-slug',
+      body: 'the rain in spain falls mainly on the plain',
+      meta_description: 'meta info about this page'
+    )
+  end
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid

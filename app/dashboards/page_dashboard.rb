@@ -16,6 +16,7 @@ class PageDashboard < Administrate::BaseDashboard
     body: RichTextAreaField.with_options(
       searchable: true
     ),
+    meta_description: Field::Text,
     featured_image: Field::ActiveStorage.with_options(
       index_preview_variant: :thumb,
       show_preview_variant: :thumb
@@ -42,6 +43,7 @@ class PageDashboard < Administrate::BaseDashboard
     title
     slug
     body
+    meta_description
     featured_image
     created_at
     updated_at
@@ -54,6 +56,7 @@ class PageDashboard < Administrate::BaseDashboard
     title
     slug
     body
+    meta_description
     featured_image
   ].freeze
 
