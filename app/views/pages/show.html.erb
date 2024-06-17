@@ -3,7 +3,7 @@
 <article class="grid grid-cols-1 md:grid-cols-2 gap-8">
   <h1 class="md:row-start-1 md:col-span-2"><%= title @page.title %></h1>
   <div class="block md:row-start-2 md:col-start-2 md:row-span-4">
-    <%= image_tag(@page.featured_image.variant(format: :webp), loading: :eager, class: "shadow-lg shadow-celery-300 w-full") if @page.featured_image.representable? %>
+    <%= image_tag(@page.featured_image.variant(format: :webp), loading: :eager, class: "shadow-lg shadow-celery-300 w-full", alt: @page.title) if @page.featured_image.representable? %>
   </div>
   <section class="md:row-start-2 md:col-start-1">
     <%= @page.body %>
