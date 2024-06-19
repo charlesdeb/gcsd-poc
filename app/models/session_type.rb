@@ -13,7 +13,7 @@ class SessionType < ApplicationRecord
   # validates_uniqueness_of :name
   # validates :name, uniqueness: true
 
-  translates :name, backend: :action_text, plain: true
+  translates :name, backend: :action_text, plain: true, fallbacks: { fr: :en }
   translates :description, backend: :action_text, plain: true
 
   has_many :sessions

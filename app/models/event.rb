@@ -23,8 +23,9 @@ class Event < ApplicationRecord
   has_many :sessions
   has_many :time_slots
 
+  # fallbacks don't work on rich text
   translates :description, backend: :action_text
-  translates :title, backend: :action_text, plain: true
+  translates :title, backend: :action_text, plain: true, fallbacks: { fr: :en }
 
   validates :title, :slug, :starting_at, :finishing_at, :status, :description, presence: true
 
@@ -50,6 +51,8 @@ class Event < ApplicationRecord
   scope :publicly_viewable, lambda {
                               order(starting_at: :desc)
                                 .published.or(coming_soon)
+                                # a hack hiding that hides events
+                                # .where.not(title: nil)
                                 .with_attached_featured_image
                                 .includes(%i[plain_text_translations rich_text_description])
                             }

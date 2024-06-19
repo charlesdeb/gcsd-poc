@@ -62,10 +62,12 @@ Mobility.configure do
     # Fallbacks
     #
     # Uncomment line below to enable fallbacks, using +I18n.fallbacks+.
-    # fallbacks
+    fallbacks
     #
     # Or uncomment this line to enable fallbacks with a global default.
-    # fallbacks { :pt => :en }
+    # fallbacks { :fr => :en }  <-- from the original install, but doesn't work
+    # fallbacks [:en]           <-- a guess from charles which doesn't work either
+    # fallbacks :en           <-- nor this one
 
     # Presence
     #

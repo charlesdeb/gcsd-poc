@@ -8,7 +8,7 @@ class Page < ApplicationRecord
   validates :slug, uniqueness: true
 
   translates :body, backend: :action_text
-  translates :title, backend: :action_text, plain: true
+  translates :title, backend: :action_text, plain: true, fallbacks: { fr: :en }
   translates :meta_description, backend: :action_text, plain: true
 
   has_one_attached :featured_image do |attachable|

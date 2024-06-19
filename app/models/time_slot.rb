@@ -9,7 +9,7 @@ class TimeSlot < ApplicationRecord
   # has_many :sessions
   has_and_belongs_to_many :sessions
 
-  translates :title, backend: :action_text, plain: true
+  translates :title, backend: :action_text, plain: true, fallbacks: { fr: :en }
 
   # TODO: this same validation is used for events as well; refactor it
   validates :finishing_at, comparison: { greater_than: :starting_at, message: 'must be after the start date' }

@@ -16,7 +16,7 @@ class Session < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [50, 50]
   end
 
-  translates :title, backend: :action_text, plain: true
+  translates :title, backend: :action_text, plain: true, fallbacks: { fr: :en }
   translates :description, backend: :action_text
   translates :requirements, backend: :action_text
   translates :presenter_bio_override, backend: :action_text
@@ -55,7 +55,7 @@ class Session < ApplicationRecord
   def slug_candidates
     [
       :title,
-      [:title, :event_id]
+      %i[title event_id]
     ]
   end
 end

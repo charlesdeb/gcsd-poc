@@ -23,6 +23,9 @@ class EventsController < ApplicationController
   # GET /events/1 or /events/1.json
   def show
     @event = Event.friendly.find(params[:id])
+    # The where clause is a hack that prevents events without a translation
+    # from being displayed.
+    # @event = Event.where.not(title: nil).friendly.find(params[:id])
   end
 
   # # GET /events/new
