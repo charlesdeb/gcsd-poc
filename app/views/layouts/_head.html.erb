@@ -1,0 +1,24 @@
+<%= display_meta_tags site: Rails.application.class.to_s.split('::').first.upcase %>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= render '/shared/gtm_script' %>
+<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= javascript_importmap_tags %>
+<%= javascript_import_module_tag "lib/timezone_select" %>
+<%#= TODO: Figure out how to import this just in the _timetable.html.erb
+               partial, but without disabling turbostreams 
+               (with data: {turbo: false}) in all links that lead onto pages 
+               that show the partial. 
+               https://stackoverflow.com/questions/70690025/where-to-place-javascript-used-in-one-page-only-in-rails-7-with-importmap
+               is clever, but doesn't handle the alpine side of things. %>
+<%= javascript_import_module_tag "lib/timetable" %>
+<%# preconnect stuff from https://developers.google.com/recaptcha/docs/loading %>
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<%# <script src="https://www.google.com/recaptcha/api.js"></script> %>
+<%= tag(:link, rel: 'apple-touch-icon', sizes: '180x180', href: asset_path('apple-touch-icon.png')) %>
+<%= tag(:link, rel: 'icon', type: 'image/png', sizes: '96x96', href: asset_path('favicon-96x96.png')) %>
+<%= tag(:link, rel: 'manifest', href: asset_path('site.webmanifest')) %>
+<%= yield :head %>

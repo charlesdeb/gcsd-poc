@@ -35,7 +35,8 @@ RSpec.feature 'Surfer visits normal pages', type: :feature do
     visit '/glub-glub-glub'
 
     expect(page.status_code).to be(404)
-    # TODO: i18n this
-    expect(page).to have_text("The page you were looking for doesn't exist")
+
+    expect(page).to have_title(I18n.t('page_not_found'))
+    expect(page).to have_text("The page you're looking for doesn't exist")
   end
 end

@@ -52,6 +52,8 @@ module Gcsd
       :enable_starttls_auto => true
     }
 
-    
+    config.exceptions_app = lambda { |env|
+      ErrorsController.action(:show).call(env)
+    }
   end
 end

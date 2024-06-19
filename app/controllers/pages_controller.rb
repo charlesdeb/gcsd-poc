@@ -26,6 +26,7 @@ class PagesController < ApplicationController
     update_active_menu_item(params[:slug]) if @page
     return if @page
 
-    render file: 'public/404.html', layout: false, status: 404
+    # trigger page not found error
+    redirect_to controller: 'errors', action: :not_found
   end
 end

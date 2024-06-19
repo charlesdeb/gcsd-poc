@@ -40,6 +40,8 @@ en:
   various_presenters: various presenters
   loading: Loading...
   time_to_be_confirmed: Time to be confirmed
+  page_not_found: Page Not Found
+  internal_server_error: Internal Error
 
   # date and time stuff
   time:

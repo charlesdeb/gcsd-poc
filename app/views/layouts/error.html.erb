@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="<%= params[:locale] %>">
+  <head>
+    <%= render "layouts/head" %>
+  </head>
+  <body class="min-h-screen bg-pageBg flex flex-col gap-y-10">
+    <%= render '/shared/gtm_no_script' %>
+    <%= render "layouts/shared/menu" %>
+    <main class="flex-auto max-w-7xl mx-auto px-4 pt-12 sm:px-6 lg:px-8 space-y-4">
+      <%= yield %>
+    </main>
+    <%= render "layouts/shared/footer" %>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   scope '(:locale)', locale:
-  /#{I18n.available_locales.join("|")}/ do
+  /#{I18n.available_locales.join('|')}/ do
     # home page is produced by running the home action of the PagesController
     # with its own (home) template as the slug
     # root controller: 'pages', action: 'home', slug: 'home', locale: I18n.default_locale
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     # Add a mobility locale to the admin area for translating content
     scope '(:mobility_locale)', mobility_locale:
-    /#{I18n.available_locales.join("|")}/ do
+    /#{I18n.available_locales.join('|')}/ do
       namespace :admin do
         resources :users
         resources :events
@@ -54,6 +54,9 @@ Rails.application.routes.draw do
     get '/sessions/by_event/:event/by_type/:session_type', to: 'sessions#index', as: :sessions_by_event_and_type
 
     get '/sitemap', to: 'sitemap#index', :defaults => { :format => 'xml' }
+
+    match '/404', to: 'errors#not_found', via: :all
+    match '/500', to: 'errors#internal_server_error', via: :all
 
     # catch all route to catch pages in the CMS which could have any slug name
     # Is this a security risk?

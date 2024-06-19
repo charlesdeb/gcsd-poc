@@ -9,9 +9,12 @@ fr:
   various_presenters: divers intervenants
   loading: Chargement...
   time_to_be_confirmed: Heure à confirmer
+  page_not_found: Page non trouvée
+  internal_server_error: Erreur interne
+
 
   # date and time stuff
-  at_session_times_html: 'à %{session_times}'
+  at_session_times_html: "à %{session_times}"
   datetime:
     distance_in_words:
       x_minutes:
