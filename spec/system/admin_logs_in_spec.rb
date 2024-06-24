@@ -21,7 +21,7 @@ RSpec.feature 'Admin tries to log in' do
   end
 
   let(:signed_in_regexp) { /#{I18n.t('devise.sessions.signed_in')}/i }
-  let(:sign_in_regexp) { /#{I18n.t('devise.sessions.new.sign_in')}/i }
+  let(:admin_regexp) { /#{I18n.t('devise.shared.links.admin')}/i }
   let(:sign_in_to_your_account_regexp) { /#{I18n.t('devise.sessions.new.sign_in_to_your_account')}/i }
   let(:not_signed_in_regexp) { /#{I18n.t('devise.failure.invalid', authentication_keys: 'Email')}/i }
 
@@ -29,18 +29,18 @@ RSpec.feature 'Admin tries to log in' do
     visit root_path
   end
 
-  scenario 'there is a working sign in link (desktop)' do
+  scenario 'there is a working sign in link to the admin area (desktop)' do
     within('nav #desktop-menu') do
-      expect(page).to have_text(sign_in_regexp)
-      find('a', text: sign_in_regexp).click
+      expect(page).to have_text(admin_regexp)
+      find('a', text: admin_regexp).click
     end
     expect(page).to have_text(sign_in_to_your_account_regexp)
   end
 
-  scenario 'there is a working sign in link (mobile)' do
+  scenario 'there is a working sign in link to the admin area (mobile)' do
     within('nav #mobile-menu') do
-      expect(page).to have_text(sign_in_regexp)
-      find('a', text: sign_in_regexp).click
+      expect(page).to have_text(admin_regexp)
+      find('a', text: admin_regexp).click
     end
     expect(page).to have_text(sign_in_to_your_account_regexp)
   end
@@ -61,7 +61,7 @@ RSpec.feature 'Admin tries to log in' do
 
     scenario 'is not logged in' do
       within('nav') do
-        expect(page).to have_text(sign_in_regexp)
+        expect(page).to have_text(admin_regexp)
       end
     end
   end

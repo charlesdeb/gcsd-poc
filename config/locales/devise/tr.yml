@@ -127,6 +127,7 @@ tr:
         sign_in: Giriş yap
         sign_in_with_provider: '%{provider} ile giriş yap'
         sign_up: Kaydol
+        admin: Yönetim
       minimum_password_length: '(Minimum %{count} karakter)'
     unlocks:
       new:
