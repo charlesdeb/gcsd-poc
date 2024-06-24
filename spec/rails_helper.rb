@@ -81,6 +81,17 @@ RSpec.configure do |config|
   config.include ShowMeTheCookies, :type => :feature
   config.include ShowMeTheCookies, :type => :system
 
+  # From https://github.com/fastruby/next_rails
+  # Tracker deprecation messages in each file
+  if ENV['DEPRECATION_TRACKER']
+    DeprecationTracker.track_rspec(
+      config,
+      shitlist_path: 'spec/support/deprecation_warning.shitlist.json',
+      mode: ENV['DEPRECATION_TRACKER'],
+      transform_message: ->(message) { message.gsub("#{Rails.root}/", '') }
+    )
+  end
+
   # Adapted from
   # https://stackoverflow.com/questions/69851082/how-do-i-correct-this-selenium-initialisation-command-deprecation-warning
   Capybara.register_driver(:chrome) do |app|
