@@ -132,6 +132,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'launchy'
+  gem 'next_rails'
   gem 'selenium-webdriver'
   gem 'show_me_the_cookies'
 end
