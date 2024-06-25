@@ -35,7 +35,7 @@ RSpec.describe Event, type: :model do
     duplicate = subject.dup
     duplicate.description = 'some description'
 
-    # a UUID should be added to the slug to prevent dupes 
+    # a UUID should be added to the slug to prevent dupes
     expect(duplicate.valid?).to be true
   end
 

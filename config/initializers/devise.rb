@@ -14,7 +14,10 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '3a0a51d0e410788946caee980bb2e9053303aa69c2b560b8e5e5374b9a1dde066af811900653d03a7ca707e45aada3c3cab5b1869df13e36a291b1fbf38aebbc'
+  # config.secret_key = '3a0a51d0e410788946caee980bb2e9053303aa69c2b560b8e5e5374b9a1dde066af811900653d03a7ca707e45aada3c3cab5b1869df13e36a291b1fbf38aebbc' # rubocop:disable Layout/LineLength
+  # Get the secret_key_base from ENV
+  # See: https://github.com/heartcombo/devise/issues/5644#issuecomment-1804626431
+  config.secret_key = Rails.application.secret_key_base
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.

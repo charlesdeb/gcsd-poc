@@ -12,7 +12,7 @@ ruby '3.1.2'
 # seems to be a problem with trix and rails 7.0.8.4
 # https://github.com/rails/rails/issues/52077
 # but not one in 7.1.3.4 when we do the upgrade
-gem 'rails', '=7.0.8.1'
+gem 'rails'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'

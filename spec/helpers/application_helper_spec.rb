@@ -204,9 +204,6 @@ RSpec.describe ApplicationHelper, :type => :helper do
       end
     end
 
-    # useless test, since an event cannot be published without a rego URL
-    it 'shows nothing if no registration_url'
-
     it 'shows nothing if event past' do
       event = FactoryBot.create(
         :event,
