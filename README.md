@@ -29,6 +29,13 @@ Since this project uses Tailwind, which compiles a custom style sheet, instead o
 1. `bin/ci` contains all the tests and checks for the app
 2. `tmp/test.log` will use the production logging format _not_ the development one.
 
+## Checking outdated gems
+
+```bash
+> libyear-bundler --all
+> bundle_report outdated | head -n 10
+```
+
 To run JS tests, you'll need Chromedriver running. Visit <https://googlechromelabs.github.io/chrome-for-testing/#stable> to get it.
 
 ## Production
