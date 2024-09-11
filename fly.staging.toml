@@ -1,16 +1,13 @@
 # fly.toml app configuration file generated for gcsd-poc-staging on 2024-06-10T20:52:54+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-# This file looks a bit different to the production one because it was 
-# generated about a year later, and I think fly have changed their set-up
 
 app = 'gcsd-poc-staging'
 primary_region = 'lhr'
 console_command = '/rails/bin/rails console'
 
 [env]
-  BUCKET_NAME = 'gcsd-poc-staging'
+  BUCKET_NAME = 'gcsd-poc-staging'  # CdeB not sure if this is actually required
   RAILS_ENV = 'staging'
 
 [build]
@@ -18,7 +15,7 @@ console_command = '/rails/bin/rails console'
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = "stop"
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
