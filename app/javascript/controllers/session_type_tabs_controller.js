@@ -36,8 +36,9 @@ export default class extends Controller {
     /** get the turbo frame to update (named afer session type) */
     const frame = document.querySelector(`turbo-frame#${frameName}`);
 
-    if (!frame.hasChildNodes()) {
-      /** only populate empty turbo-frames */
+    if (frame.querySelector('svg.animate-spin')) {
+      /** only populate turbo-frames that have a loading spinner in them,
+       * because they have not yet had data loaded into them */
       frame.src = path;
     }
   }
