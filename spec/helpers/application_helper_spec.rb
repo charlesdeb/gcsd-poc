@@ -10,6 +10,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
     let(:locale) { :fr }
 
     it 'contains a select tag' do
+      pending('reinstate French as a supported language')
       expect(helper.locale_select).to include('<select')
     end
 
@@ -23,6 +24,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
       subject { helper.locale_select(request_path) }
 
       it 'contains a selected option of default locale' do
+        pending('reinstate French as a supported language')
         expect(subject).to include('<option data-url="/fr" selected="selected"')
       end
     end
@@ -33,6 +35,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
       subject { helper.locale_select(request_path) }
 
       it 'contains a selected option with locale from path' do
+        pending('reinstate French as a supported language')
         expect(subject).to include('<option data-url="/fr" selected="selected"')
       end
     end

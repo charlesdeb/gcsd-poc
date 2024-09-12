@@ -22,7 +22,8 @@
         <div class="sm:mr-4 flex items-center space-x-1 sm:space-x-3 text-sm md:text-">
           <%= timezone_select %>
           <div class="hidden md:block">
-            <%= locale_select(request.path, 'locale-wide') %>
+            <%#= uncomment this to show locale selector %>
+            <%#= locale_select(request.path, 'locale-wide') %>
           </div>
           <button type="button" class="hidden bg-white p-1 rounded-full text-orange-400 hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="sr-only">View notifications</span>
@@ -96,7 +97,8 @@
 <!-- Mobile menu, show/hide based on menu state. -->
 <div class="md:hidden" id="mobile-menu" x-show="hamburgerOpen" x-cloak>
   <div class="px-4 w-full">
-    <%= locale_select(request.path, 'locale-narrow') %>
+    <%#= uncomment this to show locale selector %>
+    <%#= locale_select(request.path, 'locale-narrow') %>
   </div>
   <div class="pt-2 pb-3 space-y-1">
     <%= link_to "Events", events_path, class: narrow_main_menu_item_class(:events, active_menu_item) %>

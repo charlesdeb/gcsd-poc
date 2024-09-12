@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_action :update_allowed_parameters, if: :devise_controller?
 
-  before_action :set_locale
+  # before_action :set_locale
 
   # doesn't work with devise for translating error messages
   # See https://github.com/wardencommunity/warden/issues/180

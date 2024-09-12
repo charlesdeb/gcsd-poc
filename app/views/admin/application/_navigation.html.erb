@@ -18,6 +18,7 @@ as defined by the routes in the `admin/` namespace
   <%#= this is a helper from the main app. Administrate doesn't seem to include %>
   <%#= them by default, so there is a workaround in the administrate application %>
   <%#= locale_select request.path %>
-  <p class="mt-3 font-bold"><%= t('.translation_language') %></p>
-  <%= mobility_locale_select request.path %>
+  <p><%#= t('.translation_language') %></p>
+  <%#= uncomment this to show locale selector %>
+  <%#= mobility_locale_select request.path %>
 </nav>

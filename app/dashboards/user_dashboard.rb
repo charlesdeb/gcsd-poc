@@ -25,7 +25,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     role: UserRoleField,
     locale: Field::Select.with_options(
-      collection: %i[en tr fr],
+      collection: %i[en],
       searchable: false
     ),
     profile_image: Field::ActiveStorage.with_options(
