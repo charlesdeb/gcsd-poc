@@ -12,6 +12,6 @@ en:
       select_session_type: Select a session type
       session_type: Session type
     timetable:
-      timetable: Timetable
+      timetable: Time Slots
     timetable_summaries:
-      click_a_slot: Click on a time slot on the left to see what sessions are running
+      click_a_slot: Click a time slot on the left to see what sessions are running. Click on the time zone selector above to see times according to the nearest time zone to where you live.
