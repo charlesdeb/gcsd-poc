@@ -1,11 +1,12 @@
 <article class='grid grid-cols-1 sm:grid-cols-2 gap-8'>
   <h1 class="sm:row-start-1 sm:col-span-2"><%= title t('.contact_us') %></h1>
-  <div class="hidden sm:block sm:row-start-3 sm:col-start-2 sm:row-span-4">
+  <div class="hidden sm:block sm:row-start-4 sm:col-start-2 sm:row-span-4">
     <%= image_tag("contact-us.jpg", class: "shadow-lg shadow-celery-300")%>
   </div>
   <h2 class="hidden text-base font-semibold leading-7 text-gray-900">Profile</h2>
-  <p class="sm:row-start-2 sm:col-start-1 sm:col-span-2 mt-1 leading-6 text-gray-600">Got a question? You're in the right place. </p>
-  <%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: 'sm:row-start-3 sm:col-start-1 sm:border sm:border-gray-300 sm:bg-celery-100 sm:p-4' do |form| %>
+  <p class="sm:row-start-2 sm:col-start-1 sm:col-span-2 mt-1 leading-6 text-gray-600">Want to go on the mailing list to find out about the next GCSD? <%= link_to t('.join_mailing_list'), "http://eepurl.com/iza4QE", class: 'underline', target: '_blank' %></p>
+  <p class="sm:row-start-3 sm:col-start-1 sm:col-span-2 mt-1 leading-6 text-gray-600">Got a question? Ask away...</p>
+  <%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: 'sm:row-start-4 sm:col-start-1 sm:border sm:border-gray-300 sm:bg-celery-100 sm:p-4' do |form| %>
     <div class="pb-6">
       <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-6">
         <div class="col-span-6 md:col-span-3">
