@@ -257,6 +257,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
+    prism (1.0.0)
     public_suffix (6.0.0)
     puma (6.4.2)
       nio4r (~> 2.0)
@@ -303,6 +304,8 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    rbs (3.5.3)
+      logger
     recaptcha (5.17.0)
     redis (4.8.1)
     regexp_parser (2.9.2)
@@ -344,6 +347,11 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.31.3)
       parser (>= 3.3.1.0)
+    ruby-lsp (0.17.17)
+      language_server-protocol (~> 3.17.0)
+      prism (~> 1.0)
+      rbs (>= 3, < 4)
+      sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.1)
       ffi (~> 1.12)
@@ -356,6 +364,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scout_apm (5.4.0)
+      parser
     selectize-rails (0.12.6)
     selenium-webdriver (4.22.0)
       base64 (~> 0.2)
@@ -365,6 +375,7 @@ GEM
       websocket (~> 1.0)
     show_me_the_cookies (6.0.0)
       capybara (>= 2, < 4)
+    sorbet-runtime (0.5.11558)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -443,6 +454,8 @@ DEPENDENCIES
   redis (~> 4.0)
   rspec-rails
   rubocop
+  ruby-lsp
+  scout_apm
   selenium-webdriver
   show_me_the_cookies
   sprockets-rails

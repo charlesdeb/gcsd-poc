@@ -107,6 +107,9 @@ gem 'aws-sdk-s3', require: false
 # use slugs for events
 gem 'friendly_id', '~> 5.4.0'
 
+# debugging stuff
+gem 'scout_apm'
+
 group :development, :test do
   # find and kill n+1 issues
   gem 'bullet'
@@ -116,6 +119,9 @@ group :development, :test do
   gem 'htmlbeautifier'
   gem 'rspec-rails'
   gem 'rubocop'
+
+  # Used for local development by a vs-code plugin
+  gem 'ruby-lsp'
 
   # We use Faker to generate values for attributes
   # in each factory
