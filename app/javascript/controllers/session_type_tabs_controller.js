@@ -53,6 +53,7 @@ export default class extends Controller {
      */
     document.querySelector('select#session_type').value = sessionType;
 
+    this.highlightTabs(sessionType);
     this.showSummaryContents(sessionType);
   }
 
