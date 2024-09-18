@@ -19,7 +19,8 @@
       <!-- end side of nav -->
       <div class="flex items-center gap-x-1">
         <!-- i18n controls -->
-        <div class="sm:mr-4 flex items-center space-x-1 sm:space-x-3 text-sm md:text-">
+        <div class="flex items-center space-x-2 text-sm">
+          <div><%= t('time-zone') %></div>
           <%= timezone_select %>
           <div class="hidden md:block">
             <%#= uncomment this to show locale selector %>

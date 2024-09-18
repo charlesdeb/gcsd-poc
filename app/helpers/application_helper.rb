@@ -313,17 +313,17 @@ module ApplicationHelper
   end
 
   def timezone_options
-    # TODO: get these from system settings or something...,
-    # TODO: i18n required
+    # From https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    # Also see https://github.com/moment/luxon/blob/master/docs/zones.md
     options_for_select([['UTC', 'UTC+0'],
-                        ['Europe/London', 'Europe/London'],
-                        ['Europe/Paris', 'Europe/Paris'],
-                        ['Europe/Bucharest', 'Europe/Bucharest'],
-                        ['Asia/Almaty', 'Asia/Almaty'],
-                        ['Asia/Singapore', 'Asia/Singapore'],
-                        ['Australia/Sydney', 'Australia/Sydney'],
-                        ['Pacific/Auckland', 'Pacific/Auckland'],
-                        ['America/New York', 'America/New_York'],
-                        ['America/Vancouver', 'America/Vancouver']])
+                        ['New York (US)', 'America/New_York'],
+                        ['United Kingdom', 'Europe/London'],
+                        ['France', 'Europe/Paris'],
+                        ['South Africa', 'Africa/Johannesburg'],
+                        ['Turkey', 'Asia/Istanbul'],
+                        ['India', 'Asia/Kolkata'],
+                        ['Singapore', 'Asia/Singapore'],
+                        ['Sydney (Australia)', 'Australia/Sydney'],
+                        ['New Zealand', 'Pacific/Auckland']])
   end
 end
