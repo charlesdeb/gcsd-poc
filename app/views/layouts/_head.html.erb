@@ -3,8 +3,10 @@
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>
 <%= render '/shared/gtm_script' %>
-<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+<%= preload_link_tag "tailwind.css" %>
+<%= stylesheet_link_tag "tailwind", "data-turbo-track": :reload %>
+<%= stylesheet_link_tag "inter-font", "data-turbo-track": :reload %>
+<%= stylesheet_link_tag "application", "data-turbo-track": :reload %>
 <%= javascript_importmap_tags %>
 <%= javascript_import_module_tag "lib/timezone_select" %>
 <%#= TODO: Figure out how to import this just in the _timetable.html.erb

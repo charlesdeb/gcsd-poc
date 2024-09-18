@@ -4,6 +4,7 @@
 
 app = 'gcsd-poc-staging'
 primary_region = 'lhr'
+swap_size_mb = 1024  # not sure if we really need this; maybe we could use this to lower RAM
 console_command = '/rails/bin/rails console'
 
 [env]
