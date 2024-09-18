@@ -115,6 +115,9 @@ group :development, :test do
   gem 'bullet'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
+
+  # Shows more fine-grained error location
+  gem 'error_highlight', '>= 0.4.0'
   gem 'factory_bot_rails'
   gem 'htmlbeautifier'
   gem 'rspec-rails'
@@ -126,6 +129,15 @@ group :development, :test do
   # We use Faker to generate values for attributes
   # in each factory
   gem 'faker'
+end
+
+group :staging, :production do
+  # JS runtime that the terser minifier uses; requires nodejs on server
+  gem 'execjs'
+
+  # for compressing js and css.
+  # gem 'cssminify' # doesn't work so well for background image in the timezone select
+  gem 'terser', '~> 1.2'
 end
 
 group :development do

@@ -102,4 +102,13 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # minification - normally commented out in dev env
+  # https://guides.rubyonrails.org/asset_pipeline.html
+  # https://github.com/matthiassiegel/cssminify
+  # config.assets.css_compressor = CSSminify.new
+  # https://github.com/ahorek/terser-ruby
+  # config.assets.js_compressor = :terser
+
+  # config.assets.debug = true
 end

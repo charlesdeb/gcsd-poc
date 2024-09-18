@@ -120,4 +120,11 @@ Rails.application.configure do
   # https://stackoverflow.com/questions/70401077/rails-7-asset-pipeline-sasscsyntaxerror-with-tailwind
   # sassc-rails seems to be a dependency of administrate
   config.assets.css_compressor = nil
+
+  # https://github.com/matthiassiegel/cssminify
+  # CSSminify.new doesn't work with the down arrow in the timezone select control
+  # TODO: Manually fix the right background style for the select box - or get another css minifier
+  # config.assets.css_compressor = CSSminify.new
+  # https://github.com/ahorek/terser-ruby
+  config.assets.js_compressor = :terser
 end
