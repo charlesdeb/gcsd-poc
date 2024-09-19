@@ -105,6 +105,38 @@ RSpec.describe ApplicationHelper, :type => :helper do
     end
   end
 
+  describe '#timetable_session_presenters' do
+    let(:presenter1) { create(:presenter) }
+    let(:presenter2) { create(:presenter) }
+
+    context 'no presenters' do
+      it 'shows nothing' do
+        session = create(:session)
+        subject = helper.timetable_session_presenters(session)
+
+        expect(subject).to eq('')
+      end
+    end
+
+    context 'one presenter' do
+      it 'shows the first presenter\'s name' do
+        session = create(:session, presenters: [presenter1])
+        subject = helper.timetable_session_presenters(session)
+
+        expect(subject).to eq("with #{presenter1.name}")
+      end
+    end
+
+    context 'multiple presenters' do
+      it 'shows \'various presenters\'' do
+        session = create(:session, presenters: [presenter1, presenter2])
+        subject = helper.timetable_session_presenters(session)
+
+        expect(subject).to eq('with various presenters')
+      end
+    end
+  end
+
   describe '#timetable_session_presenter_bio' do
     it 'shows the presenter_bio_override if set' do
       presenter_bio = 'Presenter bio'

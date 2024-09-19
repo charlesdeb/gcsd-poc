@@ -127,7 +127,7 @@ module ApplicationHelper
   def timetable_session_presenters(session)
     return '' if session.presenters.blank?
 
-    presenter_name = if session.presenters.length.positive?
+    presenter_name = if session.presenters.length > 1
                        t('various_presenters')
                      else
                        session.presenters.first.name
