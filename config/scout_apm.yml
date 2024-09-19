@@ -8,8 +8,8 @@ common: &defaults
   # log_level: Verboseness of logs.
   # - Default: 'info'
   # - Valid Options: debug, info, warn, error
-  # log_level: <%= ENV['SCOUT_LOG_LEVEL'] %> #debug
-  log_level: debug
+  log_level: <%= ENV['SCOUT_LOG_LEVEL'] || 'info' %>
+  # log_level: debug
 
   # use_prepend: Use the newer `prepend` instrumentation method. In some cases, gems
   #              that use `alias_method` can conflict with gems that use `prepend`.
