@@ -127,7 +127,7 @@ module ApplicationHelper
   def timetable_session_presenters(session)
     return '' if session.presenters.blank?
 
-    presenter_name = if session.presenters.count > 1
+    presenter_name = if session.presenters.length.positive?
                        t('various_presenters')
                      else
                        session.presenters.first.name
@@ -247,7 +247,7 @@ module ApplicationHelper
   # returns tailwind classes suitable for the a tr of a timetable time_slot
   # time_slot:: TimeSlot
   def timetable_time_slot_tr_class(time_slot)
-    return 'hover:bg-orange-300 hover:text-white' if time_slot.sessions.count.positive?
+    return 'hover:bg-orange-300 hover:text-white' if time_slot.sessions.length.positive?
 
     'text-orange-600 bg-orange-50'
   end

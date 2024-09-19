@@ -14,7 +14,7 @@
     </div>
   </td>
   <td class="w-12 py-2 px-3 md:p-1 lg:p-2 md:hidden">
-    <% if time_slot.sessions.count > 0 %>
+    <% if time_slot.sessions.length.positive? %>
       <svg xmlns="http://www.w3.org/2000/svg" data-down_chevron viewBox="0 0 24 24" fill="currentColor" class="block w-6 h-6">
         <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
       </svg>
@@ -25,7 +25,7 @@ viewBox="0 0 24 24" fill="currentColor" class="hidden w-6 h-6">
     <% end %>
   </td>
 </tr>
-<% if time_slot.sessions.count > 0 %>
+<% if time_slot.sessions.length.positive? %>
   <%# Session details for the time slot %>
   <tr class="border-collapse border-orange border hidden md:hidden" data-time_slot_sessions="<%= dom_id(time_slot) %>">
     <td colspan="3" class="p-4 space-y-4">
