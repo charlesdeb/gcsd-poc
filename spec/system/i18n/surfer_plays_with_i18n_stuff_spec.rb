@@ -12,8 +12,8 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
   end
 
   # time zone stuff
-  let(:default_time_zone) { 'Europe/London' }
-  let(:new_time_zone) { 'Asia/Singapore' }
+  let(:default_time_zone) { { 'Europe/London': 'United Kingdom' } }
+  let(:new_time_zone) { { 'Asia/Singapore': 'Singapore' } }
 
   context 'default timezone' do
     before(:each) do
@@ -23,13 +23,13 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
 
     scenario 'timezone cookie is set to the default' do
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
-      expect(time_zone_cookie[:value]).to eq(default_time_zone)
+      expect(time_zone_cookie[:value]).to eq(default_time_zone.keys[0].to_s)
     end
 
     scenario 'they see the start date in the default time zone' do
       within('div.overview') do
         expected_date_string = I18n.l(
-          event.starting_at.in_time_zone(default_time_zone),
+          event.starting_at.in_time_zone(default_time_zone.keys[0].to_s),
           format: :starting_at
         ).strip
         find(:xpath, ".//time[text()='#{expected_date_string}']")
@@ -45,17 +45,17 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
 
     scenario 'timezone cookie is set to the new value' do
       within('nav#main-menu') do
-        select new_time_zone, from: 'time-zone'
+        select new_time_zone.values[0], from: 'time-zone'
       end
 
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
 
-      expect(time_zone_cookie[:value]).to eq(new_time_zone)
+      expect(time_zone_cookie[:value]).to eq(new_time_zone.keys[0].to_s)
     end
 
     scenario 'timezone cookie is remembered across pages' do
       within('nav#main-menu') do
-        select new_time_zone, from: 'time-zone'
+        select new_time_zone.values[0], from: 'time-zone'
       end
 
       # change pages
@@ -64,21 +64,21 @@ RSpec.feature 'Surfer plays with i18n stuff', type: :system, js: true do
 
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
 
-      expect(time_zone_cookie[:value]).to eq(new_time_zone)
+      expect(time_zone_cookie[:value]).to eq(new_time_zone.keys[0].to_s)
     end
 
     scenario 'they see the start date in a different time zone' do
       time_zone_cookie = get_me_the_cookie('gcsd_timezone')
 
-      expect(time_zone_cookie[:value]).to eq(default_time_zone)
+      expect(time_zone_cookie[:value]).to eq(default_time_zone.keys[0].to_s)
 
       within('nav#main-menu') do
-        select new_time_zone, from: 'time-zone'
+        select new_time_zone.values[0], from: 'time-zone'
       end
 
       within('div.overview') do
         expected_date_string = I18n.l(
-          event.starting_at.in_time_zone(new_time_zone),
+          event.starting_at.in_time_zone(new_time_zone.keys[0].to_s),
           format: :starting_at
         ).strip
 

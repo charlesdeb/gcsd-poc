@@ -282,7 +282,6 @@ RSpec.feature 'Surfer visits show event', type: :system do
           end
 
           scenario('they see the title') do
-            # save_and_open_page
             expect(page).to have_text(/#{time_slot.sessions.first.title}/i)
           end
 
