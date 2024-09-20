@@ -3,6 +3,13 @@
 # Helper methods
 module ApplicationHelper
   # Drop-down for selecting locale in main nav
+  #
+  # Args:
+  # - request_path (String): The current request path. Defaults to root path.
+  # - id (Symbol): The id attribute for the select tag. Defaults to :locale.
+  #
+  # Returns:
+  # - String: HTML-safe string containing the locale select dropdown.
   def locale_select(request_path = root_path, id = :locale)
     select_tag 'locale',
                language_options(request_path),
@@ -14,6 +21,9 @@ module ApplicationHelper
   end
 
   # Drop-down for selecting timezone in main nav
+  #
+  # Returns:
+  # - String: HTML-safe string containing the timezone select dropdown.
   def timezone_select
     select_tag 'time-zone',
                timezone_options,
@@ -27,8 +37,17 @@ module ApplicationHelper
                'data-time-zone-select': ''
   end
 
+  # Generates HTML links for menu pages.
+  #
+  # Args:
+  # - width (Symbol): Determines the style of the menu (:wide or :narrow).
+  # - options (Hash): A hash containing additional options. Expected key:
+  #   - :active_menu_item (Symbol): The currently active menu item.
+  #
+  # Returns:
+  # - String: HTML-safe string containing the menu links.
   def menu_page_links(width, options)
-    result =     %i[about history finance our-studios].map do |page_item|
+    result = %i[about history finance our-studios].map do |page_item|
       link_class = (if width == :wide
                       wide_main_menu_item_class(page_item, options[:active_menu_item])
                     else
@@ -40,10 +59,22 @@ module ApplicationHelper
     result.join.html_safe
   end
 
+  # Returns the CSS classes for i18n selectors.
+  #
+  # Returns:
+  # - String: CSS classes for i18n selectors.
   def i18n_selector_classes
     'text-xs sm:text-base'
   end
 
+  # Generates options for session types with counts.
+  #
+  # Args:
+  # - event (Event): The event for which session types are being generated.
+  # - session_types_with_counts (Array): Array of session types with counts.
+  #
+  # Returns:
+  # - Array: Array of HTML option tags for session types.
   def session_type_options(event, session_types_with_counts)
     session_types_with_counts.map.with_index do |session_type_with_count, _index|
       tag.option "#{session_type_with_count.name} (#{session_type_with_count.count})",
@@ -58,7 +89,15 @@ module ApplicationHelper
     end
   end
 
-  # Tab headers for the session types of an event
+  # Returns tab headers for session types of an event.
+  #
+  # Args:
+  # - event (Event): The event for which tabs are being generated.
+  # - session_type_with_count (Object): Session type with count.
+  # - position (Integer): Position of the tab.
+  #
+  # Returns:
+  # - String: HTML-safe string containing the tab headers.
   def session_type_tab(event:, session_type_with_count:, position:) # rubocop:disable Metrics/MethodLength
     bg_color_class = position.zero? ? 'bg-orange-800' : 'bg-transparent'
 
@@ -86,14 +125,15 @@ module ApplicationHelper
     end
   end
 
-  # an Alpine-enabled <time> component with an optional format object for Luxon.
+  # Returns an Alpine-enabled <time> component with an optional format object
+  # for Luxon.
   #
   # See Alpine timeZoneSelect store for more information
   #
   # Params:
   # +options+:: +Hash+ contains
-  #    +:time+:: +DateTime+ time we are showing.
-  #    +:format+:: +Hash+ formatting options suitable for toLocaleString in the
+  #    +:time+:: +DateTime+ The time we are showing.
+  #    +:format+:: +Hash+ Formatting options suitable for toLocaleString in the
   #                       Javascript DateTime object. If not provided, default
   #                       is `...DateTime.DATETIME_MED, weekday: 'long'`
   #
@@ -120,9 +160,14 @@ module ApplicationHelper
                 class: options[:class]
   end
 
-  # The name of a session's presenter; "various" if a session has more than one
-  # Params
-  # +session+:: Session
+  # Returns the name of a session's presenter; "various" if a session has more
+  # than one.
+  #
+  # Args:
+  # - +session+:: Session   The session object.
+  #
+  # Returns:
+  # - String: The name of the presenter or "various" if multiple presenters.
   # TODO: should this be on the model?
   def timetable_session_presenters(session)
     return '' if session.presenters.blank?
@@ -135,8 +180,14 @@ module ApplicationHelper
     t('with_presenter', presenter: presenter_name)
   end
 
-  # Shows the time_slots for a session in the full_event view
-  # +session+:: Session
+  # Shows the time_slots for a session in the full_event view.
+  #
+  # Args:
+  # - +session+:: Session         The session object.
+  # - +is_show_duration+::Boolean Whether to show the duration. Defaults to false.
+  #
+  # Returns:
+  # - String: HTML-safe string representing the time slots.
   def timetable_session_time_slots(session, is_show_duration: false)
     return t('time_to_be_confirmed') if session.time_slots.blank? || session.event.coming_soon?
 
@@ -152,8 +203,14 @@ module ApplicationHelper
     time_slots.join(', ').html_safe
   end
 
-  # Switches whether we show Past Events, Future Events or just Events on the
-  # event index page
+  # Switches whether we show Past Events, Future Events, or just Events on the
+  # event index page.
+  #
+  # Args:
+  # - +scope+::String The scope of events to show. Defaults to nil.
+  #
+  # Returns:
+  # - String: The event index header.
   def event_index_header(scope = nil)
     [scope, t('activerecord.models.event.other')].join(' ').humanize
   end
@@ -186,7 +243,13 @@ module ApplicationHelper
     end
   end
 
-  # show the presenter bio override of the session if it exists
+  # Returns the presenter bio override of the session if it exists.
+  #
+  # Args:
+  # - +session+::Session The session object.
+  #
+  # Returns:
+  # - String: HTML-safe string representing the presenter bio.
   def timetable_session_presenter_bio(session)
     if session.presenter_bio_override.blank?
       bio = nil
@@ -201,12 +264,27 @@ module ApplicationHelper
     render html: bio
   end
 
-  # should we show the google tag manager stuff?
+  # Determines whether to show Google Tag Manager.
+  #
+  # Args:
+  # - env (Environment):   The current environment.
+  # - +current_user+::User The current user.
+  #
+  # Returns:
+  # - Boolean: True if in production and the current user is not an admin
   def show_gtm?(env, current_user)
     env.production? && (current_user.nil? || !current_user.admin?)
   end
 
-  # returns an html link for registering for an event
+  # Returns an HTML link for registering for an event.
+  #
+  # Args:
+  # - +event+::Event  The event object.
+  # - +options+::Hash Additional HTML options for the link tag.
+  #
+  # Returns:
+  # - String: HTML-safe string representing the registration link, or nil if
+  #           the event is not published or has already started.
   def register_link(event, options = {})
     return nil unless event.published?
     return nil unless event.starting_at >= Time.zone.today
@@ -220,7 +298,15 @@ module ApplicationHelper
     end
   end
 
-  # returns an html link for donating to event
+  # Returns an HTML link for donating to an event.
+  #
+  # Args:
+  # - +event+::Event  The event object.
+  # - +options+::Hash Additional HTML options for the link tag.
+  #
+  # Returns:
+  # - String: HTML-safe string representing the donation link, or nil if the
+  #           donation URL is blank.
   def donate_link(event, options = {})
     return nil if event.donation_url.blank?
 
@@ -244,7 +330,7 @@ module ApplicationHelper
     out.join ' '
   end
 
-  # returns tailwind classes suitable for the a tr of a timetable time_slot
+  # returns tailwind classes suitable for a tr of a timetable time_slot
   # time_slot:: TimeSlot
   def timetable_time_slot_tr_class(time_slot)
     return 'hover:bg-orange-300 hover:text-white' if time_slot.sessions.length.positive?
@@ -252,7 +338,7 @@ module ApplicationHelper
     'text-orange-600 bg-orange-50'
   end
 
-  # simple html for a loading spinner
+  # Returns:HTML-safe string representing a loading spinner.
   def sessions_loading_spinner
     %(
     <svg class="animate-spin h-10 w-10 text-celery-600"
@@ -266,6 +352,10 @@ module ApplicationHelper
     ).html_safe
   end
 
+  # Returns an SVG icon for opening a new tab.
+  #
+  # Returns:
+  # - String: HTML-safe string representing the new tab icon.
   def new_tab_icon
     %(
     <svg xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +369,7 @@ module ApplicationHelper
     </svg>).html_safe
   end
 
-  # a poor-mans version of link to with a new-tab icon
+  # link_to with a new-tab icon
   def new_tab_link_to(body, url, options)
     link_to(url, options) do
       "<span>#{body}</span>#{new_tab_icon}".html_safe
