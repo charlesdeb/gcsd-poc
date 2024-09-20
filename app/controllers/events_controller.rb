@@ -78,6 +78,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
+    # select an event by id or slug
     @event = Event.find(params[:id])
   end
 

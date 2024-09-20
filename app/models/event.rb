@@ -91,10 +91,18 @@ class Event < ApplicationRecord
     published? || coming_soon?
   end
 
+  # future events are those that have not started yet
   def future?
     starting_at >= DateTime.now
   end
 
+  # Ensures that an event cannot be published without a registration URL.
+  #
+  # This validation method checks if the event is marked as published and if the
+  # registration_url attribute is blank. If both conditions are true, it adds an
+  # error to the model's base, preventing the event from being saved.
+  #
+  # @return [void]
   def registration_url_required_to_publish
     return unless published? && registration_url.blank?
 
