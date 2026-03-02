@@ -44,3 +44,6 @@
 # secrets we need for dev and test, so
 # we really don't want them in version control
 .env.*.local
+
+# From Aiven, but we don't want to commit it
+pgConnect-*
